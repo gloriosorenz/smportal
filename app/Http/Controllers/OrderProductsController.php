@@ -17,22 +17,19 @@ class OrderProductsController extends Controller
      */
     public function index()
     {
-        $pending = OrderProduct::where('farmers_id', auth()->user()->id)
-                ->where('order_product_statuses_id', 1)
-                ->get();
+        // Get peding order products
+        $pending = OrderProduct::pendingOrderProducts();
 
-        $confirmed = OrderProduct::where('farmers_id', auth()->user()->id)
-                ->where('order_product_statuses_id', 2)
-                ->get();
+        // Get confirmed order products
+        $confirmed = OrderProduct::confirmedOrderProducts();
 
-        $paid = OrderProduct::where('farmers_id', auth()->user()->id)
-                ->where('order_product_statuses_id', 3)
-                ->get();
+        // Get paid order products
+        $paid = OrderProduct::paidOrderProducts();
 
-        $cancelled = OrderProduct::where('farmers_id', auth()->user()->id)
-                ->where('order_product_statuses_id', 4)
-                ->get();
+        // Get cancelled order products
+        $cancelled = OrderProduct::cancelledOrderProducts();
 
+        // Get all order products
         $order_products = OrderProduct::all();
 
         return view('farmer.order_products.index')
@@ -41,6 +38,7 @@ class OrderProductsController extends Controller
             ->with('paid', $paid)
             ->with('cancelled', $cancelled);
     }
+
 
 
     public function confirm_order(Request $request, $id){
@@ -65,7 +63,6 @@ class OrderProductsController extends Controller
         // Mail::to($email)->send(
         //     new OrderConfirmed($order, $days)
         // );
-
 
         return redirect()->back()->with('success', 'Order Confirmed');
     }
@@ -99,7 +96,7 @@ class OrderProductsController extends Controller
         //     new OrderPaid($order)
         // );
 
-        return redirect()->back()->with('success', 'Order Cancelled');
+        return redirect()->back()->with('success', 'Order Paid');
     }
 
     public function pending_order(Request $request, $id){

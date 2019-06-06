@@ -51,7 +51,7 @@
                                     <input class="form-control" type="number" placeholder="{{ auth()->user()->hectares }}" name="planned_hectares[]" step="0.1" min="1" max="{{ auth()->user()->hectares }}">
                                 </td>
                                 <td>
-                                    <input class="form-control" type="number" placeholder="{{ auth()->user()->no_farmers }}" name="planned_num_farmers[]" step="0.1" min="1" max="{{ auth()->user()->no_farmers }}">
+                                    <input class="form-control" type="number" placeholder="{{ auth()->user()->no_farmers }}" name="planned_num_farmers[]" step="1" min="1" max="{{ auth()->user()->no_farmers }}">
                                 </td>
                                 <td>
                                     <input class="form-control" type="number" placeholder="Enter Quantity" name="planned_qty[]">

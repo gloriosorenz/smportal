@@ -15,16 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// Cart aand shop
 Route::get('/shop','WebsiteController@shop')->name('shop');
-Route::get('/cart', 'CartController@index')->name('cart');
-Route::post('/cart','CartController@store')->name('cart');
+Route::get('/cart', 'CartController@index')->name('cart.index');
+Route::post('/cart','CartController@store')->name('cart.index');
 Route::patch('/cart/{product}','CartController@update')->name('cart.update');
 Route::delete('/cart/{product}', 'CartController@destroy')->name('cart.destroy');
+
 
 // Checkout
 Route::get('/checkout', 'CheckoutController@index')->name('checkout.index')->middleware('auth');
 Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
-
+Route::get('/thankyou', 'ConfirmationController@index')->name('confirmation.index');
 
 Auth::routes();
 

@@ -12,7 +12,7 @@
 					<div class="page-brand">
 						<h3>
 							{{-- <a href="/"> --}}
-								<span class="brand">SaMa
+								<span class="brand">SMSRL
 									<span class="brand-tip">Portal</span>
 								</span>
 								<span class="brand-mini"><i class="fa fa-leaf"></i></span>

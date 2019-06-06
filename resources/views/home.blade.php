@@ -8,7 +8,7 @@
     <div class="row">
         <!-- Create Season -->
         <div class="col-lg-3 col-md-6">
-            <a href="#">
+            <a href="{{ route('seasons') }}">
                 <div class="ibox bg-green color-white widget-stat">
                     <div class="ibox-body">
                         <h2 class="m-b-5 font-strong">Create Season</h2>

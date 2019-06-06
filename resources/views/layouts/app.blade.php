@@ -109,19 +109,19 @@
             // Order Products Tables
             $('#pending_order_products').DataTable({
                 pageLength: 10,
-                order: [[ 0, 'asc' ]],
+                order: [[ 0, 'desc' ]],
             });
             $('#confirmed_order_products').DataTable({
                 pageLength: 10,
-                order: [[ 0, 'asc' ]],
+                order: [[ 0, 'desc' ]],
             });
             $('#cancelled_order_products').DataTable({
                 pageLength: 10,
-                order: [[ 0, 'asc' ]],
+                order: [[ 0, 'desc' ]],
             });
             $('#paid_order_products').DataTable({
                 pageLength: 10,
-                order: [[ 0, 'asc' ]],
+                order: [[ 0, 'desc' ]],
             });
             // Products Tables
             $('#user_products').DataTable({

@@ -33,7 +33,7 @@
                             <tr>
                                 <th>Season</th>
                                 <th>Status</th>
-                                <th>Options</th>
+                                <th width="20%">Options</th>
                             </tr>
                         </thead>
                         <tbody>
