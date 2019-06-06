@@ -441,7 +441,8 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 /*---------------------------------------------*/
 .main-menu > li:hover > a {
   text-decoration: none;
-  color: #6c7ae0;
+  color: #858586;
+  /* color: #6c7ae0; */
 }
 
 .main-menu > li:hover > .sub-menu {
@@ -459,7 +460,9 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .sub-menu > li:hover > a {
-  color: #6c7ae0;
+  /* color: #6c7ae0; */
+  color: #858586;
+
   text-decoration: none;
 }
 
@@ -580,7 +583,9 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 }
 
 .wrap-search-header button:hover {
-  color: #6c7ae0;
+  /* color: #6c7ae0; */
+  color: #858586;
+
 }
 
 /*---------------------------------------------*/
@@ -639,7 +644,9 @@ Input, textarea : 14px/1.6 '', Arial, sans-serif;
 
 /*---------------------------------------------*/
 .main-menu > li.active-menu > a {
-  color: #6c7ae0;
+  color: #858586;
+  /* color: #6c79e0; */
+  
 }
 
 

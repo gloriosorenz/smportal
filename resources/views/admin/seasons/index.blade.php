@@ -112,7 +112,12 @@
                             </a>
                             <div class="media-body">
                                 <div class="media-heading">
-                                    {{ $list->users->first_name }}  {{ $list->users->last_name }}<span class="float-right badge badge-warning badge-pill">Ongoing</span>
+                                    {{ $list->users->first_name }}  {{ $list->users->last_name }}
+                                    @if ($list->season_list_statuses->id == 2)
+                                        <span class="float-right badge badge-success badge-pill">{{$list->season_list_statuses->status }}</span>
+                                    @else
+                                        <span class="float-right badge badge-warning badge-pill">{{$list->season_list_statuses->status }}</span>
+                                    @endif
                                 </div>
                                 <div class="font-13">{{ $list->users->company }}</div>
                             </div>

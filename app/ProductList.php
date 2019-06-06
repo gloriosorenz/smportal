@@ -15,6 +15,8 @@ class ProductList extends Model
      // Primary Key
     public $primaryKey = 'id';
 
+
+    // Relations
     public function orig_products()
     {
         return $this->belongsTo(Product::class, 'orig_products_id');
@@ -33,5 +35,11 @@ class ProductList extends Model
     public function users()
     {
         return $this->belongsTo(User::class, 'users_id');
+    }
+
+    // Present Price
+    public function presentPrice()
+    {
+        return '₱'.number_format($this->price / 100 * 100, 2);
     }
 }

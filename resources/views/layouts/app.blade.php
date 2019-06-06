@@ -43,10 +43,10 @@
 </head>
 <body class="fixed-navbar">
     <div class="page-wrapper">
-        @include('inc.navbar')
-        @include('inc.sidenavbar')
+        @include('partials.navbar')
+        @include('partials.sidenavbar')
         <div class="content-wrapper">
-            @include('inc.messages')
+            @include('partials.messages')
             @yield('content')
         </div>
     </div>
@@ -93,6 +93,51 @@
                     { "data": "salary" }
                 ]*/
             });
+            // Order Tables
+            $('#pending_orders').DataTable({
+                pageLength: 10,
+                order: [[ 0, 'asc' ]],
+            });
+            $('#completed_orders').DataTable({
+                pageLength: 10,
+                order: [[ 0, 'asc' ]],
+            });
+            $('#cancelled_orders').DataTable({
+                pageLength: 10,
+                order: [[ 0, 'asc' ]],
+            });
+            // Order Products Tables
+            $('#pending_order_products').DataTable({
+                pageLength: 10,
+                order: [[ 0, 'asc' ]],
+            });
+            $('#confirmed_order_products').DataTable({
+                pageLength: 10,
+                order: [[ 0, 'asc' ]],
+            });
+            $('#cancelled_order_products').DataTable({
+                pageLength: 10,
+                order: [[ 0, 'asc' ]],
+            });
+            $('#paid_order_products').DataTable({
+                pageLength: 10,
+                order: [[ 0, 'asc' ]],
+            });
+            // Products Tables
+            $('#user_products').DataTable({
+                pageLength: 3,
+                order: [[ 0, 'asc' ]],
+            });
+            $('#all_user_products').DataTable({
+                pageLength: 6,
+                order: [[ 0, 'asc' ]],
+            });
+            // Shop Table
+            $('#shop_table').DataTable({
+                pageLength: 6,
+                order: [[ 0, 'asc' ]],
+            });
+
 
             // Select 2
             $(".select2_demo_1").select2();

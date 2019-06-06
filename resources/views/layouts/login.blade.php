@@ -42,7 +42,7 @@
 <body class="bg-silver-300">
     <div class="container">
         <div class="content">
-            @include('inc.messages')
+            @include('partials.messages')
             @yield('content')
         </div>
     </div>

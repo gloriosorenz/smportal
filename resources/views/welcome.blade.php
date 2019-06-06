@@ -109,7 +109,7 @@
                         </div>
                             
                         <div class="layer-slick1 animated visible-false" data-appear="zoomIn" data-delay="1600">
-                            <a href="{{ url('shop') }}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+                            <a href="{{ url('shop') }}" class="flex-c-m stext-101 cl0 size-101 bg7 bor1 hov-btn1 p-lr-15 trans-04">
                                 Shop Now
                             </a>
                         </div>
@@ -133,7 +133,7 @@
                         </div>
                             
                         <div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
-                            <a href="{{ url('shop') }}" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
+                            <a href="{{ url('shop') }}" class="flex-c-m stext-101 cl0 size-101 bg7 bor1 hov-btn1 p-lr-15 trans-04">
                                 Shop Now
                             </a>
                         </div>

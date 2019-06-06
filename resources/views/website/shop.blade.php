@@ -2,9 +2,23 @@
 
 @section('content')
 
+
+
 <!-- Product -->
 <div class="bg0 m-t-84 p-b-140">
         <div class="container">
+            {{-- Messages --}}
+            @if (session()->has('success_message'))
+                <div class="alert alert-success">
+                    {{ session()->get('success_message') }}
+                </div>
+            @endif
+            
+            @if (session()->has('error_message'))
+                <div class="alert alert-danger">
+                    {{ session()->get('error_message') }}
+                </div>
+            @endif
             {{-- Show Products Table --}}
                 <div class="row">
                     <div class="col-lg-12">
@@ -14,7 +28,7 @@
                                 <h2 class="title">Products</h2>
                             </div>
                             <div class="card-body">
-                                <table id="table_id2" class="table table-hover">
+                                <table id="shop_table" class="table table-hover">
                                     <thead>
                                         <tr>
                                             <th width="">Product</th>
@@ -45,13 +59,15 @@
                                             
                                                 @elseif (auth()->user()->roles_id == 3 || auth()->user()->roles_id == 4 )
                                                 <td>
-                                                    {{-- <form method="post" action="{{action('CartController@store')}}">
-                                                    @csrf
-                                                        <input type="hidden" name="id" value="{{ $product_list->id }}">
-                                                        <input type="hidden" name="price" value="{{ $product_list->price }}">
-                                                        <input type="hidden" name="quantity" value="{{ $product_list->curr_quantity }}">
-                                                        <button type="submit" class="btn btn-success btn-lg btn-block">Add to Cart</button>
-                                                    </form>   --}}
+                                                    {{-- @if ($product_list->quantity > 0) --}}
+                                                        <form method="post" action="{{action('CartController@store')}}">
+                                                            {{ csrf_field() }}
+                                                            <input type="hidden" name="id" value="{{ $product_list->id }}">
+                                                            <input type="hidden" name="price" value="{{ $product_list->price }}">
+                                                            <input type="hidden" name="quantity" value="{{ $product_list->curr_quantity }}">
+                                                            <button type="submit" class="btn btn-success btn-md btn-block">Add to Cart</button>
+                                                        </form>
+                                                    {{-- @endif --}}
                                                 </td>
                                             @endguest
                                         </tr>
@@ -71,7 +87,7 @@
             </div>
         </div>
     {{-- Example Data --}}
-    <div class="container">
+    {{-- <div class="container">
         <div class="flex-w flex-sb-m p-b-52">
             <div class="flex-w flex-l-m filter-tope-group m-tb-10">
                 <button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
@@ -834,7 +850,7 @@
                 Load More
             </a>
         </div>
-    </div>
+    </div> --}}
 </div>
     
 @endsection

@@ -9,11 +9,10 @@
         <!-- Create Season -->
         <div class="col-lg-3 col-md-6">
             <a href="#">
-                <div class="ibox bg-secondary color-white widget-stat">
+                <div class="ibox bg-green color-white widget-stat">
                     <div class="ibox-body">
                         <h2 class="m-b-5 font-strong">Create Season</h2>
                         <div class="m-b-5">Start a new season</div><i class="fas fa-plus widget-stat-icon"></i>
-                        {{-- <div><i class="fa fa-level-up m-r-5"></i><small>25% higher</small></div> --}}
                     </div>
                 </div>
             </a>
@@ -21,11 +20,10 @@
         <!-- Create Plant Report -->
         <div class="col-lg-3 col-md-6">
             <a href="#">
-                <div class="ibox bg-secondary color-white widget-stat">
+                <div class="ibox bg-info color-white widget-stat">
                     <div class="ibox-body">
                         <h2 class="m-b-5 font-strong">Plant Report</h2>
                         <div class="m-b-5">Make a Plant Report for the month</div><i class="fas fa-plus widget-stat-icon"></i>
-                        {{-- <div><i class="fa fa-level-up m-r-5"></i><small>17% higher</small></div> --}}
                     </div>
                 </div>
             </a>
@@ -33,11 +31,10 @@
         <!-- Create User -->
         <div class="col-lg-3 col-md-6">
             <a href="{{route('farmers.create')}}">
-                <div class="ibox bg-secondary color-white widget-stat">
+                <div class="ibox bg-warning color-white widget-stat">
                     <div class="ibox-body">
                         <h2 class="m-b-5 font-strong">Create Farmer</h2>
                         <div class="m-b-5">Add a new farmer to the system</div><i class="fas fa-plus widget-stat-icon"></i>
-                        {{-- <div><i class="fa fa-level-up m-r-5"></i><small>22% higher</small></div> --}}
                     </div>
                 </div>
             </a>
@@ -45,11 +42,10 @@
         <!-- Create Damage Report -->
         <div class="col-lg-3 col-md-6">
             <a href="#">
-                <div class="ibox bg-secondary color-white widget-stat">
+                <div class="ibox bg-danger color-white widget-stat">
                     <div class="ibox-body">
                         <h2 class="m-b-5 font-strong">Damage Report</h2>
                         <div class="m-b-5">Send a damage report</div><i class="fas fa-plus widget-stat-icon"></i>
-                        {{-- <div><i class="fa fa-level-down m-r-5"></i><small>-12% Lower</small></div> --}}
                     </div>
                 </div>
             </a>
@@ -57,7 +53,7 @@
     </div>
 
 
-    <div class="row">
+    {{-- <div class="row">
         <!-- Farmer Groups -->
         <div class="col-lg-3 col-md-6">
             <a href="#">
@@ -106,7 +102,7 @@
                 </div>
             </a>
         </div>
-    </div>
+    </div> --}}
 
     <div class="row">
         <div class="col-lg-8">

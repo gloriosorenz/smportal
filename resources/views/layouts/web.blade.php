@@ -50,9 +50,10 @@
 
 </head>
 <body class="animsition">
-    @include('inc.web_navbar')
+    @include('partials.web_navbar')
+    @include('partials.messages')
     @yield('content')
-    @include('inc.web_footer')
+    @include('partials.web_footer')
 
 
     <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
