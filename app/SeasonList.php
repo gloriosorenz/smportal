@@ -37,13 +37,18 @@ class SeasonList extends Model
 
     // FUNCTIONS
 
-    // Get all active farmers for the season
+    // Get all active farmers for the current season
     public static function getActiveFarmers(){
-
         $latest_season = Season::getLatestSeason();
         // $latest_season = DB::table('seasons')->orderBy('id', 'desc')->first();
 
-
         return SeasonList::where('seasons_id', $latest_season->id)->get();
+    }
+
+    // Get all farmers who participated for the season
+    public static function getFarmers($id){
+        $season = Season::find($id);
+
+        return SeasonList::where('seasons_id', $season->id)->get();
     }
 }

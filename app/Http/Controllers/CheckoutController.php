@@ -10,6 +10,10 @@ use Carbon\Carbon;
 use App\Order;
 use App\OrderProduct;
 use App\ProductList;
+use App\User;
+
+use Notification;
+use App\Notifications\OrderCreated;
 
 class CheckoutController extends Controller
 {
@@ -57,6 +61,10 @@ class CheckoutController extends Controller
             $this->decreaseQuantities();
 
             Cart::instance('default')->destroy();
+
+            // Notification
+            $farmers = User::where('roles_id', 2)->get();
+            Notification::send($farmers, new OrderCreated());
 
 
             return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');

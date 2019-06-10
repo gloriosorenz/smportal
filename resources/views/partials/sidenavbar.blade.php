@@ -3,7 +3,7 @@
     <div id="sidebar-collapse">
         <div class="admin-block d-flex">
             <div>
-                <img src="img/admin-avatar.png" width="45px" />
+                <img src="/img/admin-avatar.png" width="45px" />
             </div>
             <div class="admin-info">
                 <div class="font-strong">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</div><small>{{ auth()->user()->roles->title }}</small></div>

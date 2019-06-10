@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Season;
 use App\SeasonList;
+use App\Notifications\NewSeasonCreated;
+use Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -18,6 +20,8 @@ class SeasonsController extends Controller
     public function index()
     {
         $seasons = Season::all();
+        $statuses = Season::where('season_statuses_id', '=', 2)->get();
+
 
         $season_lists = SeasonList::getActiveFarmers();
 
@@ -26,6 +30,7 @@ class SeasonsController extends Controller
 
         return view('admin.seasons.index')
             ->with('seasons', $seasons)
+            ->with('statuses', $statuses)
             ->with('season_lists', $season_lists);
     }
 
@@ -63,6 +68,8 @@ class SeasonsController extends Controller
         $season->save();
 
 
+        $farmers = User::where('roles_id', 2)->get();
+        Notification::send($farmers, new NewSeasonCreated());
 
         return redirect()->route('seasons.index')->with('success','Season Created ');
     }
@@ -73,9 +80,31 @@ class SeasonsController extends Controller
      * @param  \App\Season  $season
      * @return \Illuminate\Http\Response
      */
-    public function show(Season $season)
+    public function show($id)
     {
-        //
+        $season = Season::find($id);
+        $season_lists = SeasonList::getFarmers($id);
+
+        $lists = DB::table('season_lists')
+                ->join('seasons', 'season_lists.seasons_id', '=', 'seasons.id')
+                ->join('users', 'season_lists.users_id', '=', 'users.id')
+                ->where('season_lists.seasons_id', $season->id)
+                ->select('users.barangays_id', 
+                        DB::raw("SUM(planned_hectares) as planned_hectares"), 
+                        DB::raw("SUM(planned_num_farmers) as planned_num_farmers"),
+                        DB::raw("SUM(planned_qty) as planned_qty"),
+                        DB::raw("SUM(actual_hectares) as actual_hectares"), 
+                        DB::raw("SUM(actual_num_farmers) as actual_num_farmers"),
+                        DB::raw("SUM(actual_qty) as actual_qty")
+                        )
+                ->groupBy('barangays_id')
+                ->get();
+
+        return view('admin.seasons.show')
+            ->with('season', $season)
+            ->with('season_lists', $season_lists)
+            ->with('lists', $lists);
+
     }
 
     /**

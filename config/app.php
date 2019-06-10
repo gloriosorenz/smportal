@@ -163,6 +163,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
+
 
         /*
          * Package Service Providers...
@@ -229,7 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
-
+        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
     ],
 
 ];

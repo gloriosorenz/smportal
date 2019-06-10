@@ -23,9 +23,11 @@
                 <div class="ibox-head">
                     <div class="ibox-title">Seasons Data Table</div>
                     <!-- Add Season Button -->
+                    @if ($active == 0)
                     <div>
                         <a class="btn btn-success btn-sm" href="{{ route('season_lists.create') }}">Plan Season</a>
                     </div>
+                    @endif
                 </div>
                 <div class="ibox-body">
                     <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">

@@ -83,7 +83,7 @@
                                 <th>Initial Quantity</th>
                                 <th>Current Quantity</th>
                                 <th>Harvest Date</th>
-                                <th width="15%">Options</th>
+                                {{-- <th width="15%">Options</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -95,10 +95,10 @@
                                 <td>{{$list->orig_quantity}}</td>
                                 <td>{{$list->curr_quantity}}</td>
                                 <td>{{$list->harvest_date}}</td>
-                                <td>
+                                {{-- <td>
                                     <a href="#" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
                                     <a href="#" class="btn btn-md btn-secondary"> <i class="fas fa-download fa-sm text-white"></i></a>
-                                </td>
+                                </td> --}}
                             </tr>
                             @endforeach
                         </tbody>

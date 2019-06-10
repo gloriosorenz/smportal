@@ -1,27 +1,22 @@
 @extends('layouts.web')
 
 @section('content')
+<div class="bg0 m-t-84 p-b-140">
+    <div class="container">
+        @if (session()->has('success_message'))
+            <div class="alert alert-success">
+                {{ session()->get('success_message') }}
+            </div>
+        @endif
+    
+        @if (session()->has('error_message'))
+            <div class="alert alert-danger">
+                {{ session()->get('error_message') }}
+            </div>
+        @endif
 
-    <div class="cart-section container">
-    <br>
-
-    <br>
-    <br>
-    
-            @if (session()->has('success_message'))
-                <div class="alert alert-success">
-                    {{ session()->get('success_message') }}
-                </div>
-            @endif
-    
-            @if (session()->has('error_message'))
-                <div class="alert alert-danger">
-                    {{ session()->get('error_message') }}
-                </div>
-            @endif
-    
+        
         @if (sizeof(Cart::content()) > 0)
-
         <br>
         <div class="row">
             <div class="col-md-12">
@@ -102,14 +97,10 @@
             <a href="{{ route('shop') }}" class="btn btn-primary btn-lg">Continue Shopping</a>
 
         @endif
-
-        <div class="spacer"></div>
-    
     </div>
+</div>
 
-    <br>
-    <br>
-    <br>
+
 
 @endsection
 

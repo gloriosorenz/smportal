@@ -15,6 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
 // Cart aand shop
 Route::get('/shop','WebsiteController@shop')->name('shop');
 Route::get('/cart', 'CartController@index')->name('cart.index');
@@ -38,12 +40,20 @@ Route::group( ['middleware' => 'auth' ], function()
     return view('profile');
     });
 
+    Route::get('/markAsRead', function () {
+        auth()->user()->unreadNotifications->markAsRead(); 
+    });
+
+
+// Dashboard
+Route::get('/home', 'DashboardController@index')->name('home');
+
+
     // Side Navbar Names
     Route::get('admin/seasons/index', 'SeasonsController@index')->name('seasons');
     Route::get('farmer/season_lists/index', 'SeasonListsController@index')->name('season_lists');
     Route::get('admin/orders/index', 'OrdersController@index')->name('orders');
     Route::get('farmer/order_products/index', 'OrderProductsController@index')->name('order_products');
-
 
 
     // Order Products
@@ -62,10 +72,12 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::resource('product_lists', 'ProductListsController');
     Route::resource('orders', 'OrdersController');
     Route::resource('order_products', 'OrderProductsController');
+    // Route::resource('dashboard', 'DashboardController');
+
 
     // Route::resource('users', 'UsersController');
 
-    Route::get('/home', 'HomeController@index')->name('home');
+    // Route::get('/home', 'HomeController@index')->name('home');
 
 });
 

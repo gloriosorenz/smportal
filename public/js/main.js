@@ -278,5 +278,11 @@
     });
 
 
+     // Notifications
+    //  $('#markasread').click(function(){
+    //     alert('clicked')
+    // })
+
+   
 
 })(jQuery);

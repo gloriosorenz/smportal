@@ -18,7 +18,7 @@
                 <div class="ibox">
                     <div class="ibox-body text-center">
                         <div class="m-t-20">
-                            <img class="img-circle" src="img/users/u3.jpg" />
+                            <img class="img-circle" src="img/admin-avatar.png" />
                         </div>
                         <h5 class="font-strong m-b-10 m-t-10">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</h5>
                         <div class="m-b-20 text-muted">{{ auth()->user()->roles->title }}</div>
