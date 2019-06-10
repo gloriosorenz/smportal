@@ -15,7 +15,7 @@
 
 
 <div class="page-content fade-in-up">
-    {{-- Products for current Season --}}
+    <!-- Products for current Season -->
     <div class="row">
         <!-- Products -->
         <div class="col-md-8">
@@ -63,12 +63,8 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    {{-- Product History --}}
-    <div class="row">
-        <!-- Products -->
-        <div class="col-md-8">
+         <!-- Product History -->
+         <div class="col-md-4">
             <div class="ibox">
                 <div class="ibox-head">
                     <div class="ibox-title">Products History</div>
@@ -103,6 +99,45 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Product History -->
+    <div class="row">
+       
+        <!-- Price History -->
+        <div class="col-md-12">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">Price History</div>
+                    <div class="ibox-tools">
+                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item">option 1</a>
+                            <a class="dropdown-item">option 2</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-body">
+                    <!-- Start Form -->
+                    <div class="flexbox mb-4">
+                        {!! Charts::styles() !!}
+                        <div class="container">
+                            <div class="app">
+                                <center>
+                                    {!! $price_history->html() !!}
+                                </center>
+                            </div>
+                        </div>
+                        <!-- End Of Main Application -->
+                        {!! Charts::scripts() !!}
+                        {!! $price_history->script() !!}
+                    </div>
+                    <!-- End Form -->
                 </div>
             </div>
         </div>

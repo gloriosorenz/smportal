@@ -9,7 +9,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 
 use Carbon;
 
-class SeasonListCreated extends Notification
+class ProductsAdded extends Notification
 {
     use Queueable;
 
@@ -71,7 +71,7 @@ class SeasonListCreated extends Notification
     public function toArray($notifiable)
     {
         return [
-            // 
+            //
         ];
     }
 }

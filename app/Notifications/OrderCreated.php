@@ -54,11 +54,24 @@ class OrderCreated extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
+    public function toDatabase($notifiable)
+    {
+        return [
+            'timeCreated'=> Carbon\Carbon::now()->diffForHumans(),
+            'user'=>auth()->user()
+        ];
+    }
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
     public function toArray($notifiable)
     {
         return [
-            'timeCreated'=> Carbon\Carbon::now(),
-            'user'=>auth()->user()
+            // 
         ];
     }
 }

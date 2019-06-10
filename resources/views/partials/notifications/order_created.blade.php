@@ -5,6 +5,6 @@
         </div> --}}
         <div class="media-body">
             {{-- {{dd($notification)}} --}}
-            <div class="font-13">{{$notification->data['user']['first_name']}} made an order</div><small class="text-muted">22 mins</small></div>
+            <div class="font-13">{{$notification->data['user']['first_name']}} made an order</div><small class="text-muted">{{ $notification->data['timeCreated'] }}</small></div>
     </div>
 </a>

@@ -10,6 +10,11 @@ use App\ProductList;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+use Charts;
+
+use App\Notifications\ProductsAdded;
+use Notification;
+
 class ProductListsController extends Controller
 {
     /**
@@ -40,12 +45,44 @@ class ProductListsController extends Controller
                 ->where('users_id', auth()->user()->id)->count();
 
 
+
+
+
+        // Labels
+        $prod_labels = ProductList::join('products', 'product_lists.orig_products_id', '=', 'products.id')
+                ->selectRaw('type')
+                ->where('users_id', auth()->user()->id)
+                ->groupby('product_lists.seasons_id', 'type')
+                ->pluck('type');
+        // dd($prod_labels);
+
+        // Get price values
+        $price = ProductList::select('seasons_id', 'price')
+                ->where('users_id', auth()->user()->id)
+                ->groupby('seasons_id', 'price')
+                ->pluck('price');
+        // dd($price);
+
+
+         // Price History Chart
+         $price_history = Charts::create('bar', 'highcharts')
+            ->title('Price History')
+            ->labels($prod_labels)
+            ->yAxisTitle("Sample")
+            ->xAxisTitle("Sample")
+            ->values($price)
+            ->dimensions(500,300)
+            ->responsive(true);
+
+
+
         return view('farmer.product_lists.index')
                 ->with('user_products', $user_products)
                 ->with('all_products', $all_products)
                 ->with('all_user_products', $all_user_products)
                 ->with('latest_season', $latest_season)
                 ->with('count', $count)
+                ->with('price_history', $price_history)
             ;
     }
 
@@ -112,6 +149,12 @@ class ProductListsController extends Controller
         $season_list->save();
         
 
+        // Notification
+        $users = User::where('roles_id', 1)
+            ->orWhere('roles_id', 3)
+            ->get();
+            // dd($users);
+        Notification::send($users, new ProductsAdded());
 
         return redirect()->route('product_lists.index')->with('success','Products Added ');
     }

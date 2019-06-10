@@ -57,7 +57,7 @@ class NewSeasonCreated extends Notification
     public function toDatabase($notifiable)
     {
         return [
-            'timeCreated'=> Carbon\Carbon::now(),
+            'timeCreated'=> Carbon\Carbon::now()->diffForHumans(),
             'user'=>auth()->user()
         ];
     }
