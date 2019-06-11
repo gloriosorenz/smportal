@@ -39,7 +39,7 @@
 
 							{{-- Goes to weather statistics --}}
 							<li class="{{Request:: is('weather') ? 'active-menu' : ''}}">
-								<a href="blog.html">Weather Statistics</a>
+								<a href="{{ url('weather') }}">Weather Statistics</a>
 							</li>
 
 							<li>

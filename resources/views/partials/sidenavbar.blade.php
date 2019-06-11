@@ -20,7 +20,7 @@
             </li>
             <!-- Profile -->
              <li>
-                <a class="active" href="{{ url('profile') }}"><i class="sidebar-item-icon fas fa-user-circle"></i>
+                <a class="active" href="{{ route('profile') }}"><i class="sidebar-item-icon fas fa-user-circle"></i>
                     <span class="nav-label">Profile</span>
                 </a>
             </li>
@@ -78,7 +78,7 @@
             </li>
             <!-- Profile -->
              <li class="{{Request:: is('profile') ? 'active' : ''}}">
-                <a href="{{ url('profile') }}"><i class="sidebar-item-icon fas fa-user-circle"></i>
+                <a href="{{ route('profile') }}"><i class="sidebar-item-icon fas fa-user-circle"></i>
                     <span class="nav-label">Profile</span>
                 </a>
             </li>

@@ -164,6 +164,7 @@ return [
 
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
+        // Naughtonium\LaravelDarkSky\LaravelDarkSkyServiceProvider::class,
 
 
         /*
@@ -232,6 +233,8 @@ return [
 
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
+        // 'DarkSky' => \Naughtonium\LaravelDarkSky\Facades\DarkSky::class,
+
     ],
 
 ];

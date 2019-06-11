@@ -97,6 +97,10 @@
             <a href="{{ route('shop') }}" class="btn btn-primary btn-lg">Continue Shopping</a>
 
         @endif
+
+
+
+
     </div>
 </div>
 

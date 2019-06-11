@@ -101,64 +101,27 @@
                         </div>
                     </li>
                     <li class="list-group list-group-divider scroller" data-height="240px" data-color="#71808f">
-                            <div>
-                                @forelse (auth()->user()->unreadNotifications as $notification)
-                                @include('partials.notifications.'. snake_case(class_basename($notification->type)))
-                                {{-- @include('partials.notifications.'. snake_case(class_basename($notification->type))) --}}
-                                @empty
-                                    <a class="list-group-item">
-                                        <div class="media">
-                                            {{-- <div class="media-img">
-                                                <span class="badge badge-success badge-big"><i class="fa fa-check"></i></span>
-                                            </div> --}}
-                                            <div class="media-body">
-                                                {{-- {{dd($notification)}} --}}
-                                                <div class="font-13">No unread Notifications</div>
-                                            </div>
+                        <div>
+                            @forelse (auth()->user()->Notifications()->take(10)->get() as $notification)
+                            @include('partials.notifications.'. snake_case(class_basename($notification->type)))
+                            {{-- @include('partials.notifications.'. snake_case(class_basename($notification->type))) --}}
+                            @empty
+                                <a class="list-group-item">
+                                    <div class="media">
+                                        {{-- <div class="media-img">
+                                            <span class="badge badge-success badge-big"><i class="fa fa-check"></i></span>
+                                        </div> --}}
+                                        <div class="media-body">
+                                            {{-- {{dd($notification)}} --}}
+                                            <div class="font-13">No unread Notifications</div>
                                         </div>
-                                    </a>
-                                @endforelse
-                            </div>
-                        {{-- <div>
-                            <a class="list-group-item">
-                                <div class="media">
-                                    <div class="media-img">
-                                        <span class="badge badge-success badge-big"><i class="fa fa-check"></i></span>
                                     </div>
-                                    <div class="media-body">
-                                        <div class="font-13">4 task compiled</div><small class="text-muted">22 mins</small></div>
-                                </div>
-                            </a>
-                            <a class="list-group-item">
-                                <div class="media">
-                                    <div class="media-img">
-                                        <span class="badge badge-default badge-big"><i class="fa fa-shopping-basket"></i></span>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="font-13">You have 12 new orders</div><small class="text-muted">40 mins</small></div>
-                                </div>
-                            </a>
-                            <a class="list-group-item">
-                                <div class="media">
-                                    <div class="media-img">
-                                        <span class="badge badge-danger badge-big"><i class="fa fa-bolt"></i></span>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="font-13">Server #7 rebooted</div><small class="text-muted">2 hrs</small></div>
-                                </div>
-                            </a>
-                            <a class="list-group-item">
-                                <div class="media">
-                                    <div class="media-img">
-                                        <span class="badge badge-success badge-big"><i class="fa fa-user"></i></span>
-                                    </div>
-                                    <div class="media-body">
-                                        <div class="font-13">New user registered</div><small class="text-muted">2 hrs</small></div>
-                                </div>
-                            </a>
-                        </div> --}}
+                                </a>
+                            @endforelse
+                        </div>
                     </li>
                 </ul>
+                
             </li>
             <li class="dropdown dropdown-user">
                 <a class="nav-link dropdown-toggle link" data-toggle="dropdown">

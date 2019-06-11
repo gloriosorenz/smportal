@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Charts;
+
 use DB;
 use App\ProductList;
 use App\Product;
 use App\Season;
+
+use DarkSkyApi;
+use Charts;
 
 class DashboardController extends Controller
 {
@@ -17,6 +20,21 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
+
+
+        // Weather forecasat
+        $forecast = DarkSkyApi::location(14.2843, 121.0889)
+            ->units('si')
+            ->forecast(['currently', 'daily']);
+
+        $daily = $forecast->daily()->data();
+
+        $alerts = $forecast->alerts('severity');
+        // dd($daily);
+
+
+
+
         $last_com_season = Season::where('season_statuses_id','=', 2)->latest('id')->first();
 
 
@@ -51,9 +69,12 @@ class DashboardController extends Controller
 
 
 
-        return view('home', compact('total_prod_per'))
+        return view('home')
             ->with('last_com_season', $last_com_season)
-            // ->with('total_prod_per', $total_prod_per)
+            ->with('forecast', $forecast)
+            ->with('alerts', $alerts)
+            ->with('daily', $daily)
+            ->with('total_prod_per', $total_prod_per)
             ;
     }
 }

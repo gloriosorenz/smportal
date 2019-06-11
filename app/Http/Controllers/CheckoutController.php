@@ -62,6 +62,8 @@ class CheckoutController extends Controller
 
             Cart::instance('default')->destroy();
 
+
+
             // Notification
             $farmers = User::where('roles_id', 2)->get();
             Notification::send($farmers, new OrderCreated());
@@ -97,16 +99,6 @@ class CheckoutController extends Controller
                 'farmers_id' => $item->model->users->id,
             ]);
         }
-
-        // Insert into reserve_product table
-        // foreach (Cart::content() as $item) {
-        //     ReserveProduct::create([
-        //         'orders_id' => $order->id,
-        //         'product_lists_id' => $item->model->id,
-        //         'quantity' => $item->qty,
-        //     ]);
-        // }
-
 
         return $order;
     }

@@ -52,13 +52,16 @@ class ProductListsController extends Controller
         $prod_labels = ProductList::join('products', 'product_lists.orig_products_id', '=', 'products.id')
                 ->selectRaw('type')
                 ->where('users_id', auth()->user()->id)
+                ->where('products.id', '!=', 3)
                 ->groupby('product_lists.seasons_id', 'type')
                 ->pluck('type');
         // dd($prod_labels);
 
         // Get price values
-        $price = ProductList::select('seasons_id', 'price')
+        $price = ProductList::join('products', 'product_lists.orig_products_id', '=', 'products.id')
+                ->select('seasons_id', 'price')
                 ->where('users_id', auth()->user()->id)
+                ->where('products.id', '!=', 3)
                 ->groupby('seasons_id', 'price')
                 ->pluck('price');
         // dd($price);
@@ -68,8 +71,8 @@ class ProductListsController extends Controller
          $price_history = Charts::create('bar', 'highcharts')
             ->title('Price History')
             ->labels($prod_labels)
-            ->yAxisTitle("Sample")
-            ->xAxisTitle("Sample")
+            ->yAxisTitle("Price")
+            ->xAxisTitle("Product")
             ->values($price)
             ->dimensions(500,300)
             ->responsive(true);

@@ -107,6 +107,112 @@
     </div> --}}
 
     <div class="row">
+        <!-- WEATHER UPDATES -->
+        <div class="col-lg-8">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">Daily Weather Updates</div>
+                    <div class="ibox-tools">
+                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item">option 1</a>
+                            <a class="dropdown-item">option 2</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-body">
+                        <div class="row">
+                            {{-- <ul>
+                                <li>Alerts: {{ $alerts }}</li>
+                                <li>Description: {{ $forecast->currently()->summary() }}</li>
+                            </ul> --}}
+                            @foreach ($daily as $item)
+                            <div class="col-12 col-md-3 p-b-20">
+                                <a class="card" data-toggle="modal" data-target="#exampleModal" >
+                                    <div class="card-body text-center scroller" data-height="200px">
+                                        <h5 class="card-title">{{ date('l', $item->time()) }}</h5>
+                                        <p class="lead m-0 small">{{ $item->summary() }}</p>
+                                        <p class="lead m-0">Hi {{ $item->temperatureHigh() }}</p>
+                                        <p class="lead m-0">Lo {{ $item->temperatureLow() }}</p>
+                                        <p class="lead m-0">Humidity {{ $item->humidity() }}</p>
+                                    </div> 
+                                </a>
+                            </div>
+
+                            <!-- Weather Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">{{ date('l', $item->time()) }}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                            <p class="lead m-0">{{ $item->summary() }}</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+
+                        {{-- Darksky Widget --}}
+                        {{-- <script type='text/javascript' src='https://darksky.net/widget/default/14.3144,121.1121/us12/en.js?width=100%&height=350&title=Santa Rosa, Laguna&textColor=333333&bgColor=transparent&transparency=true&skyColor=undefined&fontFamily=Verdana&customFont=&units=us&htColor=333333&ltColor=C7C7C7&displaySum=yes&displayHeader=yes'></script> --}}
+                </div>
+            </div>
+        </div>
+      
+        <!-- NOTIFICATIONS -->
+        <div class="col-lg-4">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">Notifications</div>
+                    <div class="ibox-tools">
+                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item">option 1</a>
+                            <a class="dropdown-item">option 2</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-body">
+                    <ul class="media-list media-list-divider m-0">
+                        <li class="list-group list-group-divider scroller" data-height="400px" data-color="#71808f">
+                            <div>
+                                @forelse (auth()->user()->Notifications()->take(5)->get() as $notification)
+                                @include('partials.notifications.'. snake_case(class_basename($notification->type)))
+                                @empty
+                                    <a class="list-group-item">
+                                        <div class="media">
+                                            {{-- <div class="media-img">
+                                                <span class="badge badge-success badge-big"><i class="fa fa-check"></i></span>
+                                            </div> --}}
+                                            <div class="media-body">
+                                                <div class="font-13">No Notifications</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @endforelse
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ibox-footer text-center">
+                    <a href="javascript:;">View All Notifications</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <!-- PRODUCT OUTPUT FOR CURRENT SEASON -->
         <div class="col-lg-8">
             <div class="ibox">
@@ -141,37 +247,38 @@
                 </div>
             </div>
         </div>
-      
+        
         <!-- NOTIFICATIONS -->
-        <div class="col-lg-4">
+        {{-- <div class="col-lg-4">
             <div class="ibox">
                 <div class="ibox-head">
                     <div class="ibox-title">Notifications</div>
                 </div>
                 <div class="ibox-body">
                     <ul class="media-list media-list-divider m-0">
-                            @forelse (auth()->user()->Notifications as $notification)
-                                @include('partials.notifications.'. snake_case(class_basename($notification->type)))
-                            @empty
-                                <a class="list-group-item">
-                                    <div class="media">
-                                        {{-- <div class="media-img">
-                                            <span class="badge badge-success badge-big"><i class="fa fa-check"></i></span>
-                                        </div> --}}
-                                        <div class="media-body">
-                                            <div class="font-13">No Notifications</div>
-                                        </div>
-                                    </div>
-                                </a>
-                            @endforelse
+                            <li class="list-group list-group-divider scroller" data-height="400px" data-color="#71808f">
+                                <div>
+                                    @forelse (auth()->user()->Notifications()->take(5)->get() as $notification)
+                                    @include('partials.notifications.'. snake_case(class_basename($notification->type)))
+                                    @empty
+                                        <a class="list-group-item">
+                                            <div class="media">
+                                                <div class="media-body">
+                                                    <div class="font-13">No Notifications</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    @endforelse
+                                </div>
+                            </li>
                     </ul>
                 </div>
                 <div class="ibox-footer text-center">
                     <a href="javascript:;">View All Notifications</a>
                 </div>
             </div>
-        </div>
-    </div>
+        </div> --}}
+    </div>    
 
     <style>
         .visitors-table tbody tr td:last-child {
@@ -189,9 +296,6 @@
         }
     </style>
 </div>
-
-
-
 
 
 <!-- Admin Functionalities -->
@@ -549,9 +653,6 @@
         </div>
     </div>
 
-
-
-
     <style>
         .visitors-table tbody tr td:last-child {
             display: flex;
@@ -569,5 +670,13 @@
     </style>
 </div>
 @endif
+
+
+{{-- <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+</button> --}}
+
+
 
 @endsection

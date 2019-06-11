@@ -1,10 +1,13 @@
 <a class="list-group-item" href="{{ route('season_lists')}}">
     <div class="media">
-        {{-- <div class="media-img">
+        <div class="media-img">
             <span class="badge badge-success badge-big"><i class="fa fa-check"></i></span>
-        </div> --}}
+        </div>
         <div class="media-body">
-            {{-- {{dd($notification)}} --}}
-            <div class="font-13">{{$notification->data['user']['first_name']}}  added their products for the season</div><small class="text-muted">{{ $notification->data['timeCreated'] }}</small></div>
+            <div class="media-heading">
+                {{$notification->data['user']['first_name']}} {{$notification->data['user']['last_name']}}<small class="text-muted float-right">{{ $notification->data['timeCreated'] }}</small>
+            </div>
+            <div class="font-13">Added their products for the season.</div>
+        </div>
     </div>
 </a>

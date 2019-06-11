@@ -145,8 +145,12 @@
 </section>
 
 <!-- Banner -->
-<div class="sec-banner bg0 p-t-80 p-b-50">
+<div class="sec-banner bg2 p-t-10 p-b-50">
     <div class="container">
+        <div class="row p-b-50">
+                <script type='text/javascript' src='https://darksky.net/widget/default/14.3144,121.1121/us12/en.js?width=100%&height=350&title=Santa Rosa, Laguna&textColor=333333&bgColor=transparent&transparency=true&skyColor=undefined&fontFamily=Verdana&customFont=&units=us&htColor=333333&ltColor=C7C7C7&displaySum=yes&displayHeader=yes'></script>
+        </div>
+
         <div class="row">
             <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
                 <!-- Block1 -->

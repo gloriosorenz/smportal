@@ -24,6 +24,11 @@ Route::post('/cart','CartController@store')->name('cart.index');
 Route::patch('/cart/{product}','CartController@update')->name('cart.update');
 Route::delete('/cart/{product}', 'CartController@destroy')->name('cart.destroy');
 
+// Weather Statistics
+Route::get('/weather', function () {
+    return view('website.weather');
+    });
+
 
 // Checkout
 Route::get('/checkout', 'CheckoutController@index')->name('checkout.index')->middleware('auth');
@@ -35,18 +40,17 @@ Auth::routes();
 // If user is authenticated
 Route::group( ['middleware' => 'auth' ], function()
 {
-    // Profile
-    Route::get('/profile', function () {
-    return view('profile');
-    });
 
     Route::get('/markAsRead', function () {
         auth()->user()->unreadNotifications->markAsRead(); 
     });
 
+    //Profile
+    Route::get('/profile', 'ProfilesController@index')->name('profile');
 
-// Dashboard
-Route::get('/home', 'DashboardController@index')->name('home');
+
+    // Dashboard
+    Route::get('/home', 'DashboardController@index')->name('home');
 
 
     // Side Navbar Names
