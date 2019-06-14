@@ -45,6 +45,11 @@ Route::group( ['middleware' => 'auth' ], function()
         auth()->user()->unreadNotifications->markAsRead(); 
     });
 
+    // Notifications
+    Route::get('/notifications', function () {
+        return view('notifications');
+        });
+
     //Profile
     Route::get('/profile', 'ProfilesController@index')->name('profile');
 

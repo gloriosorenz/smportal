@@ -163,7 +163,7 @@
                                  
                                 <!-- Monthly Transactions -->
                                 <h4 class="text-info m-b-20 m-t-20"><i class="fa fa-shopping-basket"></i>Transactions (Monthly)</h4>
-                                <table class="table table-striped table-hover">
+                                <table class="table table-striped table-hover" id="transactions_table">
                                     <thead>
                                         <tr>
                                             <th>Order ID</th>
@@ -184,7 +184,15 @@
                                                 <td>{{$t->orders->users->phone}}</td>
                                                 <td>{{$t->product_lists->orig_products->type}}</td>
                                                 <td>{{ presentPrice($t->orders->total_price) }}</td>
-                                                <td>/</td>
+                                                @if($t->order_product_statuses->id == 1)
+                                                    <td><span class="badge badge-warning">{{$t->order_product_statuses->status}}</span></td>
+                                                @elseif($t->order_product_statuses->id == 2)
+                                                    <td><span class="badge badge-success">{{$t->order_product_statuses->status}}</span></td>
+                                                @elseif($t->order_product_statuses->id == 3)
+                                                    <td><span class="badge badge-info">{{$t->order_product_statuses->status}}</span></td>
+                                                @elseif($t->order_product_statuses->id == 4)
+                                                    <td><span class="badge badge-danger">{{$t->order_product_statuses->status}}</span></td>
+                                                @endif
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -226,7 +234,7 @@
                             <!-- Feeds Tab -->
                             <div class="tab-pane fade" id="tab-3">
                                 <h5 class="text-info m-b-20 m-t-20"><i class="fa fa-bullhorn"></i> Latest Feeds</h5>
-                                <ul class="media-list media-list-divider m-0">
+                                {{-- <ul class="media-list media-list-divider m-0">
                                     <li class="media">
                                         <div class="media-img"><i class="ti-user font-18 text-muted"></i></div>
                                         <div class="media-body">
@@ -269,7 +277,30 @@
                                             <div class="font-13">Lorem Ipsum is simply dummy text.</div>
                                         </div>
                                     </li>
+                                </ul> --}}
+                                <ul class="media-list media-list-divider m-0">
+                                    <li class="list-group list-group-divider scroller" data-height="400px" data-color="#71808f">
+                                        <div>
+                                            @forelse (auth()->user()->Notifications()->take(5)->get() as $notification)
+                                            @include('partials.notifications.'. snake_case(class_basename($notification->type)))
+                                            @empty
+                                                <a class="list-group-item">
+                                                    <div class="media">
+                                                        {{-- <div class="media-img">
+                                                            <span class="badge badge-success badge-big"><i class="fa fa-check"></i></span>
+                                                        </div> --}}
+                                                        <div class="media-body">
+                                                            <div class="font-13">No Notifications</div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            @endforelse
+                                        </div>
+                                    </li>
                                 </ul>
+                                <div class="ibox-footer text-center">
+                                    <a href="{{ url('notifications') }}">View All</a>
+                                </div>
                             </div>
                         </div>
                     </div>

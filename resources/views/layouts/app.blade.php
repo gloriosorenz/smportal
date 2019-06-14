@@ -153,6 +153,11 @@
                 pageLength: 6,
                 order: [[ 0, 'asc' ]],
             });
+            // Transactions Table
+            $('#transactions_table').DataTable({
+                pageLength: 10,
+                order: [[ 0, 'desc' ]],
+            });
 
 
             // Select 2

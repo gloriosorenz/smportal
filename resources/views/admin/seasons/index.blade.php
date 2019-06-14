@@ -87,7 +87,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
+                                    <a href="/seasons/{{$season->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
                                     <a href="/seasons/{{$season->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
                                     <a href="#" class="btn btn-md btn-secondary"> <i class="fas fa-download fa-sm text-white"></i></a>
                                 </td>
@@ -125,7 +125,6 @@
                             </div>
                         </li>
                         @endforeach
-                        {{-- {{ $farmers->links() }} --}}
                     </ul>
                 </div>
             </div>

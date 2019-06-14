@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 
 use App\OrderProduct;
 use Carbon\Carbon;
+use App\User;
 // use App\Http\Controllers\Mail;
+
+use Notification;
+use App\Notifications\OrderConfirmed;
 
 class OrderProductsController extends Controller
 {
@@ -57,6 +61,13 @@ class OrderProductsController extends Controller
         $end_date = Carbon::parse($harvest_date)->addDays(7);
 
         $days = $now->diffIndays($end_date);
+
+        // Notification
+        $customers = User::where('roles_id', 3)
+            ->orWhere('roles_id', 4)
+            ->get();
+            // dd($users);
+        Notification::send($customers, new OrderConfirmed());
 
         
         // Mail to User

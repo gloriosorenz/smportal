@@ -113,9 +113,12 @@ class SeasonsController extends Controller
      * @param  \App\Season  $season
      * @return \Illuminate\Http\Response
      */
-    public function edit(Season $season)
+    public function edit($id)
     {
-        //
+        $season = Season::find($id);
+
+        return view('admin.seasons.edit')
+            ->with('season', $season);
     }
 
     /**
@@ -125,9 +128,27 @@ class SeasonsController extends Controller
      * @param  \App\Season  $season
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Season $season)
+    public function update(Request $request, $id)
     {
-        //
+        // Validation
+        $request->validate([
+            "season_end" => "required",
+        ]);
+
+        $season = Season::findOrFail($id);
+        $season->season_end = $request->input('season_start');
+        $season->season_end = $request->input('season_end');
+        $season->season_statuses_id = 2;
+        $season->save();
+
+        
+        // Notification
+        // $recipients = User::where('roles_id', 3)->get();
+        // Notification::send($recipients, new SeasonComplete());
+
+
+     
+        return redirect()->route('seasons.index')->with('success','Season Updated ');
     }
 
     /**
@@ -136,7 +157,7 @@ class SeasonsController extends Controller
      * @param  \App\Season  $season
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Season $season)
+    public function destroy($id)
     {
         //
     }

@@ -9,12 +9,12 @@
 <div class="page-content fade-in-up">
 
     <div class="row">
-        <!-- Create Season -->
+        <!-- Plan Season -->
         <div class="col-lg-3 col-md-6">
-            <a href="{{ route('seasons') }}">
+            <a href="{{ route('season_lists') }}">
                 <div class="ibox bg-green color-white widget-stat">
                     <div class="ibox-body">
-                        <h2 class="m-b-5 font-strong">Create Season</h2>
+                        <h2 class="m-b-5 font-strong">Plan Season</h2>
                         <div class="m-b-5">Start a new season</div><i class="fas fa-plus widget-stat-icon"></i>
                     </div>
                 </div>
@@ -31,13 +31,13 @@
                 </div>
             </a>
         </div>
-        <!-- Create User -->
+        <!-- Add Products -->
         <div class="col-lg-3 col-md-6">
-            <a href="{{route('farmers.create')}}">
+            <a href="{{route('product_lists.create')}}">
                 <div class="ibox bg-warning color-white widget-stat">
                     <div class="ibox-body">
-                        <h2 class="m-b-5 font-strong">Create Farmer</h2>
-                        <div class="m-b-5">Add a new farmer to the system</div><i class="fas fa-plus widget-stat-icon"></i>
+                        <h2 class="m-b-5 font-strong">Add Products</h2>
+                        <div class="m-b-5">Add products for the season</div><i class="fas fa-plus widget-stat-icon"></i>
                     </div>
                 </div>
             </a>
@@ -132,6 +132,7 @@
                                 <a class="card" data-toggle="modal" data-target="#exampleModal" >
                                     <div class="card-body text-center scroller" data-height="200px">
                                         <h5 class="card-title">{{ date('l', $item->time()) }}</h5>
+                                        {{-- <h5 class="lead m-0 small">{{ date('F j', $item->time()) }}</h5> --}}
                                         <p class="lead m-0 small">{{ $item->summary() }}</p>
                                         <p class="lead m-0">Hi {{ $item->temperatureHigh() }}</p>
                                         <p class="lead m-0">Lo {{ $item->temperatureLow() }}</p>
@@ -187,7 +188,7 @@
                     <ul class="media-list media-list-divider m-0">
                         <li class="list-group list-group-divider scroller" data-height="400px" data-color="#71808f">
                             <div>
-                                @forelse (auth()->user()->Notifications()->take(5)->get() as $notification)
+                                @forelse (auth()->user()->Notifications()->take(20)->get() as $notification)
                                 @include('partials.notifications.'. snake_case(class_basename($notification->type)))
                                 @empty
                                     <a class="list-group-item">
@@ -206,18 +207,75 @@
                     </ul>
                 </div>
                 <div class="ibox-footer text-center">
-                    <a href="javascript:;">View All Notifications</a>
+                    <a href="{{ url('notifications') }}">View All Notifications</a>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <!-- PRODUCT OUTPUT FOR CURRENT SEASON -->
+        <!-- LATEST ORDERS -->
         <div class="col-lg-8">
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Latest Orders</div>
+                        <div class="ibox-tools">
+                            <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item">option 1</a>
+                                <a class="dropdown-item">option 2</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ibox-body">
+                        <!-- Start Form -->
+                        <table class="table table-striped table-hover" id="transactions_table">
+                            <thead>
+                                <tr>
+                                    <th>Order ID</th>
+                                    <th>Tracking ID</th>
+                                    <th>Customer</th>
+                                    <th>Number</th>
+                                    <th>Product Type</th>
+                                    <th>Sub Total</th>
+                                    <th width="20%">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($transactions as $t)
+                                    <tr class="active">
+                                        <th>{{$t->orders->id}}</th>
+                                        <td>{{$t->orders->tracking_id}}</td>
+                                        <td>{{$t->orders->users->first_name}} {{$t->orders->users->last_name}}</td>
+                                        <td>{{$t->orders->users->phone}}</td>
+                                        <td>{{$t->product_lists->orig_products->type}}</td>
+                                        <td>{{ presentPrice($t->orders->total_price) }}</td>
+                                        @if($t->order_product_statuses->id == 1)
+                                            <td><span class="badge badge-warning">{{$t->order_product_statuses->status}}</span></td>
+                                        @elseif($t->order_product_statuses->id == 2)
+                                            <td><span class="badge badge-success">{{$t->order_product_statuses->status}}</span></td>
+                                        @elseif($t->order_product_statuses->id == 3)
+                                            <td><span class="badge badge-info">{{$t->order_product_statuses->status}}</span></td>
+                                        @elseif($t->order_product_statuses->id == 4)
+                                            <td><span class="badge badge-danger">{{$t->order_product_statuses->status}}</span></td>
+                                        @endif
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <!-- End Form -->
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- SEASONAL RICE PRODUCTION -->
+        <div class="col-lg-6">
             <div class="ibox">
                 <div class="ibox-head">
-                    <div class="ibox-title">Product Output for Season {{$last_com_season->id}}</div>
+                    <div class="ibox-title">Production Overview for Season {{$last_com_season->id}}</div>
                     <div class="ibox-tools">
                         <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                         <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
@@ -233,13 +291,48 @@
                         <div class="container">
                             <div class="app">
                                 <center>
-                                    {!! $total_prod_per->html() !!}
+                                    {!! $riceprodline->html() !!}
                                 </center>
                             </div>
                         </div>
                             <!-- End Of Main Application -->
                             {!! Charts::scripts() !!}
-                            {!! $total_prod_per->script() !!}
+                            {!! $riceprodline->script() !!}
+                    </div>
+                    {{-- <div>
+                        <canvas id="bar_chart" style="height:260px;"></canvas>
+                    </div> --}}
+                </div>
+            </div>
+        </div>
+
+        <!-- PRODUCTS SOLD PER SEASON -->
+        <div class="col-lg-6">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">Products Sold for Season {{$last_com_season->id}}</div>
+                    <div class="ibox-tools">
+                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item">option 1</a>
+                            <a class="dropdown-item">option 2</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-body">
+                    <div class="flexbox mb-4">
+                        {!! Charts::styles() !!}
+                        <div class="container">
+                            <div class="app">
+                                <center>
+                                    {!! $orderlinechart->html() !!}
+                                </center>
+                            </div>
+                        </div>
+                            <!-- End Of Main Application -->
+                            {!! Charts::scripts() !!}
+                            {!! $orderlinechart->script() !!}
                     </div>
                     {{-- <div>
                         <canvas id="bar_chart" style="height:260px;"></canvas>
@@ -248,36 +341,6 @@
             </div>
         </div>
         
-        <!-- NOTIFICATIONS -->
-        {{-- <div class="col-lg-4">
-            <div class="ibox">
-                <div class="ibox-head">
-                    <div class="ibox-title">Notifications</div>
-                </div>
-                <div class="ibox-body">
-                    <ul class="media-list media-list-divider m-0">
-                            <li class="list-group list-group-divider scroller" data-height="400px" data-color="#71808f">
-                                <div>
-                                    @forelse (auth()->user()->Notifications()->take(5)->get() as $notification)
-                                    @include('partials.notifications.'. snake_case(class_basename($notification->type)))
-                                    @empty
-                                        <a class="list-group-item">
-                                            <div class="media">
-                                                <div class="media-body">
-                                                    <div class="font-13">No Notifications</div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    @endforelse
-                                </div>
-                            </li>
-                    </ul>
-                </div>
-                <div class="ibox-footer text-center">
-                    <a href="javascript:;">View All Notifications</a>
-                </div>
-            </div>
-        </div> --}}
     </div>    
 
     <style>
@@ -506,9 +569,13 @@
                 </div>
                 <div class="ibox-body">
                     <ul class="media-list media-list-divider m-0">
+                        <li class="list-group list-group-divider scroller" data-height="400px" data-color="#71808f">
+                            <div>
                             @foreach (auth()->user()->Notifications as $notification)
                             @include('partials.notifications.'. snake_case(class_basename($notification->type)))
                             @endforeach
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 <div class="ibox-footer text-center">
@@ -648,6 +715,40 @@
                             </div>
                         </li>
                     </ul>
+                </div>
+            </div>
+        </div>
+        <!-- PRODUCT OUTPUT FOR CURRENT SEASON -->
+        <div class="col-lg-6">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">Product Output for Season {{$last_com_season->id}}</div>
+                    <div class="ibox-tools">
+                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item">option 1</a>
+                            <a class="dropdown-item">option 2</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-body">
+                    <div class="flexbox mb-4">
+                        {!! Charts::styles() !!}
+                        <div class="container">
+                            <div class="app">
+                                <center>
+                                    {!! $total_prod_per->html() !!}
+                                </center>
+                            </div>
+                        </div>
+                            <!-- End Of Main Application -->
+                            {!! Charts::scripts() !!}
+                            {!! $total_prod_per->script() !!}
+                    </div>
+                    {{-- <div>
+                        <canvas id="bar_chart" style="height:260px;"></canvas>
+                    </div> --}}
                 </div>
             </div>
         </div>

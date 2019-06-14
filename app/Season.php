@@ -43,4 +43,12 @@ class Season extends Model
             ->where('season_statuses_id', 1)
             ->first();
     }
+
+    // Get latest complete season
+    public static function getLastCompleteSeason(){
+        return DB::table('seasons')
+            ->where('season_statuses_id', 2)
+            ->latest('id')
+            ->first();
+    }
 }

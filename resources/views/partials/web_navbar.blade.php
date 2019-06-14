@@ -25,19 +25,14 @@
 						<ul class="main-menu">
 							<li class="{{Request:: is('/') ? 'active-menu' : ''}}">
 								<a href="/">Home</a>
-								{{-- <ul class="sub-menu">
-									<li><a href="index.html">Homepage 1</a></li>
-									<li><a href="home-02.html">Homepage 2</a></li>
-									<li><a href="home-03.html">Homepage 3</a></li>
-								</ul> --}}
 							</li>
 
-							{{-- Goes to Shop Page --}}
+							<!-- Goes to shop page -->
 							<li class="{{Request:: is('shop') ? 'active-menu' : ''}}">
 								<a href="{{ url('shop') }}">Shop</a>
 							</li>
 
-							{{-- Goes to weather statistics --}}
+							<!-- Goes to weather statistics page -->
 							<li class="{{Request:: is('weather') ? 'active-menu' : ''}}">
 								<a href="{{ url('weather') }}">Weather Statistics</a>
 							</li>
@@ -58,13 +53,6 @@
 					
 					<!-- Icon header -->
 					<div class="wrap-icon-header flex-w flex-r-m">
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-							<i class="zmdi zmdi-search"></i>
-						</div>
-
-						<div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
-							<i class="zmdi zmdi-shopping-cart"></i>
-						</div>
 
 						<div class="menu-desktop">
 							<ul class="main-menu">
@@ -124,17 +112,42 @@
 								</li>
 								<!-- CUSTOMER -->
 								@elseif(Auth::user()->roles_id == 3 || Auth::user()->roles_id == 4)
-								<li class="nav-item">
-									<a class="nav-link" href="{{ url('cart') }}">Cart ({{ Cart::content()->count() }})</a>
-				
+								 <!-- Notifications -->
+								<li class="nav-item dropdown" id="markasread" onclick="markNotificationAsRead()">
+									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										<i class="fas fa-bell rel">
+											@if( count(auth()->user()->unreadNotifications) > 0)
+											<span class="notify-signal"></span>
+											@endif
+										</i>
+									</a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+										@forelse (auth()->user()->Notifications()->take(10)->get() as $notification)
+										@include('partials.notifications.'. snake_case(class_basename($notification->type)))
+										@empty
+											<a class="dropdown-item">
+												<div class="media">
+													<div class="media-body">
+														<div class="font-13">No unread Notifications</div>
+													</div>
+												</div>
+											</a>
+										@endforelse
+										<a class="dropdown-item" href="#">Action</a>
+										<a class="dropdown-item" href="#">Another action</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item" href="#">Something else here</a>
+									</div>
 								</li>
+								<!-- Cart -->
+								<li class="nav-item">
+									<a class="nav-link" href="{{ url('cart') }}"><i class="fas fa-shopping-cart"></i> ({{ Cart::content()->count() }})</a>
+								</li>
+								<!-- Login -->
 								<li class="nav-item dropdown">
-								
 									<a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
 										{{ Auth::user()->first_name }} <i class="fas fa-caret-down"></i>
 									</a>
-									
-				
 									<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
 										<a class="dropdown-item" href="{{ url('/orders/my_orders') }}">
 											<i class="fas fa-clipboard-list"></i>
@@ -225,19 +238,6 @@
 			</ul>
 		</div>
 
-		<!-- Modal Search -->
-		<div class="modal-search-header flex-c-m trans-04 js-hide-modal-search">
-			<div class="container-search-header">
-				<button class="flex-c-m btn-hide-modal-search trans-04 js-hide-modal-search">
-					<img src="images/icons/icon-close2.png" alt="CLOSE">
-				</button>
+		
 
-				<form class="wrap-search-header flex-w p-l-15">
-					<button class="flex-c-m trans-04">
-						<i class="zmdi zmdi-search"></i>
-					</button>
-					<input class="plh3" type="text" name="search" placeholder="Search...">
-				</form>
-			</div>
-		</div>
 	</header>

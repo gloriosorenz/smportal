@@ -48,32 +48,43 @@ class ProductListsController extends Controller
 
 
 
+
+                
         // Labels
         $prod_labels = ProductList::join('products', 'product_lists.orig_products_id', '=', 'products.id')
-                ->selectRaw('type')
+                ->select('seasons_id', 'type')
                 ->where('users_id', auth()->user()->id)
-                ->where('products.id', '!=', 3)
+                ->where('products.id', '=', 1)
                 ->groupby('product_lists.seasons_id', 'type')
-                ->pluck('type');
+                ->pluck('product_lists.seasons_id');
         // dd($prod_labels);
 
         // Get price values
-        $price = ProductList::join('products', 'product_lists.orig_products_id', '=', 'products.id')
-                ->select('seasons_id', 'price')
+        $rice_price = ProductList::join('products', 'product_lists.orig_products_id', '=', 'products.id')
+                // ->select('seasons_id', 'price')
                 ->where('users_id', auth()->user()->id)
-                ->where('products.id', '!=', 3)
-                ->groupby('seasons_id', 'price')
+                ->where('products.id', '=', 1)
+                // ->groupby('seasons_id', 'price')
                 ->pluck('price');
         // dd($price);
+        $withered_price = ProductList::join('products', 'product_lists.orig_products_id', '=', 'products.id')
+                // ->select('seasons_id', 'price')
+                ->where('users_id', auth()->user()->id)
+                ->where('products.id', '=', 2)
+                // ->groupby('seasons_id', 'price')
+                ->pluck('price');
 
 
          // Price History Chart
-         $price_history = Charts::create('bar', 'highcharts')
+         $price_history = Charts::multi('bar', 'highcharts')
             ->title('Price History')
             ->labels($prod_labels)
+            // ->template('material')
+            ->elementLabel('Rice Product Prices')
             ->yAxisTitle("Price")
-            ->xAxisTitle("Product")
-            ->values($price)
+            ->xAxisTitle("Season")
+            ->dataset('Rice Products',$rice_price)
+            ->dataset('Withered Products',$withered_price)
             ->dimensions(500,300)
             ->responsive(true);
 

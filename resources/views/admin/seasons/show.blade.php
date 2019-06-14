@@ -16,44 +16,41 @@
 
 <div class="page-content fade-in-up">
 
+    <div class="row">
+        <!-- If Season is ongoing -->
+        @if ($season->season_statuses_id == 1)
+        <div class="col-md-4">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h4 class="card-title">Season {{ $season->id }}</h4>
+                    {{-- <div class="card-subtitle">subtitle</div>
+                    <p class="card-text">Season Start: {{ $season->season_start }}</p>
+                    <p class="card-text">Season End: {{ $season->season_end }}</p> --}}
+                    <p class="card-text">Staus: {{ $season->season_statuses->status }}</p>
+                </div>
+            </div><br>
+        </div>
+        <!-- If Season is done -->
+        @elseif ($season->season_statuses_id == 2)
+        <div class="col-md-4">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h4 class="card-title">Season {{ $season->id }} </h4>
+                    {{-- <div class="card-subtitle">subtitle</div>
+                    <p class="card-text">Season Start: {{ $season->season_start }}</p>
+                    <p class="card-text">Season End: {{ $season->season_end }}</p> --}}
+                    <p class="card-text">Staus: {{ $season->season_statuses->status }}</p>
+                </div>
+            </div><br>
+        </div>
+        @endif
+    </div>
 
     <div class="row">
+    
         <!-- Seasons -->
         <div class="col-md-8">
-            <div class="ibox">
-                <div class="ibox-head">
-                    <div class="ibox-title">Season {{ $season->id }} Information</div>
-                </div>
-                <div class="ibox-body">
-                    <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
-                        <thead>
-                            <tr>
-                                <th>Season</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{-- @foreach($season as $s) --}}
-                            <tr>
-                                <td>Season {{ $season->id }}</td>
-                                <td>{{ $season->season_start }}</td>
-                                <td>{{ $season->season_end }}</td>
-                                <td>
-                                    @if ($season->season_statuses_id == 1)
-                                        <span class="badge badge-warning badge-pill">{{ $season->season_statuses->status }}</span>
-                                    @else
-                                        <span class="badge badge-success badge-pill">{{ $season->season_statuses->status }}</span>
-                                    @endif
-                                </td>
-                            </tr>
-                            {{-- @endforeach --}}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
+            {{-- Harvest Report --}}
             <div class="ibox">
                 <div class="ibox-head">
                     <div class="ibox-title">Rice Product/Harvest Report</div>

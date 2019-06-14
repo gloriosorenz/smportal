@@ -5,7 +5,7 @@
         </div>
         <div class="media-body">
             <div class="media-heading">
-                {{$notification->data['user']['first_name']}} {{$notification->data['user']['last_name']}}<small class="text-muted float-right">{{ $notification->data['timeCreated'] }}</small>
+                {{$notification->data['user']['first_name']}} {{$notification->data['user']['last_name']}}<small class="text-muted float-right">{{ $notification->created_at->diffForHumans() }}</small>
             </div>
             <div class="font-13">Joined the season.</div>
         </div>

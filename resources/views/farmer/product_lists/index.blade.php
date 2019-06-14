@@ -30,8 +30,8 @@
                     </div>
                 </div>
                 <div class="ibox-body">
-                    <table class="table table-bordered table-hover" id="user_products" cellspacing="0" width="100%">
-                        <thead>
+                    <table class="table table-bordered table-hover"  cellspacing="0" width="100%">
+                        <thead class="thead-default">
                             <tr>
                                 <th>ID</th>
                                 <th>Product Type</th>
@@ -63,8 +63,15 @@
                 </div>
             </div>
         </div>
-         <!-- Product History -->
-         <div class="col-md-4">
+         
+        
+    </div>
+
+    <!-- Product History -->
+    <div class="row">
+
+        <!-- Product History -->
+        <div class="col-md-6">
             <div class="ibox">
                 <div class="ibox-head">
                     <div class="ibox-title">Products History</div>
@@ -102,14 +109,9 @@
                 </div>
             </div>
         </div>
-        
-    </div>
-
-    <!-- Product History -->
-    <div class="row">
        
         <!-- Price History -->
-        <div class="col-md-12">
+        <div class="col-md-6">
             <div class="ibox">
                 <div class="ibox-head">
                     <div class="ibox-title">Price History</div>

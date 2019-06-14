@@ -62,6 +62,29 @@
                     </li>
                 </ul>
             </li>
+            
+             <!-- Reports  -->
+             <li class="heading">Reports</li>
+             <li class="{{Request:: is('') ? 'active' : ''}}">
+                 <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
+                     <span class="nav-label">Plant Report</span>
+                 </a>
+             </li>
+             <li class="{{Request:: is('') ? 'active' : ''}}">
+                 <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
+                     <span class="nav-label">Sales Report</span>
+                 </a>
+             </li>
+             <li class="{{Request:: is('') ? 'active' : ''}}">
+                 <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
+                     <span class="nav-label">Damage Report</span>
+                 </a>
+             </li>
+             <li class="{{Request:: is('') ? 'active' : ''}}">
+                 <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
+                     <span class="nav-label">Harvest Report</span>
+                 </a>
+             </li>
 
 
 
@@ -111,6 +134,29 @@
             <li class="{{Request:: is('order_products') ? 'active' : ''}}">
                 <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-copy"></i>
                     <span class="nav-label">Order Products</span>
+                </a>
+            </li>
+
+            <!-- Reports  -->
+            <li class="heading">Reports</li>
+            <li class="{{Request:: is('') ? 'active' : ''}}">
+                <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
+                    <span class="nav-label">Plant Report</span>
+                </a>
+            </li>
+            <li class="{{Request:: is('') ? 'active' : ''}}">
+                <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
+                    <span class="nav-label">Sales Report</span>
+                </a>
+            </li>
+            <li class="{{Request:: is('') ? 'active' : ''}}">
+                <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
+                    <span class="nav-label">Damage Report</span>
+                </a>
+            </li>
+            <li class="{{Request:: is('') ? 'active' : ''}}">
+                <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
+                    <span class="nav-label">Harvest Report</span>
                 </a>
             </li>
             

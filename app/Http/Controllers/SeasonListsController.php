@@ -9,6 +9,8 @@ use App\SeasonList;
 use Notification;
 use App\Notifications\SeasonListCreated;
 
+use DB;
+
 use Illuminate\Http\Request;
 
 class SeasonListsController extends Controller
@@ -105,7 +107,10 @@ class SeasonListsController extends Controller
      */
     public function show($id)
     {
-        //
+        $season_list = SeasonList::findOrFail($id);
+
+        return view('farmer.season_lists.show')
+            ->with('season_list', $season_list);
     }
 
     /**
@@ -116,7 +121,10 @@ class SeasonListsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $season_list = SeasonList::findOrFail($id);
+
+        return view('farmer.season_lists.edit')
+            ->with('season_list', $season_list);
     }
 
     /**
@@ -128,7 +136,29 @@ class SeasonListsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $season_list = SeasonList::findOrFail($id);
+
+        // Get latest season
+        $season = DB::table('seasons')
+        ->where('season_statuses_id', 1)
+        ->first();
+
+        
+        $season_list->actual_hectares = $request->input('actual_hectares');
+        $season_list->actual_num_farmers = $request->input('actual_num_farmers');
+        $season_list->season_list_statuses_id = 2;
+        $season_list->save();
+
+
+        // Get email
+        $admin = User::where('roles_id',1)->pluck('email');
+        // Get Season 
+        $season = $season_list->seasons->id;
+
+        // Mail to User
+        // Mail::to($admin)->send(new FarmerSeasonDone($season_list));
+
+        return redirect()->route('season_lists.index')->with('success','Season List Updated ');
     }
 
     /**

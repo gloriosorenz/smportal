@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
 
 
 
@@ -27,40 +27,42 @@
 
     <!-- Global Mainly Styles -->
     <link href="{{ asset('vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('vendors/themify-icons/css/themify-icons.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('vendors/themify-icons/css/themify-icons.css') }}" rel="stylesheet"> --}}
 
     <!--  Theme Styles -->
-    <link href="{{ asset('css/main.min.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/main.min.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/signin.css') }}" rel="stylesheet">
+
     <!-- PAGE LEVEL STYLES-->
-    <link href="{{ asset('css/pages/auth-light.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/pages/auth-light.css') }}" rel="stylesheet"> --}}
 
 
     <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
 
 
 </head>
-<body class="bg-silver-300">
-    <div class="container">
-        <div class="content">
-            @include('partials.messages')
+<body class="text-center">
+    {{-- <div class="container">
+        <div class="content"> --}}
+            {{-- @include('partials.messages') --}}
             @yield('content')
-        </div>
-    </div>
+        {{-- </div>
+    </div> --}}
 
 
     <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
     <!-- CORE PLUGINS-->
-    <script type="text/javascript" src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendors/popper.js/dist/umd/popper.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendors/metisMenu/dist/metisMenu.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendors/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script> --}}
+    {{-- <script type="text/javascript" src="{{ asset('vendors/popper.js/dist/umd/popper.min.js') }}"></script> --}}
+    {{-- <script type="text/javascript" src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script> --}}
+    {{-- <script type="text/javascript" src="{{ asset('vendors/metisMenu/dist/metisMenu.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendors/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script> --}}
 
     <!-- PAGE LEVEL PLUGINS-->
-    <script type="text/javascript" src="{{ asset('vendors/jquery-validation/dist/jquery.validate.min.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('vendors/jquery-validation/dist/jquery.validate.min.js') }}"></script> --}}
 
     <!-- CORE SCRIPTS-->
-    <script src="{{ asset('js/app.min.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/app.min.js') }}" defer></script> --}}
 
 
      <!-- PAGE LEVEL SCRIPTS-->

@@ -77,6 +77,7 @@
             </li> --}}
         </ul>
         <!-- END TOP-LEFT TOOLBAR-->
+        
         <!-- START TOP-RIGHT TOOLBAR-->
         <ul class="nav navbar-toolbar">
             <!-- Link to main site -->
@@ -97,14 +98,13 @@
                     <li class="dropdown-menu-header">
                         <div>
                             <span><strong>{{ count(auth()->user()->unreadNotifications) }} New</strong> Notifications</span>
-                            <a class="pull-right" href="javascript:;">view all</a>
+                            <a class="pull-right" href="{{ url('notifications') }}">view all</a>
                         </div>
                     </li>
                     <li class="list-group list-group-divider scroller" data-height="240px" data-color="#71808f">
                         <div>
                             @forelse (auth()->user()->Notifications()->take(10)->get() as $notification)
                             @include('partials.notifications.'. snake_case(class_basename($notification->type)))
-                            {{-- @include('partials.notifications.'. snake_case(class_basename($notification->type))) --}}
                             @empty
                                 <a class="list-group-item">
                                     <div class="media">
@@ -121,8 +121,9 @@
                         </div>
                     </li>
                 </ul>
-                
             </li>
+
+            <!-- Login/Logout -->
             <li class="dropdown dropdown-user">
                 <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
                     <img src="/img/admin-avatar.png" />
