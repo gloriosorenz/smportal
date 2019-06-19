@@ -76,7 +76,7 @@ class ProductListsController extends Controller
 
 
          // Price History Chart
-         $price_history = Charts::multi('bar', 'highcharts')
+         $price_history = Charts::multi('line', 'highcharts')
             ->title('Price History')
             ->labels($prod_labels)
             // ->template('material')
@@ -181,7 +181,14 @@ class ProductListsController extends Controller
      */
     public function show($id)
     {
-        //
+        $season = Season::find($id);
+        $product_lists = ProductList::where('users_id', '=', auth()->user()->id)
+                ->where('seasons_id', $season->id)
+                ->get();
+
+        return view('farmer.product_lists.show')
+            ->with('season', $season)
+            ->with('product_lists', $product_lists);
     }
 
     /**
@@ -192,7 +199,10 @@ class ProductListsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product_list = ProductList::findOrFail($id);
+
+        return view('farmer.product_lists.edit')
+            ->with('product_list', $product_list);
     }
 
     /**
@@ -204,7 +214,16 @@ class ProductListsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product_list = ProductList::findOrFail($id);
+
+        $product_list->orig_quantity = $request->input('orig_quantity');
+        $product_list->curr_quantity = $request->input('curr_quantity');
+        $product_list->price = $request->input('price');
+        $product_list->save();
+
+       
+    
+        return redirect()->route('product_lists.index')->with('success','Products Updated ');
     }
 
     /**

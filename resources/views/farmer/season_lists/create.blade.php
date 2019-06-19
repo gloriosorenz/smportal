@@ -17,7 +17,7 @@
 <div class="page-content fade-in-up">
 
     <div class="row">
-        {{-- Input farmer's hectares and no. of farmers --}}
+        <!-- Input farmer's hectares and no. of farmers -->
         <div class="col-md-6">
             <div class="ibox">
                 <div class="ibox-head">
@@ -55,7 +55,7 @@
                                     <input class="form-control" type="number" placeholder="{{ auth()->user()->no_farmers }}" name="planned_num_farmers[]" step="1" min="1" max="{{ auth()->user()->no_farmers }}">
                                 </td>
                                 <td>
-                                    <input class="form-control" type="number" placeholder="Enter Quantity" name="planned_qty[]">
+                                    <input class="form-control" type="number" placeholder="Enter Quantity" name="planned_qty[]" step="1" min="1">
                                 </td>
                             </tr>
                         </tbody>
@@ -71,7 +71,7 @@
             </div>
         </div>
 
-        {{-- Farmer's info (hectares and no. farmers) --}}
+        <!-- Farmer's info (hectares and no. farmers) -->
         <div class="col-md-4">
             <div class="ibox">
                 <div class="ibox-head">
@@ -106,8 +106,7 @@
 
     </div>
 
-
-    {{-- Season History --}}
+    <!-- Season History -->
     <div class="row">
         <!-- Seasons -->
         <div class="col-md-6">

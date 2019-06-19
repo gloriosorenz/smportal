@@ -50,6 +50,30 @@ class User extends Authenticatable
       return $this->hasMany('App\SeasonList');
    }
 
+   public function barangays()
+   {
+       return $this->belongsTo(Barangay::class, 'barangays_id');
+   }
+
+   public function cities()
+   {
+       return $this->belongsTo(City::class, 'cities_id');
+   }
+
+   public function provinces()
+   {
+       return $this->belongsTo(Province::class, 'provinces_id');
+   }
+
+   public function rice_farmers()
+   {
+       return $this->hasMany('App\RiceFarmer');
+   }
+   
+   public function products(){
+       return $this->hasMany('App\ProductList');
+   }
+
 
 
 

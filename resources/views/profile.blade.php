@@ -50,7 +50,7 @@
                                 <div class="text-muted">Customers</div>
                             </div>
                         </div>
-                        <p class="text-center">Lorem Ipsum is simply dummy text of the printing and industry. Lorem Ipsum has been</p>
+                        {{-- <p class="text-center">Lorem Ipsum is simply dummy text of the printing and industry. Lorem Ipsum has been</p> --}}
                     </div>
                 </div>
             </div>
@@ -217,16 +217,15 @@
                                         <input class="form-control" type="text" placeholder="Email address">
                                     </div>
                                     <div class="form-group">
-                                        <label>Password</label>
+                                        <label>Old Password:</label>
                                         <input class="form-control" type="password" placeholder="Password">
                                     </div>
                                     <div class="form-group">
-                                        <label class="ui-checkbox">
-                                            <input type="checkbox">
-                                            <span class="input-span"></span>Remamber me</label>
+                                        <label>New Password:</label>
+                                        <input class="form-control" type="password" placeholder="Password">
                                     </div>
                                     <div class="form-group">
-                                        <button class="btn btn-default" type="button">Submit</button>
+                                        <button class="btn btn-success" type="button">Save</button>
                                     </div>
                                 </form>
                             </div>
@@ -307,6 +306,9 @@
                 </div>
             </div>
         </div>
+
+
+        <!-- Style -->
         <style>
             .profile-social a {
                 font-size: 16px;

@@ -33,7 +33,7 @@
         </div>
         <!-- Add Products -->
         <div class="col-lg-3 col-md-6">
-            <a href="{{route('product_lists.create')}}">
+            <a href="{{route('product_lists')}}">
                 <div class="ibox bg-warning color-white widget-stat">
                     <div class="ibox-body">
                         <h2 class="m-b-5 font-strong">Add Products</h2>
@@ -106,7 +106,7 @@
         </div>
     </div> --}}
 
-    <div class="row">
+    {{-- <div class="row">
         <!-- WEATHER UPDATES -->
         <div class="col-lg-8">
             <div class="ibox">
@@ -114,25 +114,16 @@
                     <div class="ibox-title">Daily Weather Updates</div>
                     <div class="ibox-tools">
                         <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
-                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item">option 1</a>
-                            <a class="dropdown-item">option 2</a>
-                        </div>
                     </div>
                 </div>
                 <div class="ibox-body">
                         <div class="row">
-                            {{-- <ul>
-                                <li>Alerts: {{ $alerts }}</li>
-                                <li>Description: {{ $forecast->currently()->summary() }}</li>
-                            </ul> --}}
                             @foreach ($daily as $item)
                             <div class="col-12 col-md-3 p-b-20">
                                 <a class="card" data-toggle="modal" data-target="#exampleModal" >
                                     <div class="card-body text-center scroller" data-height="200px">
                                         <h5 class="card-title">{{ date('l', $item->time()) }}</h5>
-                                        {{-- <h5 class="lead m-0 small">{{ date('F j', $item->time()) }}</h5> --}}
+                                        <h5 class="lead m-0 small">{{ date('F j', $item->time()) }}</h5>
                                         <p class="lead m-0 small">{{ $item->summary() }}</p>
                                         <p class="lead m-0">Hi {{ $item->temperatureHigh() }}</p>
                                         <p class="lead m-0">Lo {{ $item->temperatureLow() }}</p>
@@ -156,16 +147,12 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
                                     </div>
                                     </div>
                                 </div>
                             </div>
                             @endforeach
                         </div>
-
-                        {{-- Darksky Widget --}}
-                        {{-- <script type='text/javascript' src='https://darksky.net/widget/default/14.3144,121.1121/us12/en.js?width=100%&height=350&title=Santa Rosa, Laguna&textColor=333333&bgColor=transparent&transparency=true&skyColor=undefined&fontFamily=Verdana&customFont=&units=us&htColor=333333&ltColor=C7C7C7&displaySum=yes&displayHeader=yes'></script> --}}
                 </div>
             </div>
         </div>
@@ -193,9 +180,6 @@
                                 @empty
                                     <a class="list-group-item">
                                         <div class="media">
-                                            {{-- <div class="media-img">
-                                                <span class="badge badge-success badge-big"><i class="fa fa-check"></i></span>
-                                            </div> --}}
                                             <div class="media-body">
                                                 <div class="font-13">No Notifications</div>
                                             </div>
@@ -211,7 +195,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <div class="row">
         <!-- LATEST ORDERS -->
@@ -268,6 +252,24 @@
                     </div>
                 </div>
         </div>
+
+        <!-- ALERTS -->
+        <div class="col-lg-4">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">Alerts</div>
+                    <div class="ibox-tools">
+                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                    </div>
+                </div>
+                <div class="ibox-body">
+                     <ul>
+                        <li>Alerts: {{ $alerts }}</li>
+                        <li>Description: {{ $forecast->currently()->summary() }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row">
@@ -291,13 +293,13 @@
                         <div class="container">
                             <div class="app">
                                 <center>
-                                    {!! $riceprodline->html() !!}
+                                    {!! $rice_production_line->html() !!}
                                 </center>
                             </div>
                         </div>
                             <!-- End Of Main Application -->
                             {!! Charts::scripts() !!}
-                            {!! $riceprodline->script() !!}
+                            {!! $rice_production_line->script() !!}
                     </div>
                     {{-- <div>
                         <canvas id="bar_chart" style="height:260px;"></canvas>

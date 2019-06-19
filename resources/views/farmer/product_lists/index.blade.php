@@ -24,9 +24,11 @@
                     <div class="ibox-title">Products For Season {{ $latest_season->id }}</div>
                     <!-- Add Product Button -->
                     <div>
+                    @if (auth()->user()->roles_id == 2)
                         @if ($count == 0)
                             <a class="btn btn-success btn-sm" href="{{ route('product_lists.create') }}">Add Products</a>
                         @endif
+                    @endif
                     </div>
                 </div>
                 <div class="ibox-body">
@@ -39,7 +41,7 @@
                                 <th>Initial Quantity</th>
                                 <th>Current Quantity</th>
                                 <th>Harvest Date</th>
-                                <th width="20%">Options</th>
+                                <th>Options</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,9 +54,9 @@
                                 <td>{{$list->curr_quantity}}</td>
                                 <td>{{$list->harvest_date}}</td>
                                 <td>
-                                    <a href="#" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
-                                    <a href="#" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
-                                    <a href="#" class="btn btn-md btn-secondary"> <i class="fas fa-download fa-sm text-white"></i></a>
+                                    <a href="/product_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
+                                    {{-- <a href="/product_lists/{{$list->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a> --}}
+                                    {{-- <a href="#" class="btn btn-md btn-secondary"> <i class="fas fa-download fa-sm text-white"></i></a> --}}
                                 </td>
                             </tr>
                             @endforeach
@@ -63,8 +65,6 @@
                 </div>
             </div>
         </div>
-         
-        
     </div>
 
     <!-- Product History -->
@@ -77,8 +77,8 @@
                     <div class="ibox-title">Products History</div>
                 </div>
                 <div class="ibox-body">
-                    <table class="table table-bordered table-hover" id="all_user_products" cellspacing="0" width="100%">
-                        <thead>
+                    <table class="table table-bordered table-striped" id="all_user_products" cellspacing="0" width="100%">
+                        <thead class="thead-default">
                             <tr>
                                 <th>ID</th>
                                 <th>Product Type</th>

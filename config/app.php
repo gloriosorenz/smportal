@@ -233,6 +233,8 @@ return [
 
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
+        'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
+        'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
         // 'DarkSky' => \Naughtonium\LaravelDarkSky\Facades\DarkSky::class,
 
     ],

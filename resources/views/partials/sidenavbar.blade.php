@@ -89,8 +89,7 @@
 
 
 
-
-
+             
             <!-- Rice Farmer Functionalities -->
             @elseif(Auth::user()->roles_id == 2)
             <!-- Dashboard -->
@@ -132,15 +131,16 @@
             </li>
             <!-- Order Products -->
             <li class="{{Request:: is('order_products') ? 'active' : ''}}">
-                <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-copy"></i>
+                <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-clipboard-list"></i>
                     <span class="nav-label">Order Products</span>
                 </a>
             </li>
 
+            
             <!-- Reports  -->
             <li class="heading">Reports</li>
-            <li class="{{Request:: is('') ? 'active' : ''}}">
-                <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
+            <li class="{{Request:: is('plant_reports') ? 'active' : ''}}">
+                <a href="{{ route('plant_reports.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
                     <span class="nav-label">Plant Report</span>
                 </a>
             </li>
@@ -149,8 +149,8 @@
                     <span class="nav-label">Sales Report</span>
                 </a>
             </li>
-            <li class="{{Request:: is('') ? 'active' : ''}}">
-                <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
+            <li class="{{Request:: is('damage_reports') ? 'active' : ''}}">
+                <a href="{{ route('damage_reports.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
                     <span class="nav-label">Damage Report</span>
                 </a>
             </li>
@@ -163,70 +163,6 @@
 
             @endif
 
-
-
-
-
-
-
-
-            <li class="heading">PAGES</li>
-            <li>
-                <a href="calendar.html"><i class="sidebar-item-icon fa fa-calendar"></i>
-                    <span class="nav-label">Calendar</span>
-                </a>
-            </li>
-            <li>
-                <a href="javascript:;"><i class="sidebar-item-icon fa fa-file"></i>
-                    <span class="nav-label">Pages</span><i class="fa fa-angle-left arrow"></i></a>
-                <ul class="nav-2-level collapse">
-                    <li>
-                        <a href="invoice.html">Invoice</a>
-                    </li>
-                    <li>
-                        <a href="profile.html">Profile</a>
-                    </li>
-                    <li>
-                        <a href="login.html">Login</a>
-                    </li>
-                    <li>
-                        <a href="register.html">Register</a>
-                    </li>
-                    <li>
-                        <a href="lockscreen.html">Lockscreen</a>
-                    </li>
-                    <li>
-                        <a href="forgot_password.html">Forgot password</a>
-                    </li>
-                    <li>
-                        <a href="error_404.html">404 error</a>
-                    </li>
-                    <li>
-                        <a href="error_500.html">500 error</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="javascript:;"><i class="sidebar-item-icon fa fa-sitemap"></i>
-                    <span class="nav-label">Menu Levels</span><i class="fa fa-angle-left arrow"></i></a>
-                <ul class="nav-2-level collapse">
-                    <li>
-                        <a href="javascript:;">Level 2</a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <span class="nav-label">Level 2</span><i class="fa fa-angle-left arrow"></i></a>
-                        <ul class="nav-3-level collapse">
-                            <li>
-                                <a href="javascript:;">Level 3</a>
-                            </li>
-                            <li>
-                                <a href="javascript:;">Level 3</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
         </ul>
     </div>
 </nav>

@@ -102,15 +102,15 @@
             });
             // Order Tables
             $('#pending_orders').DataTable({
-                pageLength: 10,
+                pageLength: 6,
                 order: [[ 0, 'asc' ]],
             });
             $('#completed_orders').DataTable({
-                pageLength: 10,
+                pageLength: 6,
                 order: [[ 0, 'asc' ]],
             });
             $('#cancelled_orders').DataTable({
-                pageLength: 10,
+                pageLength: 6,
                 order: [[ 0, 'asc' ]],
             });
             // Order Products Tables
@@ -158,7 +158,15 @@
                 pageLength: 10,
                 order: [[ 0, 'desc' ]],
             });
+            // Reports Table
+            $('#plant_reports_table').DataTable({
+                pageLength: 10,
+                order: [[ 0, 'desc' ]],
+            });
 
+
+
+            
 
             // Select 2
             $(".select2_demo_1").select2();

@@ -7,7 +7,7 @@
 <!-- Product -->
 <div class="bg0 m-t-84 p-b-140">
         <div class="container">
-            {{-- Messages --}}
+            <!-- Messages -->
             @if (session()->has('success_message'))
                 <div class="alert alert-success">
                     {{ session()->get('success_message') }}
@@ -19,7 +19,7 @@
                     {{ session()->get('error_message') }}
                 </div>
             @endif
-            {{-- Show Products Table --}}
+            <!-- Show Products Table -->
                 <div class="row">
                     <div class="col-lg-12">
                         <!-- Show Products Datatable -->
@@ -53,7 +53,7 @@
                                             <td>{{$product_list->harvest_date}}</td>
                                             <td>{{ $product_list->curr_quantity }}</td>
                                             <td>
-                                                <div class="font-weight-bold">{{ $product_list->price }} </div>
+                                                <div class="font-weight-bold">{{ presentPrice($product_list->price) }} </div>
                                             </td>
                                             @guest
                                             
@@ -86,6 +86,8 @@
                 </a>
             </div>
         </div>
+
+        
     {{-- Example Data --}}
     {{-- <div class="container">
         <div class="flex-w flex-sb-m p-b-52">

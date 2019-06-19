@@ -96,30 +96,33 @@ class DashboardController extends Controller
         // ------------------------------------------------------------------------------------------------------------------------
 
         // Seasonal Production Overview
-        $riceprodfarm = ProductList::where('users_id','=', auth()->user()->id)
+
+        // Get rice production per season
+        $rice_products = ProductList::where('users_id','=', auth()->user()->id)
                 ->where('orig_products_id','=',1)
                 ->groupBy('seasons_id', 'orig_quantity')
                 ->limit(10)
                 ->pluck('orig_quantity')
         ;
         
-
-        $witherprodfarm = ProductList::where('users_id','=', auth()->user()->id)
+        // Get withered rice production per season
+        $withered_products = ProductList::where('users_id','=', auth()->user()->id)
                 ->where('orig_products_id','=',2)
                 ->groupBy('seasons_id', 'orig_quantity')
                 ->limit(10)
                 ->pluck('orig_quantity')
         ;
         
-
-        $dmgprodfarm = ProductList::where('users_id','=', auth()->user()->id)
+        // Get damaged rice production per season
+        $damaged_products = ProductList::where('users_id','=', auth()->user()->id)
                 ->where('orig_products_id','=',3)
                 ->groupBy('seasons_id', 'orig_quantity')
                 ->limit(10)
                 ->pluck('orig_quantity')
         ;
         
-        $riceprodfarmlbl = ProductList::
+        // Rice production labels
+        $rice_production_label = ProductList::
                 where('users_id','=', auth()->user()->id)
                 ->where('orig_products_id','=',1)
                 ->limit(10)
@@ -127,17 +130,19 @@ class DashboardController extends Controller
                 ->pluck('seasons_id')
         ;
 
-        $riceprodline = Charts::multi('line', 'highcharts')
+        // Rice Production Line Chart
+        $rice_production_line = Charts::multi('line', 'highcharts')
             ->title('Seasonal Production')
             ->yAxisTitle('Quantity')
             ->xAxisTitle('Season')
-            ->labels($riceprodfarmlbl)
-            ->dataset('Rice Products',$riceprodfarm)
-            ->dataset('Withered Products',$witherprodfarm)
-            ->dataset('Damaged Products',$dmgprodfarm)
+            ->labels($rice_production_label)
+            ->dataset('Rice Products',$rice_products)
+            ->dataset('Withered Products',$withered_products)
+            ->dataset('Damaged Products',$damaged_products)
             ->dimensions(1000,500)
             ->responsive(true)
         ;
+
 
         // ------------------------------------------------------------------------------------------------------------------------
 
@@ -197,7 +202,7 @@ class DashboardController extends Controller
             ->with('alerts', $alerts)
             ->with('daily', $daily)
             ->with('total_prod_per', $total_prod_per)
-            ->with('riceprodline', $riceprodline)
+            ->with('rice_production_line', $rice_production_line)
             ->with('orderlinechart', $orderlinechart)
             ->with('transactions', $transactions)
             ;
