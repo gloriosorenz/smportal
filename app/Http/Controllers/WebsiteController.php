@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use DB;
 use App\ProductList;
 
+use DarkSkyApi;
+
 class WebsiteController extends Controller
 {
     /**
@@ -51,9 +53,24 @@ class WebsiteController extends Controller
     }
 
 
-    public function display_products()
+    public function weather()
     {
+        // ------------------------------------------------------------------------------------------------------------------------
+        // Weather forecasat
+        // ------------------------------------------------------------------------------------------------------------------------
+
+        $forecast = DarkSkyApi::location(14.2843, 121.0889)
+            ->units('si')
+            ->forecast(['currently', 'daily']);
+
+        $daily = $forecast->daily()->data();
+        $current = $forecast->currently();
+
+        // dd($current);
        
+        return view('website.weather')
+                ->with('current', $current)
+                ->with('daily', $daily);
     }
 
 

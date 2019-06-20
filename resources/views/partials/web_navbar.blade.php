@@ -149,7 +149,7 @@
 										{{ Auth::user()->first_name }} <i class="fas fa-caret-down"></i>
 									</a>
 									<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-										<a class="dropdown-item" href="{{ url('/orders/my_orders') }}">
+										<a class="dropdown-item" href="{{ route('my_orders') }}">
 											<i class="fas fa-clipboard-list"></i>
 											Order History
 										</a>

@@ -49,7 +49,7 @@
                                         <tr class="tr">
                                             <td>{{$product_list->curr_products->type}}</td>
                                             <td>{{$product_list->users->company}}</td>
-                                            <td>#</td>
+                                            <td>{{ $product_list->users->barangays->name }}, {{ $product_list->users->cities->name }}, {{ $product_list->users->provinces->name }}</td>
                                             <td>{{$product_list->harvest_date}}</td>
                                             <td>{{ $product_list->curr_quantity }}</td>
                                             <td>
@@ -61,7 +61,7 @@
                                                 <td>
                                                     {{-- @if ($product_list->quantity > 0) --}}
                                                         <form method="post" action="{{action('CartController@store')}}">
-                                                            {{ csrf_field() }}
+                                                            @csrf
                                                             <input type="hidden" name="id" value="{{ $product_list->id }}">
                                                             <input type="hidden" name="price" value="{{ $product_list->price }}">
                                                             <input type="hidden" name="quantity" value="{{ $product_list->curr_quantity }}">
@@ -80,11 +80,11 @@
           
     
             <!-- Load more -->
-            <div class="flex-c-m flex-w w-full p-t-45">
+            {{-- <div class="flex-c-m flex-w w-full p-t-45">
                 <a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
                     Load More
                 </a>
-            </div>
+            </div> --}}
         </div>
 
         

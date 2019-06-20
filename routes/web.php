@@ -25,9 +25,11 @@ Route::patch('/cart/{product}','CartController@update')->name('cart.update');
 Route::delete('/cart/{product}', 'CartController@destroy')->name('cart.destroy');
 
 // Weather Statistics
-Route::get('/weather', function () {
-    return view('website.weather');
-    });
+Route::get('/weather','WebsiteController@weather')->name('weather');
+
+// Route::get('/weather', function () {
+//     return view('website.weather');
+//     });
 
 
 // Checkout
@@ -57,6 +59,8 @@ Route::group( ['middleware' => 'auth' ], function()
 
     // Dashboard
     Route::get('/home', 'DashboardController@index')->name('home');
+    Route::get('/request_season', 'DashboardController@request_season');
+
 
     // PDF
     Route::get('pdf/damage_report/{id}', 'DamageReportsController@pdfview');
@@ -72,6 +76,12 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('admin/orders/index', 'OrdersController@index')->name('orders');
     Route::get('farmer/order_products/index', 'OrderProductsController@index')->name('order_products');
 
+
+    // Orders
+    Route::get('/website/my_orders', 'OrdersController@my_orders')->name('my_orders');
+
+    Route::get('/orders/confirm_order/{id}', 'OrderController@confirm_order');
+    Route::get('/orders/cancel_order/{id}', 'OrderController@cancel_order');
 
     // Order Products
     Route::get('/order_products/confirm_order/{id}', 'OrderProductsController@confirm_order');

@@ -95,7 +95,9 @@ class DamageReportsController extends Controller
 
 
         // Notifications
-        $users = User::where('roles_id', 2)->get();
+        $users = User::where('roles_id', 1)
+            ->orWhere('roles_id', 2)
+            ->get();
         Notification::send($users, new DamageReportCreated());
 
         return redirect()->route('damage_reports.index')->with('success','Damage Report Created ');

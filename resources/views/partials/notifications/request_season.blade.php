@@ -7,8 +7,8 @@
             <div class="media-heading">
                 {{$notification->data['user']['first_name']}} {{$notification->data['user']['last_name']}}<small class="text-muted float-right">{{ $notification->created_at->diffForHumans() }}</small>
             </div>
-            <div class="font-13">Your order has been confirmed.</div>
+            <div class="font-13">{{$notification->data['user']['first_name']}} is requesting for a new season.</div>
         </div>
     </div>
 </a>
-    
+        

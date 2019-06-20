@@ -11,6 +11,8 @@ use App\User;
 
 use Notification;
 use App\Notifications\OrderConfirmed;
+use App\Notifications\OrderCancelled;
+use App\Notifications\OrderPaid;
 
 class OrderProductsController extends Controller
 {
@@ -63,17 +65,10 @@ class OrderProductsController extends Controller
         $days = $now->diffIndays($end_date);
 
         // Notification
-        $customers = User::where('roles_id', 3)
-            ->orWhere('roles_id', 4)
-            ->get();
-            // dd($users);
-        Notification::send($customers, new OrderConfirmed());
+        $customer = $order->orders->users;
+        Notification::send($customer, new OrderConfirmed());
 
         
-        // Mail to User
-        // Mail::to($email)->send(
-        //     new OrderConfirmed($order, $days)
-        // );
 
         return redirect()->back()->with('success', 'Order Confirmed');
     }
@@ -83,13 +78,9 @@ class OrderProductsController extends Controller
         $order->order_product_statuses_id = 4;
         $order->save();
 
-        // Get email
-        $email = $order->orders->users->email;
-
-        // Mail to User
-        // Mail::to($email)->send(
-        //     new OrderCancelled($order)
-        // );
+        // Notification
+        $customer = $order->orders->users;
+        Notification::send($customer, new OrderCancelled());
 
         return redirect()->back()->with('success', 'Order Cancelled');
     }
@@ -99,13 +90,9 @@ class OrderProductsController extends Controller
         $order->order_product_statuses_id = 3;
         $order->save();
 
-        // Get email
-        $email = $order->orders->users->email;
-
-        // Mail to User
-        // Mail::to($email)->send(
-        //     new OrderPaid($order)
-        // );
+       // Notification
+       $customer = $order->orders->users;
+       Notification::send($customer, new OrderPaid());
 
         return redirect()->back()->with('success', 'Order Paid');
     }

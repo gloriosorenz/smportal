@@ -8,6 +8,10 @@
 <!-- START PAGE CONTENT-->
 <div class="page-content fade-in-up">
 
+
+     <a class="btn btn-secondary btn-md mb-2" href="/request_season">Request Season</a>
+
+
     <div class="row">
         <!-- Plan Season -->
         <div class="col-lg-3 col-md-6">

@@ -12,6 +12,7 @@ use PDF;
 use DB;
 use Carbon\Carbon;
 use App\SeasonList;
+use App\Season;
 
 use App\Notifications\PlantReportCreated;
 use Notification;
@@ -88,13 +89,15 @@ class PlantReportsController extends Controller
 
     public function addPlantReport(){
         // Get latest season
-        $latest_season = DB::table('seasons')->orderBy('id', 'desc')->first();
+        $latest_season = Season::getLatestSeason();
 
         $preport = new PlantReport;
         $preport->seasons_id = $latest_season->id;
         $preport->save();
 
-        $farmers = User::where('roles_id', 2)->get();
+        $farmers = User::where('roles_id', 1)
+            ->orWhere('roles_id', 2)
+            ->get();
         Notification::send($farmers, new PlantReportCreated());
 
         return redirect()->back()->with('success','Plant Report Created ');

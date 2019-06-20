@@ -64,10 +64,6 @@ class CheckoutController extends Controller
 
 
 
-            // Notification
-            $farmers = User::where('roles_id', 2)->get();
-            Notification::send($farmers, new OrderCreated());
-
 
             return redirect()->route('confirmation.index')->with('success_message', 'Thank you! Your payment has been successfully accepted!');
         
@@ -98,9 +94,16 @@ class CheckoutController extends Controller
                 'order_product_statuses_id' => 1,
                 'farmers_id' => $item->model->users->id,
             ]);
+
+            // Notification
+            $farmer = $item->model->users;
+            // dd($farmer);
+            Notification::send($farmer, new OrderCreated());
         }
 
+
         return $order;
+
     }
 
     protected function decreaseQuantities()

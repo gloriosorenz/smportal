@@ -164,10 +164,7 @@ class ProductListsController extends Controller
         
 
         // Notification
-        $users = User::where('roles_id', 1)
-            ->orWhere('roles_id', 3)
-            ->get();
-            // dd($users);
+        $users = User::where('id', '!=', auth()->user()->id)->get();
         Notification::send($users, new ProductsAdded());
 
         return redirect()->route('product_lists.index')->with('success','Products Added ');

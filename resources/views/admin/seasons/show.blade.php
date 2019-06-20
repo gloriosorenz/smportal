@@ -71,11 +71,10 @@
                         <tbody>
                             @foreach($lists as $data)
                             <tr>
-                                {{-- @php
+                                @php
                                     $barangay = App\Barangay::findOrFail($data->barangays_id);
-                                @endphp --}}
-                                {{-- <td>{{$barangay->name}}</td> --}}
-                                <td></td>
+                                @endphp
+                                <td>{{$barangay->name}}</td>
                                 <td>{{$data->planned_hectares}}</td>
                                 <td>{{$data->planned_num_farmers}}</td>
                                 <td>{{$data->planned_qty}}</td>

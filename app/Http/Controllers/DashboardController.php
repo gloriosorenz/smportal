@@ -9,10 +9,14 @@ use App\ProductList;
 use App\Product;
 use App\Season;
 use App\OrderProduct;
+use App\User;
 
 use DarkSkyApi;
 use Charts;
 use Carbon\Carbon;
+
+use Notification;
+use App\Notifications\RequestSeason;
 
 class DashboardController extends Controller
 {
@@ -207,4 +211,20 @@ class DashboardController extends Controller
             ->with('transactions', $transactions)
             ;
     }
+
+
+
+    public function request_season(){
+
+        // Notification
+        $users = User::where('id', '!=', auth()->user()->id)
+            ->where('roles_id', '!=', 3)
+            ->where('roles_id', '!=', 4)
+            ->get();
+        Notification::send($users, new RequestSeason());
+
+        return redirect()->back()->with('success', 'Season Requested');
+    }
+
+
 }
