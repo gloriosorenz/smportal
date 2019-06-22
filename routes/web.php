@@ -27,6 +27,9 @@ Route::delete('/cart/{product}', 'CartController@destroy')->name('cart.destroy')
 // Weather Statistics
 Route::get('/weather','WebsiteController@weather')->name('weather');
 
+// Weather Statistics
+Route::get('/contact','WebsiteController@contact')->name('contact');
+
 // Route::get('/weather', function () {
 //     return view('website.weather');
 //     });
