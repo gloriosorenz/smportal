@@ -9,18 +9,20 @@ use Illuminate\Notifications\Messages\MailMessage;
 
 use Carbon;
 
-class SeasonListCreated extends Notification
+class NewFarmerCreated extends Notification
 {
     use Queueable;
+
+    protected $farmer;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($farmer)
     {
-        //
+        $this->farmer = $farmer;
     }
 
     /**
@@ -33,7 +35,7 @@ class SeasonListCreated extends Notification
     {
         return [
             'database',
-            'mail'
+            'mail',
         ];
     }
 
@@ -61,7 +63,8 @@ class SeasonListCreated extends Notification
     {
         return [
             'timeCreated'=> Carbon\Carbon::now()->diffForHumans(),
-            'user'=>auth()->user()
+            'user'=> auth()->user(),
+            'farmer'=>$this->farmer
         ];
     }
 
@@ -74,7 +77,7 @@ class SeasonListCreated extends Notification
     public function toArray($notifiable)
     {
         return [
-            // 
+            //
         ];
     }
 }

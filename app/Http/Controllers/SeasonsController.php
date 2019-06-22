@@ -68,8 +68,13 @@ class SeasonsController extends Controller
         $season->save();
 
 
+        // Get email
+        $email = User::where('roles_id', 2)->pluck('email');
+
+        $user = auth()->user();
+        // Notification
         $farmers = User::where('roles_id', 2)->get();
-        Notification::send($farmers, new NewSeasonCreated());
+        Notification::send($farmers, new NewSeasonCreated($user));
 
         return redirect()->route('seasons.index')->with('success','Season Created ');
     }

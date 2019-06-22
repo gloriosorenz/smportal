@@ -13,6 +13,8 @@ class RequestSeason extends Notification
 {
     use Queueable;
 
+    public $admin;
+
     /**
      * Create a new notification instance.
      *
@@ -31,7 +33,10 @@ class RequestSeason extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return [
+            'database', 
+            'mail'
+        ];
     }
 
     /**
@@ -42,7 +47,10 @@ class RequestSeason extends Notification
      */
     public function toMail($notifiable)
     {
+
         return (new MailMessage)
+                    ->subject('New Season Request') // it will use this class name if you don't specify
+                    ->greeting('Someone is Requesting for a new season') // example: Dear Sir, Hello Madam, etc ...
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');

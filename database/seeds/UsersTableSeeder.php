@@ -175,7 +175,7 @@ class UsersTableSeeder extends Seeder
                 'id' => 12,
                 'first_name' => 'Eduardo',
                 'last_name' => 'Umali',
-                'email' => 'eduardoumali@yahoo.com',  //temp
+                'email' => 'eduardo_umali@example.com',  //temp
                 'phone' => '09178484154', //temp
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
                 'company' => 'Diezmo River Irrigators Association',

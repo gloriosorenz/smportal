@@ -6,6 +6,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+use Notification;
+use App\Notifications\NewFarmerCreated;
 
 class FarmersController extends Controller
 {
@@ -75,6 +77,10 @@ class FarmersController extends Controller
         $farmer->roles_id = 2;
         $farmer->save();
 
+        // Notification
+        $users = User::where('roles_id', 2)
+        ->get();
+        Notification::send($users, new NewFarmerCreated($farmer));
 
         return redirect()->route('farmers.index')->with('success','Farmer Created ');
     }

@@ -13,14 +13,16 @@ class NewSeasonCreated extends Notification
 {
     use Queueable;
 
+    protected  $user;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -31,7 +33,10 @@ class NewSeasonCreated extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return [
+            'database', 
+            'mail'
+        ];
     }
 
     /**
@@ -42,7 +47,10 @@ class NewSeasonCreated extends Notification
      */
     public function toMail($notifiable)
     {
+
         return (new MailMessage)
+            ->subject('New Season Created') // it will use this class name if you don't specify
+            ->greeting('Good Day!') // example: Dear Sir, Hello Madam, etc ...
             ->line('The introduction to the notification.')
             ->action('Notification Action', url('/'))
             ->line('Thank you for using our application!');
@@ -58,7 +66,7 @@ class NewSeasonCreated extends Notification
     {
         return [
             'timeCreated'=> Carbon\Carbon::now()->diffForHumans(),
-            'user'=>auth()->user()
+            'user'=>$notifiable
         ];
     }
 

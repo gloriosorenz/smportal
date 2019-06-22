@@ -66,15 +66,6 @@
             <li>
                 <a class="nav-link sidebar-toggler js-sidebar-toggler"><i class="ti-menu"></i></a>
             </li>
-        <!-- Search Bar-->
-            {{-- <li>
-                <form class="navbar-search" action="javascript:;">
-                    <div class="rel">
-                        <span class="search-icon"><i class="ti-search"></i></span>
-                        <input class="form-control" placeholder="Search here...">
-                    </div>
-                </form>
-            </li> --}}
         </ul>
         <!-- END TOP-LEFT TOOLBAR-->
         
@@ -112,7 +103,6 @@
                                             <span class="badge badge-success badge-big"><i class="fa fa-check"></i></span>
                                         </div> --}}
                                         <div class="media-body">
-                                            {{-- {{dd($notification)}} --}}
                                             <div class="font-13">No unread Notifications</div>
                                         </div>
                                     </div>

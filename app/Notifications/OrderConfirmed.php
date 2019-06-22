@@ -31,7 +31,10 @@ class OrderConfirmed extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return [
+            'database',
+            'mail'
+        ];
     }
 
     /**
@@ -43,6 +46,8 @@ class OrderConfirmed extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    ->subject('Your order is confirmed') // it will use this class name if you don't specify
+                    ->greeting('Hello Customer!') // example: Dear Sir, Hello Madam, etc ...
                     ->line('The introduction to the notification.')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
