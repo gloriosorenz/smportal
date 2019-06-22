@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('company')->nullable();
             $table->integer('no_farmers')->nullable();
             $table->double('hectares')->nullable();
+            $table->boolean('active')->nullable();
 
 
             // FOREIGN KEYS

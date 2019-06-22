@@ -19,12 +19,12 @@ class CreateDamageDatasTable extends Migration
             $table->string('crop_stage')->nullable();
             $table->double('production')->nullable(); //in metric ton
 
-            $table->string('animal')->nullable();
-            $table->integer('animal_head')->nullable();
+            // $table->string('animal')->nullable();
+            // $table->integer('animal_head')->nullable();
 
-            $table->string('fish')->nullable();
-            $table->double('area')->nullable();
-            $table->integer('fish_pieces')->nullable();
+            // $table->string('fish')->nullable();
+            // $table->double('area')->nullable();
+            // $table->integer('fish_pieces')->nullable();
 
             $table->integer('damage_reports_id')->unsigned()->nullable();
             $table->timestamps();
