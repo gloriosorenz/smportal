@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('website');
 });
 
 
@@ -58,7 +58,7 @@ Route::group( ['middleware' => 'auth' ], function()
 
 
     // Dashboard
-    Route::get('/home', 'DashboardController@index')->name('home');
+    Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::get('/request_season', 'DashboardController@request_season');
 
 
@@ -112,7 +112,7 @@ Route::group( ['middleware' => 'auth' ], function()
 
     // Route::resource('users', 'UsersController');
 
-    // Route::get('/home', 'HomeController@index')->name('home');
+    // Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
 });
 

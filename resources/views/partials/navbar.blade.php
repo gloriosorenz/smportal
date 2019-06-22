@@ -53,7 +53,7 @@
 <!-- START HEADER-->
 <header class="header">
     <div class="page-brand">
-        <a class="link" href="{{route('home')}}">
+        <a class="link" href="{{route('dashboard')}}">
             <span class="brand">SMSRL
                 <span class="brand-tip">Portal</span>
             </span>

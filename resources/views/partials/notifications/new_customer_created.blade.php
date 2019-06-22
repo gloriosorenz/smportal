@@ -1,4 +1,4 @@
-<a class="list-group-item" href="{{ route('home')}}">
+<a class="list-group-item" href="{{ route('dashboard')}}">
     <div class="media">
         <div class="media-img">
             <span class="badge badge-success badge-big"><i class="fa fa-user"></i></span>

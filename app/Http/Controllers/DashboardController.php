@@ -200,7 +200,7 @@ class DashboardController extends Controller
 
 
 
-        return view('home')
+        return view('dashboard')
             ->with('last_com_season', $last_com_season)
             ->with('forecast', $forecast)
             ->with('alerts', $alerts)

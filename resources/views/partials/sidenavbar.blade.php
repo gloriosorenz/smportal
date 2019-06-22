@@ -14,7 +14,7 @@
             @if(Auth::user()->roles_id == 1)
             <!-- Dashboard -->
             <li>
-                <a class="active" href="{{ route('home') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
+                <a class="active" href="{{ route('dashboard') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
                     <span class="nav-label">Dashboard</span>
                 </a>
             </li>
@@ -93,8 +93,8 @@
             <!-- Rice Farmer Functionalities -->
             @elseif(Auth::user()->roles_id == 2)
             <!-- Dashboard -->
-            <li class="{{Request:: is('home') ? 'active' : ''}}">
-                <a href="{{ route('home') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
+            <li class="{{Request:: is('dashboard') ? 'active' : ''}}">
+                <a href="{{ route('dashboard') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
                     <span class="nav-label">Dashboard</span>
                 </a>
             </li>
