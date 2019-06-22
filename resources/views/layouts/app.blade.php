@@ -66,16 +66,23 @@
     <script type="text/javascript" src="{{ asset('vendors/jvectormap/jquery-jvectormap-2.0.3.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('vendors/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
     <script type="text/javascript" src="{{ asset('vendors/jvectormap/jquery-jvectormap-us-aea-en.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendors/DataTables/datatables.min.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('vendors/DataTables/datatables.min.js') }}"></script> --}}
     <script type="text/javascript" src="{{ asset('vendors/select2/dist/js/select2.full.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('vendors/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js') }}"></script>
 
 
+    <!-- DataTables JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.18/af-2.3.2/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-1.5.0/sl-1.2.6/datatables.min.css"/>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.18/af-2.3.2/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-1.5.0/sl-1.2.6/datatables.min.js"></script>
 
     <!-- PAGE LEVEL SCRIPTS-->
-    <script type="text/javascript" src="{{ asset('js/scripts/dashboard_1_demo.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('js/scripts/dashboard_1_demo.js') }}"></script> --}}
     <!-- CORE SCRIPTS-->
     <script src="{{ asset('js/app.min.js') }}" defer></script>
+    {{-- <script src="{{ asset('js/main.js') }}" defer></script>  --}}
 
 
     <!-- PAGE LEVEL SCRIPTS-->
@@ -95,33 +102,41 @@
             });
             // Order Tables
             $('#pending_orders').DataTable({
-                pageLength: 10,
+                pageLength: 6,
                 order: [[ 0, 'asc' ]],
             });
             $('#completed_orders').DataTable({
-                pageLength: 10,
+                pageLength: 6,
                 order: [[ 0, 'asc' ]],
             });
             $('#cancelled_orders').DataTable({
-                pageLength: 10,
+                pageLength: 6,
                 order: [[ 0, 'asc' ]],
             });
             // Order Products Tables
             $('#pending_order_products').DataTable({
                 pageLength: 10,
-                order: [[ 0, 'asc' ]],
+                order: [[ 0, 'desc' ]],
+                // dom: 'Bfrtip',
+                // buttons: [
+                //     {
+                //         extend: 'pdfHtml5',
+                //         orientation: 'landscape',
+                //         pageSize: 'LEGAL'
+                //     }
+                // ],
             });
             $('#confirmed_order_products').DataTable({
                 pageLength: 10,
-                order: [[ 0, 'asc' ]],
+                order: [[ 0, 'desc' ]],
             });
             $('#cancelled_order_products').DataTable({
                 pageLength: 10,
-                order: [[ 0, 'asc' ]],
+                order: [[ 0, 'desc' ]],
             });
             $('#paid_order_products').DataTable({
                 pageLength: 10,
-                order: [[ 0, 'asc' ]],
+                order: [[ 0, 'desc' ]],
             });
             // Products Tables
             $('#user_products').DataTable({
@@ -129,15 +144,29 @@
                 order: [[ 0, 'asc' ]],
             });
             $('#all_user_products').DataTable({
-                pageLength: 6,
+                pageLength: 100,
                 order: [[ 0, 'asc' ]],
+                scrollY: 200,
             });
             // Shop Table
             $('#shop_table').DataTable({
                 pageLength: 6,
                 order: [[ 0, 'asc' ]],
             });
+            // Transactions Table
+            $('#transactions_table').DataTable({
+                pageLength: 10,
+                order: [[ 0, 'desc' ]],
+            });
+            // Reports Table
+            $('#plant_reports_table').DataTable({
+                pageLength: 10,
+                order: [[ 0, 'desc' ]],
+            });
 
+
+
+            
 
             // Select 2
             $(".select2_demo_1").select2();
@@ -158,7 +187,23 @@
 
             $('#date_6').datepicker({});
 
+
+            // Notifications
+            // $('#markasread').click(function(){
+            //     alert('clicked')
+            // })
+
+            $('#myModal').on('shown.bs.modal', function () {
+            $('#myInput').trigger('focus')
+            })
+
         })
+
+        // Notifications
+        function markNotificationAsRead(){
+            // alert('clicked')
+            $.get('/markAsRead')
+        }
     </script>
     <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
 

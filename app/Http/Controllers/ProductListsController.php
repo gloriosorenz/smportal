@@ -10,6 +10,11 @@ use App\ProductList;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
+use Charts;
+
+use App\Notifications\ProductsAdded;
+use Notification;
+
 class ProductListsController extends Controller
 {
     /**
@@ -40,12 +45,58 @@ class ProductListsController extends Controller
                 ->where('users_id', auth()->user()->id)->count();
 
 
+
+
+
+
+                
+        // Labels
+        $prod_labels = ProductList::join('products', 'product_lists.orig_products_id', '=', 'products.id')
+                ->select('seasons_id', 'type')
+                ->where('users_id', auth()->user()->id)
+                ->where('products.id', '=', 1)
+                ->groupby('product_lists.seasons_id', 'type')
+                ->pluck('product_lists.seasons_id');
+        // dd($prod_labels);
+
+        // Get price values
+        $rice_price = ProductList::join('products', 'product_lists.orig_products_id', '=', 'products.id')
+                // ->select('seasons_id', 'price')
+                ->where('users_id', auth()->user()->id)
+                ->where('products.id', '=', 1)
+                // ->groupby('seasons_id', 'price')
+                ->pluck('price');
+        // dd($price);
+        $withered_price = ProductList::join('products', 'product_lists.orig_products_id', '=', 'products.id')
+                // ->select('seasons_id', 'price')
+                ->where('users_id', auth()->user()->id)
+                ->where('products.id', '=', 2)
+                // ->groupby('seasons_id', 'price')
+                ->pluck('price');
+
+
+         // Price History Chart
+         $price_history = Charts::multi('line', 'highcharts')
+            ->title('Price History')
+            ->labels($prod_labels)
+            // ->template('material')
+            ->elementLabel('Rice Product Prices')
+            ->yAxisTitle("Price")
+            ->xAxisTitle("Season")
+            ->dataset('Rice Products',$rice_price)
+            ->dataset('Withered Products',$withered_price)
+            ->dimensions(500,300)
+            ->responsive(true);
+
+
+
         return view('farmer.product_lists.index')
                 ->with('user_products', $user_products)
                 ->with('all_products', $all_products)
                 ->with('all_user_products', $all_user_products)
                 ->with('latest_season', $latest_season)
                 ->with('count', $count)
+                ->with('price_history', $price_history)
             ;
     }
 
@@ -112,6 +163,9 @@ class ProductListsController extends Controller
         $season_list->save();
         
 
+        // Notification
+        $users = User::where('id', '!=', auth()->user()->id)->get();
+        Notification::send($users, new ProductsAdded());
 
         return redirect()->route('product_lists.index')->with('success','Products Added ');
     }
@@ -124,7 +178,14 @@ class ProductListsController extends Controller
      */
     public function show($id)
     {
-        //
+        $season = Season::find($id);
+        $product_lists = ProductList::where('users_id', '=', auth()->user()->id)
+                ->where('seasons_id', $season->id)
+                ->get();
+
+        return view('farmer.product_lists.show')
+            ->with('season', $season)
+            ->with('product_lists', $product_lists);
     }
 
     /**
@@ -135,7 +196,10 @@ class ProductListsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product_list = ProductList::findOrFail($id);
+
+        return view('farmer.product_lists.edit')
+            ->with('product_list', $product_list);
     }
 
     /**
@@ -147,7 +211,16 @@ class ProductListsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $product_list = ProductList::findOrFail($id);
+
+        $product_list->orig_quantity = $request->input('orig_quantity');
+        $product_list->curr_quantity = $request->input('curr_quantity');
+        $product_list->price = $request->input('price');
+        $product_list->save();
+
+       
+    
+        return redirect()->route('product_lists.index')->with('success','Products Updated ');
     }
 
     /**

@@ -17,6 +17,7 @@
 <div class="page-content fade-in-up">
 
     <!-- Create Season -->
+    @if (count($seasons) == count($statuses))
     <div class="row">
         <div class="col-md-3">
             <div class="ibox">
@@ -51,6 +52,7 @@
             </div>
         </div>
     </div>
+    @endif
 
 
     <div class="row">
@@ -85,8 +87,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
-                                    <a href="#" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
+                                    <a href="/seasons/{{$season->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
+                                    <a href="/seasons/{{$season->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
                                     <a href="#" class="btn btn-md btn-secondary"> <i class="fas fa-download fa-sm text-white"></i></a>
                                 </td>
                             </tr>
@@ -108,7 +110,7 @@
                         @foreach($season_lists as $list)
                         <li class="media">
                             <a class="media-img" href="javascript:;">
-                                <img class="img-circle" src="img/admin-avatar.png" width="40" />
+                                <img class="img-circle" src="/img/admin-avatar.png" width="40" />
                             </a>
                             <div class="media-body">
                                 <div class="media-heading">
@@ -123,7 +125,6 @@
                             </div>
                         </li>
                         @endforeach
-                        {{-- {{ $farmers->links() }} --}}
                     </ul>
                 </div>
             </div>

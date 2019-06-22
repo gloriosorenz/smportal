@@ -15,40 +15,84 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+// Cart aand shop
 Route::get('/shop','WebsiteController@shop')->name('shop');
-Route::get('/cart', 'CartController@index')->name('cart');
-Route::post('/cart','CartController@store')->name('cart');
+Route::get('/cart', 'CartController@index')->name('cart.index');
+Route::post('/cart','CartController@store')->name('cart.index');
 Route::patch('/cart/{product}','CartController@update')->name('cart.update');
 Route::delete('/cart/{product}', 'CartController@destroy')->name('cart.destroy');
+
+// Weather Statistics
+Route::get('/weather','WebsiteController@weather')->name('weather');
+
+// Route::get('/weather', function () {
+//     return view('website.weather');
+//     });
+
 
 // Checkout
 Route::get('/checkout', 'CheckoutController@index')->name('checkout.index')->middleware('auth');
 Route::post('/checkout', 'CheckoutController@store')->name('checkout.store');
-
+Route::get('/thankyou', 'ConfirmationController@index')->name('confirmation.index');
 
 Auth::routes();
 
 // If user is authenticated
 Route::group( ['middleware' => 'auth' ], function()
 {
-    // Profile
-    Route::get('/profile', function () {
-    return view('profile');
+
+    Route::get('/markAsRead', function () {
+        auth()->user()->unreadNotifications->markAsRead(); 
     });
+
+    // Notifications
+    Route::get('/notifications', function () {
+        return view('notifications');
+        });
+        
+
+    //Profile
+    Route::get('/profile', 'ProfilesController@index')->name('profile');
+
+
+    // Dashboard
+    Route::get('/home', 'DashboardController@index')->name('home');
+    Route::get('/request_season', 'DashboardController@request_season');
+
+
+    // PDF
+    Route::get('pdf/damage_report/{id}', 'DamageReportsController@pdfview');
+    Route::get('pdf/invoice/{id}', 'OrdersController@pdfview');
+    Route::get('pdf/season_report/{id}', 'SeasonsController@pdfview');
+    Route::get('pdf/sales_report/{id}', 'SalesReportsController@pdfview');
+    Route::get('pdf/plant_report/{id}', 'PlantReportsController@pdfview');
 
     // Side Navbar Names
     Route::get('admin/seasons/index', 'SeasonsController@index')->name('seasons');
     Route::get('farmer/season_lists/index', 'SeasonListsController@index')->name('season_lists');
+    Route::get('farmer/product_lists/index', 'ProductListsController@index')->name('product_lists');
     Route::get('admin/orders/index', 'OrdersController@index')->name('orders');
     Route::get('farmer/order_products/index', 'OrderProductsController@index')->name('order_products');
 
 
+    // Orders
+    Route::get('/website/my_orders', 'OrdersController@my_orders')->name('my_orders');
+
+    Route::get('/orders/confirm_order/{id}', 'OrderController@confirm_order');
+    Route::get('/orders/cancel_order/{id}', 'OrderController@cancel_order');
 
     // Order Products
     Route::get('/order_products/confirm_order/{id}', 'OrderProductsController@confirm_order');
     Route::get('/order_products/cancel_order/{id}', 'OrderProductsController@cancel_order');
     Route::get('/order_products/paid_order/{id}', 'OrderProductsController@paid_order');
     Route::get('/order_products/pending_order/{id}', 'OrderProductsController@pending_order');
+
+    // Plant Report
+    Route::get('reports/plant_reports/deactivateReport{id}','PlantReportsController@deactivateReport');
+    Route::get('reports/plant_reports/addPlantReport','PlantReportsController@addPlantReport');
+    Route::get('reports/plant_reports/plant_report_created', 'PlantReportsController@plant_report_created');
 
     
     Route::resource('administrators', 'AdministratorsController');
@@ -60,10 +104,15 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::resource('product_lists', 'ProductListsController');
     Route::resource('orders', 'OrdersController');
     Route::resource('order_products', 'OrderProductsController');
+    Route::resource('damage_reports', 'DamageReportsController');
+    Route::resource('plant_reports', 'PlantReportsController');
+
+    // Route::resource('dashboard', 'DashboardController');
+
 
     // Route::resource('users', 'UsersController');
 
-    Route::get('/home', 'HomeController@index')->name('home');
+    // Route::get('/home', 'HomeController@index')->name('home');
 
 });
 

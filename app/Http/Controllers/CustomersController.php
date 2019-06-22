@@ -6,6 +6,9 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
+use Notification;
+use App\Notifications\NewCustomerCreated;
+
 class CustomersController extends Controller
 {
     /**
@@ -71,6 +74,13 @@ class CustomersController extends Controller
         $user->password = Hash::make($password);
         $user->roles_id = 3;
         $user->save();
+
+
+         // Notification
+         $users = User::where('roles_id', 1)
+            ->orWhere('roles_id', 2)
+            ->get();
+         Notification::send($users, new NewCustomerCreated($user));
 
 
         return redirect()->route('customers.index')->with('success','Customer Created ');

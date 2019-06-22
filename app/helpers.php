@@ -24,22 +24,33 @@ function productImage($path)
 
 function getNumbers()
 {
-    $tax = config('cart.tax') / 100;
-    $discount = session()->get('coupon')['discount'] ?? 0;
-    $code = session()->get('coupon')['name'] ?? null;
-    $newSubtotal = (Cart::subtotal() - $discount);
+    // $tax = config('cart.tax') / 100;
+    // $discount = session()->get('coupon')['discount'] ?? 0;
+    // $code = session()->get('coupon')['name'] ?? null;
+    // $newSubtotal = (Cart::subtotal() - $discount);
+    // if ($newSubtotal < 0) {
+    //     $newSubtotal = 0;
+    // }
+    // $newTax = $newSubtotal * $tax;
+    // $newTotal = $newSubtotal * (1 + $tax);
+
+    // return collect([
+    //     'tax' => $tax,
+    //     'discount' => $discount,
+    //     'code' => $code,
+    //     'newSubtotal' => $newSubtotal,
+    //     'newTax' => $newTax,
+    //     'newTotal' => $newTotal,
+    // ]);
+
+    $newSubtotal = (Cart::subtotal());
     if ($newSubtotal < 0) {
         $newSubtotal = 0;
     }
-    $newTax = $newSubtotal * $tax;
-    $newTotal = $newSubtotal * (1 + $tax);
+    $newTotal = $newSubtotal;
 
     return collect([
-        'tax' => $tax,
-        'discount' => $discount,
-        'code' => $code,
         'newSubtotal' => $newSubtotal,
-        'newTax' => $newTax,
         'newTotal' => $newTotal,
     ]);
 }

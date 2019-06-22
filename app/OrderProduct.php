@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
 class OrderProduct extends Model
@@ -29,5 +30,37 @@ class OrderProduct extends Model
     public function users()
     {
         return $this->belongsTo(User::class, 'farmers_id');
+    }
+
+
+
+
+
+    // Get peding order products
+    public static function pendingOrderProducts(){
+        return $pending = OrderProduct::where('farmers_id', auth()->user()->id)
+                ->where('order_product_statuses_id', 1)
+                ->get();
+    }
+
+    // Get confirmed order products
+    public static function confirmedOrderProducts(){
+        return $pending = OrderProduct::where('farmers_id', auth()->user()->id)
+                ->where('order_product_statuses_id', 2)
+                ->get();
+    }
+
+    // Get paid order products
+    public static function paidOrderProducts(){
+        return $pending = OrderProduct::where('farmers_id', auth()->user()->id)
+                ->where('order_product_statuses_id', 3)
+                ->get();
+    }
+
+    // Get cancelled order products
+    public static function cancelledOrderProducts(){
+        return $pending = OrderProduct::where('farmers_id', auth()->user()->id)
+                ->where('order_product_statuses_id', 4)
+                ->get();
     }
 }

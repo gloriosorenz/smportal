@@ -23,9 +23,11 @@
                 <div class="ibox-head">
                     <div class="ibox-title">Seasons Data Table</div>
                     <!-- Add Season Button -->
+                    @if ($active == 0)
                     <div>
                         <a class="btn btn-success btn-sm" href="{{ route('season_lists.create') }}">Plan Season</a>
                     </div>
+                    @endif
                 </div>
                 <div class="ibox-body">
                     <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
@@ -33,7 +35,7 @@
                             <tr>
                                 <th>Season</th>
                                 <th>Status</th>
-                                <th>Options</th>
+                                <th width="20%">Options</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,8 +50,8 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="#" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
-                                    <a href="#" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
+                                    <a href="/season_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
+                                    <a href="/season_lists/{{$list->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
                                     <a href="#" class="btn btn-md btn-secondary"> <i class="fas fa-download fa-sm text-white"></i></a>
                                 </td>
                             </tr>

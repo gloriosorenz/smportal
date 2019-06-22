@@ -7,6 +7,7 @@ use App\Order;
 use App\OrderProduct;
 use Carbon\Carbon;
 use DB;
+use PDF;
 
 class OrdersController extends Controller
 {
@@ -135,5 +136,52 @@ class OrdersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function my_orders(){
+
+        // $orders = auth()->user()->orders()->with('product_lists')->get(); // fix n + 1 issues
+        // $orders = Order::where('users_id', '=', auth()->user()->id);
+        $orders = Order::all();
+        $pending = Order::where('order_statuses_id', 1)->get();
+        $done = Order::where('order_statuses_id', 2)->get();
+        $cancelled = Order::where('order_statuses_id', 4)->get();
+        
+        // dd($orders);
+        return view('website.my_orders')
+            ->with('orders', $orders)
+            ->with('pending', $pending)
+            ->with('done', $done)
+            ->with('cancelled', $cancelled);
+    }
+
+    public function pdfview(Request $request, $id)
+    {
+
+        $order = Order::findOrFail($id);
+
+        // $farmers = OrderProduct::where('orders_id', $order->id)
+        //         ->groupBy('farmers_id')
+        //         ->get();
+
+        $farmers = OrderProduct::
+                where('orders_id', $order->id)
+                // ->selectRaw('farmers.*')
+                ->get()
+                ->groupBy('farmers_id');
+
+
+        $data = $farmers->all();
+
+        // dd($data);
+        // dd($farmers);
+
+
+
+        // pass view file
+        $pdf = PDF::loadView('partials.pdf.invoice', compact('order', 'data', 'farmers'))->setPaper('a4', 'landscape');
+        // download pdf
+        return $pdf->stream('invoice.pdf');
     }
 }

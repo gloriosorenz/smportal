@@ -6,7 +6,13 @@ use Illuminate\Http\Request;
 
 use App\OrderProduct;
 use Carbon\Carbon;
+use App\User;
 // use App\Http\Controllers\Mail;
+
+use Notification;
+use App\Notifications\OrderConfirmed;
+use App\Notifications\OrderCancelled;
+use App\Notifications\OrderPaid;
 
 class OrderProductsController extends Controller
 {
@@ -17,22 +23,19 @@ class OrderProductsController extends Controller
      */
     public function index()
     {
-        $pending = OrderProduct::where('farmers_id', auth()->user()->id)
-                ->where('order_product_statuses_id', 1)
-                ->get();
+        // Get peding order products
+        $pending = OrderProduct::pendingOrderProducts();
 
-        $confirmed = OrderProduct::where('farmers_id', auth()->user()->id)
-                ->where('order_product_statuses_id', 2)
-                ->get();
+        // Get confirmed order products
+        $confirmed = OrderProduct::confirmedOrderProducts();
 
-        $paid = OrderProduct::where('farmers_id', auth()->user()->id)
-                ->where('order_product_statuses_id', 3)
-                ->get();
+        // Get paid order products
+        $paid = OrderProduct::paidOrderProducts();
 
-        $cancelled = OrderProduct::where('farmers_id', auth()->user()->id)
-                ->where('order_product_statuses_id', 4)
-                ->get();
+        // Get cancelled order products
+        $cancelled = OrderProduct::cancelledOrderProducts();
 
+        // Get all order products
         $order_products = OrderProduct::all();
 
         return view('farmer.order_products.index')
@@ -41,6 +44,7 @@ class OrderProductsController extends Controller
             ->with('paid', $paid)
             ->with('cancelled', $cancelled);
     }
+
 
 
     public function confirm_order(Request $request, $id){
@@ -60,12 +64,11 @@ class OrderProductsController extends Controller
 
         $days = $now->diffIndays($end_date);
 
-        
-        // Mail to User
-        // Mail::to($email)->send(
-        //     new OrderConfirmed($order, $days)
-        // );
+        // Notification
+        $customer = $order->orders->users;
+        Notification::send($customer, new OrderConfirmed());
 
+        
 
         return redirect()->back()->with('success', 'Order Confirmed');
     }
@@ -75,13 +78,9 @@ class OrderProductsController extends Controller
         $order->order_product_statuses_id = 4;
         $order->save();
 
-        // Get email
-        $email = $order->orders->users->email;
-
-        // Mail to User
-        // Mail::to($email)->send(
-        //     new OrderCancelled($order)
-        // );
+        // Notification
+        $customer = $order->orders->users;
+        Notification::send($customer, new OrderCancelled());
 
         return redirect()->back()->with('success', 'Order Cancelled');
     }
@@ -91,15 +90,11 @@ class OrderProductsController extends Controller
         $order->order_product_statuses_id = 3;
         $order->save();
 
-        // Get email
-        $email = $order->orders->users->email;
+       // Notification
+       $customer = $order->orders->users;
+       Notification::send($customer, new OrderPaid());
 
-        // Mail to User
-        // Mail::to($email)->send(
-        //     new OrderPaid($order)
-        // );
-
-        return redirect()->back()->with('success', 'Order Cancelled');
+        return redirect()->back()->with('success', 'Order Paid');
     }
 
     public function pending_order(Request $request, $id){

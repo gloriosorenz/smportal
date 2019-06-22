@@ -1,27 +1,22 @@
 @extends('layouts.web')
 
 @section('content')
-
-    <div class="cart-section container">
-    <br>
-
-    <br>
-    <br>
+<div class="bg0 m-t-84 p-b-140">
+    <div class="container">
+        @if (session()->has('success_message'))
+            <div class="alert alert-success">
+                {{ session()->get('success_message') }}
+            </div>
+        @endif
     
-            @if (session()->has('success_message'))
-                <div class="alert alert-success">
-                    {{ session()->get('success_message') }}
-                </div>
-            @endif
-    
-            @if (session()->has('error_message'))
-                <div class="alert alert-danger">
-                    {{ session()->get('error_message') }}
-                </div>
-            @endif
-    
-            @if (sizeof(Cart::content()) > 0)
+        @if (session()->has('error_message'))
+            <div class="alert alert-danger">
+                {{ session()->get('error_message') }}
+            </div>
+        @endif
 
+        
+        @if (sizeof(Cart::content()) > 0)
         <br>
         <div class="row">
             <div class="col-md-12">
@@ -94,59 +89,51 @@
             </div>
         </div>
     
-                
-                
+            
     
-                {{-- <div style="float:right">
-                    <form action="{{route ('cart.emptycart') }}" method="POST">
-                        {!! csrf_field() !!}
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="submit" class="btn btn-danger btn-lg" value="Empty Cart">
-                    </form>
-                </div> --}}
-    
-            @else
-    
-                <h3>You have no items in your shopping cart</h3>
-                <a href="{{ route('shop') }}" class="btn btn-primary btn-lg">Continue Shopping</a>
-    
-            @endif
-    
-            <div class="spacer"></div>
-    
-    </div>
+        @else
 
-    <br>
-    <br>
-    <br>
+            <h3>You have no items in your shopping cart</h3>
+            <a href="{{ route('shop') }}" class="btn btn-primary btn-lg">Continue Shopping</a>
+
+        @endif
+
+
+
+
+    </div>
+</div>
+
+
 
 @endsection
 
 @section('extra-js')
-    <script>
-        (function(){
-            const classname = document.querySelectorAll('.quantity')
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    (function(){
+        const classname = document.querySelectorAll('.quantity')
 
-            Array.from(classname).forEach(function(element) {
-                element.addEventListener('change', function() {
-                    const id = element.getAttribute('data-id')
-                    const productQuantity = element.getAttribute('data-productQuantity')
-                    // console.log('error 1');
+        Array.from(classname).forEach(function(element) {
+            element.addEventListener('change', function() {
+                const id = element.getAttribute('data-id')
+                const productQuantity = element.getAttribute('data-productQuantity')
+                // console.log('error 1');
 
-                    axios.patch(`/cart/${id}`, {
-                        quantity: this.value,
-                        productQuantity: productQuantity
-                    })
-                    .then(function (response) {
-                        // console.log('error 2');
-                        window.location.href = '{{ route('cart') }}'
-                    })
-                    .catch(function (error) {
-                        // console.log('error 3');
-                        window.location.href = '{{ route('cart') }}'
-                    });
+                axios.patch(`/cart/${id}`, {
+                    quantity: this.value,
+                    productQuantity: productQuantity
                 })
+                .then(function (response) {
+                    // console.log('error 2');
+                    window.location.href = '{{ route('cart.index') }}'
+                })
+                .catch(function (error) {
+                    // console.log('error 3');
+                    window.location.href = '{{ route('cart.index') }}'
+                });
             })
-        })();
-    </script>
+        })
+    })();
+</script>
 @endsection

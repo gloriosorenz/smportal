@@ -18,7 +18,7 @@
                 <div class="ibox">
                     <div class="ibox-body text-center">
                         <div class="m-t-20">
-                            <img class="img-circle" src="img/users/u3.jpg" />
+                            <img class="img-circle" src="img/admin-avatar.png" />
                         </div>
                         <h5 class="font-strong m-b-10 m-t-10">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</h5>
                         <div class="m-b-20 text-muted">{{ auth()->user()->roles->title }}</div>
@@ -38,19 +38,19 @@
                     <div class="ibox-body">
                         <div class="row text-center m-b-20">
                             <div class="col-4">
-                                <div class="font-24 profile-stat-count">140</div>
-                                <div class="text-muted">Followers</div>
+                                <div class="font-24 profile-stat-count">{{$orders}}</div>
+                                <div class="text-muted">Orders</div>
                             </div>
                             <div class="col-4">
-                                <div class="font-24 profile-stat-count">$780</div>
+                                <div class="font-24 profile-stat-count">{{ presentPrice($monthly_income[0]) }}</div>
                                 <div class="text-muted">Sales</div>
                             </div>
                             <div class="col-4">
                                 <div class="font-24 profile-stat-count">15</div>
-                                <div class="text-muted">Projects</div>
+                                <div class="text-muted">Customers</div>
                             </div>
                         </div>
-                        <p class="text-center">Lorem Ipsum is simply dummy text of the printing and industry. Lorem Ipsum has been</p>
+                        {{-- <p class="text-center">Lorem Ipsum is simply dummy text of the printing and industry. Lorem Ipsum has been</p> --}}
                     </div>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                                 <div class="row">
                                     <div class="col-md-6" style="border-right: 1px solid #eee;">
                                         <h5 class="text-info m-b-20 m-t-10"><i class="fa fa-bar-chart"></i> Month Statistics</h5>
-                                        <div class="h2 m-0">$12,400<sup>.60</sup></div>
+                                        <div class="h2 m-0">{{ presentPrice($monthly_income[0]) }}</div>
                                         <div><small>Month income</small></div>
                                         <div class="m-t-20 m-b-20">
                                             <div class="h4 m-0">120</div>
@@ -96,16 +96,16 @@
                                         </div>
                                         <ul class="list-group list-group-full list-group-divider">
                                             <li class="list-group-item">Seasons
-                                                <span class="pull-right color-orange">15</span>
+                                                <span class="pull-right color-orange">{{$season_count}}</span>
                                             </li>
-                                            <li class="list-group-item">Orders
-                                                <span class="pull-right color-orange">148</span>
+                                            <li class="list-group-item">Orders (For this month)
+                                                <span class="pull-right color-orange">{{$orders}}</span>
                                             </li>
                                             <li class="list-group-item">Hectares
-                                                <span class="pull-right color-orange">72</span>
+                                                <span class="pull-right color-orange">{{$user->hectares}}</span>
                                             </li>
                                             <li class="list-group-item">Farmers
-                                                <span class="pull-right color-orange">44</span>
+                                                <span class="pull-right color-orange">{{$user->no_farmers}}</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -160,72 +160,41 @@
                                         </ul>
                                     </div>
                                 </div>
-                                <h4 class="text-info m-b-20 m-t-20"><i class="fa fa-shopping-basket"></i> Latest Transactions</h4>
-                                <table class="table table-striped table-hover">
+                                 
+                                <!-- Monthly Transactions -->
+                                <h4 class="text-info m-b-20 m-t-20"><i class="fa fa-shopping-basket"></i>Transactions (Monthly)</h4>
+                                <table class="table table-striped table-hover" id="transactions_table">
                                     <thead>
                                         <tr>
                                             <th>Order ID</th>
+                                            <th>Tracking ID</th>
                                             <th>Customer</th>
-                                            <th>Amount</th>
-                                            <th>Status</th>
-                                            <th width="91px">Date</th>
+                                            <th>Number</th>
+                                            <th>Product Type</th>
+                                            <th>Sub Total</th>
+                                            <th width="20%">Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>11</td>
-                                            <td>@Jack</td>
-                                            <td>$564.00</td>
-                                            <td>
-                                                <span class="badge badge-success">Shipped</span>
-                                            </td>
-                                            <td>10/07/2017</td>
-                                        </tr>
-                                        <tr>
-                                            <td>12</td>
-                                            <td>@Amalia</td>
-                                            <td>$220.60</td>
-                                            <td>
-                                                <span class="badge badge-success">Shipped</span>
-                                            </td>
-                                            <td>10/07/2017</td>
-                                        </tr>
-                                        <tr>
-                                            <td>13</td>
-                                            <td>@Emma</td>
-                                            <td>$760.00</td>
-                                            <td>
-                                                <span class="badge badge-default">Pending</span>
-                                            </td>
-                                            <td>10/07/2017</td>
-                                        </tr>
-                                        <tr>
-                                            <td>14</td>
-                                            <td>@James</td>
-                                            <td>$87.60</td>
-                                            <td>
-                                                <span class="badge badge-warning">Expired</span>
-                                            </td>
-                                            <td>10/07/2017</td>
-                                        </tr>
-                                        <tr>
-                                            <td>15</td>
-                                            <td>@Ava</td>
-                                            <td>$430.50</td>
-                                            <td>
-                                                <span class="badge badge-default">Pending</span>
-                                            </td>
-                                            <td>10/07/2017</td>
-                                        </tr>
-                                        <tr>
-                                            <td>16</td>
-                                            <td>@Noah</td>
-                                            <td>$64.00</td>
-                                            <td>
-                                                <span class="badge badge-success">Shipped</span>
-                                            </td>
-                                            <td>10/07/2017</td>
-                                        </tr>
+                                        @foreach ($transactions as $t)
+                                            <tr class="active">
+                                                <th>{{$t->orders->id}}</th>
+                                                <td>{{$t->orders->tracking_id}}</td>
+                                                <td>{{$t->orders->users->first_name}} {{$t->orders->users->last_name}}</td>
+                                                <td>{{$t->orders->users->phone}}</td>
+                                                <td>{{$t->product_lists->orig_products->type}}</td>
+                                                <td>{{ presentPrice($t->orders->total_price) }}</td>
+                                                @if($t->order_product_statuses->id == 1)
+                                                    <td><span class="badge badge-warning">{{$t->order_product_statuses->status}}</span></td>
+                                                @elseif($t->order_product_statuses->id == 2)
+                                                    <td><span class="badge badge-success">{{$t->order_product_statuses->status}}</span></td>
+                                                @elseif($t->order_product_statuses->id == 3)
+                                                    <td><span class="badge badge-info">{{$t->order_product_statuses->status}}</span></td>
+                                                @elseif($t->order_product_statuses->id == 4)
+                                                    <td><span class="badge badge-danger">{{$t->order_product_statuses->status}}</span></td>
+                                                @endif
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -248,16 +217,15 @@
                                         <input class="form-control" type="text" placeholder="Email address">
                                     </div>
                                     <div class="form-group">
-                                        <label>Password</label>
+                                        <label>Old Password:</label>
                                         <input class="form-control" type="password" placeholder="Password">
                                     </div>
                                     <div class="form-group">
-                                        <label class="ui-checkbox">
-                                            <input type="checkbox">
-                                            <span class="input-span"></span>Remamber me</label>
+                                        <label>New Password:</label>
+                                        <input class="form-control" type="password" placeholder="Password">
                                     </div>
                                     <div class="form-group">
-                                        <button class="btn btn-default" type="button">Submit</button>
+                                        <button class="btn btn-success" type="button">Save</button>
                                     </div>
                                 </form>
                             </div>
@@ -265,7 +233,7 @@
                             <!-- Feeds Tab -->
                             <div class="tab-pane fade" id="tab-3">
                                 <h5 class="text-info m-b-20 m-t-20"><i class="fa fa-bullhorn"></i> Latest Feeds</h5>
-                                <ul class="media-list media-list-divider m-0">
+                                {{-- <ul class="media-list media-list-divider m-0">
                                     <li class="media">
                                         <div class="media-img"><i class="ti-user font-18 text-muted"></i></div>
                                         <div class="media-body">
@@ -308,13 +276,39 @@
                                             <div class="font-13">Lorem Ipsum is simply dummy text.</div>
                                         </div>
                                     </li>
+                                </ul> --}}
+                                <ul class="media-list media-list-divider m-0">
+                                    <li class="list-group list-group-divider scroller" data-height="400px" data-color="#71808f">
+                                        <div>
+                                            @forelse (auth()->user()->Notifications()->take(5)->get() as $notification)
+                                            @include('partials.notifications.'. snake_case(class_basename($notification->type)))
+                                            @empty
+                                                <a class="list-group-item">
+                                                    <div class="media">
+                                                        {{-- <div class="media-img">
+                                                            <span class="badge badge-success badge-big"><i class="fa fa-check"></i></span>
+                                                        </div> --}}
+                                                        <div class="media-body">
+                                                            <div class="font-13">No Notifications</div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            @endforelse
+                                        </div>
+                                    </li>
                                 </ul>
+                                <div class="ibox-footer text-center">
+                                    <a href="{{ url('notifications') }}">View All</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
+        <!-- Style -->
         <style>
             .profile-social a {
                 font-size: 16px;

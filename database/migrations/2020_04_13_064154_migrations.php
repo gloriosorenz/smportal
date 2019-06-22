@@ -68,6 +68,46 @@ class Migrations extends Migration
             $table->foreign('order_statuses_id')
                 ->references('id')->on('order_statuses')->onDelete('cascade');
         });
+
+        // Reports
+        // Schema::table('reports',function(Blueprint $table){
+        //     $table->foreign('damage_reports_id')
+        //         ->references('id')->on('damage_reports')->onDelete('cascade');
+        //     $table->foreign('users_id')
+        //         ->references('id')->on('users')->onDelete('cascade');
+        //     $table->foreign('plant_reports_id')
+        //         ->references('id')->on('plant_reports')->onDelete('cascade');
+        // });
+
+         // Plant Data Report
+         Schema::table('plant_datas',function(Blueprint $table){
+            $table->foreign('plant_reports_id')
+                ->references('id')->on('plant_reports')->onDelete('cascade');
+            $table->foreign('users_id')
+                ->references('id')->on('users')->onDelete('cascade');
+        });
+
+        // Plant Report
+        Schema::table('plant_reports',function(Blueprint $table){
+            $table->foreign('seasons_id')
+                ->references('id')->on('seasons')->onDelete('cascade');
+        });
+
+         // Damage Report
+         Schema::table('damage_reports',function(Blueprint $table){
+            $table->foreign('regions_id')
+                ->references('id')->on('regions')->onDelete('cascade');
+            $table->foreign('provinces_id')
+                ->references('id')->on('provinces')->onDelete('cascade');
+            $table->foreign('calamities_id')
+                ->references('id')->on('calamities')->onDelete('cascade');
+        });
+
+        // Damage Data
+        Schema::table('damage_datas',function(Blueprint $table){
+            $table->foreign('damage_reports_id')
+                ->references('id')->on('damage_reports')->onDelete('cascade');
+        });
     }
 
     /**

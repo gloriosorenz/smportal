@@ -24,7 +24,7 @@
             @if (auth()->user()->roles_id == 2)
             <!-- Add Products -->
             <div class="row">
-                <div class="offset-md-1 col-md-10 offset-md-1">
+                <div class="offset-lg-1 col-lg-10 offset-lg-1">
                     <div class="card shadow mb-4">
                         <div class="card-header card-header-primary">
                             <h2 class="card-title">Add Products</h2>
@@ -32,7 +32,7 @@
                         <div class="card-body">
                             <!-- Products -->
                             <table class="table table-bordered">
-                                <thead>
+                                <thead class="thead-default">
                                     <tr>
                                         <th>Product</th>
                                         <th>Quantity</th>
