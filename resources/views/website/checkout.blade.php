@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="bg0 m-t-84 p-b-140">
-    <div class="container" id="invoice_container">
+    <div class="container-fluid w-00 h-100 p-t-70 p-r-250 p-l-250 p-b-300 bg0">
         {{-- <div class="row">
             <div class="col-md-12">
                 <div class="invoice-title">
@@ -102,6 +102,11 @@
 
         <div class="page-content fade-in-up">
 
+            <!-- Buttons -->
+            <div class="text-right">
+                <button class="btn btn-info" type="button" onclick="javascript:window.print();"><i class="fa fa-print"></i> Print</button>
+            </div>
+
             <div class="ibox invoice">
                 <div class="invoice-header">
                     <div class="row">
@@ -155,13 +160,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- <tr>
-                                <td>
-                                    <div><strong>Flat Design</strong></div><small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small></td>
-                                <td>2</td>
-                                <td>$220.00</td>
-                                <td>$440.00</td>
-                            </tr> --}}
                             @foreach (Cart::content() as $item)
                             <tr>
                                 <td>{{ $item->model->curr_products->type }}</td>
@@ -185,16 +183,17 @@
                                 <td class="font-bold font-18">TOTAL:</td>
                                 <td class="font-bold font-18">₱{{ Cart::instance('default')->subtotal() }}</td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <a href="{{ route('cart.index') }}" class="btn btn-lg btn-warning"><i class="fa fa-angle-left"></i> Back to Cart</a> &nbsp;
+                                </td>
+                                <td>
+                                    <button type="submit" id="complete-order" class="btn btn-lg btn-success">Complete Order</button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
 
-                    <!-- Buttons -->
-                    <a href="{{ route('cart.index') }}" class="btn btn-lg btn-primary">Back to Cart</a> &nbsp;
-                    <button type="submit" id="complete-order" class="btn btn-lg btn-success">Complete Order</button>
-                    
-                    <div class="text-right">
-                        <button class="btn btn-info" type="button" onclick="javascript:window.print();"><i class="fa fa-print"></i> Print</button>
-                    </div>
                 </form> 
 
             </div>

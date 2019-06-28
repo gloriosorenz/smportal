@@ -33,7 +33,7 @@ class SeasonListCreated extends Notification
     {
         return [
             'database',
-            'mail'
+            // 'mail'
         ];
     }
 

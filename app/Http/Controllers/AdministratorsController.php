@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
+use App\User;
+use App\Barangay;
+use App\Province;
+use App\City;
 
 class AdministratorsController extends Controller
 {
@@ -28,8 +32,15 @@ class AdministratorsController extends Controller
      */
     public function create()
     {
-        return view('admin.administrators.create');
-    }
+        $barangays = Barangay::orderBy('name')->get();
+        $provinces = Province::orderBy('name')->get();
+        $cities = City::orderBy('name')->get();
+
+        return view('admin.administrators.create')
+            ->with('barangays', $barangays)
+            ->with('provinces', $provinces)
+            ->with('cities', $cities)
+            ;        }
 
     /**
      * Store a newly created resource in storage.

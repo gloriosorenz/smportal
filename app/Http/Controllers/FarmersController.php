@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
+use App\User;
+use App\Barangay;
+use App\City;
+use App\Province;
+use App\Region;
 
 use Notification;
 use App\Notifications\NewFarmerCreated;
@@ -31,7 +36,18 @@ class FarmersController extends Controller
      */
     public function create()
     {
-        return view('admin.farmers.create');
+        $lagunabarangays = Barangay::where('cities_id','=', 43428)->whereNotIn('id', array(11218, 11219, 11223,11224,11225,11228))->get();
+            // dd($lagunabarangays);
+        $calabarzon = Region::where('id','=', 4)->get();
+        $starosa = City::where('id','=', 433)->get();
+        $laguna = Province::where('id','=',19)->get();
+      
+        return view('admin.farmers.create')
+            ->with('lagunabarangays', $lagunabarangays)
+            ->with('calabarzon', $calabarzon)
+            ->with('laguna',$laguna)
+            ->with('starosa',$starosa)
+            ;
     }
 
     /**

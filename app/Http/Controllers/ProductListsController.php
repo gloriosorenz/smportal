@@ -111,11 +111,22 @@ class ProductListsController extends Controller
         $products = Product::where('id', '!=', 4)->get();
         $users = User::where('roles_id', 2)->get()->pluck('company');
 
+        // Get rice product average
+        $rice_prod_ave = ProductList::getRiceProductAverage();
+
+        // Get withered product average
+        $withered_prod_ave = ProductList::getWitheredProductAverage();
+            
+
+        // dd($withered_prod_ave);
 
         return view('farmer.product_lists.create')
             ->with('users', $users)
             ->with('season', $season)
-            ->with('products', $products);
+            ->with('products', $products)
+            ->with('rice_prod_ave', $rice_prod_ave)
+            ->with('withered_prod_ave', $withered_prod_ave)
+            ;
     }
 
     /**

@@ -100,8 +100,11 @@ class UsersTableSeeder extends Seeder
                 'phone' => '09178416388',
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
                 'company' => 'Sta. Rosa Animal Farmers',
+                'street'=> 'Block 9 Lot 2 Legaspi corner Arzobispo Street',
                 'roles_id' => 3,
                 'barangays_id'=> 9,
+                'cities_id'=> 408,
+                'provinces_id'=> 19,
                 'remember_token' => '',
             ],
             [

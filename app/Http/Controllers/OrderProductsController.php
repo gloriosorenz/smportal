@@ -74,12 +74,14 @@ class OrderProductsController extends Controller
     }
 
     public function cancel_order(Request $request, $id){
-        $order = OrderProduct::findOrFail($id);
-        $order->order_product_statuses_id = 4;
-        $order->save();
+        $orderproduct = OrderProduct::findOrFail($id);
+        
+        $orderproduct->update(['order_product_statuses_id'=>4]);    
+        $orderproduct->product_lists->update(['curr_quantity' => $orderproduct->product_lists->curr_quantity + $orderproduct->quantity]);                
+    
 
         // Notification
-        $customer = $order->orders->users;
+        $customer = $orderproduct->orders->users;
         Notification::send($customer, new OrderCancelled());
 
         return redirect()->back()->with('success', 'Order Cancelled');
@@ -101,6 +103,9 @@ class OrderProductsController extends Controller
         $order = OrderProduct::findOrFail($id);
         $order->order_product_statuses_id = 1;
         $order->save();
+
+        $order->update(['order_product_statuses_id'=>1]);    
+        $order->product_lists->update(['curr_quantity' => $order->product_lists->curr_quantity - $order->quantity]);
 
         // Get email
         $email = $order->orders->users->email;

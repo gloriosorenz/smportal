@@ -24,7 +24,7 @@
                     <span class="nav-label">Profile</span>
                 </a>
             </li>
-            <li class="heading">FEATURES</li>
+            <li class="heading">FUNCTIONS</li>
             <!-- Season -->
             <li>
                 <a href="{{ route('seasons.index') }}"><i class="sidebar-item-icon fa fa-cloud-sun-rain"></i>
@@ -65,27 +65,26 @@
             
              <!-- Reports  -->
              <li class="heading">Reports</li>
-             <li class="{{Request:: is('') ? 'active' : ''}}">
-                 <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
-                     <span class="nav-label">Plant Report</span>
-                 </a>
-             </li>
-             <li class="{{Request:: is('') ? 'active' : ''}}">
-                 <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
-                     <span class="nav-label">Sales Report</span>
-                 </a>
-             </li>
-             <li class="{{Request:: is('') ? 'active' : ''}}">
-                 <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
-                     <span class="nav-label">Damage Report</span>
-                 </a>
-             </li>
-             <li class="{{Request:: is('') ? 'active' : ''}}">
-                 <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
-                     <span class="nav-label">Harvest Report</span>
-                 </a>
-             </li>
-
+             <li class="{{Request:: is('plant_reports') ? 'active' : ''}}">
+                <a href="{{ route('plant_reports.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
+                    <span class="nav-label">Plant Report</span>
+                </a>
+            </li>
+            <li class="{{Request:: is('sales_reports') ? 'active' : ''}}">
+                <a href="{{ route('sales_reports.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
+                    <span class="nav-label">Sales Report</span>
+                </a>
+            </li>
+            <li class="{{Request:: is('damage_reports') ? 'active' : ''}}">
+                <a href="{{ route('damage_reports.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
+                    <span class="nav-label">Damage Report</span>
+                </a>
+            </li>
+            <li class="{{Request:: is('') ? 'active' : ''}}">
+                <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
+                    <span class="nav-label">Harvest Report</span>
+                </a>
+            </li>
 
 
 
@@ -104,7 +103,7 @@
                     <span class="nav-label">Profile</span>
                 </a>
             </li>
-            <li class="heading">FEATURES</li>
+            <li class="heading">FUNCTIONS</li>
             <!-- Season -->
             <li class="{{Request:: is('seasons') ? 'active' : ''}}">
                 <a href="{{ route('seasons.index') }}"><i class="sidebar-item-icon fa fa-cloud-sun-rain"></i>
@@ -124,11 +123,11 @@
                 </a>
             </li>
             <!-- Orders -->
-            <li class="{{Request:: is('orders') ? 'active' : ''}}">
+            {{-- <li class="{{Request:: is('orders') ? 'active' : ''}}">
                 <a href="{{ route('orders.index') }}"><i class="sidebar-item-icon fas fa-folder-open"></i>
                     <span class="nav-label">Orders</span>
                 </a>
-            </li>
+            </li> --}}
             <!-- Order Products -->
             <li class="{{Request:: is('order_products') ? 'active' : ''}}">
                 <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-clipboard-list"></i>
@@ -144,8 +143,8 @@
                     <span class="nav-label">Plant Report</span>
                 </a>
             </li>
-            <li class="{{Request:: is('') ? 'active' : ''}}">
-                <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
+            <li class="{{Request:: is('sales_reports') ? 'active' : ''}}">
+                <a href="{{ route('sales_reports.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
                     <span class="nav-label">Sales Report</span>
                 </a>
             </li>

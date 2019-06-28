@@ -43,7 +43,7 @@ function getNumbers()
     //     'newTotal' => $newTotal,
     // ]);
 
-    $newSubtotal = (Cart::subtotal());
+    $newSubtotal = (Cart::subtotal(2,'.',''));
     if ($newSubtotal < 0) {
         $newSubtotal = 0;
     }

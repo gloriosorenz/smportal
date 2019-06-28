@@ -41,7 +41,7 @@
 
     </head>
     <body>
-            <div class="container" id="invoice_container">
+            {{-- <div class="container" id="invoice_container">
                 <div class="row">
                     <div class="col-md-12">
                         @foreach ($data as $key => $value)
@@ -97,13 +97,6 @@
                                                     <td class="text-right">{{ presentPrice($v->product_lists->price *  $v->quantity)}}</td>
                                                 </tr>
                                                 @endforeach
-                                                {{-- <tr>
-                                                    <td class="text-left">{{ $item->product_lists->curr_products->type }}</td>
-                                                    <td class="text-center">{{ $item->product_lists->users->company }}</td>
-                                                    <td class="text-center">{{$item->product_lists->price}}</td>
-                                                    <td class="text-center">{{ $item->quantity }} kaban/s</td>
-                                                    <td class="text-right">{{ presentPrice($item->product_lists->price *  $item->quantity)}}</td>
-                                                </tr> --}}
                                                 <tr>
                                                     <td class="thick-line"></td>
                                                     <td class="thick-line"></td>
@@ -123,20 +116,128 @@
                         <!-- End Panel -->
                         @endforeach
 
-                        {{-- <div class="row">
-                            <div class="col-md-6">
-                                <div class="text-right">
-                                    <h3>Total: {{presentPrice($order->total_price)}}<h3>
-                                </div>
-                            </div>
-                        </div> --}}
-
                     </div>
                     <!-- End Col-md-12 -->
                 </div>
                 <!-- End Row -->
-            </div>
+
+            </div> --}}
             <!-- End Container -->
+
+
+
+
+
+
+
+            
+
+            <div class="container">
+                @foreach ($data as $key => $value)
+                
+                @php
+                    $seller = App\User::findOrFail($key);
+                    // dd($data);
+                @endphp
+
+                <div class="page">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="invoice-title">
+                                <h2>Invoice</h2><h3 class="pull-right">Order # 12345</h3>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <address>
+                                            <strong>{{$value['0']->users->company}}</strong><br>
+                                            Contact Number: {{$value['0']->users->phone}}<br>
+                                            Location: {{$seller->street}}, {{$seller->barangays->name}}, {{$seller->cities->name}}, {{$seller->provinces->name}} <br>
+                                    </address>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <address>
+                                    <strong>Shipped To:</strong><br>
+                                        {{$value['0']->orders->users->first_name}} {{$value['0']->orders->users->last_name}}<br>
+                                        {{$value['0']->orders->users->street}}<br>
+                                        {{$value['0']->orders->users->barangays->name}}<br>
+                                        {{$value['0']->orders->users->cities->name}} {{$value['0']->orders->users->provinces->name}}
+                                    </address>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <address>
+                                        <strong>Payment Method:</strong><br>
+                                        Cash<br>
+                                    </address>
+                                </div>
+                                <div class="col-xs-6 text-right">
+                                    <address>
+                                        <strong>Order Date:</strong><br>
+                                        March 7, 2014<br><br>
+                                    </address>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><strong>Order summary</strong></h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-condensed">
+                                            <thead>
+                                                <tr>
+                                                    <td><strong>Item</strong></td>
+                                                    <td class="text-center"><strong>Company</strong></td>
+                                                    <td class="text-center"><strong>Price</strong></td>
+                                                    <td class="text-center"><strong>Quantity</strong></td>
+                                                    <td class="text-right"><strong>Subtotal</strong></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @php
+                                                    $sub_total = 0;
+                                                @endphp
+                                                @foreach ($value as $v)
+                                                @php
+                                                    $product = App\ProductList::findOrFail($v->product_lists_id);
+                                                    $seller = App\User::findOrFail($v->farmers_id);
+                                                    
+                                                    $sub_total = ($product->price *  $v->quantity) + $sub_total;
+                                                @endphp
+                                                <!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                                <tr>
+                                                    <td class="text-left">{{$product->orig_products->type}}</td>
+                                                    <td class="text-center">{{$seller->company}}</td>
+                                                    <td class="text-center">{{$product->price}}</td>
+                                                    <td class="text-center">{{$v->quantity}} kaban/s</td>
+                                                    <td class="text-right">{{ presentPrice($v->product_lists->price *  $v->quantity)}}</td>
+                                                </tr>
+                                                @endforeach
+                                                <tr>
+                                                    <td class="thick-line"></td>
+                                                    <td class="thick-line"></td>
+                                                    <td class="thick-line"></td>
+                                                    <td class="thick-line text-center"><strong>Total</strong></td>
+                                                    <td class="thick-line text-right">{{presentPrice($sub_total)}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+
+            </div>
                 
     </body>
 </html>

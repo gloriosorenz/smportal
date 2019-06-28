@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PlantReportTableSeeder::class);
         $this->call(PlantDataTableSeeder::class);
         $this->call(DamageReportsTableSeeder::class);
-        $this->call(DamageDataTableSeeder::class);
+        // $this->call(DamageDataTableSeeder::class);
 
 
             //  // Primary Seeders

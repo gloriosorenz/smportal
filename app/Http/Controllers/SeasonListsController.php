@@ -96,7 +96,7 @@ class SeasonListsController extends Controller
         $admin = User::where('roles_id', 1)->get();
         Notification::send($admin, new SeasonListCreated());
 
-    return redirect()->route('season_lists.index')->with('success','Plan Report Created ');
+    return redirect()->route('season_lists.index')->with('success','Season List Created ');
     }
 
     /**

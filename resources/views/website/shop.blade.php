@@ -47,7 +47,9 @@
                                     <tbody>
                                         @foreach($product_lists as $product_list)
                                         <tr class="tr">
-                                            <td>{{$product_list->curr_products->type}}</td>
+                                            <td>
+                                                {{$product_list->curr_products->type}}
+                                            </td>
                                             <td>{{$product_list->users->company}}</td>
                                             <td>{{ $product_list->users->barangays->name }}, {{ $product_list->users->cities->name }}, {{ $product_list->users->provinces->name }}</td>
                                             <td>{{$product_list->harvest_date}}</td>

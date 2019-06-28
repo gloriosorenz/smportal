@@ -35,7 +35,7 @@ class NewSeasonCreated extends Notification
     {
         return [
             'database', 
-            'mail'
+            // 'mail'
         ];
     }
 
@@ -66,7 +66,7 @@ class NewSeasonCreated extends Notification
     {
         return [
             'timeCreated'=> Carbon\Carbon::now()->diffForHumans(),
-            'user'=>$notifiable
+            'user'=> auth()->user()
         ];
     }
 

@@ -3,9 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use DB;
-use App\ProductList;
 
+use App\ProductList;
+use App\User;
+use App\Barangay;
+use App\Province;
+use App\City;
+use App\Role;
+use App\Region;
+
+use DB;
 use DarkSkyApi;
 
 class WebsiteController extends Controller
@@ -205,10 +212,30 @@ class WebsiteController extends Controller
         // Contact
         // ------------------------------------------------------------------------------------------------------------------------
 
-        
-       
+        // For customers
+        $barangays = Barangay::orderBy('name')->get();
+        $provinces = Province::orderBy('name')->get();
+        $cities = City::orderBy('name')->get();
+        $roles = Role::where('id','>',2)->get();
+
+
+        // For farmers
+        $lagunabarangays = Barangay::where('cities_id','=', 43428)->whereNotIn('id', array(11218, 11219, 11223,11224,11225,11228))->get();
+        $calabarzon = Region::where('id','=', 4)->get();
+        $starosa = City::where('id','=', 433)->get();
+        $laguna = Province::where('id','=',19)->get();
+
         return view('website.contact')
-            ;
+            ->with('barangays', $barangays)
+            ->with('provinces', $provinces)
+            ->with('cities', $cities)
+            ->with('roles', $roles)
+            ->with('lagunabarangays', $lagunabarangays)
+            ->with('calabarzon', $calabarzon)
+            ->with('laguna',$laguna)
+            ->with('starosa',$starosa)
+            ;    
+        
     }
 
 

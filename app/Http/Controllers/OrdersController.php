@@ -165,8 +165,7 @@ class OrdersController extends Controller
         //         ->groupBy('farmers_id')
         //         ->get();
 
-        $farmers = OrderProduct::
-                where('orders_id', $order->id)
+        $farmers = OrderProduct::where('orders_id', $order->id)
                 // ->selectRaw('farmers.*')
                 ->get()
                 ->groupBy('farmers_id');

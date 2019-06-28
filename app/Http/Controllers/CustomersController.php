@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
+use App\User;
+use App\Barangay;
+use App\Province;
+use App\City;
+use App\Role;
 
 use Notification;
 use App\Notifications\NewCustomerCreated;
@@ -31,7 +36,17 @@ class CustomersController extends Controller
      */
     public function create()
     {
-        return view('admin.customers.create');
+        $barangays = Barangay::orderBy('name')->get();
+        $provinces = Province::orderBy('name')->get();
+        $cities = City::orderBy('name')->get();
+        $roles = Role::where('id','>',2)->get();
+
+        return view('admin.customers.create')
+            ->with('barangays', $barangays)
+            ->with('provinces', $provinces)
+            ->with('cities', $cities)
+            ->with('roles', $roles)
+            ;    
     }
 
     /**

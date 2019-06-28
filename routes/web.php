@@ -42,17 +42,19 @@ Route::get('/thankyou', 'ConfirmationController@index')->name('confirmation.inde
 
 Auth::routes();
 
+
+
+
 // If user is authenticated
 Route::group( ['middleware' => 'auth' ], function()
 {
-
-    Route::get('/markAsRead', function () {
-        auth()->user()->unreadNotifications->markAsRead(); 
-    });
-
     // Notifications
     Route::get('/notifications', function () {
         return view('notifications');
+        });
+
+    Route::get('/markAsRead', function () {
+            auth()->user()->unreadNotifications->markAsRead(); 
         });
         
 
@@ -109,6 +111,7 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::resource('order_products', 'OrderProductsController');
     Route::resource('damage_reports', 'DamageReportsController');
     Route::resource('plant_reports', 'PlantReportsController');
+    Route::resource('sales_reports', 'SalesReportsController');
 
     // Route::resource('dashboard', 'DashboardController');
 

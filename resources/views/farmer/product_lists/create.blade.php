@@ -15,22 +15,74 @@
 
 <div class="page-content fade-in-up">
 
-    <div class="row">
         <!-- Form -->
         <form method="post" action="{{action('ProductListsController@store')}}" enctype="multipart/form-data">
         @csrf
     
-            {{-- If user is a Farmer --}}
+            <!-- If user is a Farmer -->
             @if (auth()->user()->roles_id == 2)
+            <!-- Price Statistics -->
+            <div class="row">
+                <!-- Rice Product Average -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="ibox bg-info color-white widget-stat">
+                        <div class="ibox-body">
+                            <h2 class="m-b-5 font-strong">{{ presentPrice($rice_prod_ave) }}</h2>
+                            <div class="m-b-5">Rice Product Average Price</div>
+                            {{-- <div><i class="fa fa-level-up m-r-5"></i><small>25% higher</small></div> --}}
+                        </div>
+                    </div>
+                </div>
+                <!-- Withered Product Average -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="ibox bg-info color-white widget-stat">
+                        <div class="ibox-body">
+                            <h2 class="m-b-5 font-strong">{{ presentPrice($withered_prod_ave) }}</h2>
+                            <div class="m-b-5">Withered Product Average Price</div>
+                            {{-- <div><i class="fa fa-level-up m-r-5"></i><small>17% higher</small></div> --}}
+                        </div>
+                    </div>
+                </div>
+                {{-- <!-- Total Income -->
+                <div class="col-lg-3 col-md-6">
+                    <a href="#">
+                        <div class="ibox bg-warning color-white widget-stat">
+                            <div class="ibox-body">
+                                <h2 class="m-b-5 font-strong">$1570</h2>
+                                <div class="m-b-5">TOTAL INCOME</div><i class="fas fa-money-bill widget-stat-icon"></i>
+                                <div><i class="fa fa-level-up m-r-5"></i><small>22% higher</small></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- New Users -->
+                <div class="col-lg-3 col-md-6">
+                    <a href="#">
+                        <div class="ibox bg-danger color-white widget-stat">
+                            <div class="ibox-body">
+                                <h2 class="m-b-5 font-strong">108</h2>
+                                <div class="m-b-5">NEW USERS</div><i class="ti-user widget-stat-icon"></i>
+                                <div><i class="fa fa-level-down m-r-5"></i><small>-12% Lower</small></div>
+                            </div>
+                        </div>
+                    </a>
+                </div> --}}
+            </div>
+
+
+
             <!-- Add Products -->
             <div class="row">
-                <div class="offset-lg-1 col-lg-10 offset-lg-1">
-                    <div class="card shadow mb-4">
-                        <div class="card-header card-header-primary">
-                            <h2 class="card-title">Add Products</h2>
+                <div class="col-md-8">
+                    <div class="ibox">
+                        <div class="ibox-head">
+                            <div class="ibox-title">Add Products</div>
+                            <div class="ibox-tools">
+                                <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <!-- Products -->
+                        <div class="ibox-body">
+                            <!-- Start Form -->
                             <table class="table table-bordered">
                                 <thead class="thead-default">
                                     <tr>
@@ -71,13 +123,22 @@
                                     @endforeach
                                 </tbody>
                             </table>
-            
+                            <!-- Submit Button -->
+                            <button type="submit" class="btn btn-success">Create</button>
+                            <!-- End Form -->
                         </div>
                     </div>
                 </div>
             </div>
             
-            {{-- If user is admin --}}
+
+
+
+
+
+
+
+            <!-- If user is admin -->
             @elseif(auth()->user()->roles_id == 1)
             <!-- Add Products -->
             <div class="row">
@@ -132,17 +193,15 @@
                     </div>
                 </div>
             </div>
-            @endif
-        
-        
             <!-- Submit Button -->
             <div class="row">
                 <div class="offset-md-1 col-md-10 offset-md-1">
                     <button type="submit" class="btn btn-success">Create</button>
                 </div>
             </div>
-        </form>
-    </div>
+            @endif
+                   
+        </form> <!-- End Form -->
 
 </div>
 <!-- END PAGE CONTENT-->

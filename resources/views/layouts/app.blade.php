@@ -163,6 +163,10 @@
                 pageLength: 10,
                 order: [[ 0, 'desc' ]],
             });
+            $('#sales_reports_table').DataTable({
+                pageLength: 10,
+                order: [[ 0, 'desc' ]],
+            });
 
 
 

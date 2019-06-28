@@ -75,6 +75,15 @@ class CheckoutController extends Controller
         $random = str_shuffle('1234567890');
         $tracking_id = substr($random, 0, 6);
 
+        $orders = Order::all();
+
+        // foreach($oredrs as $order){
+        //     do{
+
+        //     }while($order);
+        // }
+
+
         // Insert into orders table
         $order = Order::create([
             // 'users_id' => auth()->user() ? auth()->user()->id : null,

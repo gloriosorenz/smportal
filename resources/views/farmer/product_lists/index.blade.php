@@ -17,8 +17,9 @@
 <div class="page-content fade-in-up">
     <!-- Products for current Season -->
     <div class="row">
-        <!-- Products -->
-        <div class="col-md-8">
+        
+        <div class="col-md-6">
+            <!-- Products -->
             <div class="ibox">
                 <div class="ibox-head">
                     <div class="ibox-title">Products For Season {{ $latest_season->id }}</div>
@@ -64,20 +65,15 @@
                     </table>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- Product History -->
-    <div class="row">
 
-        <!-- Product History -->
-        <div class="col-md-6">
+            <!-- Product History -->
             <div class="ibox">
                 <div class="ibox-head">
                     <div class="ibox-title">Products History</div>
                 </div>
                 <div class="ibox-body">
-                    <table class="table table-bordered table-striped" id="all_user_products" cellspacing="0" width="100%">
+                    <table class="table table-bordered" id="all_user_products" cellspacing="0" width="100%">
                         <thead class="thead-default">
                             <tr>
                                 <th>ID</th>
@@ -109,7 +105,9 @@
                 </div>
             </div>
         </div>
-       
+
+
+
         <!-- Price History -->
         <div class="col-md-6">
             <div class="ibox">
@@ -143,8 +141,8 @@
                 </div>
             </div>
         </div>
-    </div>
 
+    </div>
 </div>
 <!-- END PAGE CONTENT-->
 @endsection

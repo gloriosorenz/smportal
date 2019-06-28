@@ -67,13 +67,20 @@
     <script type="text/javascript" src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!--===============================================================================================-->
     <script type="text/javascript" src="{{ asset('vendors/select2/dist/js/select2.min.js') }}"></script>
-    <script>
+    <script type="text/javascript">
         $(".js-select2").each(function(){
             $(this).select2({
                 minimumResultsForSearch: 20,
                 dropdownParent: $(this).next('.dropDownSelect2')
             });
         })
+
+        $(document).ready(function() {
+            $('.select2_basic').select2({
+                placeholder: 'Category',
+                tags: true,
+            });
+        });
     </script>
     <!--===============================================================================================-->
     <script type="text/javascript" src="{{ asset('vendors/daterangepicker/moment.min.js') }}"></script>
