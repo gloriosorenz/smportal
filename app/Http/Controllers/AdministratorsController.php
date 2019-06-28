@@ -64,6 +64,7 @@ class AdministratorsController extends Controller
             // 'city' => 'required',
             // 'province' => 'required',
             'company' => 'required|string|max:255',
+            'active' => true,
         ]);
 
         $user = new User;
