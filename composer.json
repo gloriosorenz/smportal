@@ -14,6 +14,7 @@
         "dmitry-ivanov/dark-sky-api": "^1.0",
         "fideloper/proxy": "^4.0",
         "gloudemans/shoppingcart": "^2.6",
+        "gmopx/laravel-owm": "^0.1.3",
         "h4cc/wkhtmltoimage-amd64": "0.12.x",
         "h4cc/wkhtmltopdf-amd64": "0.12.x",
         "hardevine/shoppingcart": "2.6.2.1",

@@ -45,6 +45,28 @@ class ProductListsController extends Controller
                 ->where('users_id', auth()->user()->id)->count();
 
 
+        // // Date Automation
+        // $decrease1 = ProductList::where('harvest_date', '<', Carbon::now()->subDays(7))
+        //     ->where('curr_quantity', '>', 0)
+        //     ->get();
+
+
+        // // dd($prod1);
+        // foreach($decrease1 as $pl){
+        // $sub = $pl->curr_quantity;
+        // $prod1 = $decrease1['products_id' == 1 ];
+        //     if($pl->products_id == 1){
+        //         $pl->update([
+        //             'curr_quantity' => $pl->curr_quantity - $sub,
+        //             ]);
+        //     }
+        //     if($pl->products_id == 2){
+        //         $pl->update([
+        //             'curr_quantity' => $pl->curr_quantity + $prod1->curr_quantity,
+        //             ]);
+        //     }
+        // }
+
 
 
 

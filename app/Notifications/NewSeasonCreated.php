@@ -49,9 +49,9 @@ class NewSeasonCreated extends Notification
     {
 
         return (new MailMessage)
-            ->subject('New Season Created') // it will use this class name if you don't specify
+            ->subject('A new season has been created for SMPortal') // it will use this class name if you don't specify
             ->greeting('Good Day!') // example: Dear Sir, Hello Madam, etc ...
-            ->line('The introduction to the notification.')
+            ->line('A new season has been created by the administrator.')
             ->action('Notification Action', url('/'))
             ->line('Thank you for using our application!');
     }

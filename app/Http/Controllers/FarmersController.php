@@ -56,6 +56,8 @@ class FarmersController extends Controller
             // 'city' => 'required',
             // 'province' => 'required',
             'company' => 'required|string|max:255',
+            'active' => true,
+
         ]);
 
         $farmer = new User;
