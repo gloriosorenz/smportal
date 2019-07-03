@@ -10,6 +10,8 @@ use Notification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use Carbon\Carbon;
+
 class SeasonsController extends Controller
 {
     /**
@@ -61,9 +63,14 @@ class SeasonsController extends Controller
         ]);
 
 
+        $date = Carbon::createFromFormat('m-d', '02-01');
+
         $season = new Season;
         $season->season_start = date("Y:m:d", strtotime(request('season_start')));
         // $season->season_types_id = $request->input('season_types_id');
+        if (Carbon::parse('')) {
+            # code...
+        }
         $season->season_statuses_id =1;
         $season->save();
 

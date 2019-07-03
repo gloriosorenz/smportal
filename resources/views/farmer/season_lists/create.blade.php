@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@include('partials.javascripts.add_farmer_javascript')
 @section('content')
 
 <!-- START PAGE CONTENT-->
@@ -16,6 +16,8 @@
 
 <div class="page-content fade-in-up">
 
+    <!-- Farmer Functionality  -->
+    @if(auth()->user()->roles_id == 2)
     <div class="row">
         <!-- Input farmer's hectares and no. of farmers -->
         <div class="col-md-6">
@@ -47,7 +49,10 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</td>
+                                <td>
+                                    {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
+                                    <input name="users_id[]" type="hidden" value="{{auth()->user()->id}}">                   
+                                </td>
                                 <td>
                                     <input class="form-control" type="number" placeholder="{{ auth()->user()->hectares }}" name="planned_hectares[]" step="0.1" min="1" max="{{ auth()->user()->hectares }}">
                                 </td>
@@ -141,7 +146,69 @@
                 </div>
             </div>
     </div>
+    <!-- End row -->
 
+    <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+    <!-- Admin Functionality  -->
+    @elseif (auth()->user()->roles_id == 1)
+        <div class="row">
+            <!-- Input farmer's hectares and no. of farmers -->
+            <div class="offset-md-2 col-md-8 offset-md-2">
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Plan</div>
+                        <div class="ibox-tools">
+                            <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                        </div>
+                    </div>
+                    <div class="ibox-body">
+                        <!-- Start Form -->
+                        <form method="post" action="{{action('SeasonListsController@store')}}" enctype="multipart/form-data">
+                            @csrf
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Rice Farmer</th>
+                                        <th>Planned Hectares</th>
+                                        <th>Planned Number of Farmers</th>
+                                        <th>Planned Quantity</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="resultbody1">
+                                    <tr>
+                                        <td>
+                                            <select class="form-control" name="users_id[]" id="users_id">
+                                                <option value="0" selected="true" disabled="True">Select Farmer</option>
+                                                    @foreach ($users as $key=>$value)
+                                                        <option value="{{$value->id}}">{{$value->first_name}} {{$value->last_name}}</option>
+                                                    @endforeach
+                                            </select>
+                                        </td>
+                                        <td><input type="text" class="form-control" name="planned_hectares[]" step="0.1" min="1" max="{{ $value->hectares }}"/></td>
+                                        <td><input type="text" class="form-control" name="planned_num_farmers[]" step="0.1" min="1" max="{{ $value->no_farmers }}" /></td>
+                                        <td><input type="text" class="form-control" name="planned_qty[]" value="" /></td>
+                                        <td><input type="button" class="btn btn-danger remove" value="x"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <center><input type="button" class="btn btn-lg btn-warning addRow" value="+"></center>
+
+                            <!-- Submit Button -->
+                            <div class="form-group">
+                                <button class="btn btn-success" type="submit">Submit</button>
+                            </div>
+                        </form>
+                        <!-- End Form-->
+                    </div>
+                </div>
+            </div>
+            <!-- End Column-->
+        </div>
+        <!-- End Row-->
+    @endif
 </div>
 <!-- End Page Content-->
 

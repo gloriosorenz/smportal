@@ -201,7 +201,7 @@
 
                             <!-- Settings Tab -->
                             <div class="tab-pane fade" id="tab-2">
-                                <form action="javascript:void(0)">
+                                {{-- <form action="javascript:void(0)">
                                     <div class="row">
                                         <div class="col-sm-6 form-group">
                                             <label>First Name</label>
@@ -212,71 +212,162 @@
                                             <input class="form-control" type="text" placeholder="First Name">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Email</label>
-                                        <input class="form-control" type="text" placeholder="Email address">
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group">
+                                            <label>Email</label>
+                                            <input class="form-control" type="text" placeholder="Email address">
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Old Password:</label>
-                                        <input class="form-control" type="password" placeholder="Password">
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group">
+                                            <label>Old Password:</label>
+                                            <input class="form-control" type="password" placeholder="Password">
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>New Password:</label>
-                                        <input class="form-control" type="password" placeholder="Password">
+                                   
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group">
+                                            <label>New Password:</label>
+                                            <input class="form-control" type="password" placeholder="Password">
+                                        </div>
                                     </div>
+                                   
                                     <div class="form-group">
                                         <button class="btn btn-success" type="button">Save</button>
                                     </div>
+                                </form> --}}
+                                @if (auth()->user()->roles_id == 2)
+                                <form method="post" action="{{action('FarmersController@update', $user->id)}}">
+                                @method('PATCH')
+                                @csrf
+                                    <!-- Farmer Information -->
+                                    <h4><strong>Farmer Information</strong></h4>
+                                    <br>
+                                    <div class="row">
+                                        <!-- First Name -->
+                                        <div class="col-sm-6 form-group">
+                                            <label>First Name</label>
+                                            <input class="form-control" type="text" placeholder="First Name" name="first_name" value="{{$user->first_name}}">
+                                        </div>
+                                        <!-- Last Name -->
+                                        <div class="col-sm-6 form-group">
+                                            <label>Last Name</label>
+                                            <input class="form-control" type="text" placeholder="Last Name" name="last_name" value="{{$user->last_name}}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <!-- Phone -->
+                                        <div class="col-sm-6 form-group">
+                                            <label>Phone</label>
+                                            <input class="form-control" type="text" placeholder="Phone" name="phone" value="{{$user->phone}}">
+                                        </div>
+                                        <!-- Email -->
+                                        <div class="col-sm-6 form-group">
+                                            <label>Email</label>
+                                            <input class="form-control" type="text" placeholder="Email" name="email" value="{{$user->email}}">
+                                        </div>
+                                    </div>
+    
+    
+                                    <!-- Address -->
+                                    <h5><strong>Address</strong></h5>
+    
+                                    <!-- Street -->
+                                    <div class="form-group">
+                                        <label>Street</label>
+                                        <input class="form-control" type="text" placeholder="Street" name="street" value="{{$user->street}}">
+                                    </div>
+    
+                                    <div class="row">
+                                        <!-- Provice-->
+                                        <div class="col-sm-4 form-group">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Province</label>
+                                                <select class="form-control" name="province" id="province" readonly>
+                                                    @foreach ($laguna as $l)
+                                                        <option value="{{ $l['id']}}">{{ $l['name']}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+    
+                                        <!-- City-->
+                                        <div class="col-sm-4 form-group">
+                                            <div class="form-group">
+                                                <label class="form-control-label">City</label>
+                                                <select class="form-control" name="city" id="city" readonly>
+                                                        @foreach ($starosa as $sa)
+                                                            <option value="{{ $sa['id']}}">{{ $sa['name']}}</option>
+                                                        @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+    
+    
+                                        <!-- Barangay-->
+                                        <div class="col-sm-4 form-group">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Barangay</label>
+                                                <select class="form-control" name="barangay" id="barangay">
+                                                    <option value="0" selected="true" disabled="True" value="{{$user->barangays->name}}">{{$user->barangays->name}}</option>
+                                                    @foreach ($lagunabarangays as $lagbarangay)
+                                                        <option value="{{ $lagbarangay['id']}}">{{ $lagbarangay['name']}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="row">
+                                        <!-- Company -->
+                                        <div class="col-sm-6 form-group">
+                                            <label>Company</label>
+                                            <input class="form-control" type="text" placeholder="Company" name="company" {{$user->company}}>
+                                        </div>
+                                    </div>
+    
+                                    <div class="row">
+                                        <!-- Number of Farmers -->
+                                        <div class="col-sm-6 form-group">
+                                            <label>Number of Farmers</label>
+                                            <input class="form-control" type="text" placeholder="Number of Farmers" name="no_farmers" {{$user->no_farmers}}> 
+                                        </div>
+                                        <!-- Hectares -->
+                                        <div class="col-sm-6 form-group">
+                                            <label>Hectares</label>
+                                            <input class="form-control" type="text" placeholder="Hectares" name="hectares" {{$user->hectares}}>
+                                        </div>
+                                    </div>
+
+                                    <!-- Change Password -->
+                                    <h5><strong>Change Password</strong></h5>
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group">
+                                            <label>Old Password:</label>
+                                            <input class="form-control" type="password" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-sm-6 form-group">
+                                            <label>New Password:</label>
+                                            <input class="form-control" type="password" placeholder="Password">
+                                        </div>
+                                    </div>
+    
+                                    <!-- Submit Button -->
+                                    <div class="form-group">
+                                        <button class="btn btn-success" type="submit">Submit</button>
+                                    </div>
                                 </form>
+                                @endif
                             </div>
 
                             <!-- Feeds Tab -->
                             <div class="tab-pane fade" id="tab-3">
                                 <h5 class="text-info m-b-20 m-t-20"><i class="fa fa-bullhorn"></i> Latest Feeds</h5>
-                                {{-- <ul class="media-list media-list-divider m-0">
-                                    <li class="media">
-                                        <div class="media-img"><i class="ti-user font-18 text-muted"></i></div>
-                                        <div class="media-body">
-                                            <div class="media-heading">New customer <small class="float-right text-muted">12:05</small></div>
-                                            <div class="font-13">Lorem Ipsum is simply dummy text.</div>
-                                        </div>
-                                    </li>
-                                    <li class="media">
-                                        <div class="media-img"><i class="ti-info-alt font-18 text-muted"></i></div>
-                                        <div class="media-body">
-                                            <div class="media-heading text-warning">Server Warning <small class="float-right text-muted">12:05</small></div>
-                                            <div class="font-13">Lorem Ipsum is simply dummy text.</div>
-                                        </div>
-                                    </li>
-                                    <li class="media">
-                                        <div class="media-img"><i class="ti-announcement font-18 text-muted"></i></div>
-                                        <div class="media-body">
-                                            <div class="media-heading">7 new feedback <small class="float-right text-muted">Today</small></div>
-                                            <div class="font-13">Lorem Ipsum is simply dummy text.</div>
-                                        </div>
-                                    </li>
-                                    <li class="media">
-                                        <div class="media-img"><i class="ti-check font-18 text-muted"></i></div>
-                                        <div class="media-body">
-                                            <div class="media-heading text-success">Issue fixed <small class="float-right text-muted">12:05</small></div>
-                                            <div class="font-13">Lorem Ipsum is simply dummy text.</div>
-                                        </div>
-                                    </li>
-                                    <li class="media">
-                                        <div class="media-img"><i class="ti-shopping-cart font-18 text-muted"></i></div>
-                                        <div class="media-body">
-                                            <div class="media-heading">7 New orders <small class="float-right text-muted">12:05</small></div>
-                                            <div class="font-13">Lorem Ipsum is simply dummy text.</div>
-                                        </div>
-                                    </li>
-                                    <li class="media">
-                                        <div class="media-img"><i class="ti-reload font-18 text-muted"></i></div>
-                                        <div class="media-body">
-                                            <div class="media-heading text-danger">Server warning <small class="float-right text-muted">12:05</small></div>
-                                            <div class="font-13">Lorem Ipsum is simply dummy text.</div>
-                                        </div>
-                                    </li>
-                                </ul> --}}
                                 <ul class="media-list media-list-divider m-0">
                                     <li class="list-group list-group-divider scroller" data-height="400px" data-color="#71808f">
                                         <div>

@@ -108,7 +108,7 @@
 
 
 
-        <!-- Price History -->
+        <!-- Price History Chart-->
         <div class="col-md-6">
             <div class="ibox">
                 <div class="ibox-head">

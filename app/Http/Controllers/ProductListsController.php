@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use Charts;
+use DB;
 
 use App\Notifications\ProductsAdded;
 use Notification;
@@ -79,7 +80,6 @@ class ProductListsController extends Controller
                 ->where('products.id', '=', 1)
                 ->groupby('product_lists.seasons_id', 'type')
                 ->pluck('product_lists.seasons_id');
-        // dd($prod_labels);
 
         // Get price values
         $rice_price = ProductList::join('products', 'product_lists.orig_products_id', '=', 'products.id')
@@ -88,14 +88,13 @@ class ProductListsController extends Controller
                 ->where('products.id', '=', 1)
                 // ->groupby('seasons_id', 'price')
                 ->pluck('price');
-        // dd($price);
+
         $withered_price = ProductList::join('products', 'product_lists.orig_products_id', '=', 'products.id')
                 // ->select('seasons_id', 'price')
                 ->where('users_id', auth()->user()->id)
                 ->where('products.id', '=', 2)
                 // ->groupby('seasons_id', 'price')
                 ->pluck('price');
-
 
          // Price History Chart
          $price_history = Charts::multi('line', 'highcharts')
@@ -133,14 +132,108 @@ class ProductListsController extends Controller
         $products = Product::where('id', '!=', 4)->get();
         $users = User::where('roles_id', 2)->get()->pluck('company');
 
-        // Get rice product average
+        // Get rice product average of the user 
         $rice_prod_ave = ProductList::getRiceProductAverage();
 
-        // Get withered product average
+        // Get withered product average of the user
         $withered_prod_ave = ProductList::getWitheredProductAverage();
-            
 
-        // dd($withered_prod_ave);
+        // Get all rice product average of all farmers
+        $all_rice_prod_ave = ProductList::getAllRiceProductAverage();
+        
+            
+        // Get all withered product average of all farmers
+        $all_withered_prod_ave = ProductList::getAllWitheredProductAverage();
+
+
+
+
+        // Labels
+        $prod_labels = ProductList::join('products', 'product_lists.orig_products_id', '=', 'products.id')
+                ->select('seasons_id', 'type')
+                ->where('users_id', auth()->user()->id)
+                ->where('products.id', '=', 1)
+                ->groupby('product_lists.seasons_id', 'type')
+                ->pluck('product_lists.seasons_id');
+
+        // Get price values
+        $rice_price = ProductList::join('products', 'product_lists.orig_products_id', '=', 'products.id')
+                // ->select('seasons_id', 'price')
+                ->where('users_id', auth()->user()->id)
+                ->where('products.id', '=', 1)
+                // ->groupby('seasons_id', 'price')
+                ->pluck('price');
+                
+        $withered_price = ProductList::join('products', 'product_lists.orig_products_id', '=', 'products.id')
+                // ->select('seasons_id', 'price')
+                ->where('users_id', auth()->user()->id)
+                ->where('products.id', '=', 2)
+                // ->groupby('seasons_id', 'price')
+                ->pluck('price');
+
+         // Price History Chart
+         $price_history = Charts::multi('line', 'highcharts')
+                ->title('Price History')
+                ->labels($prod_labels)
+                // ->template('material')
+                ->elementLabel('Rice Product Prices')
+                ->yAxisTitle("Price")
+                ->xAxisTitle("Season")
+                ->dataset('Rice Products',$rice_price)
+                ->dataset('Withered Products',$withered_price)
+                ->dimensions(500,300)
+                ->responsive(true);
+
+
+        // ------------------------------------------------------------------------------------------------------------------------
+
+        // Seasonal Production Overview
+
+        // Get rice production per season
+        $rice_products = ProductList::where('users_id','=', auth()->user()->id)
+                ->where('orig_products_id','=',1)
+                ->groupBy('seasons_id', 'orig_quantity')
+                ->limit(10)
+                ->pluck('orig_quantity')
+        ;
+        
+        // Get withered rice production per season
+        $withered_products = ProductList::where('users_id','=', auth()->user()->id)
+                ->where('orig_products_id','=',2)
+                ->groupBy('seasons_id', 'orig_quantity')
+                ->limit(10)
+                ->pluck('orig_quantity')
+        ;
+        
+        // Get damaged rice production per season
+        $damaged_products = ProductList::where('users_id','=', auth()->user()->id)
+                ->where('orig_products_id','=',3)
+                ->groupBy('seasons_id', 'orig_quantity')
+                ->limit(10)
+                ->pluck('orig_quantity')
+        ;
+        
+        // Rice production labels
+        $rice_production_label = ProductList::
+                where('users_id','=', auth()->user()->id)
+                ->where('orig_products_id','=',1)
+                ->limit(10)
+                ->get()
+                ->pluck('seasons_id')
+        ;
+
+        // Rice Production Line Chart
+        $rice_production_line = Charts::multi('line', 'highcharts')
+            ->title('Seasonal Production')
+            ->yAxisTitle('Quantity')
+            ->xAxisTitle('Season')
+            ->labels($rice_production_label)
+            ->dataset('Rice Products',$rice_products)
+            ->dataset('Withered Products',$withered_products)
+            ->dataset('Damaged Products',$damaged_products)
+            ->dimensions(1000,500)
+            ->responsive(true)
+        ;
 
         return view('farmer.product_lists.create')
             ->with('users', $users)
@@ -148,6 +241,10 @@ class ProductListsController extends Controller
             ->with('products', $products)
             ->with('rice_prod_ave', $rice_prod_ave)
             ->with('withered_prod_ave', $withered_prod_ave)
+            ->with('all_rice_prod_ave', $all_rice_prod_ave)
+            ->with('all_withered_prod_ave', $all_withered_prod_ave)
+            ->with('price_history', $price_history)
+            ->with('rice_production_line', $rice_production_line)
             ;
     }
 

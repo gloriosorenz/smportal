@@ -8,6 +8,10 @@ use App\Order;
 use App\OrderProduct;
 use App\User;
 use App\SeasonList;
+use App\Barangay;
+use App\Province;
+use App\City;
+use App\Region;
 
 use DB;
 use Carbon\Carbon;
@@ -23,6 +27,12 @@ class ProfilesController extends Controller
     {
         // Farmers Info
         $user = User::where('id', auth()->user()->id)->first();
+
+        // For farmers
+        $lagunabarangays = Barangay::where('cities_id','=', 43428)->whereNotIn('id', array(11218, 11219, 11223,11224,11225,11228))->get();
+        $calabarzon = Region::where('id','=', 4)->get();
+        $starosa = City::where('id','=', 433)->get();
+        $laguna = Province::where('id','=',19)->get();
     
 
         // Count total seasons of farmer
@@ -57,6 +67,10 @@ class ProfilesController extends Controller
             ->with('transactions', $transactions)
             ->with('orders', $orders)
             ->with('monthly_income', $monthly_income)
+            ->with('lagunabarangays', $lagunabarangays)
+            ->with('calabarzon', $calabarzon)
+            ->with('laguna',$laguna)
+            ->with('starosa',$starosa)
             ;
     }
 

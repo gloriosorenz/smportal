@@ -10,6 +10,7 @@ use App\Product;
 use App\Season;
 use App\OrderProduct;
 use App\User;
+use App\Order;
 
 use DarkSkyApi;
 use Charts;
@@ -32,13 +33,15 @@ class DashboardController extends Controller
         // ------------------------------------------------------------------------------------------------------------------------
 
         $forecast = DarkSkyApi::location(14.2843, 121.0889)
-            ->units('si')
-            ->forecast(['currently', 'daily']);
+            ->units('ca')
+            ->forecast(['currently', 'daily', 'alerts', 'hourly']);
 
         $daily = $forecast->daily()->data();
+        $currently = $forecast->currently();
+        $hourly = $forecast->hourly();
+        $alerts = $forecast->alerts();
 
-        $alerts = $forecast->alerts('severity');
-
+        // dd($daily);
         // ------------------------------------------------------------------------------------------------------------------------
 
         // ------------------------------------------------------------------------------------------------------------------------
@@ -51,8 +54,9 @@ class DashboardController extends Controller
             ->whereMonth('created_at', Carbon::now()->month)
             ->get();
 
-
-
+        $all_transactions = OrderProduct::whereYear('created_at', Carbon::now()->year)
+            ->whereMonth('created_at', Carbon::now()->month)
+            ->get();
 
 
         // ------------------------------------------------------------------------------------------------------------------------
@@ -88,11 +92,67 @@ class DashboardController extends Controller
             ->responsive(true);
 
         // ------------------------------------------------------------------------------------------------------------------------
+
+        // Most Valuable Customer Bar Chart (for all farmers)
+        $mvc = DB::table('orders')
+            ->where('order_statuses_id','=',2)
+            ->selectRaw('COUNT(orders.id) as orders')
+            ->groupBy('users_id')
+            ->orderBy('users_id')
+            ->pluck('orders')
+            ;
+        // dd($mvc);
+
+        $mvcbarlabel =  DB::table('orders')
+                ->join('users', 'orders.users_id', '=', 'users.id')
+                ->where('order_statuses_id','=',2)
+                ->groupBy('users.id','name')
+                ->orderBy('users.id')
+                ->selectRaw('CONCAT(users.first_name, users.last_name) AS name')
+                ->pluck('name')
+                // ->get();
+                ;
+
+        // dd($mvcbarlabel);
+
+        $mvcbarchart = Charts::create('bar', 'highcharts')
+                ->title('Customer with Most Orders')
+                ->labels($mvcbarlabel)
+                ->values($mvc)
+                ->elementLabel('Number of Orders')
+                ->dimensions(1000, 500)
+                ->responsive(true)
+                ;
+
+        // ------------------------------------------------------------------------------------------------------------------------
+
+        // Best Selling Farmer Bar Chart
+
+        $bestfarmer = OrderProduct::where('order_product_statuses_id','=',3)
+                ->selectRaw('sum(quantity) as sum')
+                ->groupBy('farmers_id')
+                ->pluck('sum')
+                ;
         
 
+        $bestfarmerlbl =  OrderProduct::join('users', 'order_products.farmers_id', '=', 'users.id')
+                ->groupBy('farmers_id', 'users.company')
+                ->selectRaw('users.company')
+                ->where('order_product_statuses_id','=',3)
+                ->pluck('users.company')
+                ;
+
+        // dd($bestfarmerlbl);
 
 
-
+        $bestfarmerbarchart = Charts::create('bar', 'highcharts')
+                ->title('Best Selling Farmer')
+                ->labels($bestfarmerlbl)
+                ->values($bestfarmer)
+                ->elementLabel('Number of Product Orders')
+                ->dimensions(1000, 500)
+                ->responsive(true)
+                ;
 
 
         // ------------------------------------------------------------------------------------------------------------------------
@@ -176,7 +236,6 @@ class DashboardController extends Controller
             ->pluck('sum')
         ;
 
-        // dd($withersoldperse);
 
         // Products sold per season labels
         $prodsoldperselbl = DB::table('product_lists')
@@ -198,6 +257,46 @@ class DashboardController extends Controller
             ->responsive(true)
         ;
 
+        // ------------------------------------------------------------------------------------------------------------------------
+
+         // Farmer's Most Valuable Customer Bar Chart (for farmer)
+         $fmvc = DB::table('order_products')
+            ->join('orders', 'order_products.orders_id', '=', 'orders.id')
+            ->where('order_product_statuses_id','=',3)
+            ->where('farmers_id', auth()->user()->id)
+            ->groupBy('users_id')
+            ->orderBy('orders', 'desc')
+            ->selectRaw('COUNT(order_products.id) as orders')
+            ->pluck('orders')
+            // ->get()
+            ;
+        // dd($fmvc);
+
+        $fmvcbarlabel =  DB::table('order_products')
+            ->join('orders', 'order_products.orders_id', '=', 'orders.id')
+            ->join('users', 'orders.users_id', '=', 'users.id')
+            ->where('order_product_statuses_id','=',3)
+            ->where('farmers_id', auth()->user()->id)
+            ->groupBy('users_id', 'name')
+            ->orderBy('orders', 'desc')
+            ->selectRaw('CONCAT(first_name, last_name) AS name, COUNT(order_products.id) as orders')
+            ->pluck('name')
+            // ->get()
+            ;
+
+        // dd($fmvcbarlabel);
+
+        $fmvcbarchart = Charts::create('bar', 'highcharts')
+            ->title('Customer with Most Orders')
+            ->labels($fmvcbarlabel)
+            ->values($fmvc)
+            ->elementLabel('Number of Orders')
+            ->dimensions(1000, 500)
+            ->responsive(true)
+            ;
+
+        // ------------------------------------------------------------------------------------------------------------------------
+
 
 
         return view('dashboard')
@@ -205,10 +304,16 @@ class DashboardController extends Controller
             ->with('forecast', $forecast)
             ->with('alerts', $alerts)
             ->with('daily', $daily)
+            ->with('hourly', $hourly)
+            ->with('currently', $currently)
             ->with('total_prod_per', $total_prod_per)
             ->with('rice_production_line', $rice_production_line)
             ->with('orderlinechart', $orderlinechart)
+            ->with('mvcbarchart', $mvcbarchart)
+            ->with('fmvcbarchart', $fmvcbarchart)
+            ->with('bestfarmerbarchart', $bestfarmerbarchart)
             ->with('transactions', $transactions)
+            ->with('all_transactions', $all_transactions)
             ;
     }
 

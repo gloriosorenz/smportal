@@ -56,7 +56,15 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('/markAsRead', function () {
             auth()->user()->unreadNotifications->markAsRead(); 
         });
-        
+
+    
+    // Dynamic Modal
+    // Route::get('dynamicModal/{id}',[
+    //     'as'=>'dynamicModal',
+    //     'uses'=> 'OrderProductsController@loadModal'
+    // ]);
+    Route::get('dynamicModal/{id}', 'OrderProductsController@loadModal')->name('dynamicModal');
+
 
     //Profile
     Route::get('/profile', 'ProfilesController@index')->name('profile');

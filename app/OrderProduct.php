@@ -5,11 +5,13 @@ namespace App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Season;
+
 class OrderProduct extends Model
 {
     protected $table = 'order_products';
 
-    protected $fillable = ['orders_id', 'product_lists_id', 'quantity','order_product_statuses_id', 'farmers_id'];
+    protected $fillable = ['orders_id', 'product_lists_id', 'quantity','order_product_statuses_id', 'farmers_id', 'receipt'];
 
 
     public function orders()
@@ -61,6 +63,13 @@ class OrderProduct extends Model
     public static function cancelledOrderProducts(){
         return $pending = OrderProduct::where('farmers_id', auth()->user()->id)
                 ->where('order_product_statuses_id', 4)
+                ->get();
+    }
+
+    // Get all order products for current season
+    public static function currentSeasonOrderProducts(){
+        return $current_season_order_products = OrderProduct::join('product_lists', 'order_products.product_lists_id', '=', 'product_lists_id')
+                ->where('seasons_id', Season::getLatestSeason())
                 ->get();
     }
 }

@@ -21,58 +21,9 @@
     
             <!-- If user is a Farmer -->
             @if (auth()->user()->roles_id == 2)
-            <!-- Price Statistics -->
+           
             <div class="row">
-                <!-- Rice Product Average -->
-                <div class="col-lg-3 col-md-6">
-                    <div class="ibox bg-info color-white widget-stat">
-                        <div class="ibox-body">
-                            <h2 class="m-b-5 font-strong">{{ presentPrice($rice_prod_ave) }}</h2>
-                            <div class="m-b-5">Rice Product Average Price</div>
-                            {{-- <div><i class="fa fa-level-up m-r-5"></i><small>25% higher</small></div> --}}
-                        </div>
-                    </div>
-                </div>
-                <!-- Withered Product Average -->
-                <div class="col-lg-3 col-md-6">
-                    <div class="ibox bg-info color-white widget-stat">
-                        <div class="ibox-body">
-                            <h2 class="m-b-5 font-strong">{{ presentPrice($withered_prod_ave) }}</h2>
-                            <div class="m-b-5">Withered Product Average Price</div>
-                            {{-- <div><i class="fa fa-level-up m-r-5"></i><small>17% higher</small></div> --}}
-                        </div>
-                    </div>
-                </div>
-                {{-- <!-- Total Income -->
-                <div class="col-lg-3 col-md-6">
-                    <a href="#">
-                        <div class="ibox bg-warning color-white widget-stat">
-                            <div class="ibox-body">
-                                <h2 class="m-b-5 font-strong">$1570</h2>
-                                <div class="m-b-5">TOTAL INCOME</div><i class="fas fa-money-bill widget-stat-icon"></i>
-                                <div><i class="fa fa-level-up m-r-5"></i><small>22% higher</small></div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <!-- New Users -->
-                <div class="col-lg-3 col-md-6">
-                    <a href="#">
-                        <div class="ibox bg-danger color-white widget-stat">
-                            <div class="ibox-body">
-                                <h2 class="m-b-5 font-strong">108</h2>
-                                <div class="m-b-5">NEW USERS</div><i class="ti-user widget-stat-icon"></i>
-                                <div><i class="fa fa-level-down m-r-5"></i><small>-12% Lower</small></div>
-                            </div>
-                        </div>
-                    </a>
-                </div> --}}
-            </div>
-
-
-
-            <!-- Add Products -->
-            <div class="row">
+                <!-- Add Products -->
                 <div class="col-md-8">
                     <div class="ibox">
                         <div class="ibox-head">
@@ -129,8 +80,110 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Price Statistics -->
+                <div class="col-md-4">
+                    <!-- Rice Product Average -->
+                    <div class="ibox bg-info color-white widget-stat">
+                        <div class="ibox-body">
+                            <h2 class="m-b-5 font-strong">{{ presentPrice($rice_prod_ave) }}</h2>
+                            <div class="m-b-5">Your Rice Product Average Price</div>
+                        </div>
+                    </div>
+                    <!-- Withered Product Average -->
+                    <div class="ibox bg-info color-white widget-stat">
+                        <div class="ibox-body">
+                            <h2 class="m-b-5 font-strong">{{ presentPrice($withered_prod_ave) }}</h2>
+                            <div class="m-b-5">Your Withered Product Average Price</div>
+                        </div>
+                    </div>
+                    <!-- All Rice Product Average -->
+                    <div class="ibox bg-warning color-white widget-stat">
+                        <div class="ibox-body">
+                            <h2 class="m-b-5 font-strong">{{ presentPrice($all_rice_prod_ave) }}</h2>
+                            <div class="m-b-5">All Rice Product Average Price</div>
+                        </div>
+                    </div>
+                    <!-- All Withered Product Average -->
+                    <div class="ibox bg-warning color-white widget-stat">
+                        <div class="ibox-body">
+                            <h2 class="m-b-5 font-strong">{{ presentPrice($all_withered_prod_ave) }}</h2>
+                            <div class="m-b-5">All Withered Product Average Price</div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
+
+            <!-- Price History Chart-->
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-head">
+                            <div class="ibox-title">Price History</div>
+                            <div class="ibox-tools">
+                                <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item">option 1</a>
+                                    <a class="dropdown-item">option 2</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ibox-body">
+                            <!-- Start Form -->
+                            <div class="flexbox mb-4">
+                                {!! Charts::styles() !!}
+                                <div class="container">
+                                    <div class="app">
+                                        <center>
+                                            {!! $price_history->html() !!}
+                                        </center>
+                                    </div>
+                                </div>
+                                <!-- End Of Main Application -->
+                                {!! Charts::scripts() !!}
+                                {!! $price_history->script() !!}
+                            </div>
+                            <!-- End Form -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEASONAL RICE PRODUCTION -->
+                <div class="col-lg-6">
+                    <div class="ibox">
+                        <div class="ibox-head">
+                            <div class="ibox-title">Production Overview for Season</div>
+                            <div class="ibox-tools">
+                                <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item">option 1</a>
+                                    <a class="dropdown-item">option 2</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ibox-body">
+                            <div class="flexbox mb-4">
+                                {!! Charts::styles() !!}
+                                <div class="container">
+                                    <div class="app">
+                                        <center>
+                                            {!! $rice_production_line->html() !!}
+                                        </center>
+                                    </div>
+                                </div>
+                                    <!-- End Of Main Application -->
+                                    {!! Charts::scripts() !!}
+                                    {!! $rice_production_line->script() !!}
+                            </div>
+                            {{-- <div>
+                                <canvas id="bar_chart" style="height:260px;"></canvas>
+                            </div> --}}
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 

@@ -4,8 +4,14 @@
 <div class="bg0 m-t-84 p-b-140">
         <div class="container">
 
-           
+                <p>{{ date('l', $current->time()) }}</p>
+                <p>{{ date('F j', $current->time()) }}</p>
+                <p>Windspeed: {{ $current->windspeed() }}</p>
 
+                <p>Forecast in 3 days:</p>
+                <p>{{ date('l', $three_days->time()) }}</p>
+                <p>{{ date('F j', $three_days->time()) }}</p>
+                <p>Windspeed: {{ $three_days->windspeed() }}</p>
 
             <div class="row m-b-50">
                 <!-- WEATHER UPDATES -->

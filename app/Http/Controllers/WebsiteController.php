@@ -14,6 +14,7 @@ use App\Region;
 
 use DB;
 use DarkSkyApi;
+use Carbon\Carbon;
 
 class WebsiteController extends Controller
 {
@@ -191,18 +192,27 @@ class WebsiteController extends Controller
         // Weather forecasat
         // ------------------------------------------------------------------------------------------------------------------------
 
-        $forecast = DarkSkyApi::location(14.2843, 121.0889)
-            ->units('si')
-            ->forecast(['currently', 'daily']);
+        $current = DarkSkyApi::location(14.2843, 121.0889)
+            ->units('ca')
+            ->forecast(['currently', 'daily'])
+            ;
 
-        $daily = $forecast->daily()->data();
-        $current = $forecast->currently();
+        $timemachine = DarkSkyApi::location(14.2843, 121.0889)
+            ->units('ca')
+            ->timeMachine(Carbon::now()->addDays(3)->format('Y-m-d'), ['currently', 'flags']);
+            ;
+        // dd($forecast);
 
-        // dd($current);
+        $daily = $current->daily()->data();
+        $current = $current->currently();
+        $three_days = $timemachine->currently();
+
        
         return view('website.weather')
+                ->with('three_days', $three_days)
                 ->with('current', $current)
                 ->with('daily', $daily);
+                ;
     }
 
 

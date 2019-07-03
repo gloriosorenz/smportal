@@ -63,4 +63,21 @@ class ProductList extends Model
                 ->where('products.id', '=', 2)
                 ->avg('price');
     }
+
+    // Get all rice product average of all farmers
+    public static function getAllRiceProductAverage(){
+        return DB::table('product_lists')->join('users', 'product_lists.users_id', '=', 'users.id')
+                ->join('products', 'product_lists.orig_products_id', '=', 'products.id')
+                ->where('products.id', '=', 1)
+                ->avg('price');
+    }
+    
+    // Get all rice product average of all farmers
+    public static function getAllWitheredProductAverage(){
+        return DB::table('product_lists')->join('users', 'product_lists.users_id', '=', 'users.id')
+                ->join('products', 'product_lists.orig_products_id', '=', 'products.id')
+                ->where('products.id', '=', 2)
+                ->avg('price');
+    }
+
 }

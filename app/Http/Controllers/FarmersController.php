@@ -51,6 +51,21 @@ class FarmersController extends Controller
     }
 
     /**
+     * Temporarily stores user information
+     */
+    // public function getFarmerRequest(Request $request)
+    // {
+    //     $data=array(
+    //         '',
+    //     );
+
+    //     return redirect('website.contact')
+    //         ->with('data', $data)
+    //         ->with('success', 'Request Created')
+    //         ;
+    // }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

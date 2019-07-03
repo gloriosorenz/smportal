@@ -38,9 +38,15 @@
                 </a>
             </li>
             <!-- Orders -->
-            <li>
+            {{-- <li>
                 <a href="{{ route('orders.index') }}"><i class="sidebar-item-icon fas fa-file"></i>
                     <span class="nav-label">Orders</span>
+                </a>
+            </li> --}}
+            <!-- Order Products -->
+            <li class="{{Request:: is('order_products') ? 'active' : ''}}">
+                <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-clipboard-list"></i>
+                    <span class="nav-label">Order Products</span>
                 </a>
             </li>
             <!-- User Management-->
@@ -80,11 +86,11 @@
                     <span class="nav-label">Damage Report</span>
                 </a>
             </li>
-            <li class="{{Request:: is('') ? 'active' : ''}}">
+            {{-- <li class="{{Request:: is('') ? 'active' : ''}}">
                 <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
                     <span class="nav-label">Harvest Report</span>
                 </a>
-            </li>
+            </li> --}}
 
 
 
@@ -113,13 +119,13 @@
             <!-- Season List-->
             <li class="{{Request:: is('season_lists') ? 'active' : ''}}">
                 <a href="{{ route('season_lists.index') }}"><i class="sidebar-item-icon fas fa-list"></i>
-                    <span class="nav-label">Seasons List</span>
+                    <span class="nav-label">Season List</span>
                 </a>
             </li>
             <!-- Products -->
             <li class="{{Request:: is('product_lists') ? 'active' : ''}}">
                 <a href="{{ route('product_lists.index') }}"><i class="sidebar-item-icon fas fa-box"></i>
-                    <span class="nav-label">Products</span>
+                    <span class="nav-label">Product List</span>
                 </a>
             </li>
             <!-- Orders -->
@@ -153,11 +159,11 @@
                     <span class="nav-label">Damage Report</span>
                 </a>
             </li>
-            <li class="{{Request:: is('') ? 'active' : ''}}">
+            {{-- <li class="{{Request:: is('') ? 'active' : ''}}">
                 <a href="{{ route('order_products.index') }}"><i class="sidebar-item-icon fas fa-chart-line"></i>
                     <span class="nav-label">Harvest Report</span>
                 </a>
-            </li>
+            </li> --}}
             
 
             @endif

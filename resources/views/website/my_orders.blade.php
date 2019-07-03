@@ -27,7 +27,7 @@
                             <tr class="active">
                                 <td>{{$p->tracking_id}}</td>
                                 <td>{{$p->created_at->toFormattedDateString()}}</td>
-                                <td>{{ presentPrice($p->total_price) }}</td>
+                                <td>₱ {{ number_format($p->total_price, 2) }}</td>
                                 <td>
                                     <a href="/pdf/invoice/{{$p->id}}" class="btn btn-secondary"><i class="fas fa-download fa-sm text-white"></i></a>
                                 </td>
@@ -64,7 +64,7 @@
                             <tr class="active">
                                 <td>{{$order->tracking_id}}</td>
                                 <td>{{$order->created_at->toFormattedDateString()}}</td>
-                                <td>{{ presentPrice($order->total_price) }}</td>
+                                <td>₱ {{ number_format($order->total_price, 2) }}</td>
                                 <td>
                                     <a href="/pdf/invoice/{{$order->id}}" class="btn btn-secondary"><i class="fas fa-download fa-sm text-white"></i></a>
                                 </td>
@@ -101,7 +101,7 @@
                             <tr class="active">
                                 <td>{{$order->tracking_id}}</td>
                                 <td>{{$order->created_at->toFormattedDateString()}}</td>
-                                <td>{{ presentPrice($order->total_price) }}</td>
+                                <td>₱ {{ number_format($order->total_price, 2) }}</td>
                                 <td>
                                     <a href="/pdf/invoice/{{$order->id}}" class="btn btn-secondary"><i class="fas fa-download fa-sm text-white"></i></a>
                                 </td>

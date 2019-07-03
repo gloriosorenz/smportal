@@ -112,36 +112,41 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="invoice-logo">
-                                <img src="/img/admin-avatar.png" height="65px" />
+                                <h2>Invoice #</h2>
                             </div>
                             <div>
                                 <div class="m-b-5"><strong>Invoice from</strong></div>
-                                <div>Github, Inc.</div>
+                                <div>Samahan ng Magsasaka sa Santa Rosa Laguna</div>
                                 <ul class="list-unstyled m-t-10">
                                     <li class="m-b-5">
-                                        <strong>A:</strong> San Francisco, CA 94103 Market Street</li>
+                                        <strong>A:</strong> City Agricultural Office 
+                                        2F Cityhall B, City Govenment Center
+                                        Santa Rosa City, Laguna</li>
                                     <li class="m-b-5">
-                                        <strong>E:</strong> adminca@exmail.com</li>
+                                        <strong>E:</strong> cityagricultureoffice_csrl@yahoo.com</li>
                                     <li>
-                                        <strong>P:</strong> (123) 456-2112</li>
+                                        <strong>P:</strong> 049 530 0015</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-md-6 text-right">
                             <div class="clf" style="margin-bottom:150px;">
-                                <dl class="row pull-right" style="width:250px;"><dt class="col-sm-6">Invoice Date</dt>
-                                    <dd class="col-sm-6">10 April 2017</dd><dt class="col-sm-6">Issue Date</dt>
-                                    <dd class="col-sm-6">30 April 2017</dd><dt class="col-sm-6">Account No.</dt>
-                                    <dd class="col-sm-6">1450012</dd>
+                                <dl class="row pull-right" style="width:250px;">
+                                    <dt class="col-sm-6">Invoice Date</dt>
+                                        <dd class="col-sm-6">{{ $order_date->englishMonth }} {{ $order_date->day }}, {{$order_date->year}}</dd>
+                                    <dt class="col-sm-6">Issue Date</dt>
+                                        <dd class="col-sm-6">{{ $order_date->englishMonth }} {{ $order_date->day }}, {{$order_date->year}}</dd>
+                                    {{-- <dt class="col-sm-6">Account No.</dt>
+                                        <dd class="col-sm-6">1450012</dd> --}}
                                 </dl>
                             </div>
                             <div>
                                 <div class="m-b-5"><strong>Invoice To</strong></div>
                                 <div>{{auth()->user()->first_name}} {{auth()->user()->last_name}}</div>
                                 <ul class="list-unstyled m-t-10">
-                                    <li class="m-b-5">San Francisco, 548 Market St.</li>
-                                    <li class="m-b-5">emma.johnson@exmail.com</li>
-                                    <li>(123) 279-4058</li>
+                                    <li class="m-b-5">{{ auth()->user()->barangays->name }}, {{ auth()->user()->cities->name }}, {{ auth()->user()->provinces->name }}</li>
+                                    <li class="m-b-5">{{ auth()->user()->email }}</li>
+                                    <li>{{ auth()->user()->phone }}</li>
                                 </ul>
                             </div>
                         </div>

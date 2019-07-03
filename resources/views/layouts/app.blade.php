@@ -138,6 +138,14 @@
                 pageLength: 10,
                 order: [[ 0, 'desc' ]],
             });
+            $('#current_season_order_products').DataTable({
+                pageLength: 10,
+                order: [[ 0, 'desc' ]],
+            });
+            $('#all_order_products').DataTable({
+                pageLength: 10,
+                order: [[ 0, 'desc' ]],
+            });
             // Products Tables
             $('#user_products').DataTable({
                 pageLength: 3,
@@ -167,7 +175,11 @@
                 pageLength: 10,
                 order: [[ 0, 'desc' ]],
             });
-
+            // Season Lists
+            $('#all_season_lists_table').DataTable({
+                pageLength: 10,
+                order: [[ 1, 'desc' ]],
+            });
 
 
             
@@ -209,6 +221,17 @@
             $.get('/markAsRead')
         }
     </script>
+
+
+    <script>
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+
+
     <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
 
 

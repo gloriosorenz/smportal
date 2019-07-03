@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\OrderProduct;
 use Carbon\Carbon;
 use App\User;
+use App\Season;
 // use App\Http\Controllers\Mail;
 
 use Notification;
@@ -36,13 +37,96 @@ class OrderProductsController extends Controller
         $cancelled = OrderProduct::cancelledOrderProducts();
 
         // Get all order products
+        // $order_products = OrderProduct::all();
+
+        // Get all order products for current season
         $order_products = OrderProduct::all();
+
+        $latest_season = Season::getLatestSeason();
+
+        $current_season_order_products = OrderProduct::join('product_lists', 'order_products.product_lists_id', '=', 'product_lists_id')
+            ->where('seasons_id', '=', $latest_season->id)
+            ->get();
+
 
         return view('farmer.order_products.index')
             ->with('pending', $pending)
             ->with('confirmed', $confirmed)
             ->with('paid', $paid)
-            ->with('cancelled', $cancelled);
+            ->with('cancelled', $cancelled)
+            ->with('order_products', $order_products)
+            ->with('current_season_order_products', $current_season_order_products)
+            ->with('latest_season', $latest_season)
+            ;
+    }
+
+    public function loadModal($id)
+    {
+        $order_product = OrderProduct::findOrFail($id);
+        // write your process if any
+        return view('farmer.order_products.view_product', ['data'=>$order_product])
+        // ->with('order_product', $order_product)
+        ;
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $order_product = OrderProduct::findOrFail($id);
+
+        return view('farmer.order_products.index')
+            ->with('order_product', $order_product)
+        ;
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * Order is now paid
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        // Validation
+        $request->validate([
+            'receipt' => 'image|nullable|max:1999'
+        ]);
+
+        // Handle file upload
+        if($request->hasFile('logo')){
+        // Get filename with extension
+        $filenameWithExt = $request->file('logo')->getClientOriginalName();
+        // Get just filename 
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        // Get just extension
+        $extension = $request->file('logo')->getClientOriginalExtension();
+        // Filename to store 
+        $fileNameToStore = $filename.'_'.time().'.'.$extension;
+        // Upload image
+        $path = $request->file('logo')->storeAs('public/logos/', $fileNameToStore);
+        } else {
+            $fileNameToStore = 'noimage.jpeg';
+        };
+
+
+        $order = OrderProduct::findOrFail($request->order_product_id);
+        $order->order_product_statuses_id = 3;
+        $order->receipt = $fileNameToStore;
+        $order->save();
+
+       // Notification
+       $customer = $order->orders->users;
+       Notification::send($customer, new OrderPaid());
+
+    
+
+    return redirect()->route('order_products.index')->with('success','Order Paid ');
     }
 
 
@@ -87,17 +171,40 @@ class OrderProductsController extends Controller
         return redirect()->back()->with('success', 'Order Cancelled');
     }
 
-    public function paid_order(Request $request, $id){
-        $order = OrderProduct::findOrFail($id);
-        $order->order_product_statuses_id = 3;
-        $order->save();
+    // public function paid_order(Request $request, $id){
+    //     // Validation
+    //     $request->validate([
+    //         'receipt' => 'image|nullable|max:1999'
+    //     ]);
 
-       // Notification
-       $customer = $order->orders->users;
-       Notification::send($customer, new OrderPaid());
+    //     // Handle file upload
+    //     if($request->hasFile('logo')){
+    //     // Get filename with extension
+    //     $filenameWithExt = $request->file('logo')->getClientOriginalName();
+    //     // Get just filename 
+    //     $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+    //     // Get just extension
+    //     $extension = $request->file('logo')->getClientOriginalExtension();
+    //     // Filename to store 
+    //     $fileNameToStore = $filename.'_'.time().'.'.$extension;
+    //     // Upload image
+    //     $path = $request->file('logo')->storeAs('public/logos/', $fileNameToStore);
+    //     } else {
+    //         $fileNameToStore = 'noimage.jpeg';
+    //     };
 
-        return redirect()->back()->with('success', 'Order Paid');
-    }
+
+    //     $order = OrderProduct::findOrFail($id);
+    //     $order->order_product_statuses_id = 3;
+    //     $order->receipt = $fileNameToStore;
+    //     $order->save();
+
+    //    // Notification
+    //    $customer = $order->orders->users;
+    //    Notification::send($customer, new OrderPaid());
+
+    //     return redirect()->back()->with('success', 'Order Paid');
+    // }
 
     public function pending_order(Request $request, $id){
         $order = OrderProduct::findOrFail($id);

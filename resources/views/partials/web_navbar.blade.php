@@ -141,7 +141,12 @@
 								</li>
 								<!-- Cart -->
 								<li class="nav-item">
-									<a class="nav-link" href="{{ url('cart') }}"><i class="fas fa-shopping-cart"></i> ({{ Cart::content()->count() }})</a>
+									<a class="nav-link" href="{{ url('cart') }}">
+										<i class="fas fa-shopping-cart"></i> 
+										@if( Cart::content()->count() > 0)
+											<span class="badge badge-danger badge-circle m-b-5">{{ Cart::content()->count() }}</span>
+										@endif
+									</a>
 								</li>
 								<!-- Login -->
 								<li class="nav-item dropdown">

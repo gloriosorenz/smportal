@@ -36,11 +36,16 @@ class SeasonListsController extends Controller
                     ->get()
                     ->count();
 
+
+        $all_season_lists = SeasonList::all();
+
         // dd($season_lists);
         return view('farmer.season_lists.index')
             ->with('season_lists', $season_lists)
+            ->with('all_season_lists', $all_season_lists)
             ->with('active', $active)
-            ->with('farmers', $farmers);
+            ->with('farmers', $farmers)
+            ;
 
     }
 
@@ -53,9 +58,14 @@ class SeasonListsController extends Controller
     {
         $season_lists = SeasonList::where('users_id', auth()->user()->id)
                     ->get();
+        $users = User::getAllFarmers();
+
         return view('farmer.season_lists.create')
-            ->with('season_lists', $season_lists);
+            ->with('season_lists', $season_lists)
+            ->with('users', $users)
+            ;
     }
+    
 
     /**
      * Store a newly created resource in storage.
@@ -80,7 +90,7 @@ class SeasonListsController extends Controller
         foreach($request->planned_hectares as $key => $value) {
             $data=array(
                         'seasons_id' => $season->id,
-                        'users_id'=> auth()->user()->id,
+                        'users_id'=> $request->users_id [$key],
                         'planned_hectares'=>$request->planned_hectares [$key],
                         'planned_num_farmers'=>$request->planned_num_farmers [$key],
                         'planned_qty'=>$request->planned_qty [$key],
