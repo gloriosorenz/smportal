@@ -5,6 +5,32 @@
 <div class="bg0 m-t-84 p-b-140">
 
     <div class="container">
+
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pending-tab" data-toggle="tab" href="#pending" role="tab" aria-controls="pending" aria-selected="true">Pending</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="completed-tab" data-toggle="tab" href="#completed" role="tab" aria-controls="completed" aria-selected="false">Completed</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="cancelled-tab" data-toggle="tab" href="#cancelled" role="tab" aria-controls="cancelled" aria-selected="false">Cancelled</a>
+            </li>
+
+
+            </ul>
+                <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="pending" role="tabpanel" aria-labelledby="pending-tab">
+
+                </div>
+                <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="completed-tab">
+
+                </div>
+                <div class="tab-pane fade" id="cancelled" role="tabpanel" aria-labelledby="cancelled-tab">
+
+                </div>
+            </div>
+            
         <!-- Pending Orders Datatable -->
         <div class="card shadow mt-5 mb-4 ">
             <div class="card-header py-3 bg-warning text-white">

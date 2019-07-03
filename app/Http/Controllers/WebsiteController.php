@@ -11,10 +11,13 @@ use App\Province;
 use App\City;
 use App\Role;
 use App\Region;
+use App\Product;
+use App\OrderProduct;
 
 use DB;
 use DarkSkyApi;
 use Carbon\Carbon;
+use Gmopx\LaravelOWM\LaravelOWM;
 
 class WebsiteController extends Controller
 {
@@ -34,6 +37,7 @@ class WebsiteController extends Controller
             ->count();
 
         
+        // dd($clients);
         $products = Product::where('id', '!=', 3)
         ->where('id','!=',4)
         ->get();
@@ -61,7 +65,7 @@ class WebsiteController extends Controller
             $wind = $f->wind->speed;
             // $wind = $f->wind;
             strval($wind);
-            dd($wind);
+            // dd($wind);
 
             // $was = $f->wind;
 

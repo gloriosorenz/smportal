@@ -170,6 +170,7 @@ class FarmersController extends Controller
         $farmer->company = $request->input('company');
         $farmer->no_farmers = $request->input('no_farmers');
         $farmer->hectares = $request->input('hectares');
+        $user->active = true;
         $farmer->save();
 
         // dd($farmer);

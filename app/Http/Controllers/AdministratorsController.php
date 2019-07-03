@@ -134,6 +134,7 @@ class AdministratorsController extends Controller
         // $user->provinces_id = $request->input('province');
 
         $user->company = $request->input('company');
+        $user->active = true;
         $user->save();
 
         // dd($user);

@@ -71,7 +71,7 @@ class CustomersController extends Controller
             // 'city' => 'required',
             // 'province' => 'required',
             'company' => 'required|string|max:255',
-            'active' => true,
+            // 'active' => true,
 
         ]);
 
@@ -89,6 +89,7 @@ class CustomersController extends Controller
 
         $user->company = $request->input('company');
         $user->password = Hash::make($password);
+        $user->active = true;
         $user->roles_id = 3;
         $user->save();
 

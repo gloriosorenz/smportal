@@ -11,10 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('website');
-});
+// Route::get('/', function () {
+//     return view('website');
+// });
 
+Route::get('/','WebsiteController@index');
 
 
 // Cart aand shop
