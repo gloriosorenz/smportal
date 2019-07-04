@@ -37,6 +37,23 @@ class WebsiteController extends Controller
             ->whereNotIn('id', array(11218, 11219, 11223,11224,11225,11228))
             ->count();
 
+        // // Automated withering products
+        // $pro = ProductList::where('harvest_date', '<', Carbon::now()->addDays(7))
+        // ->where('curr_products_id','=', 1)
+        // ->get();
+
+        // foreach($pro as $pr){
+        //         $pr->update(['curr_products_id' => 2]);
+        // }
+
+        //  //Automated damaged products
+        //  $pro = ProductList::where('harvest_date', '<', Carbon::now()->addDays(7))
+        //  ->where('curr_products_id','=', 2)
+        //  ->get();
+ 
+        //  foreach($pro as $pr){
+        //          $pr->update(['curr_products_id' => 3]);
+        //  }
         
         // dd($clients);
         $products = Product::where('id', '!=', 3)
