@@ -18,7 +18,7 @@
 
     <div class="row">
         <!-- Input farmer's hectares and no. of farmers -->
-        <div class="col-md-6">
+        <div class="offset-lg-3 col-md-6 offset-lg-3">
             <div class="ibox">
                 <div class="ibox-head">
                     <div class="ibox-title">Farmer Season {{$season_list->seasons->id}}</div>

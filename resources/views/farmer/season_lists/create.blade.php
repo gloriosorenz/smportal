@@ -83,15 +83,10 @@
                     <div class="ibox-title">Farmer Info</div>
                     <div class="ibox-tools">
                         <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
-                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item">option 1</a>
-                            <a class="dropdown-item">option 2</a>
-                        </div>
                     </div>
                 </div>
                 <div class="ibox-body">
-                    <table class="table table-bordered table-hover" cellspacing="0" width="100%">
+                    <table class="table table-bordered" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>Hectares</th>
@@ -187,9 +182,9 @@
                                                     @endforeach
                                             </select>
                                         </td>
-                                        <td><input type="text" class="form-control" name="planned_hectares[]" step="0.1" min="1" max="{{ $value->hectares }}"/></td>
-                                        <td><input type="text" class="form-control" name="planned_num_farmers[]" step="0.1" min="1" max="{{ $value->no_farmers }}" /></td>
-                                        <td><input type="text" class="form-control" name="planned_qty[]" value="" /></td>
+                                        <td><input type="number" class="form-control" name="planned_hectares[]" step="0.1" min="1" max="{{ $value->hectares }}"/></td>
+                                        <td><input type="number" class="form-control" name="planned_num_farmers[]" step="1" min="1" max="{{ $value->no_farmers }}"/></td>
+                                        <td><input type="number" class="form-control" name="planned_qty[]" value="" step="1" min="1"/></td>
                                         <td><input type="button" class="btn btn-danger remove" value="x"></td>
                                     </tr>
                                 </tbody>

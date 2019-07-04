@@ -79,7 +79,7 @@ class OrderProductsController extends Controller
     {
         $order_product = OrderProduct::findOrFail($id);
 
-        return view('farmer.order_products.index')
+        return view('farmer.order_products.show')
             ->with('order_product', $order_product)
         ;
     }

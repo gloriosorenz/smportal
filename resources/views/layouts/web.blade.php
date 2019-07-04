@@ -40,6 +40,7 @@
     <link href="{{ asset('vendors/slick/slick.css') }}" rel="stylesheet">
     <link href="{{ asset('vendors/MagnificPopup/magnific-popup.css') }}" rel="stylesheet">
     <link href="{{ asset('vendors/perfect-scrollbar/perfect-scrollbar.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendors/DataTables/datatables.min.css') }}" rel="stylesheet">
 
 
     <!--  Theme Styles -->
@@ -110,46 +111,46 @@
     <!--===============================================================================================-->
     <script type="text/javascript" src="{{ asset('vendors/isotope/isotope.pkgd.min.js') }}"></script>
     <!--===============================================================================================-->
-        <script src="vendors/sweetalert/sweetalert.min.js"></script>
-        <script>
-            $('.js-addwish-b2').on('click', function(e){
-                e.preventDefault();
-            });
-    
-            $('.js-addwish-b2').each(function(){
-                var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-                $(this).on('click', function(){
-                    swal(nameProduct, "is added to wishlist !", "success");
-    
-                    $(this).addClass('js-addedwish-b2');
-                    $(this).off('click');
-                });
-            });
-    
-            $('.js-addwish-detail').each(function(){
-                var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
-    
-                $(this).on('click', function(){
-                    swal(nameProduct, "is added to wishlist !", "success");
-    
-                    $(this).addClass('js-addedwish-detail');
-                    $(this).off('click');
-                });
-            });
-    
-            /*---------------------------------------------*/
-    
-            $('.js-addcart-detail').each(function(){
-                var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-                $(this).on('click', function(){
-                    swal(nameProduct, "is added to cart !", "success");
-                });
-            });
-        
-        </script>
-    <!--===============================================================================================-->
-    <script src="vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="{{ asset('vendors/sweetalert/sweetalert.min.js') }}"></script>
     <script>
+        $('.js-addwish-b2').on('click', function(e){
+            e.preventDefault();
+        });
+
+        $('.js-addwish-b2').each(function(){
+            var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+            $(this).on('click', function(){
+                swal(nameProduct, "is added to wishlist !", "success");
+
+                $(this).addClass('js-addedwish-b2');
+                $(this).off('click');
+            });
+        });
+
+        $('.js-addwish-detail').each(function(){
+            var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+
+            $(this).on('click', function(){
+                swal(nameProduct, "is added to wishlist !", "success");
+
+                $(this).addClass('js-addedwish-detail');
+                $(this).off('click');
+            });
+        });
+
+        /*---------------------------------------------*/
+
+        $('.js-addcart-detail').each(function(){
+            var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+            $(this).on('click', function(){
+                swal(nameProduct, "is added to cart !", "success");
+            });
+        });
+    
+    </script>
+    <!--===============================================================================================-->
+    <script type="text/javascript" src="{{ asset('vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+    <script type="text/javascript">
         $('.js-pscroll').each(function(){
             $(this).css('position','relative');
             $(this).css('overflow','hidden');
@@ -165,10 +166,35 @@
         });
     </script>
     <!--===============================================================================================-->
-    <script src="js/main.js"></script>
+    <!-- DataTables JS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.18/af-2.3.2/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-1.5.0/sl-1.2.6/datatables.min.css"/>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.18/af-2.3.2/b-1.5.4/b-colvis-1.5.4/b-flash-1.5.4/b-html5-1.5.4/b-print-1.5.4/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.5.0/r-2.2.2/rg-1.1.0/rr-1.2.4/sc-1.5.0/sl-1.2.6/datatables.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            // Order Tables
+            $('#pending_table').DataTable({
+                pageLength: 6,
+                order: [[ 0, 'desc' ]],
+            });
+            $('#completed_table').DataTable({
+                pageLength: 6,
+                order: [[ 0, 'desc' ]],
+            });
+            $('#cancelled_table').DataTable({
+                pageLength: 6,
+                order: [[ 0, 'desc' ]],
+            });
+        })
+    </script>
+    <!--===============================================================================================-->
+    <script src="{{ asset('js/main.js') }}"></script>
+
 
     <!-- CORE SCRIPTS-->
-    {{-- <script src="{{ asset('js/app.min.js') }}" defer></script> --}}
+    <script src="{{ asset('js/app.min.js') }}" defer></script>
     <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
 
 

@@ -19,6 +19,12 @@ class Migrations extends Migration
                 ->references('id')->on('roles')->onDelete('cascade');
         });
 
+        // Foreign keys of Farmer List
+        Schema::table('farmer_lists',function(Blueprint $table){
+            $table->foreign('users_id')
+                ->references('id')->on('users')->onDelete('cascade');
+        });
+
         // Season List
         Schema::table('season_lists',function(Blueprint $table){
             $table->foreign('users_id')

@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 use App\User;
 use App\Season;
 use App\SeasonList;
+use App\ProductList;
+
 use App\Notifications\NewSeasonCreated;
 use Notification;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 use Carbon\Carbon;
 
@@ -22,18 +25,28 @@ class SeasonsController extends Controller
     public function index()
     {
         $seasons = Season::all();
-        $statuses = Season::where('season_statuses_id', '=', 2)->get();
+        $complete = Season::where('season_statuses_id', '=', 2)->get();
+        $latest_season = Season::getLatestSeason();
 
 
         $season_lists = SeasonList::getActiveFarmers();
+        $ongoing_season = Season::getOngoingSeason();
+
+        // Count Products
+        $count = ProductList::where('seasons_id', $latest_season->id)
+                ->count();
 
         // dd($season_lists);
         // $farmers = User::where('roles_id', 2)->paginate(5);
 
         return view('admin.seasons.index')
             ->with('seasons', $seasons)
-            ->with('statuses', $statuses)
-            ->with('season_lists', $season_lists);
+            ->with('complete', $complete)
+            ->with('season_lists', $season_lists)
+            ->with('latest_season', $latest_season)
+            ->with('ongoing_season', $ongoing_season)
+            ->with('count', $count)
+            ;
     }
 
     /**

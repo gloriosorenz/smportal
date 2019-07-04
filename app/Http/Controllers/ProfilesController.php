@@ -12,6 +12,7 @@ use App\Barangay;
 use App\Province;
 use App\City;
 use App\Region;
+use App\FarmerList;
 
 use DB;
 use Carbon\Carbon;
@@ -27,6 +28,9 @@ class ProfilesController extends Controller
     {
         // Farmers Info
         $user = User::where('id', auth()->user()->id)->first();
+
+        // Farmer List
+        $farmers = FarmerList::where('users_id', auth()->user()->id)->get();
 
         // For farmers
         $lagunabarangays = Barangay::where('cities_id','=', 43428)->whereNotIn('id', array(11218, 11219, 11223,11224,11225,11228))->get();
@@ -60,9 +64,10 @@ class ProfilesController extends Controller
             ->whereMonth('created_at', Carbon::now()->month)
             ->get();
 
-        // dd($transactions);
+        // dd($monthly_income);
         return view('profile')
             ->with('user', $user)
+            ->with('farmers', $farmers)
             ->with('season_count', $season_count)
             ->with('transactions', $transactions)
             ->with('orders', $orders)
@@ -92,7 +97,14 @@ class ProfilesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $farmer = new FarmerList;
+        $farmer->first_name = $request->input('first_name');
+        $farmer->last_name = $request->input('last_name');
+        $farmer->users_id = $request->input('users_id');
+        $farmer->save();
+
+        return redirect()->route('profile')->with('success','Farmer Created ');
     }
 
     /**

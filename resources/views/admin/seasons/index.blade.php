@@ -16,44 +16,93 @@
 
 <div class="page-content fade-in-up">
 
+    <!-- Complete Season-->
+    @if ($latest_season->season_statuses_id == 1)
+        @if ($count != 0)
+            {{-- @if (auth()->user()->roles_id == 1) --}}
+                <a class="btn btn-secondary btn-md mb-3" href="/seasons/complete_season/{{$latest_season->id}}">Complete Season {{$latest_season->id}} <i class="fas fa-check"></i></a>
+            {{-- @endif --}}
+        @endif
+    @endif
+
+
     <!-- Create Season -->
-    @if (count($seasons) == count($statuses))
-    <div class="row">
-        <div class="col-md-3">
-            <div class="ibox">
-                <div class="ibox-head">
-                    <div class="ibox-title">Create New Season</div>
-                    <div class="ibox-tools">
-                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
-                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item">option 1</a>
-                            <a class="dropdown-item">option 2</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="ibox-body">
-                    <!-- Start Form -->
-                    <form method="post" action="{{action('SeasonsController@store')}}" enctype="multipart/form-data">
-                    @csrf
-                        <div class="form-group" id="date_1">
-                            <label class="font-normal">Start Date</label>
-                            <div class="input-group date">
-                                <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
-                                <input class="form-control" type="text" name="season_start" value="{{\Carbon\Carbon::today()->toDateString() }}">
+    @if (count($seasons) == count($complete))
+        <div class="row">
+            <div class="col-md-3">
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Create New Season</div>
+                        <div class="ibox-tools">
+                            <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                            <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item">option 1</a>
+                                <a class="dropdown-item">option 2</a>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <button class="btn btn-success btn-block" type="submit">Submit</button>
-                        </div>
-                    </form>
-                    <!-- End Form -->
+                    </div>
+                    <div class="ibox-body">
+                        <!-- Start Form -->
+                        <form method="post" action="{{action('SeasonsController@store')}}" enctype="multipart/form-data">
+                        @csrf
+                            <div class="form-group" id="date_1">
+                                <label class="font-normal">Start Date</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
+                                    <input class="form-control" type="text" name="season_start" value="{{\Carbon\Carbon::now()->format('Y-m-d') }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success btn-block" type="submit">Submit</button>
+                            </div>
+                        </form>
+                        <!-- End Form -->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     @endif
 
+    @if ($latest_season->season_statuses_id == 1)
+        <div class="row">
+            <div class="col-md-4">
+                <div class="ibox">
+                    <div class="ibox-head bg-warning text-white">
+                        <div class="ibox-title">Ongoing Season: Season {{$ongoing_season->id}}</div>
+                        <div class="ibox-tools">
+                            <a class="ibox-collapse"><i class="fa fa-minus text-white"></i></a>
+                        </div>
+                    </div>
+                    <div class="ibox-body">
+                        <!-- Start Form -->
+                        <form method="post" action="{{action('SeasonsController@update', $latest_season->id)}}">
+                        @method('PATCH')
+                        @csrf
+                            <div class="form-group" id="date_1">
+                                <label class="font-normal">Start Date</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
+                                    <input class="form-control" type="text" name="season_start" value="{{ $latest_season->season_start }}">
+                                </div>
+                            </div>
+                            <div class="form-group" id="date_1">
+                                <label class="font-normal">End Date</label>
+                                <div class="input-group date">
+                                    <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
+                                    <input class="form-control" type="text" name="season_end" value="{{ \Carbon\Carbon::now()->format('Y-m-d')  }}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-success btn-block" type="submit">Complete Season</button>
+                            </div>
+                        </form>
+                        <!-- End Form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 
     <div class="row">
         <!-- Seasons -->
@@ -70,11 +119,11 @@
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th>Status</th>
-                                <th>Options</th>
+                                <th class="text-center">Options</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($seasons as $season)
+                            @foreach($complete as $season)
                             <tr>
                                 <td>Season {{ $season->id }}</td>
                                 <td>{{ $season->season_start }}</td>
@@ -86,8 +135,13 @@
                                         <span class="badge badge-success badge-pill">{{ $season->season_statuses->status }}</span>
                                     @endif
                                 </td>
-                                <td>
+                                <td class="text-center">
+                                    @if ($season->season_statuses_id == 1)
+                                    <a href="/seasons/{{$season->id}}/edit" class="btn btn-md btn-success"><i class="fas fa-check fa-sm text-white"></i></a>
+                                    @elseif ($season->season_statuses_id == 2)
                                     <a href="/seasons/{{$season->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
+                                    @endif
+
                                     <a href="/seasons/{{$season->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
                                     <a href="#" class="btn btn-md btn-secondary"> <i class="fas fa-download fa-sm text-white"></i></a>
                                 </td>

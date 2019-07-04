@@ -13,6 +13,7 @@ use App\Role;
 use App\Region;
 use App\Product;
 use App\OrderProduct;
+use App\Order;
 
 use DB;
 use DarkSkyApi;
@@ -155,6 +156,37 @@ class WebsiteController extends Controller
                 ->with('current_weather',$current_weather)
                 ->with('wind',$wind)
         ;
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function view_order($id)
+    {
+        $order = Order::findOrFail($id);
+
+        // $farmers = OrderProduct::where('orders_id', $order->id)
+        //         ->groupBy('farmers_id')
+        //         ->get();
+
+        $farmers = OrderProduct::where('orders_id', $order->id)
+                // ->selectRaw('farmers.*')
+                ->get()
+                ->groupBy('farmers_id');
+
+
+        $data = $farmers->all();
+
+        // dd($farmers);
+
+        return view('/website/view_order')
+            ->with('order', $order)
+            ->with('farmers', $farmers)
+            ->with('data', $data)
+            ;
     }
 
     /**

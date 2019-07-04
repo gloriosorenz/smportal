@@ -43,6 +43,7 @@ Route::get('/thankyou', 'ConfirmationController@index')->name('confirmation.inde
 
 Auth::routes();
 
+Route::get('website/view_order/{id}', 'WebsiteController@view_order');
 
 
 
@@ -121,6 +122,7 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::resource('damage_reports', 'DamageReportsController');
     Route::resource('plant_reports', 'PlantReportsController');
     Route::resource('sales_reports', 'SalesReportsController');
+    Route::resource('profiles', 'ProfilesController');
 
     // Route::resource('dashboard', 'DashboardController');
 

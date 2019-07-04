@@ -22,16 +22,6 @@
                         </div>
                         <h5 class="font-strong m-b-10 m-t-10">{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}</h5>
                         <div class="m-b-20 text-muted">{{ auth()->user()->roles->title }}</div>
-                        <div class="profile-social m-b-20">
-                            <a href="javascript:;"><i class="fab fa-twitter"></i></a>
-                            <a href="javascript:;"><i class="fab fa-facebook"></i></a>
-                            <a href="javascript:;"><i class="fab fa-pinterest"></i></a>
-                            <a href="javascript:;"><i class="fab fa-dribbble"></i></a>
-                        </div>
-                        <div>
-                            <button class="btn btn-info btn-rounded m-b-5"><i class="fa fa-plus"></i> Follow</button>
-                            <button class="btn btn-default btn-rounded m-b-5">Message</button>
-                        </div>
                     </div>
                 </div>
                 <div class="ibox">
@@ -76,7 +66,9 @@
                                         <h5 class="text-info m-b-20 m-t-10"><i class="fa fa-bar-chart"></i> Month Statistics</h5>
                                         <div class="h2 m-0">{{ presentPrice($monthly_income[0]) }}</div>
                                         <div><small>Month income</small></div>
-                                        <div class="m-t-20 m-b-20">
+                                        <br>
+                                        <br>
+                                        {{-- <div class="m-t-20 m-b-20">
                                             <div class="h4 m-0">120</div>
                                             <div class="d-flex justify-content-between"><small>Month income</small>
                                                 <span class="text-success font-12"><i class="fa fa-level-up"></i> +24%</span>
@@ -84,16 +76,7 @@
                                             <div class="progress m-t-5">
                                                 <div class="progress-bar progress-bar-success" role="progressbar" style="width:50%; height:5px;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
-                                        </div>
-                                        <div class="m-b-20">
-                                            <div class="h4 m-0">86</div>
-                                            <div class="d-flex justify-content-between"><small>Month income</small>
-                                                <span class="text-warning font-12"><i class="fa fa-level-down"></i> -12%</span>
-                                            </div>
-                                            <div class="progress m-t-5">
-                                                <div class="progress-bar progress-bar-warning" role="progressbar" style="width:50%; height:5px;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
+                                        </div> --}}
                                         <ul class="list-group list-group-full list-group-divider">
                                             <li class="list-group-item">Seasons
                                                 <span class="pull-right color-orange">{{$season_count}}</span>
@@ -101,7 +84,7 @@
                                             <li class="list-group-item">Orders (For this month)
                                                 <span class="pull-right color-orange">{{$orders}}</span>
                                             </li>
-                                            <li class="list-group-item">Hectares
+                                            <li class="list-group-item">Total Hectares
                                                 <span class="pull-right color-orange">{{$user->hectares}}</span>
                                             </li>
                                             <li class="list-group-item">Farmers
@@ -109,56 +92,74 @@
                                             </li>
                                         </ul>
                                     </div>
+                                    <!-- Farmer List -->
                                     <div class="col-md-6">
                                         <h5 class="text-info m-b-20 m-t-10"><i class="fa fa-user"></i> Farmers</h5>
-                                        <ul class="media-list media-list-divider m-0">
+                                        <ul class="media-list media-list-divider m-0 scroller" data-height="350px">
+                                            @foreach ($farmers as $item)
                                             <li class="media">
                                                 <a class="media-img" href="javascript:;">
-                                                    <img class="img-circle" src="img/users/u1.jpg" width="40" />
+                                                    <img class="img-circle" src="/img/admin-avatar.png" width="40" />
                                                 </a>
                                                 <div class="media-body">
-                                                    <div class="media-heading">Jeanne Gonzalez <small class="float-right text-muted">12:05</small></div>
+                                                    <div class="media-heading">
+                                                        {{$item->first_name}} {{$item->last_name}}
+                                                        <a href="#" class="btn btn-md btn-warning float-right"><i class="fas fa-edit fa-sm text-white"></i></a>
+                                                    </div>
                                                     <div class="font-13">Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
                                                 </div>
                                             </li>
-                                            <li class="media">
-                                                <a class="media-img" href="javascript:;">
-                                                    <img class="img-circle" src="img/users/u2.jpg" width="40" />
-                                                </a>
-                                                <div class="media-body">
-                                                    <div class="media-heading">Becky Brooks <small class="float-right text-muted">1 hrs ago</small></div>
-                                                    <div class="font-13">Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
-                                                </div>
-                                            </li>
-                                            <li class="media">
-                                                <a class="media-img" href="javascript:;">
-                                                    <img class="img-circle" src="img/users/u3.jpg" width="40" />
-                                                </a>
-                                                <div class="media-body">
-                                                    <div class="media-heading">Frank Cruz <small class="float-right text-muted">3 hrs ago</small></div>
-                                                    <div class="font-13">Lorem Ipsum is simply dummy.</div>
-                                                </div>
-                                            </li>
-                                            <li class="media">
-                                                <a class="media-img" href="javascript:;">
-                                                    <img class="img-circle" src="img/users/u6.jpg" width="40" />
-                                                </a>
-                                                <div class="media-body">
-                                                    <div class="media-heading">Connor Perez <small class="float-right text-muted">Today</small></div>
-                                                    <div class="font-13">Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
-                                                </div>
-                                            </li>
-                                            <li class="media">
-                                                <a class="media-img" href="javascript:;">
-                                                    <img class="img-circle" src="img/users/u5.jpg" width="40" />
-                                                </a>
-                                                <div class="media-body">
-                                                    <div class="media-heading">Bob Gonzalez <small class="float-right text-muted">Today</small></div>
-                                                    <div class="font-13">Lorem Ipsum is simply dummy.</div>
-                                                </div>
-                                            </li>
+                                            @endforeach
                                         </ul>
+                                        <br>
+                                        <!-- Add Farmer Modal Button -->
+                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#addFarmer">
+                                            Add Farmer
+                                        </button>
                                     </div>
+
+                                    <!-- Create Farmer Modal -->
+                                    <div class="modal fade" id="addFarmer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Add Farmer</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <!-- Start Form -->
+                                            <form method="post" action="{{action('ProfilesController@store')}}" enctype="multipart/form-data">
+                                            @csrf
+                                                <div class="modal-body">
+                                                    <!-- Farmer Information -->
+                                                    <h4><strong>Farmer Information</strong></h4>
+                                                    <br>
+                                                    <div class="row">
+                                                        <input type="hidden" name="users_id" value="{{ auth()->user()->id }}" readonly/>
+                                                        <!-- First Name -->
+                                                        <div class="col-sm-6 form-group">
+                                                            <label>First Name</label>
+                                                            <input class="form-control" type="text" placeholder="First Name" name="first_name" required>
+                                                        </div>
+                                                        <!-- Last Name -->
+                                                        <div class="col-sm-6 form-group">
+                                                            <label>Last Name</label>
+                                                            <input class="form-control" type="text" placeholder="Last Name" name="last_name" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    <!-- Submit Button -->
+                                                    <button type="sumbmit" class="btn btn-success">Add</button>
+                                                </div>
+                                            </form>
+                                            <!-- End Form -->
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                                  
                                 <!-- Monthly Transactions -->
@@ -201,42 +202,6 @@
 
                             <!-- Settings Tab -->
                             <div class="tab-pane fade" id="tab-2">
-                                {{-- <form action="javascript:void(0)">
-                                    <div class="row">
-                                        <div class="col-sm-6 form-group">
-                                            <label>First Name</label>
-                                            <input class="form-control" type="text" placeholder="First Name">
-                                        </div>
-                                        <div class="col-sm-6 form-group">
-                                            <label>Last Name</label>
-                                            <input class="form-control" type="text" placeholder="First Name">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-6 form-group">
-                                            <label>Email</label>
-                                            <input class="form-control" type="text" placeholder="Email address">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="row">
-                                        <div class="col-sm-6 form-group">
-                                            <label>Old Password:</label>
-                                            <input class="form-control" type="password" placeholder="Password">
-                                        </div>
-                                    </div>
-                                   
-                                    <div class="row">
-                                        <div class="col-sm-6 form-group">
-                                            <label>New Password:</label>
-                                            <input class="form-control" type="password" placeholder="Password">
-                                        </div>
-                                    </div>
-                                   
-                                    <div class="form-group">
-                                        <button class="btn btn-success" type="button">Save</button>
-                                    </div>
-                                </form> --}}
                                 @if (auth()->user()->roles_id == 2)
                                 <form method="post" action="{{action('FarmersController@update', $user->id)}}">
                                 @method('PATCH')

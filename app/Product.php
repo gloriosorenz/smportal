@@ -10,7 +10,7 @@ class Product extends Model
     protected $table = 'products';
     // Fillables
     protected $fillable = [
-        'total_quantity', 'seasons_id', 'rice_farmers_id',
+        'type'
     ];
      // Primary Key
     public $primaryKey = 'id';

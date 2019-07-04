@@ -32,7 +32,7 @@
                                 <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                             </div>
                         </div>
-                        <div class="ibox-body">
+                        <div class="ibox-body" style="height: 420px">
                             <!-- Start Form -->
                             <table class="table table-bordered">
                                 <thead class="thead-default">
@@ -63,10 +63,9 @@
                                         <td>
                                             {{-- {{ Form::date('harvest_date[]', \Carbon\Carbon::now(), ['class' => 'datepicker form-control','id'=>'harvest_date[]'])}} --}}
                                             <div class="form-group" id="date_1">
-                                                <label class="font-normal"></label>
                                                 <div class="input-group date">
                                                     <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
-                                                <input class="form-control" type="text" value="{{ \Carbon\Carbon::now() }}" name="harvest_date[]">
+                                                <input class="form-control" type="text" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" name="harvest_date[]">
                                                 </div>
                                             </div>
                                         </td>
@@ -82,33 +81,33 @@
                 </div>
 
                 <!-- Price Statistics -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <!-- Rice Product Average -->
-                    <div class="ibox bg-info color-white widget-stat">
+                    <div class="ibox">
                         <div class="ibox-body">
                             <h2 class="m-b-5 font-strong">{{ presentPrice($rice_prod_ave) }}</h2>
-                            <div class="m-b-5">Your Rice Product Average Price</div>
+                            <div class="m-b-5 text-primary">Your Rice Product Average Price</div>
                         </div>
                     </div>
                     <!-- Withered Product Average -->
-                    <div class="ibox bg-info color-white widget-stat">
+                    <div class="ibox">
                         <div class="ibox-body">
                             <h2 class="m-b-5 font-strong">{{ presentPrice($withered_prod_ave) }}</h2>
-                            <div class="m-b-5">Your Withered Product Average Price</div>
+                            <div class="m-b-5 text-warning">Your Withered Product Average Price</div>
                         </div>
                     </div>
                     <!-- All Rice Product Average -->
-                    <div class="ibox bg-warning color-white widget-stat">
+                    <div class="ibox">
                         <div class="ibox-body">
                             <h2 class="m-b-5 font-strong">{{ presentPrice($all_rice_prod_ave) }}</h2>
-                            <div class="m-b-5">All Rice Product Average Price</div>
+                            <div class="m-b-5 text-primary">All Rice Product Average Price</div>
                         </div>
                     </div>
                     <!-- All Withered Product Average -->
-                    <div class="ibox bg-warning color-white widget-stat">
+                    <div class="ibox">
                         <div class="ibox-body">
                             <h2 class="m-b-5 font-strong">{{ presentPrice($all_withered_prod_ave) }}</h2>
-                            <div class="m-b-5">All Withered Product Average Price</div>
+                            <div class="m-b-5 text-warning">All Withered Product Average Price</div>
                         </div>
                     </div>
                 </div>
@@ -149,7 +148,7 @@
                     </div>
                 </div>
 
-                <!-- SEASONAL RICE PRODUCTION -->
+                <!-- Seasonal Rice Production -->
                 <div class="col-lg-6">
                     <div class="ibox">
                         <div class="ibox-head">

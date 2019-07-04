@@ -103,15 +103,15 @@
             // Order Tables
             $('#pending_orders').DataTable({
                 pageLength: 6,
-                order: [[ 0, 'asc' ]],
+                order: [[ 0, 'desc' ]],
             });
             $('#completed_orders').DataTable({
                 pageLength: 6,
-                order: [[ 0, 'asc' ]],
+                order: [[ 0, 'desc' ]],
             });
             $('#cancelled_orders').DataTable({
                 pageLength: 6,
-                order: [[ 0, 'asc' ]],
+                order: [[ 0, 'desc' ]],
             });
             // Order Products Tables
             $('#pending_order_products').DataTable({
@@ -195,8 +195,7 @@
             // Bootstrap datepicker
             $('#date_1 .input-group.date').datepicker({
                 todayBtn: "linked",
-                keyboardNavigation: false,
-                forceParse: false,
+                format: 'yyyy/mm/dd',
                 calendarWeeks: true,
                 autoclose: true
             });

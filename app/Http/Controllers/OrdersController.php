@@ -144,9 +144,15 @@ class OrdersController extends Controller
         // $orders = auth()->user()->orders()->with('product_lists')->get(); // fix n + 1 issues
         // $orders = Order::where('users_id', '=', auth()->user()->id);
         $orders = Order::all();
-        $pending = Order::where('order_statuses_id', 1)->get();
-        $done = Order::where('order_statuses_id', 2)->get();
-        $cancelled = Order::where('order_statuses_id', 4)->get();
+        $pending = Order::where('order_statuses_id', 1)
+            ->orderBy('id', 'desc')
+            ->get();
+        $done = Order::where('order_statuses_id', 2)
+            ->orderBy('id', 'desc')
+            ->get();
+        $cancelled = Order::where('order_statuses_id', 4)
+            ->orderBy('id', 'desc')
+            ->get();
         
         // dd($orders);
         return view('website.my_orders')

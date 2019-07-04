@@ -36,7 +36,7 @@
                             <tr>
                                 <th>Season</th>
                                 <th>Status</th>
-                                <th width="20%">Options</th>
+                                <th class="text-center" width="20%">Options</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,10 +50,13 @@
                                         <h5><span class="badge badge-success badge-pill">{{ $list->season_list_statuses->status }}</span></h5>
                                     @endif
                                 </td>
-                                <td>
+                                <td class="text-center">
+                                    @if ($list->season_list_statuses_id == 1)
+                                    <a href="/season_lists/{{$list->id}}/edit" class="btn btn-md btn-success"><i class="fas fa-check fa-sm text-white"></i></a>
+                                    @else
                                     <a href="/season_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
+                                    @endif
                                     <a href="/season_lists/{{$list->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
-                                    <a href="#" class="btn btn-md btn-secondary"> <i class="fas fa-download fa-sm text-white"></i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -117,7 +120,6 @@
                                     <td class="text-center">
                                         <a href="/season_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
                                         <a href="/season_lists/{{$list->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
-                                        <a href="#" class="btn btn-md btn-secondary"> <i class="fas fa-download fa-sm text-white"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
