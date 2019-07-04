@@ -233,21 +233,34 @@ class WebsiteController extends Controller
             ->forecast(['currently', 'daily'])
             ;
 
+        // $week = DarkSkyApi::location(14.2843, 121.0889)
+        //     ->units('ca')
+        //     ->forecast(['daily', 'flags'])
+        //     ;
+            // dd($current);
+
         $timemachine = DarkSkyApi::location(14.2843, 121.0889)
             ->units('ca')
-            ->timeMachine(Carbon::now()->addDays(3)->format('Y-m-d'), ['currently', 'flags']);
+            ->timeMachine(Carbon::now()->addDays(4)->format('Y-m-d'), ['currently', 'flags']);
             ;
         // dd($forecast);
 
+
         $daily = $current->daily()->data();
+        $week = $current->daily();
+
         $current = $current->currently();
         $three_days = $timemachine->currently();
 
+        // dd($wee);
        
         return view('website.weather')
                 ->with('three_days', $three_days)
                 ->with('current', $current)
-                ->with('daily', $daily);
+                ->with('daily', $daily)
+                ->with('week', $week)
+                // ->with('allday', $allday)
+
                 ;
     }
 
