@@ -89,7 +89,7 @@
     <script type="text/javascript">
         $(function() {
             $('#example-table').DataTable({
-                pageLength: 10,
+                pageLength: 6,
                 order: [[ 0, 'desc' ]],
                 //"ajax": './assets/demo/data/table_data.json',
                 /*"columns": [
@@ -99,6 +99,19 @@
                     { "data": "start_date" },
                     { "data": "salary" }
                 ]*/
+            });
+            // Users Tables
+            $('#customers_table').DataTable({
+                pageLength: 10,
+                order: [[ 0, 'asc' ]],
+            });
+            $('#farmers_table').DataTable({
+                pageLength: 10,
+                order: [[ 0, 'asc' ]],
+            });
+            $('#administrators_table').DataTable({
+                pageLength: 10,
+                order: [[ 0, 'asc' ]],
             });
             // Order Tables
             $('#pending_orders').DataTable({

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container-fluid w-00 h-100 p-t-300 p-r-250 p-l-250 p-b-150 bg0">
+<div class="container-fluid w-100 h-100 p-t-300 p-r-250 p-l-250 p-b-150 bg0">
     <div class="row">
         <div class="col-lg-6 p-t-80">
             <div data-appear="fadeInDown" data-delay="0">
@@ -69,31 +69,34 @@
 </section> --}}
 
 <!-- Banner -->
-<div class="sec-banner bg2 p-t-10 p-b-50">
+<div class="sec-banner bg2 w-100 h-100 p-t-200 p-r-250 p-l-250 p-b-150">
     <div class="container">
         {{-- <div class="row p-b-50">
                 <script type='text/javascript' src='https://darksky.net/widget/default/14.3144,121.1121/us12/en.js?width=100%&height=350&title=Santa Rosa, Laguna&textColor=333333&bgColor=transparent&transparency=true&skyColor=undefined&fontFamily=Verdana&customFont=&units=us&htColor=333333&ltColor=C7C7C7&displaySum=yes&displayHeader=yes'></script>
         </div> --}}
+        <h3 class="text-center text-grey ltext-103 cl5 p-b-150">
+            Product Overview
+        </h3>
 
         <div class="row">
-            <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
+            <div class="col-md-6 col-xl-6 p-b-30 m-lr-auto">
                 <!-- Block1 -->
                 <div class="block1 wrap-pic-w">
-                    <img src="images/banner-01.jpg" alt="IMG-BANNER">
+                    <img src="/img/good_rice.jpeg" alt="IMG-BANNER">
 
-                    <a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+                    <a href="{{ url('shop') }}" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                         <div class="block1-txt-child1 flex-col-l">
-                            <span class="block1-name ltext-102 trans-04 p-b-8">
-                                Rice 
+                            <span class="block1-name ltext-102 trans-04 p-b-8 text-white">
+                                Good Rice 
                             </span>
 
-                            <span class="block1-info stext-102 trans-04">
+                            {{-- <span class="block1-info stext-102 trans-04 text-white">
                                 Spring 2018
-                            </span>
+                            </span> --}}
                         </div>
 
                         <div class="block1-txt-child2 p-b-4 trans-05">
-                            <div class="block1-link stext-101 cl0 trans-09">
+                            <div class="block1-link stext-101 cl0 trans-09 text-white">
                                 Shop Now
                             </div>
                         </div>
@@ -101,49 +104,24 @@
                 </div>
             </div>
 
-            <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
+            <div class="col-md-6 col-xl-6 p-b-30 m-lr-auto">
                 <!-- Block1 -->
                 <div class="block1 wrap-pic-w">
-                    <img src="images/banner-02.jpg" alt="IMG-BANNER">
+                    <img src="/img/bad_rice.jpg" alt="IMG-BANNER">
 
-                    <a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
+                    <a href="{{ url('shop') }}" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
                         <div class="block1-txt-child1 flex-col-l">
-                            <span class="block1-name ltext-102 trans-04 p-b-8">
+                            <span class="block1-name ltext-102 trans-04 p-b-8 text-white">
                                 Withered
                             </span>
 
-                            <span class="block1-info stext-102 trans-04">
+                            {{-- <span class="block1-info stext-102 trans-04 text-white">
                                 Spring 2018
-                            </span>
+                            </span> --}}
                         </div>
 
                         <div class="block1-txt-child2 p-b-4 trans-05">
-                            <div class="block1-link stext-101 cl0 trans-09">
-                                Shop Now
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
-                <!-- Block1 -->
-                <div class="block1 wrap-pic-w">
-                    <img src="images/banner-03.jpg" alt="IMG-BANNER">
-
-                    <a href="product.html" class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-                        <div class="block1-txt-child1 flex-col-l">
-                            <span class="block1-name ltext-102 trans-04 p-b-8">
-                                Accessories
-                            </span>
-
-                            <span class="block1-info stext-102 trans-04">
-                                New Trend
-                            </span>
-                        </div>
-
-                        <div class="block1-txt-child2 p-b-4 trans-05">
-                            <div class="block1-link stext-101 cl0 trans-09">
+                            <div class="block1-link stext-101 cl0 trans-09 text-white">
                                 Shop Now
                             </div>
                         </div>
@@ -1095,102 +1073,3 @@
 
 
 
-{{-- <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html> --}}

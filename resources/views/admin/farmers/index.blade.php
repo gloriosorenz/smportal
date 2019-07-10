@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="ibox-body">
-                    <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+                    <table class="table table-striped table-bordered table-hover" id="farmers_table" cellspacing="0" width="100%">
                         <thead class="thead-default">
                             <tr>
                                 <th>ID</th>
@@ -35,6 +35,7 @@
                                 <th>Company</th>
                                 <th>Email</th>
                                 <th>Phone</th>
+                                <th>Active</th>
                                 <th width="13%">Options</th>
                             </tr>
                         </thead>
@@ -46,6 +47,13 @@
                                 <td>{{$farmer->company}}</td>
                                 <td>{{$farmer->email}}</td>
                                 <td>{{$farmer->phone}}</td>
+                                <td>
+                                    @if($farmer->active)
+                                        <span class="badge badge-success">Active</span>
+                                    @else
+                                        <span class="badge badge-danger">Not Active</span>
+                                    @endif
+                                </td>
                                 <td>
                                     <a href="/farmers/{{ $farmer->id }}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
                                     <a href="/farmers/{{ $farmer->id }}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>

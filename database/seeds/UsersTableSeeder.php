@@ -22,6 +22,7 @@ class UsersTableSeeder extends Seeder
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
                 'roles_id' => 1,
                 'remember_token' => '',
+                'active' => true,
             ],
             [
                 'id' => 2,
@@ -39,6 +40,7 @@ class UsersTableSeeder extends Seeder
                 'cities_id'=> 433,
                 'provinces_id'=> 19,
                 'remember_token' => '',
+                'active' => true,
             ],
             [
                 'id' => 3,
@@ -51,6 +53,7 @@ class UsersTableSeeder extends Seeder
                 'roles_id' => 3, //Customer
                 'barangays_id'=> 4,
                 'remember_token' => '',
+                'active' => true,
             ],
             [
                 'id' => 4,
@@ -66,6 +69,7 @@ class UsersTableSeeder extends Seeder
                 'cities_id'=> 433,
                 'provinces_id'=> 19,
                 'remember_token' => '',
+                'active' => true,
             ],
             [
                 'id' => 5,
@@ -76,6 +80,7 @@ class UsersTableSeeder extends Seeder
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
                 'roles_id' => 1,
                 'remember_token' => '',
+                'active' => true,
             ],
             [
                 'id' => 6,
@@ -91,6 +96,7 @@ class UsersTableSeeder extends Seeder
                 'cities_id'=> 433,
                 'provinces_id'=> 19,
                 'remember_token' => '',
+                'active' => true,
             ],
             [
                 'id' => 7,
@@ -106,6 +112,7 @@ class UsersTableSeeder extends Seeder
                 'cities_id'=> 408,
                 'provinces_id'=> 19,
                 'remember_token' => '',
+                'active' => true,
             ],
             [
                 'id' => 8,
@@ -121,6 +128,7 @@ class UsersTableSeeder extends Seeder
                 'cities_id'=> 433,
                 'provinces_id'=> 19,
                 'remember_token' => '',
+                'active' => true,
             ],
             [
                 'id' => 9,
@@ -136,6 +144,7 @@ class UsersTableSeeder extends Seeder
                 'cities_id'=> 433,
                 'provinces_id'=> 19,
                 'remember_token' => '',
+                'active' => true,
             ],
 
             //FARMER SEEDERS
@@ -155,6 +164,7 @@ class UsersTableSeeder extends Seeder
                 'cities_id'=> 433,
                 'provinces_id'=> 19,
                 'remember_token' => '',
+                'active' => true,
             ],
 
             [
@@ -173,6 +183,7 @@ class UsersTableSeeder extends Seeder
                 'cities_id'=> 433,
                 'provinces_id'=> 19,
                 'remember_token' => '',
+                'active' => true,
             ],
             [
                 'id' => 12,
@@ -190,6 +201,7 @@ class UsersTableSeeder extends Seeder
                 'cities_id'=> 433,
                 'provinces_id'=> 19,
                 'remember_token' => '',
+                'active' => true,
             ],
 
                 // CUSTOMER SEEDERS
@@ -208,6 +220,7 @@ class UsersTableSeeder extends Seeder
                 'cities_id'=> 433,
                 'provinces_id'=> 19,
                 'remember_token' => '',
+                'active' => true,
             ],
             [
                 'id' => 14,
@@ -222,6 +235,7 @@ class UsersTableSeeder extends Seeder
                 'cities_id'=> 433,
                 'provinces_id'=> 19,
                 'remember_token' => '',
+                'active' => false,
             ],
             [
                 'id' => 15,
@@ -236,6 +250,7 @@ class UsersTableSeeder extends Seeder
                 'cities_id'=> 433,
                 'provinces_id'=> 19,
                 'remember_token' => '',
+                'active' => false,
             ],
             [
                 'id' => 16,
@@ -251,6 +266,7 @@ class UsersTableSeeder extends Seeder
                 'cities_id'=> 433,
                 'provinces_id'=> 19,
                 'remember_token' => '',
+                'active' => true,
             ],
             //FARMER SEEDERS
             [
@@ -269,6 +285,7 @@ class UsersTableSeeder extends Seeder
                 'cities_id'=> 433,
                 'provinces_id'=> 19,
                 'remember_token' => '',
+                'active' => false,
             ],
 
             [
@@ -287,6 +304,7 @@ class UsersTableSeeder extends Seeder
                 'cities_id'=> 433,
                 'provinces_id'=> 19,
                 'remember_token' => '',
+                'active' => false,
             ],
             [
                 'id' => 19,
@@ -304,6 +322,7 @@ class UsersTableSeeder extends Seeder
                 'cities_id'=> 433,
                 'provinces_id'=> 19,
                 'remember_token' => '',
+                'active' => true,
             ],
 
 

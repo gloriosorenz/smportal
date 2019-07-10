@@ -20,7 +20,7 @@
     @if(auth()->user()->roles_id == 2)
     <div class="row">
         <!-- Input farmer's hectares and no. of farmers -->
-        <div class="col-md-6">
+        <div class="offset-md-3 col-md-6 offset-md-3">
             <div class="ibox">
                 <div class="ibox-head">
                     <div class="ibox-title">Plan</div>
@@ -41,23 +41,25 @@
                     <table class="table table-bordered table-hover" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th>Rice Farmer</th>
-                                <th>Planned Hectares</th>
-                                <th>Planned Number of Farmers</th>
-                                <th>Planned Quantity</th>
+                                <th class="text-center">Rice Farmer</th>
+                                <th class="text-center">Planned Hectares</th>
+                                <th class="text-center">Planned Number of Farmers</th>
+                                <th class="text-center">Planned Quantity</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             <tr>
                                 <td>
                                     {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
                                     <input name="users_id[]" type="hidden" value="{{auth()->user()->id}}">                   
                                 </td>
                                 <td>
-                                    <input class="form-control" type="number" placeholder="{{ auth()->user()->hectares }}" name="planned_hectares[]" step="0.1" min="1" max="{{ auth()->user()->hectares }}">
+                                    <input class="form-control" type="number" placeholder="0" name="planned_hectares[]" step="0.1" min="1" max="{{ auth()->user()->hectares }}">
+                                    <small class="text-muted text-sm">Hectares owned: <b>{{ auth()->user()->hectares }}</b></small>
                                 </td>
                                 <td>
-                                    <input class="form-control" type="number" placeholder="{{ auth()->user()->no_farmers }}" name="planned_num_farmers[]" step="1" min="1" max="{{ auth()->user()->no_farmers }}">
+                                    <input class="form-control" type="number" placeholder="0" name="planned_num_farmers[]" step="1" min="1" max="{{ auth()->user()->no_farmers }}">
+                                    <small class="text-muted text-sm">Farmers employed: <b>{{ auth()->user()->no_farmers }}</b></small>
                                 </td>
                                 <td>
                                     <input class="form-control" type="number" placeholder="Enter Quantity" name="planned_qty[]" step="1" min="1">
@@ -77,7 +79,7 @@
         </div>
 
         <!-- Farmer's info (hectares and no. farmers) -->
-        <div class="col-md-4">
+        {{-- <div class="col-md-4">
             <div class="ibox">
                 <div class="ibox-head">
                     <div class="ibox-title">Farmer Info</div>
@@ -102,14 +104,14 @@
                     </table>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
     </div>
 
-    <!-- Season History -->
+    <!-- Season Plan History -->
     <div class="row">
         <!-- Seasons -->
-        <div class="col-md-6">
+        <div class="offset-md-3 col-md-6 offset-md-3">
                 <div class="ibox">
                     <div class="ibox-head">
                         <div class="ibox-title">History</div>
@@ -118,12 +120,12 @@
                         <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>Season</th>
-                                    <th>Hectares</th>
-                                    <th>No. of Farmers</th>
+                                    <th class="text-center">Season</th>
+                                    <th class="text-center">Hectares</th>
+                                    <th class="text-center">No. of Farmers</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-center">
                                 @foreach($season_lists as $list)
                                 <tr>
                                     <td>Season {{ $list->seasons->id }}</td>

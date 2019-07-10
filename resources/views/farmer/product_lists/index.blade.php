@@ -34,14 +34,14 @@
                 </div>
                 <div class="ibox-body">
                     <table class="table table-bordered table-hover"  cellspacing="0" width="100%">
-                        <thead class="thead-default">
+                        <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Product Type</th>
                                 <th>Rice Farmer</th>
                                 <th>Initial Quantity</th>
                                 <th>Current Quantity</th>
-                                <th>Harvest Date</th>
+                                <th width="15%">Harvest Date</th>
                                 <th>Options</th>
                             </tr>
                         </thead>
@@ -53,7 +53,7 @@
                                 <td>{{$list->users->company}}</td>
                                 <td>{{$list->orig_quantity}}</td>
                                 <td>{{$list->curr_quantity}}</td>
-                                <td>{{$list->harvest_date}}</td>
+                                <td>{{ \Carbon\Carbon::parse($list->harvest_date)->format('F j, Y') }}</td>
                                 <td>
                                     <a href="/product_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
                                     {{-- <a href="/product_lists/{{$list->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a> --}}
@@ -74,7 +74,7 @@
                 </div>
                 <div class="ibox-body">
                     <table class="table table-bordered" id="all_user_products" cellspacing="0" width="100%">
-                        <thead class="thead-default">
+                        <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Product Type</th>

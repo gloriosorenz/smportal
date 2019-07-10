@@ -93,7 +93,9 @@ class User extends Authenticatable
 
      // Get All Customers
     public static function getAllCustomers(){
-        return DB::table('users')->where('roles_id', 3)->get();
+        return DB::table('users')->where('roles_id', 3)
+            ->orWhere('roles_id', 4)
+            ->get();
     }
 
 

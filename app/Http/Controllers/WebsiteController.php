@@ -220,7 +220,7 @@ class WebsiteController extends Controller
 
         //Show all Products
         $product_lists = ProductList::where('seasons_id', $latest_season->id)
-                        ->where('curr_products_id', '!=', 3) 
+                        // ->where('curr_products_id', '!=', 3) 
                         ->where('curr_quantity', '>', 0)
                         ->get();
 

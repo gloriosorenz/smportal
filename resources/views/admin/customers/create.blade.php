@@ -125,7 +125,7 @@
                             <div class="col-sm-6 form-group">
                                  <div class="form-group">
                                     <label>Customer Type</label>
-                                    <select class="form-control select2_demo_1" name="role" id="role">
+                                    <select class="form-control select2_demo_1" name="roles_id" id="roles_id">
                                         <option value="0" selected="true" disabled="True">Select Role</option>
                                         @foreach ($roles as $role)
                                             <option value="{{ $role['id']}}">{{ $role['title']}}</option>

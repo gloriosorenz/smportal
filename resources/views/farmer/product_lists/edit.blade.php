@@ -19,12 +19,9 @@
 
 <div class="page-content fade-in-up">
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-8">
 
-        <!-- Form -->
-        <form method="post" action="{{action('ProductListsController@update', $product_list->id)}}">
-        @method('PATCH')
-        @csrf
+        
         <!-- Product List Datatable -->
         <div class="ibox">
             <div class="ibox-head">
@@ -35,15 +32,19 @@
             </div>
             <div class="ibox-body">
                 <!-- Start Form -->
+                    <form method="POST" action="{{action('ProductListsController@update', $product_list->id)}}" enctype="multipart/form-data">
+                    @method('PATCH')
+                    @csrf
                     <!-- Products -->
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Product</th>
-                                <th>Original Quantity</th>
-                                <th>Current Quantity</th>
-                                <th>Price</th>
-                                <th>Harvest Date</th>
+                                <th class="text-center" width="20%">Product</th>
+                                <th class="text-center">Original Quantity</th>
+                                <th class="text-center">Current Quantity</th>
+                                <th class="text-center">Price</th>
+                                <th class="text-center">Harvest Date</th>
+                                <th class="text-center">Product Image</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,10 +61,16 @@
                                         {{-- <label class="font-normal">Start Date</label> --}}
                                         <div class="input-group date">
                                             <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
-                                            <input class="form-control" type="text" name="harvest_date[]" value="{{ $product_list->harves_date }}">
+                                            <input class="form-control" type="text" name="harvest_date[]" value="{{ $product_list->harvest_date }}">
                                         </div>
                                     </div>
                                     {{-- {{ Form::date('harvest_date[]', \Carbon\Carbon::now(), ['class' => 'datepicker form-control','id'=>'harvest_date[]'])}} --}}
+                                </td>
+                                <td>
+                                    <div class="custom-file form-control-sm p-b-10">
+                                        <input type="file" class="custom-file-input" id="image" name="image">
+                                        <label class="custom-file-label" for="image">Choose file</label>
+                                    </div>
                                 </td>
                             </tr>
                         </tbody>

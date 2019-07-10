@@ -37,13 +37,11 @@ class OrderProductsController extends Controller
         $cancelled = OrderProduct::cancelledOrderProducts();
 
         // Get all order products
-        // $order_products = OrderProduct::all();
-
-        // Get all order products for current season
         $order_products = OrderProduct::all();
 
         $latest_season = Season::getLatestSeason();
 
+        // Get all order products for current season
         $current_season_order_products = OrderProduct::join('product_lists', 'order_products.product_lists_id', '=', 'product_lists_id')
             ->where('seasons_id', '=', $latest_season->id)
             ->get();
@@ -99,17 +97,17 @@ class OrderProductsController extends Controller
         ]);
 
         // Handle file upload
-        if($request->hasFile('logo')){
+        if($request->hasFile('receipt')){
         // Get filename with extension
-        $filenameWithExt = $request->file('logo')->getClientOriginalName();
+        $filenameWithExt = $request->file('receipt')->getClientOriginalName();
         // Get just filename 
         $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
         // Get just extension
-        $extension = $request->file('logo')->getClientOriginalExtension();
+        $extension = $request->file('receipt')->getClientOriginalExtension();
         // Filename to store 
         $fileNameToStore = $filename.'_'.time().'.'.$extension;
         // Upload image
-        $path = $request->file('logo')->storeAs('public/logos/', $fileNameToStore);
+        $path = $request->file('receipt')->storeAs('public/receipts/', $fileNameToStore);
         } else {
             $fileNameToStore = 'noimage.jpeg';
         };

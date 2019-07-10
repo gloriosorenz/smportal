@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddReceipToOrderProducts extends Migration
+class AddImageToProductLists extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddReceipToOrderProducts extends Migration
      */
     public function up()
     {
-        Schema::table('order_products', function (Blueprint $table) {
-            $table->string('receipt')->nullable();
+        Schema::table('product_lists', function (Blueprint $table) {
+            $table->string('image')->nullable();
         });
     }
 
@@ -25,8 +25,8 @@ class AddReceipToOrderProducts extends Migration
      */
     public function down()
     {
-        Schema::table('order_products', function (Blueprint $table) {
-            $table->dropColumn('receipt');
+        Schema::table('product_lists', function (Blueprint $table) {
+            $table->dropColumn('image');
         });
     }
 }

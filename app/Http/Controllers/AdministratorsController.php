@@ -40,7 +40,8 @@ class AdministratorsController extends Controller
             ->with('barangays', $barangays)
             ->with('provinces', $provinces)
             ->with('cities', $cities)
-            ;        }
+            ;        
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -110,8 +111,17 @@ class AdministratorsController extends Controller
     {
         $admin = User::findOrFail($id);
 
+        $barangays = Barangay::orderBy('name')->get();
+        $provinces = Province::orderBy('name')->get();
+        $cities = City::orderBy('name')->get();
+
         return view('admin.administrators.edit')
-            ->with('admin', $admin);    }
+            ->with('admin', $admin)
+            ->with('barangays', $barangays)
+            ->with('provinces', $provinces)
+            ->with('cities', $cities)
+            ;   
+    }
 
     /**
      * Update the specified resource in storage.

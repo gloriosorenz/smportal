@@ -119,13 +119,13 @@
                                 <div>Samahan ng Magsasaka sa Santa Rosa Laguna</div>
                                 <ul class="list-unstyled m-t-10">
                                     <li class="m-b-5">
-                                        <strong>A:</strong> City Agricultural Office 
+                                        <strong>Address:</strong> City Agricultural Office 
                                         2F Cityhall B, City Govenment Center
                                         Santa Rosa City, Laguna</li>
                                     <li class="m-b-5">
-                                        <strong>E:</strong> cityagricultureoffice_csrl@yahoo.com</li>
+                                        <strong>Email:</strong> cityagricultureoffice_csrl@yahoo.com</li>
                                     <li>
-                                        <strong>P:</strong> 049 530 0015</li>
+                                        <strong>Phone:</strong> 049 530 0015</li>
                                 </ul>
                             </div>
                         </div>

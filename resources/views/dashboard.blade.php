@@ -4,12 +4,14 @@
 
 
 <!-- Admin Functionalities -->
-@if(Auth::user()->roles_id == 2)
+@if(auth()->user()->roles_id == 2)
 <!-- START PAGE CONTENT-->
 <div class="page-content fade-in-up">
 
 
+    {{-- @if ($latest_season->season_statuses->id == 2) --}}
     <a class="btn btn-secondary btn-md mb-2" href="/request_season">Request Season</a>
+    {{-- @endif --}}
 
 
     <div class="row">
@@ -207,7 +209,7 @@
                 </div>
         </div>
 
-        <!-- ALERTS -->
+        <!-- ALERTS AND WEATHER -->
         <div class="col-lg-4">
             <div class="ibox">
                 <div class="ibox-head">
@@ -237,12 +239,12 @@
                     <!-- Text -->
                     <p class="card-text">{{ date('l', $currently->time()) }}, {{ date('h:i:sa', $currently->time()) }}, {{$currently->summary()}}</p>
                     <div class="d-flex justify-content-between">
-                        <p class="display-1 degree">{{ $currently->temperature() }}</p>
+                        <p class="display-1 degree">{{ $currently->temperature() }} °C</p>
                         <i class="fas fa-sun-o fa-5x pt-3 amber-text"></i>
                     </div>
                     <div class="d-flex justify-content-between mb-4">
                         <p><i class="fas fa-tint fa-lg text-info pr-2"></i>{{ $currently->precipProbability() * 100 }}% Precipitation</p>
-                        <p><i class="fas fa-leaf fa-lg grey-text pr-2"></i>{{ $currently->windspeed() }} </p>
+                        <p><i class="fas fa-wind fa-lg grey-text pr-2"></i>{{ $currently->windspeed() }} kph</p>
                     </div>
                     @foreach ($hourly as $item)
                     <div class="progress md-progress">
@@ -296,7 +298,7 @@
         <div class="col-lg-6">
             <div class="ibox">
                 <div class="ibox-head">
-                    <div class="ibox-title">Production Overview for Season {{$last_com_season->id}}</div>
+                    <div class="ibox-title">Production Overview per Season</div>
                     <div class="ibox-tools">
                         <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                         <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
@@ -362,7 +364,73 @@
             </div>
         </div>
         
-    </div>    
+    </div>  
+    
+    <div class="row">
+        <!-- PRODUCT COMPARISON FOR THE LAST SEASON -->
+        <div class="col-lg-6">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">Product Comparison for Season {{$last_com_season->id}}</div>
+                    <div class="ibox-tools">
+                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item">option 1</a>
+                            <a class="dropdown-item">option 2</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-body">
+                    <div class="flexbox mb-4">
+                        {!! Charts::styles() !!}
+                        <div class="container">
+                            <div class="app">
+                                <center>
+                                    {!! $origcurrprodbar->html() !!}
+                                </center>
+                            </div>
+                        </div>
+                            <!-- End Of Main Application -->
+                            {!! Charts::scripts() !!}
+                            {!! $origcurrprodbar->script() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- REVENUE EARNED -->
+        <div class="col-lg-6">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">Revenue</div>
+                    <div class="ibox-tools">
+                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item">option 1</a>
+                            <a class="dropdown-item">option 2</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-body">
+                    <div class="flexbox mb-4">
+                        {!! Charts::styles() !!}
+                        <div class="container">
+                            <div class="app">
+                                <center>
+                                    {!! $revlinechart->html() !!}
+                                </center>
+                            </div>
+                        </div>
+                            <!-- End Of Main Application -->
+                            {!! Charts::scripts() !!}
+                            {!! $revlinechart->script() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
 
     <div class="row">
         <!-- FARMER'S MOST VALUBALE CUSTOMER BARCHART (MVC) -->
@@ -571,6 +639,37 @@
     </div>
 
     <div class="row">
+        <!-- TOTAL ORDER OVERVIEW -->
+        <div class="col-lg-6">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">Total Order Overview</div>
+                    <div class="ibox-tools">
+                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item">option 1</a>
+                            <a class="dropdown-item">option 2</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-body">
+                    <div class="flexbox mb-4">
+                        {!! Charts::styles() !!}
+                        <div class="container">
+                            <div class="app">
+                                <center>
+                                    {!! $totalorderline->html() !!}
+                                </center>
+                            </div>
+                        </div>
+                            <!-- End Of Main Application -->
+                            {!! Charts::scripts() !!}
+                            {!! $totalorderline->script() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- PRODUCT OUTPUT FOR CURRENT SEASON -->
         <div class="col-lg-6">
             <div class="ibox">

@@ -16,7 +16,7 @@
 <div class="page-content fade-in-up">
 
         <!-- Form -->
-        <form method="post" action="{{action('ProductListsController@store')}}" enctype="multipart/form-data">
+        <form method="POST" action="{{action('ProductListsController@store')}}" enctype="multipart/form-data">
         @csrf
     
             <!-- If user is a Farmer -->
@@ -35,9 +35,10 @@
                         <div class="ibox-body" style="height: 420px">
                             <!-- Start Form -->
                             <table class="table table-bordered">
-                                <thead class="thead-default">
+                                <thead>
                                     <tr>
-                                        <th>Product</th>
+                                        <th width="10%">Image</th>
+                                        <th width="20%">Product</th>
                                         <th>Quantity</th>
                                         <th>Price</th>
                                         <th>Harvest Date</th>
@@ -46,6 +47,12 @@
                                 <tbody>
                                     @foreach ($products as $product)
                                     <tr>
+                                        <td>
+                                            <div class="custom-file form-control-sm p-b-10">
+                                                <input type="file" class="custom-file-input" id="image" name="image">
+                                                <label class="custom-file-label" for="image">Choose file</label>
+                                            </div>
+                                        </td>
                                         <td>
                                             <input type="text" class="form-control" name="product_type" value="{{$product->type}}" disabled/>
                                             <input name="products_id[]" type="hidden" value="{{$product->id}}">
@@ -80,12 +87,42 @@
                     </div>
                 </div>
 
+
+                <!-- Yearly Product Price Averages -->
+                <div class="col-md-4">
+                    <div class="ibox">
+                        <div class="ibox-head">
+                            <div class="ibox-title"> Your Yearly Price Average</div>
+                            <div class="ibox-tools">
+                                <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                            </div>
+                        </div>
+                        <div class="ibox-body">
+                            <!-- Start Form -->
+                            <div class="flexbox mb-4">
+                                {!! Charts::styles() !!}
+                                <div class="container">
+                                    <div class="app">
+                                        <center>
+                                            {!! $yearly_rice_prod_ave->html() !!}
+                                        </center>
+                                    </div>
+                                </div>
+                                <!-- End Of Main Application -->
+                                {!! Charts::scripts() !!}
+                                {!! $yearly_rice_prod_ave->script() !!}
+                            </div>
+                            <!-- End Form -->
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Price Statistics -->
-                <div class="col-md-3">
+                {{-- <div class="col-md-3">
                     <!-- Rice Product Average -->
                     <div class="ibox">
                         <div class="ibox-body">
-                            <h2 class="m-b-5 font-strong">{{ presentPrice($rice_prod_ave) }}</h2>
+                            <h2 class="m-b-5 font-strong">{{$rice_prod_ave }}</h2>
                             <div class="m-b-5 text-primary">Your Rice Product Average Price</div>
                         </div>
                     </div>
@@ -110,7 +147,7 @@
                             <div class="m-b-5 text-warning">All Withered Product Average Price</div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
 
             <!-- Price History Chart-->
@@ -121,28 +158,34 @@
                             <div class="ibox-title">Price History</div>
                             <div class="ibox-tools">
                                 <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
-                                <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item">option 1</a>
-                                    <a class="dropdown-item">option 2</a>
-                                </div>
                             </div>
                         </div>
-                        <div class="ibox-body">
+                        <div class="ibox-body text-center">
                             <!-- Start Form -->
-                            <div class="flexbox mb-4">
-                                {!! Charts::styles() !!}
-                                <div class="container">
-                                    <div class="app">
-                                        <center>
-                                            {!! $price_history->html() !!}
-                                        </center>
-                                    </div>
-                                </div>
-                                <!-- End Of Main Application -->
-                                {!! Charts::scripts() !!}
-                                {!! $price_history->script() !!}
-                            </div>
+                            <table id="example-table" class="table table-bordered table-hover"  cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Season</th>
+                                        <th class="text-center">Product Type</th>
+                                        {{-- <th>Initial Quantity</th>
+                                        <th>Current Quantity</th>
+                                        <th>Harvest Date</th> --}}
+                                        <th class="text-center">Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($product_history as $list)
+                                    <tr>
+                                        <td>Season {{$list->seasons->id}}</td>
+                                        <td>{{$list->orig_products->type}}</td>
+                                        {{-- <td>{{$list->orig_quantity}}</td>
+                                        <td>{{$list->curr_quantity}}</td>
+                                        <td>{{$list->harvest_date}}</td> --}}
+                                        <td>{{$list->price}}</td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                             <!-- End Form -->
                         </div>
                     </div>
@@ -183,6 +226,8 @@
                     </div>
                 </div>
             </div>
+
+
 
 
 
