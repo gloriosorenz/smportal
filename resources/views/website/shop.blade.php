@@ -60,11 +60,11 @@
                                                     </div>
                                                 @endif
                                             </td>
-                                            <td>{{$curr_product_list->curr_products->type}}</td>
+                                            <td>{{$curr_product_list->products->type}}</td>
                                             <td>{{$curr_product_list->users->company}}</td>
                                             <td>{{ $curr_product_list->users->barangays->name }}, {{ $curr_product_list->users->cities->name }}, {{ $curr_product_list->users->provinces->name }}</td>
                                             <td>{{$curr_product_list->harvest_date}}</td>
-                                            <td>{{ $curr_product_list->curr_quantity }}</td>
+                                            <td>{{ $curr_product_list->quantity }}</td>
                                             <td>
                                                 <div class="font-weight-bold">{{ presentPrice($curr_product_list->price) }} </div>
                                             </td>

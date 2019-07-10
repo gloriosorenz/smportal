@@ -365,24 +365,24 @@ class DashboardController extends Controller
         $last_com_season2 = Season::where('season_statuses_id','=', 2)->latest('id')->pluck('id')->first();
 
         $origprod = DB::table('seasons')
-            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
+            ->join('original_product_lists', 'seasons.id', '=', 'original_product_lists.seasons_id')
             ->where('users_id','=', auth()->user()->id)
             ->where('seasons_id','=',$last_com_season2)
-            ->pluck('orig_quantity')
+            ->pluck('quantity')
         ;
 
         $currprod = DB::table('seasons')
-            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
+            ->join('current_product_lists', 'seasons.id', '=', 'current_product_lists.seasons_id')
             ->where('users_id','=',auth()->user()->id)
             ->where('seasons_id','=',$last_com_season2)
-            ->pluck('curr_quantity')
+            ->pluck('quantity')
         ;
 
         $origcurrprod = DB::table('seasons')
-            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
+            ->join('original_product_lists', 'seasons.id', '=', 'original_product_lists.seasons_id')
             ->where('users_id','=',auth()->user()->id)
             ->where('seasons_id','=',$last_com_season2)
-            ->pluck('orig_quantity')
+            ->pluck('quantity')
         ;
 
         $origcurrprodbar = Charts::multi('bar', 'highcharts')
@@ -398,27 +398,33 @@ class DashboardController extends Controller
      
         // Revenue Earned
 
-        $ricesoldpriperse = DB::table('product_lists')
-        ->join('order_products', 'product_lists.id', '=', 'order_products.product_lists_id')
+        $ricesoldpriperse = DB::table('original_product_lists')
+        ->join('order_products', 'original_product_lists.id', '=', 'order_products.original_product_lists_id')
         ->where('farmers_id','=', auth()->user()->id)
         ->where('order_product_statuses_id','=',3)
-        ->where('curr_products_id','=',1)
+        ->where('products_id','=',1)
         ->groupBy('seasons_id')
-        ->selectRaw('seasons_id,sum(quantity*price) as sum')
+        ->selectRaw('seasons_id,sum(order_products.quantity*price) as sum')
         ->pluck('sum')
         ;
 
-        $withersoldpriperse = DB::table('product_lists')
-            ->join('order_products', 'product_lists.id', '=', 'order_products.product_lists_id')
+        // dd($ricesoldpriperse);
+
+
+        $withersoldpriperse = DB::table('original_product_lists')
+            ->join('order_products', 'original_product_lists.id', '=', 'order_products.original_product_lists_id')
             ->where('farmers_id','=', auth()->user()->id)
             ->where('order_product_statuses_id','=',3)
-            ->where('curr_products_id','=',2)
+            ->where('products_id','=',2)
             ->groupBy('seasons_id')
-            ->selectRaw('seasons_id,sum(quantity*price) as sum')
+            ->selectRaw('seasons_id,sum(order_products.quantity*price) as sum')
             ->pluck('sum')
         ;
-        $prodsoldpriperselbl = DB::table('product_lists')
-            ->join('order_products', 'product_lists.id', '=', 'order_products.product_lists_id')
+
+        // dd($withersoldpriperse);
+
+        $prodsoldpriperselbl = DB::table('original_product_lists')
+            ->join('order_products', 'original_product_lists.id', '=', 'order_products.current_product_lists_id')
             ->where('farmers_id','=', auth()->user()->id)
             ->groupBy('seasons_id')
             ->pluck('seasons_id')

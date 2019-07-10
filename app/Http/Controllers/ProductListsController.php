@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\User;
 use App\Season;
 use App\SeasonList;
@@ -9,13 +10,14 @@ use App\Product;
 // use App\ProductList;
 use App\OriginalProductList;
 use App\CurrentProductList;
-use Carbon\Carbon;
 use App\ProductImage;
 use Illuminate\Http\Request;
 
 use Charts;
 use DB;
-use Carbon\Carbon;
+
+// use Carbon\Carbon;
+
 
 use App\Notifications\ProductsAdded;
 use Notification;
@@ -298,6 +300,7 @@ class ProductListsController extends Controller
             ;
     }
 
+
         /**
          * Store a newly created resource in storage.
          *
@@ -347,14 +350,7 @@ class ProductListsController extends Controller
             
         }
 
-                        
-                        $season_list = SeasonList::where('seasons_id', $product_list->seasons_id)
-                                        ->where('users_id', $product_list->users_id)
-                                        ->first();
-
-                        $counter = $product_list->orig_quantity + $counter;
-                }
-
+        
                 $season_list = SeasonList::findOrFail($season_list->id);
                 $season_list->actual_qty = $counter;
                 $season_list->save();
