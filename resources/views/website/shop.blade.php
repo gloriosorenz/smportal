@@ -31,6 +31,7 @@
                                 <table id="shop_table" class="table table-hover">
                                     <thead>
                                         <tr>
+                                            <th width="">Image</th>
                                             <th width="">Product</th>
                                             <th width="">Rice Farm Company</th>
                                             <th width="">Farm Location</th>
@@ -38,7 +39,7 @@
                                             <th width="">Available</th>
                                             <th width="">Price</th>
                                             @guest
-                                                @elseif (auth()->user()->roles_id == 3 || auth()->user()->roles_id == 4 )
+                                                @elseif (auth()->user()->roles_id == 3 && auth()->user()->active || auth()->user()->roles_id == 4 && auth()->user()->active )
                                                 <th width="15%">Options</th>
                                             @endguest
                                             
@@ -48,18 +49,28 @@
                                         @foreach($product_lists as $curr_product_list)
                                         <tr class="tr">
                                             <td>
-                                                {{$curr_product_list->products->type}}
+                                                @if($curr_product_list->image == 'noimage.jpeg' || $curr_product_list->image == null)
+                                                    <div class="img-wrap">
+                                                        <img src="/img/image.png" width="auto" height="80"/>
+                                                    </div>
+                                                @elseif($curr_product_list->image)
+                                                    <div class="img-wrap">
+                                                        {{-- <img src="/storage/logos/{{$item->logo}}" class="img-thumbnail img-sm" width="100%" height="100%"> --}}
+                                                        <img src="/storage/images/{{$curr_product_list->image}}" width="auto" height="80"/>
+                                                    </div>
+                                                @endif
                                             </td>
+                                            <td>{{$curr_product_list->curr_products->type}}</td>
                                             <td>{{$curr_product_list->users->company}}</td>
                                             <td>{{ $curr_product_list->users->barangays->name }}, {{ $curr_product_list->users->cities->name }}, {{ $curr_product_list->users->provinces->name }}</td>
                                             <td>{{$curr_product_list->harvest_date}}</td>
-                                            <td>{{ $curr_product_list->quantity }} kaban/s</td>
+                                            <td>{{ $curr_product_list->curr_quantity }}</td>
                                             <td>
                                                 <div class="font-weight-bold">{{ presentPrice($curr_product_list->price) }} </div>
                                             </td>
                                             @guest
                                             
-                                                @elseif (auth()->user()->roles_id == 3 || auth()->user()->roles_id == 4 )
+                                                @elseif (auth()->user()->roles_id == 3 && auth()->user()->active || auth()->user()->roles_id == 4 && auth()->user()->active)
                                                 <td>
                                                     {{-- @if ($product_list->quantity > 0) --}}
                                                         <form method="post" action="{{action('CartController@store')}}">

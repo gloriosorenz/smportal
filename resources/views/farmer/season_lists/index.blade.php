@@ -19,15 +19,15 @@
     @if (auth()->user()->roles_id == 2)
     <div class="row">
         <!-- Seasons -->
-        <div class="col-md-8">
+        <div class="offset-md-2 col-md-8 offset-md-2">
             <div class="ibox">
                 <div class="ibox-head">
-                    <div class="ibox-title">Seasons Data Table</div>
+                    <div class="ibox-title">Season History</div>
                     <!-- Add Season Button -->
                     @if ($active == 0)
-                    <div>
-                        <a class="btn btn-success btn-sm" href="{{ route('season_lists.create') }}">Plan Season</a>
-                    </div>
+                        <div>
+                            <a class="btn btn-success btn-sm" href="{{ route('season_lists.create') }}">Plan Season</a>
+                        </div>
                     @endif
                 </div>
                 <div class="ibox-body">
@@ -68,7 +68,7 @@
         <!-- END COLUMN-->
 
         <!-- Projected Sales -->
-        <div class="col-lg-3 col-md-6">
+        {{-- <div class="col-lg-3 col-md-6">
             <div class="ibox bg-info color-white widget-stat">
                 <div class="ibox-body">
                     <h2 class="m-b-5 font-strong">P5,000.00</h2>
@@ -76,7 +76,7 @@
                     <div><i class="fa fa-level-up m-r-5"></i><small>25% higher</small></div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- END COLUMN-->
     </div>
     <!-- END ROW-->
@@ -87,19 +87,19 @@
     @elseif(auth()->user()->roles_id == 1)
         <div class="row">
             <!-- Seasons -->
-            <div class="col-md-8">
+            <div class="offset-md-2 col-md-8 offset-md-2">
                 <div class="ibox">
                     <div class="ibox-head">
-                        <div class="ibox-title">Seasons Data Table</div>
-                        <div>
+                        <div class="ibox-title">Season List of Farmers</div>
+                        {{-- <div>
                             <a class="btn btn-success btn-sm" href="{{ route('season_lists.create') }}">Plan Season</a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="ibox-body">
-                        <table class="table table-striped table-bordered table-hover" id="all_season_lists_table" cellspacing="0" width="100%">
+                        <table class="table table-bordered table-hover" id="all_season_lists_table" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th class="text-center">Farmer</th>
+                                    <th class="text-center" width="35%">Farmer</th>
                                     <th class="text-center">Season</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center" width="20%">Options</th>
@@ -108,7 +108,7 @@
                             <tbody>
                                 @foreach($all_season_lists as $list)
                                 <tr>
-                                    <td class="text-center">{{ $list->users->first_name }} {{ $list->users->last_name }}</td>
+                                    <td class="text-center">{{ $list->users->company }}</td>
                                     <td class="text-center">Season {{ $list->seasons->id }}</td>
                                     <td class="text-center">
                                         @if ($list->season_list_statuses_id == 1)
@@ -131,7 +131,7 @@
             <!-- END COLUMN-->
 
             <!-- Projected Sales -->
-            <div class="col-lg-3 col-md-6">
+            {{-- <div class="col-lg-3 col-md-6">
                 <div class="ibox bg-info color-white widget-stat">
                     <div class="ibox-body">
                         <h2 class="m-b-5 font-strong">P5,000.00</h2>
@@ -139,7 +139,7 @@
                         <div><i class="fa fa-level-up m-r-5"></i><small>25% higher</small></div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <!-- END COLUMN-->
         </div>
         <!-- END ROW-->

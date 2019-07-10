@@ -10,10 +10,12 @@ use App\Product;
 use App\OriginalProductList;
 use App\CurrentProductList;
 use Carbon\Carbon;
+use App\ProductImage;
 use Illuminate\Http\Request;
 
 use Charts;
 use DB;
+use Carbon\Carbon;
 
 use App\Notifications\ProductsAdded;
 use Notification;
@@ -136,7 +138,19 @@ class ProductListsController extends Controller
 
         // Get rice product average of the user 
         $rice_prod_ave = OriginalProductList::getRiceProductAverage();
+        $product_history = OriginalProductList::join('products', 'original_product_lists.orig_products_id', '=', 'products.id')
+                ->where('users_id', auth()->user()->id)
+                ->where('products.id', '!=', 3)
+                ->select('original_product_lists.*', 'products.type')
+                ->orderBy('original_product_lists.id')
+                ->get()
+                ;
 
+        // dd($product_history);
+
+        // Get yearly rice product average of the user 
+        // $rice_prod_ave = ProductList::getRiceProductAverage();
+        
         // Get withered product average of the user
         $withered_prod_ave = OriginalProductList::getWitheredProductAverage();
 
@@ -148,7 +162,40 @@ class ProductListsController extends Controller
         $all_withered_prod_ave = OriginalProductList::getAllWitheredProductAverage();
 
 
+        // ------------------------------------------------------------------------------------------------------------------------
 
+        // Farmer Yearly Rice Product Average Chart
+        
+        $rice_prod_ave = ProductList::getYearlyRiceProductAverage();
+        $withered_prod_ave = ProductList::getYearlyWitheredProductAverage();
+
+        $price_ave_labels = DB::table('original_product_lists AS pl')->join('users', 'pl.users_id', '=', 'users.id')
+                ->join('products', 'pl.orig_products_id', '=', 'products.id')
+                ->selectraw('YEAR(harvest_date) year')
+                ->where('users_id', '=', auth()->user()->id)
+                ->where('products.id', '=', 1)
+                ->groupBy(DB::raw('year(harvest_date)'))
+                // ->orderBy('year','desc')
+                ->limit(3)
+                ->pluck('year')
+                ;
+        // dd($price_ave_labels);
+
+        $yearly_rice_prod_ave = Charts::multi('line', 'highcharts')
+                ->title('Price Averages')
+                ->labels($price_ave_labels)
+                // ->template('material')
+                ->elementLabel('Rice Product Prices')
+                ->yAxisTitle("Price")
+                ->xAxisTitle("Year")
+                ->dataset('Rice Products',$rice_prod_ave)
+                ->dataset('Withered Products',$withered_prod_ave)
+                ->dimensions(500,300)
+                ->responsive(true);
+
+
+
+        // ------------------------------------------------------------------------------------------------------------------------
 
         // Labels
         $prod_labels = OriginalProductList::join('products', 'original_product_lists.products_id', '=', 'products.id')
@@ -241,7 +288,8 @@ class ProductListsController extends Controller
             ->with('users', $users)
             ->with('season', $season)
             ->with('products', $products)
-            ->with('rice_prod_ave', $rice_prod_ave)
+            ->with('product_history', $product_history)
+            ->with('yearly_rice_prod_ave', $yearly_rice_prod_ave)
             ->with('withered_prod_ave', $withered_prod_ave)
             ->with('all_rice_prod_ave', $all_rice_prod_ave)
             ->with('all_withered_prod_ave', $all_withered_prod_ave)
@@ -250,22 +298,22 @@ class ProductListsController extends Controller
             ;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+        /**
+         * Store a newly created resource in storage.
+         *
+         * @param  \Illuminate\Http\Request  $request
+         * @return \Illuminate\Http\Response
+         */
+        public function store(Request $request)
+        {
         // Validation
        $request->validate([
             'quantity.*' => 'required|int|',
             'price.*' => 'required|int',
         ]);
 
-        // Get latest season
-        $latest_season = Season::getLatestSeason();
+                // Get latest season
+                $latest_season = DB::table('seasons')->orderBy('id', 'desc')->first();
 
         $counter = 0;
         foreach($request->products_id as $key => $value) {
@@ -299,17 +347,24 @@ class ProductListsController extends Controller
             
         }
 
-        $season_list = SeasonList::findOrFail($season_list->id);
-        $season_list->actual_qty = $counter;
-        $season_list->save();
-        
+                        
+                        $season_list = SeasonList::where('seasons_id', $product_list->seasons_id)
+                                        ->where('users_id', $product_list->users_id)
+                                        ->first();
 
-        // Notification
-        $users = User::where('id', '!=', auth()->user()->id)->get();
-        Notification::send($users, new ProductsAdded());
+                        $counter = $product_list->orig_quantity + $counter;
+                }
 
-        return redirect()->route('product_lists.index')->with('success','Products Added ');
-    }
+                $season_list = SeasonList::findOrFail($season_list->id);
+                $season_list->actual_qty = $counter;
+                $season_list->save();
+                
+
+
+                return redirect()->route('product_lists.index')->with('success','Products Added ');
+        }
+
+
 
     /**
      * Display the specified resource.
@@ -352,14 +407,38 @@ class ProductListsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Validation
+        $request->validate([
+        // 'name'  => 'required',
+        // 'equipment_types_id'  => 'required',
+        // 'image' => 'image|nullable|max:1999'
+        ]);
+
+        
+        // Handle file upload
+        if($request->hasFile('image')){
+                // Get filename with extension
+                $filenameWithExt = $request->file('image')->getClientOriginalName();
+                // Get just filename 
+                $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                // Get just extension
+                $extension = $request->file('image')->getClientOriginalExtension();
+                // Filename to store 
+                $fileNameToStore = $filename.'_'.time().'.'.$extension;
+                // Upload image
+                $path = $request->file('image')->storeAs('public/images/', $fileNameToStore);
+        } else {
+                $fileNameToStore = 'noimage.jpeg';
+        };
+
         $product_list = OriginalProductList::findOrFail($id);
 
         $product_list->quantity = $request->input('quantity');
         // $product_list->curr_quantity = $request->input('curr_quantity');
         $product_list->price = $request->input('price');
+        $product_list->image = $fileNameToStore;
         $product_list->save();
 
-       
     
         return redirect()->route('product_lists.index')->with('success','Products Updated ');
     }

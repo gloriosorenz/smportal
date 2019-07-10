@@ -101,6 +101,7 @@ class ProfilesController extends Controller
         $farmer = new FarmerList;
         $farmer->first_name = $request->input('first_name');
         $farmer->last_name = $request->input('last_name');
+        $farmer->phone = $request->input('phone');
         $farmer->users_id = $request->input('users_id');
         $farmer->save();
 
@@ -149,6 +150,10 @@ class ProfilesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $farmer = FarmerList::findOrFail($id);
+        $farmer->delete();
+  
+        return redirect()->route('profile')
+                        ->with('success','Farmer Removed');
     }
 }

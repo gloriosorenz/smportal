@@ -142,8 +142,19 @@ class FarmersController extends Controller
     {
         $farmer = User::findOrFail($id);
 
+        $lagunabarangays = Barangay::where('cities_id','=', 43428)->whereNotIn('id', array(11218, 11219, 11223,11224,11225,11228))->get();
+            // dd($lagunabarangays);
+        $calabarzon = Region::where('id','=', 4)->get();
+        $starosa = City::where('id','=', 433)->get();
+        $laguna = Province::where('id','=',19)->get();
+
         return view('admin.farmers.edit')
-            ->with('farmer', $farmer);
+            ->with('farmer', $farmer)
+            ->with('lagunabarangays', $lagunabarangays)
+            ->with('calabarzon', $calabarzon)
+            ->with('laguna',$laguna)
+            ->with('starosa',$starosa)
+            ;
     }
 
     /**
@@ -163,14 +174,13 @@ class FarmersController extends Controller
         $farmer->phone = $request->input('phone');
         $farmer->street = $request->input('street');
 
-        // $farmer->barangays_id = $request->input('barangay');
-        // $farmer->cities_id = $request->input('city');
-        // $farmer->provinces_id = $request->input('province');
+        $farmer->barangays_id = $request->input('barangay');
+        $farmer->cities_id = $request->input('city');
+        $farmer->provinces_id = $request->input('province');
 
         $farmer->company = $request->input('company');
         $farmer->no_farmers = $request->input('no_farmers');
         $farmer->hectares = $request->input('hectares');
-        $user->active = true;
         $farmer->save();
 
         // dd($farmer);

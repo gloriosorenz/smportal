@@ -46,7 +46,7 @@ class Season extends Model
 
     // Get latest season
     public static function getLatestSeason(){
-        return $latest_season = DB::table('seasons')->orderBy('id', 'desc')->first();
+        return DB::table('seasons')->orderBy('id', 'desc')->first();
 
     }
 

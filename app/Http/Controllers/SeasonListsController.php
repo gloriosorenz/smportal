@@ -26,25 +26,27 @@ class SeasonListsController extends Controller
 
         $latest_season = Season::getLatestSeason();
 
-
         $season_lists = SeasonList::where('users_id', auth()->user()->id)
                     ->get();
         $farmers = User::where('roles_id', 2)->paginate(5);
 
-        $active = SeasonList::where('seasons_id', $latest_season->id)
+        $active = SeasonList::join('seasons', 'season_lists.seasons_id', '=', 'seasons.id')
+                    // ->where('season_statuses_id', 2)
+                    ->where('seasons_id', $latest_season->id)
                     ->where('users_id', auth()->user()->id)
                     ->get()
                     ->count();
+        // dd($active);
 
 
         $all_season_lists = SeasonList::all();
 
-        // dd($season_lists);
         return view('farmer.season_lists.index')
             ->with('season_lists', $season_lists)
             ->with('all_season_lists', $all_season_lists)
             ->with('active', $active)
             ->with('farmers', $farmers)
+            ->with('latest_season', $latest_season)
             ;
 
     }

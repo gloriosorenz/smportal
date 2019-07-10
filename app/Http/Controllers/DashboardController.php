@@ -11,6 +11,7 @@ use App\OriginalProductList;
 use App\CurrentProductList;
 use App\Product;
 use App\Season;
+use App\SeasonList;
 use App\OrderProduct;
 use App\User;
 use App\Order;
@@ -30,6 +31,39 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
+
+        // Get Latest Season
+
+        $latest_season = Season::getLatestSeason();
+
+        // ------------------------------------------------------------------------------------------------------------------------
+        // Check if user is active (auto deactivate user)
+        // ------------------------------------------------------------------------------------------------------------------------
+
+        $count_seasons = Season::count();
+        $counter = 0;
+        for($i=$count_seasons-3; $i <= $count_seasons; $i++){
+            $check_if_active = SeasonList::join('seasons', 'season_lists.seasons_id', '=', 'seasons.id')
+                ->where('seasons_id', $i)
+                ->where('users_id', auth()->user()->id)
+                ->count()
+                ;
+
+            // dd($check_if_active);
+            if($check_if_active == 0)
+                $counter ++;
+        }
+
+        // dd($counter);
+        if($counter > 3){
+            // Deactivates farmer
+            if(auth()->user()->roles_id == 2){
+                $id = auth()->user()->id;
+                $user = User::findOrfail($id);
+                $user->active = false;
+                $user->save();
+            }
+        }
 
         // ------------------------------------------------------------------------------------------------------------------------
         // Weather forecasat
@@ -160,6 +194,25 @@ class DashboardController extends Controller
                 ;
 
 
+
+
+        // ------------------------------------------------------------------------------------------------------------------------
+        
+        // TOTAL ORDER OVERVIEW
+        
+        $totalorderline = Charts::database(Order::where('order_statuses_id','=',2)->get(),'line', 'highcharts')
+                ->title('For the current year (per Month)')
+                ->elementLabel("Number of Orders")
+                ->dimensions(700,450)
+                ->responsive(true)
+                ->groupByMonth();
+        ;
+
+
+        // dd($totalorderline);
+
+
+
         // ------------------------------------------------------------------------------------------------------------------------
         // FARMER CHARTS
         // ------------------------------------------------------------------------------------------------------------------------
@@ -266,7 +319,8 @@ class DashboardController extends Controller
 
         // ------------------------------------------------------------------------------------------------------------------------
 
-         // Farmer's Most Valuable Customer Bar Chart (for farmer)
+        // Farmer's Most Valuable Customer Bar Chart (for farmer)
+
          $fmvc = DB::table('order_products')
             ->join('orders', 'order_products.orders_id', '=', 'orders.id')
             ->where('order_product_statuses_id','=',3)
@@ -274,6 +328,7 @@ class DashboardController extends Controller
             ->groupBy('users_id')
             ->orderBy('orders', 'desc')
             ->selectRaw('COUNT(order_products.id) as orders')
+            ->limit(3)
             ->pluck('orders')
             // ->get()
             ;
@@ -287,6 +342,7 @@ class DashboardController extends Controller
             ->groupBy('users_id', 'name')
             ->orderBy('orders', 'desc')
             ->selectRaw('CONCAT(first_name, last_name) AS name, COUNT(order_products.id) as orders')
+            ->limit(3)
             ->pluck('name')
             // ->get()
             ;
@@ -301,6 +357,82 @@ class DashboardController extends Controller
             ->dimensions(1000, 500)
             ->responsive(true)
             ;
+
+        // ------------------------------------------------------------------------------------------------------------------------
+     
+        // Prouct Comparison for the last season chart
+
+        $last_com_season2 = Season::where('season_statuses_id','=', 2)->latest('id')->pluck('id')->first();
+
+        $origprod = DB::table('seasons')
+            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
+            ->where('users_id','=', auth()->user()->id)
+            ->where('seasons_id','=',$last_com_season2)
+            ->pluck('orig_quantity')
+        ;
+
+        $currprod = DB::table('seasons')
+            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
+            ->where('users_id','=',auth()->user()->id)
+            ->where('seasons_id','=',$last_com_season2)
+            ->pluck('curr_quantity')
+        ;
+
+        $origcurrprod = DB::table('seasons')
+            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
+            ->where('users_id','=',auth()->user()->id)
+            ->where('seasons_id','=',$last_com_season2)
+            ->pluck('orig_quantity')
+        ;
+
+        $origcurrprodbar = Charts::multi('bar', 'highcharts')
+            ->title('Product Comparison For the Latest Season')
+            ->labels(['Rice','Withered','Damaged'])
+            ->dataset('Original Quantity',$origprod)
+            ->dataset('Current Quantity',$currprod)
+            ->dimensions(1000,500)
+            ->responsive(true)
+        ;
+
+        // ------------------------------------------------------------------------------------------------------------------------
+     
+        // Revenue Earned
+
+        $ricesoldpriperse = DB::table('product_lists')
+        ->join('order_products', 'product_lists.id', '=', 'order_products.product_lists_id')
+        ->where('farmers_id','=', auth()->user()->id)
+        ->where('order_product_statuses_id','=',3)
+        ->where('curr_products_id','=',1)
+        ->groupBy('seasons_id')
+        ->selectRaw('seasons_id,sum(quantity*price) as sum')
+        ->pluck('sum')
+        ;
+
+        $withersoldpriperse = DB::table('product_lists')
+            ->join('order_products', 'product_lists.id', '=', 'order_products.product_lists_id')
+            ->where('farmers_id','=', auth()->user()->id)
+            ->where('order_product_statuses_id','=',3)
+            ->where('curr_products_id','=',2)
+            ->groupBy('seasons_id')
+            ->selectRaw('seasons_id,sum(quantity*price) as sum')
+            ->pluck('sum')
+        ;
+        $prodsoldpriperselbl = DB::table('product_lists')
+            ->join('order_products', 'product_lists.id', '=', 'order_products.product_lists_id')
+            ->where('farmers_id','=', auth()->user()->id)
+            ->groupBy('seasons_id')
+            ->pluck('seasons_id')
+        ;
+
+        $revlinechart = Charts::multi('line', 'highcharts')
+            ->title('Revenue Earned')
+            ->labels($prodsoldpriperselbl)
+            ->dataset('Rice',$ricesoldpriperse)
+            ->dataset('Withered',$withersoldpriperse)
+            ->dimensions(1000,500)
+            ->responsive(true)
+        ;
+
 
         // ------------------------------------------------------------------------------------------------------------------------
 
@@ -319,8 +451,12 @@ class DashboardController extends Controller
             ->with('mvcbarchart', $mvcbarchart)
             ->with('fmvcbarchart', $fmvcbarchart)
             ->with('bestfarmerbarchart', $bestfarmerbarchart)
+            ->with('origcurrprodbar', $origcurrprodbar)
+            ->with('revlinechart', $revlinechart)
+            ->with('totalorderline', $totalorderline)
             ->with('transactions', $transactions)
             ->with('all_transactions', $all_transactions)
+            ->with('latest_season', $latest_season)
             ;
     }
 

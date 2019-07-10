@@ -24,6 +24,7 @@ class CustomersController extends Controller
     public function index()
     {
         $customers = User::getAllCustomers();
+        // dd($customers);
 
         return view('admin.customers.index')
             ->with('customers', $customers);
@@ -82,15 +83,15 @@ class CustomersController extends Controller
         $user->phone = $request->input('phone');
         $user->street = $request->input('street');
 
-        // $user->barangays_id = $request->input('barangay');
-        // $user->cities_id = $request->input('city');
-        // $user->provinces_id = $request->input('province');
+        $user->barangays_id = $request->input('barangay');
+        $user->cities_id = $request->input('city');
+        $user->provinces_id = $request->input('province');
 
 
         $user->company = $request->input('company');
         $user->password = Hash::make($password);
         $user->active = true;
-        $user->roles_id = 3;
+        $user->roles_id = $request->input('roles_id');
         $user->save();
 
 
@@ -128,8 +129,18 @@ class CustomersController extends Controller
     {
         $customer = User::findOrFail($id);
 
+        $barangays = Barangay::orderBy('name')->get();
+        $provinces = Province::orderBy('name')->get();
+        $cities = City::orderBy('name')->get();
+        $roles = Role::where('id','>',2)->get();
+
         return view('admin.customers.edit')
-            ->with('customer', $customer);
+            ->with('customer', $customer)
+            ->with('barangays', $barangays)
+            ->with('provinces', $provinces)
+            ->with('cities', $cities)
+            ->with('roles', $roles)
+            ;
     }
 
     /**

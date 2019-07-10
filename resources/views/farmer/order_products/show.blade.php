@@ -87,6 +87,34 @@
         </div>
     </div>
 
+
+    <div class="row">
+        <div class="offset-lg-2 col-lg-8 offset-lg-2">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">{{ $order_product->orders->users->first_name }}'s Receipt</div>
+                    <div class="ibox-tools">
+                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                    </div>
+                </div>
+                <div class="ibox-body text-center">
+                    @if($order_product->receipt == 'noimage.jpeg' || $order_product->receipt == null)
+                        {{-- <div class="img-wrap">
+                            <img src="/img/image.png" width="auto" height="80"/>
+                        </div> --}}
+                        No receipt
+                    @elseif($order_product->receipt)
+                        <div class="img-wrap">
+                            <img src="/storage/receipts/{{$order_product->receipt}}" width="auto" height="auto"/>
+                        </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+
 </div>
 <!-- End Page Content-->
 

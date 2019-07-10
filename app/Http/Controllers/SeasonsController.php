@@ -16,6 +16,7 @@ use App\Notifications\NewSeasonCreated;
 use Notification;
 
 use Carbon\Carbon;
+use PDF;
 
 class SeasonsController extends Controller
 {
@@ -202,5 +203,33 @@ class SeasonsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    // Generate PDF
+    public function pdfview(Request $request, $id)
+    {
+        $season = Season::find($id);
+        // $lists = SeasonList::where('seasons_id', $season->id)->get();
+
+        $lists = DB::table('season_lists')
+        ->join('seasons', 'season_lists.seasons_id', '=', 'seasons.id')
+        ->join('users', 'season_lists.users_id', '=', 'users.id')
+        ->where('season_lists.seasons_id', $season->id)
+        ->select('users.barangays_id', 
+                DB::raw("SUM(planned_hectares) as planned_hectares"), 
+                DB::raw("SUM(planned_num_farmers) as planned_num_farmers"),
+                DB::raw("SUM(planned_qty) as planned_qty"),
+                DB::raw("SUM(actual_hectares) as actual_hectares"), 
+                DB::raw("SUM(actual_num_farmers) as actual_num_farmers"),
+                DB::raw("SUM(actual_qty) as actual_qty")
+                )
+        ->groupBy('barangays_id')
+        ->get();
+
+        // pass view file
+        $pdf = PDF::loadView('partials.pdf.season_report', compact('season', 'lists'))->setPaper('a4', 'landscape');
+        // download pdf
+        return $pdf->stream('season_report.pdf');
     }
 }

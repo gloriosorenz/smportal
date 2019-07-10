@@ -84,7 +84,7 @@
                                             <li class="list-group-item">Orders (For this month)
                                                 <span class="pull-right color-orange">{{$orders}}</span>
                                             </li>
-                                            <li class="list-group-item">Total Hectares
+                                            <li class="list-group-item">Hectares owned
                                                 <span class="pull-right color-orange">{{$user->hectares}}</span>
                                             </li>
                                             <li class="list-group-item">Farmers
@@ -104,9 +104,16 @@
                                                 <div class="media-body">
                                                     <div class="media-heading">
                                                         {{$item->first_name}} {{$item->last_name}}
-                                                        <a href="#" class="btn btn-md btn-warning float-right"><i class="fas fa-edit fa-sm text-white"></i></a>
+                                                        <div class="text-center">
+                                                            <form action="{{ route('profiles.destroy',$item->id ?? 'Not set') }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-md btn-danger float-right"><i class="fas fa-times fa-sm text-white"></i></button>
+                                                                <a href="#" class="btn btn-md btn-warning float-right"><i class="fas fa-edit fa-sm text-white"></i></a>
+                                                            </form>
+                                                        </div>
                                                     </div>
-                                                    <div class="font-13">Lorem Ipsum is simply dummy text of the printing and typesetting.</div>
+                                                    <div class="font-13"><i class="fa fa-phone"></i> : {{$item->phone}}</div>
                                                 </div>
                                             </li>
                                             @endforeach
@@ -146,6 +153,14 @@
                                                         <div class="col-sm-6 form-group">
                                                             <label>Last Name</label>
                                                             <input class="form-control" type="text" placeholder="Last Name" name="last_name" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <input type="hidden" name="users_id" value="{{ auth()->user()->id }}" readonly/>
+                                                        <!-- Phone -->
+                                                        <div class="col-sm-6 form-group">
+                                                            <label>Phone</label>
+                                                            <input class="form-control" type="text" placeholder="Phone" name="phone" required>
                                                         </div>
                                                     </div>
                                                 </div>
