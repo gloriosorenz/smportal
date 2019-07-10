@@ -13,7 +13,7 @@ class AddImageToProductLists extends Migration
      */
     public function up()
     {
-        Schema::table('product_lists', function (Blueprint $table) {
+        Schema::table('current_product_lists', function (Blueprint $table) {
             $table->string('image')->nullable();
         });
     }
@@ -25,7 +25,7 @@ class AddImageToProductLists extends Migration
      */
     public function down()
     {
-        Schema::table('product_lists', function (Blueprint $table) {
+        Schema::table('current_product_lists', function (Blueprint $table) {
             $table->dropColumn('image');
         });
     }

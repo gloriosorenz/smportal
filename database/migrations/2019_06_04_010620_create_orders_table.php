@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->integer('tracking_id')->unique();
             $table->integer('order_statuses_id')->unsigned()->nullable();
             $table->double('total_price', 8, 2);
-            // $table->date('order_date')->nullable();
+            $table->date('order_date')->nullable();
 
 
             $table->integer('users_id')->unsigned()->nullable();
