@@ -62,17 +62,17 @@
                         <tbody>
                             <tr class=" text-center">
                                 <td>
-                                    <p>{{ $order_product->product_lists->orig_products->type }}</p>
+                                    <p>{{ $order_product->original_product_lists->products->type }}</p>
                                     {{-- <input class="form-control" type="number" value="{{ $order_product->quantity }}" disabled> --}}
                                 </td>
                                 <td>
                                     <p>{{ $order_product->quantity }}</p>
                                 </td>
                                 <td>
-                                    {{ presentPrice($order_product->product_lists->price) }}
+                                    {{ presentPrice($order_product->original_product_lists->price) }}
                                 </td>
                                 <td>
-                                    {{ presentPrice($order_product->quantity * $order_product->product_lists->price) }}
+                                    {{ presentPrice($order_product->quantity * $order_product->original_product_lists->price) }}
                                 </td>
                             </tr>
                         </tbody>

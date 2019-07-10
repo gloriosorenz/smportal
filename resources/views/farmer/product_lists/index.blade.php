@@ -40,7 +40,7 @@
                                 <th>Product Type</th>
                                 <th>Rice Farmer</th>
                                 <th>Initial Quantity</th>
-                                <th>Current Quantity</th>
+                                {{-- <th>Current Quantity</th> --}}
                                 <th>Harvest Date</th>
                                 <th>Options</th>
                             </tr>
@@ -49,10 +49,10 @@
                             @foreach($user_products as $list)
                             <tr>
                                 <td>{{$list->id}}</td>
-                                <td>{{$list->orig_products->type}}</td>
+                                <td>{{$list->products->type}}</td>
                                 <td>{{$list->users->company}}</td>
-                                <td>{{$list->orig_quantity}}</td>
-                                <td>{{$list->curr_quantity}}</td>
+                                <td>{{$list->quantity}}</td>
+                                {{-- <td>{{$list->curr_quantity}}</td> --}}
                                 <td>{{$list->harvest_date}}</td>
                                 <td>
                                     <a href="/product_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
@@ -80,7 +80,7 @@
                                 <th>Product Type</th>
                                 <th>Rice Farmer</th>
                                 <th>Initial Quantity</th>
-                                <th>Current Quantity</th>
+                                {{-- <th>Current Quantity</th> --}}
                                 <th>Harvest Date</th>
                                 {{-- <th width="15%">Options</th> --}}
                             </tr>
@@ -89,10 +89,10 @@
                             @foreach($all_user_products as $list)
                             <tr>
                                 <td>{{$list->id}}</td>
-                                <td>{{$list->orig_products->type}}</td>
+                                <td>{{$list->products->type}}</td>
                                 <td>{{$list->users->company}}</td>
-                                <td>{{$list->orig_quantity}}</td>
-                                <td>{{$list->curr_quantity}}</td>
+                                <td>{{$list->quantity}}</td>
+                                {{-- <td>{{$list->curr_quantity}}</td> --}}
                                 <td>{{$list->harvest_date}}</td>
                                 {{-- <td>
                                     <a href="#" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>

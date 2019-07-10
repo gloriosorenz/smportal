@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\ProductList;
+// use App\ProductList;
+use App\CurrentProductList;
+use App\OriginalProductList;
 use App\User;
 use App\Barangay;
 use App\Province;
@@ -37,23 +39,67 @@ class WebsiteController extends Controller
             ->whereNotIn('id', array(11218, 11219, 11223,11224,11225,11228))
             ->count();
 
-        // // Automated withering products
-        // $pro = ProductList::where('harvest_date', '<', Carbon::now()->addDays(7))
-        // ->where('curr_products_id','=', 1)
-        // ->get();
 
-        // foreach($pro as $pr){
-        //         $pr->update(['curr_products_id' => 2]);
-        // }
 
-        //  //Automated damaged products
-        //  $pro = ProductList::where('harvest_date', '<', Carbon::now()->addDays(7))
-        //  ->where('curr_products_id','=', 2)
-        //  ->get();
- 
-        //  foreach($pro as $pr){
-        //          $pr->update(['curr_products_id' => 3]);
-        //  }
+        // AUTOMATED WITHERING PRODUCTS
+            // Get all good from current
+            $goodid = CurrentProductList::where('harvest_date', '<', Carbon::now()->subDays(7))
+                ->where('products_id','=', 1)
+                ->get();
+
+                // dd($pro);
+
+            // get all withered from original
+            $witheredid = OriginalProductList::where('harvest_date', '<', Carbon::now()->subDays(7))
+                ->where('products_id','=', 2)
+                ->get();
+
+            // get all damaged from original
+            $damagedid = OriginalProductList::where('harvest_date', '<', Carbon::now()->subDays(7))
+                ->where('products_id','=', 3)
+                ->get();
+
+                // dd($whut);
+
+            // will update price and product type to withered, the original withered to damaged
+                foreach($goodid as $pr){
+                    foreach($witheredid as $wh){
+                        foreach($damagedid as $dg){
+                            if($pr->id+1 == $wh->id){
+                                $pr->update(['products_id' => 2]);
+                                $pr->update(['price' => $wh->price] );
+                            }
+                            if($pr->id+2 == $dg->id){
+                                $pr->update(['products_id' => 3]);
+                                $pr->update(['price' => 0] );
+                            }
+                        }
+                    }
+                }
+                
+
+
+        // AUTOMATED DAMAGED PRODUCTS
+            //  Get all withered from current
+            $witheredid1 = CurrentProductList::where('harvest_date', '<', Carbon::now()->subDays(14))
+                ->where('products_id','=', 2)
+                ->get();
+
+
+            // get all damaged from original
+            $damagedid = OriginalProductList::where('harvest_date', '<', Carbon::now()->subDays(14))
+                ->where('products_id','=', 3)
+                ->get();
+
+            // will update price and product type to damaged
+                foreach($witheredid1 as $pr){
+                    foreach($damagedid as $wh){
+                        if($pr->id+1 == $wh->id || $pr->id+2 == $wh->id){
+                            $pr->update(['products_id' => 3]);
+                            $pr->update(['price' => $wh->price] );
+                        }
+                    }
+                }
         
         // dd($clients);
         $products = Product::where('id', '!=', 3)
@@ -135,19 +181,19 @@ class WebsiteController extends Controller
             ->get();
 
             foreach($orderproducts as $op){
-                    $op->product_lists->update(['curr_quantity' => $op->product_lists->curr_quantity + $op->quantity]);
+                    $op->current_product_lists->update(['quantity' => $op->current_product_lists->quantity + $op->quantity]);
                     $op->update(['order_product_statuses_id' => 4]);    
             }
 
         // Auto add Cancel Order with Quantity (Confirmed Status)
-        $orderproducts1 = OrderProduct::where('updated_at', '<', Carbon::now()->subDays(3))
-            ->where('order_product_statuses_id','=', 2)
-            ->get();
+        // $orderproducts1 = OrderProduct::where('updated_at', '<', Carbon::now()->subDays(3))
+        //     ->where('order_product_statuses_id','=', 2)
+        //     ->get();
 
-            foreach($orderproducts1 as $op){
-                    $op->product_lists->update(['curr_quantity' => $op->product_lists->curr_quantity + $op->quantity]);
-                    $op->update(['order_product_statuses_id' => 4]);    
-            }
+        //     foreach($orderproducts1 as $op){
+        //             $op->current_product_lists->update(['quantity' => $op->current_product_lists->quantity + $op->quantity]);
+        //             $op->update(['order_product_statuses_id' => 4]);     
+        //     }
 
         // Auto check status of Product Order to change status or Order
         $poee = OrderProduct::groupBy('orders_id')->select( 'orders_id', DB::raw( 'AVG(order_product_statuses_id) as avg' ) )->get();
@@ -219,15 +265,19 @@ class WebsiteController extends Controller
          ->orderBy('id', 'desc')->first();
 
         //Show all Products
-        $product_lists = ProductList::where('seasons_id', $latest_season->id)
-                        ->where('curr_products_id', '!=', 3) 
-                        ->where('curr_quantity', '>', 0)
+        // $product_lists = CurrentProductList::where('seasons_id', $latest_season->id)
+        // ->where('products_id', '!=', 3) 
+        // ->where('quantity', '>', 0)
+        // ->get();
+
+        $product_lists = CurrentProductList::where('products_id', '!=', 3) 
+                        ->where('quantity', '>', 0)
                         ->get();
 
         // dd($product_lists);
                         
 
-        $farmers = DB::table('product_lists')
+        $farmers = DB::table('curr_product_lists')
                         ->groupBy('rice_farmers_id', 'seasons_id', 'products_id');
 
         

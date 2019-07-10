@@ -41,7 +41,7 @@
                             <tr>
                                 <th>Product</th>
                                 <th>Original Quantity</th>
-                                <th>Current Quantity</th>
+                                {{-- <th>Current Quantity</th> --}}
                                 <th>Price</th>
                                 <th>Harvest Date</th>
                             </tr>
@@ -49,11 +49,11 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <input type="text" class="form-control" name="product_type" value="{{$product_list->orig_products->type}}" disabled/>
+                                    <input type="text" class="form-control" name="product_type" value="{{$product_list->products->type}}" disabled/>
                                     {{-- <input name="products_id" type="hidden" value="{{$product_list->orig_products->id}}"/> --}}
                                 </td>
-                                <td><input type="text" class="form-control" name="orig_quantity" value="{{$product_list->orig_quantity}}" /></td>
-                                <td><input type="text" class="form-control" name="curr_quantity" value="{{$product_list->curr_quantity}}" /></td>
+                                <td><input type="text" class="form-control" name="orig_quantity" value="{{$product_list->quantity}}" /></td>
+                                {{-- <td><input type="text" class="form-control" name="curr_quantity" value="{{$product_list->curr_quantity}}" /></td> --}}
                                 <td><input type="text" class="form-control" name="price" value="{{$product_list->price}}"/></td>
                                 <td>
                                     <div class="form-group" id="date_1">

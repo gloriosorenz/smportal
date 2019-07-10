@@ -44,7 +44,7 @@ class OrderProductsController extends Controller
 
         $latest_season = Season::getLatestSeason();
 
-        $current_season_order_products = OrderProduct::join('product_lists', 'order_products.product_lists_id', '=', 'product_lists_id')
+        $current_season_order_products = OrderProduct::join('original_product_lists', 'order_products.original_product_lists_id', '=', 'original_product_lists_id')
             ->where('seasons_id', '=', $latest_season->id)
             ->get();
 

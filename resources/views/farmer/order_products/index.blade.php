@@ -63,8 +63,8 @@
                                         <td>{{$p->orders->tracking_id}}</td>
                                         <td>{{$p->orders->users->first_name}} {{$p->orders->users->last_name}}</td>
                                         <td>{{$p->orders->users->phone}}</td>
-                                        <td>{{$p->product_lists->orig_products->type}}</td>
-                                        <td>{{ presentPrice($p->quantity * $p->product_lists->price) }}</td>
+                                        <td>{{$p->original_product_lists->products->type}}</td>
+                                        <td>{{ presentPrice($p->quantity * $p->original_product_lists->price) }}</td>
                                         <td>
                                             <a href="/order_products/{{$p->id}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
                                             <a href="/order_products/confirm_order/{{$p->id}}" class="btn btn-success"><i class="fas fa-check"></i></a>
@@ -283,11 +283,11 @@
                                 <tbody>
                                     @foreach ($current_season_order_products as $item)
                                     <tr class="active">
-                                        <th>{{$item->product_lists->seasons->id}}</th>
+                                        <th>{{$item->original_product_lists->seasons->id}}</th>
                                         <td>{{$item->orders->tracking_id}}</td>
                                         <td>{{$item->orders->users->first_name}} {{$item->orders->users->last_name}}</td>
                                         <td>{{$item->orders->users->phone}}</td>
-                                        <td>{{$item->product_lists->orig_products->type}}</td>
+                                        <td>{{$item->original_product_lists->products->type}}</td>
                                         <td>{{$item->quantity}}</td>
                                         <td>{{ presentPrice($item->orders->total_price) }}</td>
                                         <td>
@@ -345,11 +345,11 @@
                                 <tbody>
                                     @foreach ($order_products as $p)
                                     <tr class="active">
-                                        <th>{{$p->product_lists->seasons->id}}</th>
+                                        <th>{{$p->original_product_lists->seasons->id}}</th>
                                         <td>{{$p->orders->tracking_id}}</td>
                                         <td>{{$p->orders->users->first_name}} {{$p->orders->users->last_name}}</td>
                                         <td>{{$p->orders->users->phone}}</td>
-                                        <td>{{$p->product_lists->orig_products->type}}</td>
+                                        <td>{{$p->original_product_lists->products->type}}</td>
                                         <td>{{$p->quantity}}</td>
                                         <td>{{ presentPrice($p->orders->total_price) }}</td>
                                         <td>

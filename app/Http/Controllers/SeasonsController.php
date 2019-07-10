@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Season;
 use App\SeasonList;
-use App\ProductList;
+use App\OriginalProductList;
+use App\CurrentProductList;
+
 
 use App\Notifications\NewSeasonCreated;
 use Notification;
@@ -33,7 +35,7 @@ class SeasonsController extends Controller
         $ongoing_season = Season::getOngoingSeason();
 
         // Count Products
-        $count = ProductList::where('seasons_id', $latest_season->id)
+        $count = OriginalProductList::where('seasons_id', $latest_season->id)
                 ->count();
 
         // dd($season_lists);

@@ -17,6 +17,20 @@ class Season extends Model
      // Primary Key
     public $primaryKey = 'id';
 
+    public function products()
+    {
+        return $this->belongsTo(Product::class, 'products_id');
+    }
+
+    public function current_product_lists()
+    {
+        return $this->belongsTo(CurrentProductList::class, 'current_product_lists_id');
+    }
+
+    public function original_product_lists()
+    {
+        return $this->belongsTo(OriginalProductList::class, 'original_product_lists_id');
+    }
 
     public function season_types()
     {

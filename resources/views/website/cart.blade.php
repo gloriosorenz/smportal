@@ -164,7 +164,7 @@
                             <figure class="media">
                                 <div class="img-wrap"><img src="http://placehold.it/100x100" class="img-thumbnail img-sm"></div>
                                 <figcaption class="media-body">
-                                    <h6 class="title text-truncate">{{ $item->model->curr_products->type }} </h6>
+                                    <h6 class="title text-truncate">{{ $item->model->products->type }} </h6>
                                     <br>
                                     <dl class="param param-inline small">
                                         <dt>Harvest Date: </dt>
@@ -179,13 +179,13 @@
                             </div>
                         </td>
                         <td> 
-                            <select class="quantity form-control" data-id="{{ $item->rowId }}" data-productQuantity="{{ $item->model->curr_quantity }}">
-                                @for ($i = 1; $i < $item->model->curr_quantity + 1 ; $i++)
+                            <select class="quantity form-control" data-id="{{ $item->rowId }}" data-productQuantity="{{ $item->model->quantity }}">
+                                @for ($i = 1; $i < $item->model->quantity + 1 ; $i++)
                                     <option {{ $item->qty == $i ? 'selected' : '' }}>{{ $i }}</option>
                                 @endfor                                
                             </select>
                             <dl class="p-t-20 param param-inline small">
-                                <dt>Availabel: {{ $item->model->curr_quantity }}</dt>
+                                <dt>Available: {{ $item->model->quantity }}</dt>
                             </dl>
                         </td>
                         <td>{{ $item->model->presentPrice() }}</td>

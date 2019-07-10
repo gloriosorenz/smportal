@@ -9,7 +9,9 @@ use App\Http\Requests\CheckoutRequest;
 use Carbon\Carbon;
 use App\Order;
 use App\OrderProduct;
-use App\ProductList;
+// use App\ProductList;
+use App\CurrentProductList;
+
 use App\User;
 
 use Notification;
@@ -52,7 +54,7 @@ class CheckoutController extends Controller
         }
 
         $contents = Cart::content()->map(function ($item) {
-            return $item->model->curr_products->type.', '.$item->qty;
+            return $item->model->products->type.', '.$item->qty;
         })->values()->toJson();
 
             $order = $this->addToOrdersTables($request, null);
@@ -98,7 +100,10 @@ class CheckoutController extends Controller
         foreach (Cart::content() as $item) {
             OrderProduct::create([
                 'orders_id' => $order->id,
-                'product_lists_id' => $item->model->id,
+                'original_product_lists_id' => $item->model->id,
+                'current_product_lists_id' => $item->model->id,
+                'product_types_id'=> $item->model->products->id,
+                'purchase_price'=> $item->model->price,
                 'quantity' => $item->qty,
                 'order_product_statuses_id' => 1,
                 'farmers_id' => $item->model->users->id,
@@ -118,9 +123,9 @@ class CheckoutController extends Controller
     protected function decreaseQuantities()
     {
         foreach (Cart::content() as $item) {
-            $product = ProductList::find($item->model->id);
+            $product = CurrentProductList::find($item->model->id);
 
-            $product->update(['curr_quantity' => $product->curr_quantity - $item->qty]);
+            $product->update(['quantity' => $product->quantity - $item->qty]);
 
 
             /*
@@ -134,9 +139,9 @@ class CheckoutController extends Controller
     protected function increaseQuantities()
     {
         foreach (Cart::content() as $item) {
-            $product = ProductList::find($item->model->id);
+            $product = CurrentProductList::find($item->model->id);
 
-            $product->update(['curr_quantity' => $product->curr_quantity + $item->qty]);
+            $product->update(['quantity' => $product->quantity + $item->qty]);
 
 
             /*
@@ -150,8 +155,8 @@ class CheckoutController extends Controller
     protected function productsAreNoLongerAvailable()
     {
         foreach (Cart::content() as $item) {
-            $product = ProductList::find($item->model->id);
-            if ($product->curr_quantity < $item->qty) {
+            $product = CurrentProductList::find($item->model->id);
+            if ($product->quantity < $item->qty) {
                 return true;
             }
         }

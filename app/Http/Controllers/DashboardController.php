@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use DB;
-use App\ProductList;
+// use App\ProductList;
+
+use App\OriginalProductList;
+use App\CurrentProductList;
 use App\Product;
 use App\Season;
 use App\OrderProduct;
@@ -31,6 +34,8 @@ class DashboardController extends Controller
         // ------------------------------------------------------------------------------------------------------------------------
         // Weather forecasat
         // ------------------------------------------------------------------------------------------------------------------------
+
+        $authid = auth()->user()->id;
 
         $forecast = DarkSkyApi::location(14.2843, 121.0889)
             ->units('ca')
@@ -68,17 +73,17 @@ class DashboardController extends Controller
         $last_com_season = Season::getLastCompleteSeason();
 
         // Get product type
-        $total_prod_label = Product::join('product_lists', 'products.id', '=', 'product_lists.orig_products_id')
-            ->where('orig_products_id','!=',4)
-            ->groupBy('orig_products_id', 'type')
+        $total_prod_label = Product::join('original_product_lists', 'products.id', '=', 'original_product_lists.products_id')
+            ->where('products_id','!=',4)
+            ->groupBy('products_id', 'type')
             ->pluck('products.type')
             ;
 
 
         // Get total quantity of products for last complete season
-        $total_prod_sum = ProductList::where('orig_products_id','!=',4)
-            ->groupBy('orig_products_id')
-            ->selectRaw('sum(curr_quantity) as sum')
+        $total_prod_sum = OriginalProductList::where('products_id','!=',4)
+            ->groupBy('products_id')
+            ->selectRaw('sum(quantity) as sum') //originally current_quantity
             ->where('seasons_id',$last_com_season->id) //error
             ->pluck('sum')
             ;
@@ -162,33 +167,33 @@ class DashboardController extends Controller
         // Seasonal Production Overview
 
         // Get rice production per season
-        $rice_products = ProductList::where('users_id','=', auth()->user()->id)
-                ->where('orig_products_id','=',1)
-                ->groupBy('seasons_id', 'orig_quantity')
+        $rice_products = OriginalProductList::where('users_id','=', auth()->user()->id)
+                ->where('products_id','=',1)
+                ->groupBy('seasons_id', 'quantity')
                 ->limit(10)
-                ->pluck('orig_quantity')
+                ->pluck('quantity')
         ;
         
         // Get withered rice production per season
-        $withered_products = ProductList::where('users_id','=', auth()->user()->id)
-                ->where('orig_products_id','=',2)
-                ->groupBy('seasons_id', 'orig_quantity')
+        $withered_products = OriginalProductList::where('users_id','=', auth()->user()->id)
+                ->where('products_id','=',2)
+                ->groupBy('seasons_id', 'quantity')
                 ->limit(10)
-                ->pluck('orig_quantity')
+                ->pluck('quantity')
         ;
         
         // Get damaged rice production per season
-        $damaged_products = ProductList::where('users_id','=', auth()->user()->id)
-                ->where('orig_products_id','=',3)
-                ->groupBy('seasons_id', 'orig_quantity')
+        $damaged_products = OriginalProductList::where('users_id','=', auth()->user()->id)
+                ->where('products_id','=',3)
+                ->groupBy('seasons_id', 'quantity')
                 ->limit(10)
-                ->pluck('orig_quantity')
+                ->pluck('quantity')
         ;
         
         // Rice production labels
-        $rice_production_label = ProductList::
+        $rice_production_label = OriginalProductList::
                 where('users_id','=', auth()->user()->id)
-                ->where('orig_products_id','=',1)
+                ->where('products_id','=',1)
                 ->limit(10)
                 ->get()
                 ->pluck('seasons_id')
@@ -213,33 +218,35 @@ class DashboardController extends Controller
         // Products Sold per Season Chart
 
         // Products sold per season (rice products)
-        $ricesoldperse = DB::table('product_lists')
-            ->selectRaw('seasons_id, sum(quantity) as sum')
-            ->join('order_products', 'product_lists.id', '=', 'order_products.product_lists_id')
-            ->where('farmers_id','=', auth()->user()->id)
+        $ricesoldperse = DB::table('current_product_lists')
+            ->join('order_products', 'current_product_lists.id', '=', 'order_products.current_product_lists_id')
+            ->where('farmers_id','=', $authid)
             ->where('order_product_statuses_id','=',3)
-            ->where('curr_products_id','=',1)
+            ->where('products_id','=',1)
             ->groupBy('seasons_id')
+            ->selectRaw('seasons_id, sum(order_products.quantity) as sum')
+            // ->get()
             ->pluck('sum')
         ;
 
+        // dd($ricesoldperse);
         
         // Products sold per season (withered products)
-        $withersoldperse = DB::table('product_lists')
-            ->selectRaw('seasons_id, sum(quantity) as sum')
-            ->join('order_products', 'product_lists.id', '=', 'order_products.product_lists_id')
-            ->where('farmers_id','=', auth()->user()->id)
-            ->where('order_product_statuses_id','=',3)
-            ->where('curr_products_id','=',2)
-            ->groupBy('seasons_id', 'quantity')
-            ->get()
+        $withersoldperse = DB::table('current_product_lists')
+        ->join('order_products', 'current_product_lists.id', '=', 'order_products.current_product_lists_id')
+        ->where('farmers_id','=', $authid)
+        ->where('order_product_statuses_id','=',3)
+        ->where('products_id','=',2)
+        ->groupBy('seasons_id')
+        ->selectRaw('seasons_id, sum(order_products.quantity) as sum')
+            // ->get()
             ->pluck('sum')
         ;
 
 
         // Products sold per season labels
-        $prodsoldperselbl = DB::table('product_lists')
-            ->join('order_products', 'product_lists.id', '=', 'order_products.product_lists_id')
+        $prodsoldperselbl = DB::table('current_product_lists')
+            ->join('order_products', 'current_product_lists.id', '=', 'order_products.current_product_lists_id')
             ->where('farmers_id','=', auth()->user()->id)
             ->groupBy('seasons_id')
             ->pluck('seasons_id')

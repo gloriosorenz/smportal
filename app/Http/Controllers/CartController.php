@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\ProductList;
+use App\CurrentProductList;
 use Illuminate\Http\Request;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Validator;
@@ -43,7 +43,7 @@ class CartController extends Controller
         //     ->associate('App\ProductList');
 
         Cart::add($request->id, $request->id, 1, $request->price)
-            ->associate('App\ProductList');
+            ->associate('App\CurrentProductList');
 
         return redirect()->route('shop')->with('success_message', 'Item was added to your cart!');
     }

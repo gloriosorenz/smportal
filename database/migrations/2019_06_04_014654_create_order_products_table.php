@@ -18,8 +18,10 @@ class CreateOrderProductsTable extends Migration
             $table->integer('quantity');
 
             $table->integer('order_product_statuses_id')->unsigned()->nullable();
-            $table->integer('product_lists_id')->unsigned()->nullable();
-            $table->integer('product_type')->unsigned()->nullable();
+            $table->integer('original_product_lists_id')->unsigned()->nullable();
+            $table->integer('current_product_lists_id')->unsigned()->nullable();
+            $table->integer('product_types_id')->unsigned()->nullable();
+            $table->double('purchase_price')->nullable();
             $table->integer('orders_id')->unsigned()->nullable();
             $table->integer('farmers_id')->unsigned()->nullable();
 

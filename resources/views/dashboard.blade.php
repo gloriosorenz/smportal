@@ -187,7 +187,7 @@
                                         <td>{{$t->orders->tracking_id}}</td>
                                         <td>{{$t->orders->users->first_name}} {{$t->orders->users->last_name}}</td>
                                         <td>{{$t->orders->users->phone}}</td>
-                                        <td>{{$t->product_lists->orig_products->type}}</td>
+                                        <td>{{$t->original_product_lists->products->type}}</td>
                                         <td>{{ presentPrice($t->orders->total_price) }}</td>
                                         @if($t->order_product_statuses->id == 1)
                                             <td><span class="badge badge-warning">{{$t->order_product_statuses->status}}</span></td>
@@ -527,7 +527,7 @@
                                         <td>{{$t->orders->tracking_id}}</td>
                                         <td>{{$t->orders->users->first_name}} {{$t->orders->users->last_name}}</td>
                                         <td>{{$t->orders->users->phone}}</td>
-                                        <td>{{$t->product_lists->orig_products->type}}</td>
+                                        <td>{{$t->current_product_lists->products->type}}</td>
                                         <td>{{ presentPrice($t->orders->total_price) }}</td>
                                         @if($t->order_product_statuses->id == 1)
                                             <td><span class="badge badge-warning">{{$t->order_product_statuses->status}}</span></td>

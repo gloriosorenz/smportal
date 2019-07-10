@@ -32,7 +32,7 @@
                                     <thead>
                                         <tr>
                                             <th width="">Product</th>
-                                            <th width="">Rice Farmer</th>
+                                            <th width="">Rice Farm Company</th>
                                             <th width="">Farm Location</th>
                                             <th width="">Harvest Date</th>
                                             <th width="">Available</th>
@@ -45,17 +45,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($product_lists as $product_list)
+                                        @foreach($product_lists as $curr_product_list)
                                         <tr class="tr">
                                             <td>
-                                                {{$product_list->curr_products->type}}
+                                                {{$curr_product_list->products->type}}
                                             </td>
-                                            <td>{{$product_list->users->company}}</td>
-                                            <td>{{ $product_list->users->barangays->name }}, {{ $product_list->users->cities->name }}, {{ $product_list->users->provinces->name }}</td>
-                                            <td>{{$product_list->harvest_date}}</td>
-                                            <td>{{ $product_list->curr_quantity }}</td>
+                                            <td>{{$curr_product_list->users->company}}</td>
+                                            <td>{{ $curr_product_list->users->barangays->name }}, {{ $curr_product_list->users->cities->name }}, {{ $curr_product_list->users->provinces->name }}</td>
+                                            <td>{{$curr_product_list->harvest_date}}</td>
+                                            <td>{{ $curr_product_list->quantity }} kaban/s</td>
                                             <td>
-                                                <div class="font-weight-bold">{{ presentPrice($product_list->price) }} </div>
+                                                <div class="font-weight-bold">{{ presentPrice($curr_product_list->price) }} </div>
                                             </td>
                                             @guest
                                             
@@ -64,9 +64,9 @@
                                                     {{-- @if ($product_list->quantity > 0) --}}
                                                         <form method="post" action="{{action('CartController@store')}}">
                                                             @csrf
-                                                            <input type="hidden" name="id" value="{{ $product_list->id }}">
-                                                            <input type="hidden" name="price" value="{{ $product_list->price }}">
-                                                            <input type="hidden" name="quantity" value="{{ $product_list->curr_quantity }}">
+                                                            <input type="hidden" name="id" value="{{ $curr_product_list->id }}">
+                                                            <input type="hidden" name="price" value="{{ $curr_product_list->price }}">
+                                                            <input type="hidden" name="quantity" value="{{ $curr_product_list->quantity }}">
                                                             <button type="submit" class="btn btn-success btn-md btn-block">Add to Cart</button>
                                                         </form>
                                                     {{-- @endif --}}
