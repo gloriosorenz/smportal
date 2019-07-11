@@ -3,6 +3,12 @@
 @section('content')
 
 
+<!-- START PAGE CONTENT-->
+<div class="page-heading">
+    <h1 class="page-title font-bold">Hi {{auth()->user()->first_name}}!</h1>
+</div>
+
+
 <!-- Admin Functionalities -->
 @if(auth()->user()->roles_id == 2)
 <!-- START PAGE CONTENT-->

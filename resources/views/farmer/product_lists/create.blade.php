@@ -177,7 +177,7 @@
                                     @foreach($product_history as $list)
                                     <tr>
                                         <td>Season {{$list->seasons->id}}</td>
-                                        <td>{{$list->orig_products->type}}</td>
+                                        <td>{{$list->products->type}}</td>
                                         {{-- <td>{{$list->orig_quantity}}</td>
                                         <td>{{$list->curr_quantity}}</td>
                                         <td>{{$list->harvest_date}}</td> --}}

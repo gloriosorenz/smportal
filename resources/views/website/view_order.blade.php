@@ -92,18 +92,19 @@
                                         @endphp
                                         @foreach ($value as $v)
                                         @php
-                                            $product = App\ProductList::findOrFail($v->product_lists_id);
+                                            // dd($value);
+                                            $product = App\OriginalProductList::findOrFail($v->original_product_lists_id);
                                             $seller = App\User::findOrFail($v->farmers_id);
                                             
                                             $sub_total = ($product->price *  $v->quantity) + $sub_total;
                                         @endphp
                                         <!-- foreach ($order->lineItems as $line) or some such thing here -->
                                         <tr>
-                                            <td class="text-left">{{$product->orig_products->type}}</td>
+                                            <td class="text-left">{{$product->products->type}}</td>
                                             <td class="text-center">{{$seller->company}}</td>
                                             <td class="text-center">{{$product->price}}</td>
                                             <td class="text-center">{{$v->quantity}} kaban/s</td>
-                                            <td class="text-right">{{ presentPrice($v->product_lists->price *  $v->quantity)}}</td>
+                                            <td class="text-right">{{ presentPrice($v->original_product_lists->price *  $v->quantity)}}</td>
                                         </tr>
                                         @endforeach
                                         <tr>

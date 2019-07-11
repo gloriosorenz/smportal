@@ -10,6 +10,7 @@ use Notification;
 use App\Notifications\SeasonListCreated;
 
 use DB;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
@@ -161,14 +162,27 @@ class SeasonListsController extends Controller
         $season_list->season_list_statuses_id = 2;
         $season_list->save();
 
-
-        // Get email
-        $admin = User::where('roles_id',1)->pluck('email');
         // Get Season 
         $season = $season_list->seasons->id;
 
-        // Mail to User
-        // Mail::to($admin)->send(new FarmerSeasonDone($season_list));
+        $ongoing_season = Season::getOngoingSeason();
+
+        $check_season_list = SeasonList::where('seasons_id', $ongoing_season->id)
+            ->where('season_list_statuses_id', 2)
+            ->count();
+        $count_season_list = SeasonList::getActiveFarmers()->count();
+
+
+        // dd($count_season_list);
+
+        if($check_season_list == $count_season_list){
+            $season = Season::findOrFail($ongoing_season->id);
+            $season->season_end = Carbon::now();
+            $season->season_statuses_id = 2;
+            $season->save();
+        }
+
+
 
         return redirect()->route('season_lists.index')->with('success','Season List Updated ');
     }

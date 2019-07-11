@@ -139,8 +139,8 @@ class ProductListsController extends Controller
         $users = User::where('roles_id', 2)->get()->pluck('company');
 
         // Get rice product average of the user 
-        $rice_prod_ave = OriginalProductList::getRiceProductAverage();
-        $product_history = OriginalProductList::join('products', 'original_product_lists.orig_products_id', '=', 'products.id')
+        // $rice_prod_ave = OriginalProductList::getRiceProductAverage();
+        $product_history = OriginalProductList::join('products', 'original_product_lists.products_id', '=', 'products.id')
                 ->where('users_id', auth()->user()->id)
                 ->where('products.id', '!=', 3)
                 ->select('original_product_lists.*', 'products.type')
@@ -154,25 +154,25 @@ class ProductListsController extends Controller
         // $rice_prod_ave = ProductList::getRiceProductAverage();
         
         // Get withered product average of the user
-        $withered_prod_ave = OriginalProductList::getWitheredProductAverage();
+        // $withered_prod_ave = OriginalProductList::getWitheredProductAverage();
 
         // Get all rice product average of all farmers
-        $all_rice_prod_ave = OriginalProductList::getAllRiceProductAverage();
+        // $all_rice_prod_ave = OriginalProductList::getAllRiceProductAverage();
         
             
         // Get all withered product average of all farmers
-        $all_withered_prod_ave = OriginalProductList::getAllWitheredProductAverage();
+        // $all_withered_prod_ave = OriginalProductList::getAllWitheredProductAverage();
 
 
         // ------------------------------------------------------------------------------------------------------------------------
 
         // Farmer Yearly Rice Product Average Chart
         
-        $rice_prod_ave = ProductList::getYearlyRiceProductAverage();
-        $withered_prod_ave = ProductList::getYearlyWitheredProductAverage();
+        $rice_prod_ave = OriginalProductList::getYearlyRiceProductAverage();
+        $withered_prod_ave = OriginalProductList::getYearlyWitheredProductAverage();
 
         $price_ave_labels = DB::table('original_product_lists AS pl')->join('users', 'pl.users_id', '=', 'users.id')
-                ->join('products', 'pl.orig_products_id', '=', 'products.id')
+                ->join('products', 'pl.products_id', '=', 'products.id')
                 ->selectraw('YEAR(harvest_date) year')
                 ->where('users_id', '=', auth()->user()->id)
                 ->where('products.id', '=', 1)
@@ -293,8 +293,8 @@ class ProductListsController extends Controller
             ->with('product_history', $product_history)
             ->with('yearly_rice_prod_ave', $yearly_rice_prod_ave)
             ->with('withered_prod_ave', $withered_prod_ave)
-            ->with('all_rice_prod_ave', $all_rice_prod_ave)
-            ->with('all_withered_prod_ave', $all_withered_prod_ave)
+        //     ->with('all_rice_prod_ave', $all_rice_prod_ave)
+        //     ->with('all_withered_prod_ave', $all_withered_prod_ave)
             ->with('price_history', $price_history)
             ->with('rice_production_line', $rice_production_line)
             ;
@@ -315,8 +315,8 @@ class ProductListsController extends Controller
             'price.*' => 'required|int',
         ]);
 
-                // Get latest season
-                $latest_season = DB::table('seasons')->orderBy('id', 'desc')->first();
+        // Get latest season
+        $latest_season = DB::table('seasons')->orderBy('id', 'desc')->first();
 
         $counter = 0;
         foreach($request->products_id as $key => $value) {
@@ -344,7 +344,7 @@ class ProductListsController extends Controller
             $season_list = SeasonList::where('seasons_id', $orig_product_list->seasons_id)
                         ->where('users_id', $orig_product_list->users_id)
                         ->first();
-                dd($season_list);
+                // dd($season_list);
 
             $counter = $orig_product_list->quantity + $counter;
             

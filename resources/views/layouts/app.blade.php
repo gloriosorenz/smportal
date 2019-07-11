@@ -166,7 +166,7 @@
             });
             $('#all_user_products').DataTable({
                 pageLength: 100,
-                order: [[ 0, 'asc' ]],
+                order: [[ 0, 'desc' ]],
                 scrollY: 200,
             });
             // Shop Table

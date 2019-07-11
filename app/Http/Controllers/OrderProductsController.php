@@ -137,7 +137,7 @@ class OrderProductsController extends Controller
         $email = $order->orders->users->email;
 
         // Get Harvest Date
-        $harvest_date = $order->product_lists->harvest_date;
+        $harvest_date = $order->original_product_lists->harvest_date;
         // Get Date Now
         $now = Carbon::now();
         // Get date after 7 days
@@ -158,7 +158,7 @@ class OrderProductsController extends Controller
         $orderproduct = OrderProduct::findOrFail($id);
         
         $orderproduct->update(['order_product_statuses_id'=>4]);    
-        $orderproduct->product_lists->update(['curr_quantity' => $orderproduct->product_lists->curr_quantity + $orderproduct->quantity]);                
+        $orderproduct->current_product_lists->update(['quantity' => $orderproduct->current_product_lists->quantity + $orderproduct->quantity]);                
     
 
         // Notification
@@ -209,7 +209,7 @@ class OrderProductsController extends Controller
         $order->save();
 
         $order->update(['order_product_statuses_id'=>1]);    
-        $order->product_lists->update(['curr_quantity' => $order->product_lists->curr_quantity - $order->quantity]);
+        $order->current_product_lists->update(['quantity' => $order->current_product_lists->curr_quantity - $order->quantity]);
 
         // Get email
         $email = $order->orders->users->email;

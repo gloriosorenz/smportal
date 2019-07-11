@@ -36,7 +36,7 @@
                     <table class="table table-bordered table-hover"  cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                {{-- <th>ID</th> --}}
                                 <th>Product Type</th>
                                 <th>Rice Farmer</th>
                                 <th>Initial Quantity</th>
@@ -46,25 +46,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($user_products as $list)
-                            <tr>
-                                <td>{{$list->id}}</td>
-                                <td>{{$list->products->type}}</td>
-                                <td>{{$list->users->company}}</td>
-                                <td>{{$list->quantity}}</td>
-                                <td>{{$list->quantity}}</td>
-                                <td>{{$list->harvest_date}}</td>
-                                <td>{{$list->quantity}}</td> {{-- orig =--}}
-                                <td>{{$list->quantity}}</td>{{--current--}}
-                                <td>{{ \Carbon\Carbon::parse($list->harvest_date)->format('F j, Y') }}</td>
-                                <td>
-                                    <a href="/product_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
-                                    {{-- <a href="/product_lists/{{$list->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a> --}}
-                                    {{-- <a href="#" class="btn btn-md btn-secondary"> <i class="fas fa-download fa-sm text-white"></i></a> --}}
-                                </td>
-                            </tr>
-                            @endforeach
+                            {{-- @if(count($user_products > 0)) --}}
+                                @foreach($user_products as $list)
+                                <tr>
+                                    {{-- <td>{{$list->id}}</td> --}}
+                                    <td>{{$list->products->type}}</td>
+                                    <td>{{$list->users->company}}</td>
+                                    <td>{{$list->quantity}}</td>
+                                    <td>{{$list->quantity}}</td>
+                                    <td>{{$list->harvest_date}}</td>
+                                    <td>{{$list->quantity}}</td> {{-- orig =--}}
+                                    <td>{{$list->quantity}}</td>{{--current--}}
+                                    <td>{{ \Carbon\Carbon::parse($list->harvest_date)->format('F j, Y') }}</td>
+                                    <td>
+                                        <a href="/product_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
+                                        {{-- <a href="/product_lists/{{$list->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a> --}}
+                                        {{-- <a href="#" class="btn btn-md btn-secondary"> <i class="fas fa-download fa-sm text-white"></i></a> --}}
+                                    </td>
+                                </tr>
+                                @endforeach
+                            {{-- @else
+                                <p>No data</p>
+                            @endif --}}
                         </tbody>
+
                     </table>
                 </div>
             </div>
@@ -79,7 +84,7 @@
                     <table class="table table-bordered" id="all_user_products" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>Season</th>
                                 <th>Product Type</th>
                                 <th>Rice Farmer</th>
                                 <th>Initial Quantity</th>
@@ -91,12 +96,12 @@
                         <tbody>
                             @foreach($all_user_products as $list)
                             <tr>
-                                <td>{{$list->id}}</td>
+                                <td>Season {{$list->seasons->id}}</td>
                                 <td>{{$list->products->type}}</td>
                                 <td>{{$list->users->company}}</td>
                                 <td>{{$list->quantity}}</td>
                                 <td>{{$list->quantity}}</td>
-                                <td>{{$list->harvest_date}}</td>
+                                <td>{{\Carbon\Carbon::parse($list->harvest_date)->format('F j, Y')}}</td>
                                 {{-- <td>
                                     <a href="#" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
                                     <a href="#" class="btn btn-md btn-secondary"> <i class="fas fa-download fa-sm text-white"></i></a>

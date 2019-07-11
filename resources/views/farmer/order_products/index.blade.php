@@ -57,15 +57,17 @@
                                     <tr class="active">
                                         <th>{{$p->orders->id}}</th>
                                         <td>{{$p->orders->tracking_id}}</td>
-                                        <td>{{\Carbon\Carbon::parse($p->orders->created_at)->format('F j, Y')}}</td>
+                                        <td>{{\Carbon\Carbon::parse($p->orders->order_date)->format('F j, Y')}}</td>
                                         <td>{{$p->orders->users->first_name}} {{$p->orders->users->last_name}}</td>
                                         <td>{{$p->orders->users->phone}}</td>
                                         <td>{{$p->original_product_lists->products->type}}</td>
                                         <td>{{ presentPrice($p->quantity * $p->original_product_lists->price) }}</td>
                                         <td>
                                             <a href="/order_products/{{$p->id}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                            <a href="/order_products/confirm_order/{{$p->id}}" class="btn btn-success"><i class="fas fa-check"></i></a>
-                                            <a href="/order_products/cancel_order/{{$p->id}}" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                            @if (auth()->user()->active)
+                                                <a href="/order_products/confirm_order/{{$p->id}}" class="btn btn-success"><i class="fas fa-check"></i></a>
+                                                <a href="/order_products/cancel_order/{{$p->id}}" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
@@ -109,22 +111,28 @@
                                     <tr class="active">
                                         <th>{{$c->orders->id}}</th>
                                         <td>{{$c->orders->tracking_id}}</td>
-                                        <td>{{\Carbon\Carbon::parse($c->orders->created_at)->format('F j, Y')}}</td>
+                                        <td>{{\Carbon\Carbon::parse($c->orders->order_date)->format('F j, Y')}}</td>
                                         <td>{{$c->orders->users->first_name}} {{$c->orders->users->last_name}}</td>
                                         <td>{{$c->orders->users->phone}}</td>
-                                        <td>{{$c->product_lists->orig_products->type}}</td>
-                                        <td>{{ presentPrice($c->quantity * $c->product_lists->price) }}</td>
+                                        <td>{{$c->original_product_lists->products->type}}</td>
+                                        <td>{{ presentPrice($c->quantity * $c->original_product_lists->price) }}</td>
                                         <td>
                                             <!-- Form -->
                                             <form method="POST" action="{{action('OrderProductsController@store')}}" enctype="multipart/form-data">
                                             @csrf
                                                 <input type="hidden" class="form-control" name="order_product_id" value="{{$c->id}}" readonly/>
-                                                <div class="custom-file form-control-sm p-b-10">
-                                                    <input type="file" class="custom-file-input" id="receipt" name="receipt" required>
-                                                    <label class="custom-file-label" for="receipt">Choose file</label>
-                                                </div>
+                                                @if (auth()->user()->active)
+                                                    <div class="custom-file form-control-sm p-b-10">
+                                                        <input type="file" class="custom-file-input" id="receipt" name="receipt" required>
+                                                        <label class="custom-file-label" for="receipt">Choose file</label>
+                                                    </div>
+                                                @endif
+
                                                 <a href="/order_products/{{$c->id}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
-                                                <button type="submit" class="btn btn-success">Paid</button>
+
+                                                @if (auth()->user()->active)
+                                                    <button type="submit" class="btn btn-success">Paid</button>
+                                                @endif
                                             </form>
                                             <!-- End Form -->
                                         </td>
@@ -170,13 +178,16 @@
                                     <tr class="active">
                                         <th>{{$c->orders->id}}</th>
                                         <td>{{$c->orders->tracking_id}}</td>
-                                        <td>{{\Carbon\Carbon::parse($c->orders->created_at)->format('F j, Y')}}</td>
+                                        <td>{{\Carbon\Carbon::parse($c->orders->order_date)->format('F j, Y')}}</td>
                                         <td>{{$c->orders->users->first_name}} {{$c->orders->users->last_name}}</td>
                                         <td>{{$c->orders->users->phone}}</td>
-                                        <td>{{$c->product_lists->orig_products->type}}</td>
-                                        <td>{{ presentPrice($c->quantity * $c->product_lists->price) }}</td>
+                                        <td>{{$c->original_product_lists->products->type}}</td>
+                                        <td>{{ presentPrice($c->quantity * $c->original_product_lists->price) }}</td>
                                         <td>
-                                            <a href="/order_products/pending_order/{{$c->id}}" class="btn btn-warning">Return to Pending</a>
+                                            <a href="/order_products/{{$c->id}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                            @if (auth()->user()->active)
+                                                <a href="/order_products/pending_order/{{$c->id}}" class="btn btn-warning">Return to Pending</a>
+                                            @endif
                                         </td>
                                     </tr>
                                     @endforeach
@@ -221,11 +232,11 @@
                                     <tr class="active">
                                         <th class="text-center">{{$p->orders->id}}</th>
                                         <td>{{$p->orders->tracking_id}}</td>
-                                        <td>{{\Carbon\Carbon::parse($c->orders->created_at)->format('F j, Y')}}</td>
+                                        <td>{{\Carbon\Carbon::parse($p->orders->order_date)->format('F j, Y')}}</td>
                                         <td>{{$p->orders->users->first_name}} {{$p->orders->users->last_name}}</td>
                                         <td>{{$p->orders->users->phone}}</td>
-                                        <td>{{$p->product_lists->orig_products->type}}</td>
-                                        <td>{{ presentPrice($p->quantity * $p->product_lists->price) }}</td>
+                                        <td>{{$p->original_product_lists->products->type}}</td>
+                                        <td>{{ presentPrice($p->quantity * $p->original_product_lists->price) }}</td>
                                         <td>
                                             @if($p->receipt == 'noimage.jpeg' || $p->receipt == null)
                                                 <div class="img-wrap">
@@ -423,10 +434,10 @@
                             <tr class="active">
                                 <th>{{$p->product_lists->seasons->id}}</th>
                                 <td>{{$p->orders->tracking_id}}</td>
-                                <td>{{\Carbon\Carbon::parse($p->orders->created_at)->format('F j, Y')}}</td>
+                                <td>{{\Carbon\Carbon::parse($p->orders->order_date)->format('F j, Y')}}</td>
                                 <td>{{$p->orders->users->first_name}} {{$p->orders->users->last_name}}</td>
                                 <td>{{$p->orders->users->phone}}</td>
-                                <td>{{$p->product_lists->orig_products->type}}</td>
+                                <td>{{$p->original_product_lists->products->type}}</td>
                                 <td>{{$p->quantity}}</td>
                                 <td>{{ presentPrice($p->orders->total_price) }}</td>
                                 <td>

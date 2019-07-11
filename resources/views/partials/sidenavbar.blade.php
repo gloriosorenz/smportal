@@ -18,7 +18,6 @@
                     <span class="nav-label">Dashboard</span>
                 </a>
             </li>
-                @if (auth()->user()->active)
                 <!-- Profile -->
                 <li>
                     <a class="active" href="{{ route('profile') }}"><i class="sidebar-item-icon fas fa-user-circle"></i>
@@ -87,7 +86,6 @@
                         <span class="nav-label">Damage Report</span>
                     </a>
                 </li>
-                @endif
 
             <!-- ------------------------------------------------------------------------------------------------------------------------ -->
 
@@ -99,9 +97,7 @@
                 <a href="{{ route('dashboard') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
                     <span class="nav-label">Dashboard</span>
                 </a>
-            </li>
-                @if (auth()->user()->active)
-                    
+            </li>                    
                 <!-- Profile -->
                 <li class="{{Request:: is('profile') ? 'active' : ''}}">
                     <a href="{{ route('profile') }}"><i class="sidebar-item-icon fas fa-user-circle"></i>
@@ -158,7 +154,6 @@
                         <span class="nav-label">Damage Report</span>
                     </a>
                 </li>
-                @endif
 
             
 

@@ -25,9 +25,11 @@
                     <div class="ibox-title">Season History</div>
                     <!-- Add Season Button -->
                     @if ($active == 0)
-                        <div>
-                            <a class="btn btn-success btn-sm" href="{{ route('season_lists.create') }}">Plan Season</a>
-                        </div>
+                        @if (auth()->user()->active)
+                            <div>
+                                <a class="btn btn-success btn-sm" href="{{ route('season_lists.create') }}">Plan Season</a>
+                            </div>
+                        @endif
                     @endif
                 </div>
                 <div class="ibox-body">
@@ -51,10 +53,12 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    @if ($list->season_list_statuses_id == 1)
-                                    <a href="/season_lists/{{$list->id}}/edit" class="btn btn-md btn-success"><i class="fas fa-check fa-sm text-white"></i></a>
-                                    @else
-                                    <a href="/season_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
+                                    @if (auth()->user()->active)
+                                        @if ($list->season_list_statuses_id == 1)
+                                            <a href="/season_lists/{{$list->id}}/edit" class="btn btn-md btn-success"><i class="fas fa-check fa-sm text-white"></i></a>
+                                        @else
+                                            <a href="/season_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
+                                        @endif
                                     @endif
                                     <a href="/season_lists/{{$list->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
                                 </td>

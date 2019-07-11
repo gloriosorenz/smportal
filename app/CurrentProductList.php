@@ -46,36 +46,46 @@ class CurrentProductList extends Model
         }
     
     
-        // Get Rice Product Average Price of a farmer
-        public static function getRiceProductAverage(){
-            return DB::table('current_product_lists')->join('users', 'current_product_lists.users_id', '=', 'users.id')
-                    ->join('products', 'current_product_lists.orig_products_id', '=', 'products.id')
+         // Get Yearly Rice Product Average Price of a farmer
+        public static function getYearlyRiceProductAverage(){
+            return DB::table('product_lists AS pl')->join('users', 'pl.users_id', '=', 'users.id')
+                    ->join('products', 'pl.orig_products_id', '=', 'products.id')
+                    ->selectraw('AVG(price) as price, YEAR(harvest_date) year')
                     ->where('users_id', '=', auth()->user()->id)
                     ->where('products.id', '=', 1)
-                    ->avg('price');
+                    ->groupBy(DB::raw('year(harvest_date)'))
+                    // ->orderBy('year','desc')
+                    ->limit(3)
+                    ->pluck('price')
+                    ;
         }
-    
-        // Get Withered Product Average Price of a farmer
-        public static function getWitheredProductAverage(){
-            return DB::table('current_product_lists')->join('users', 'current_product_lists.users_id', '=', 'users.id')
-                    ->join('products', 'current_product_lists.orig_products_id', '=', 'products.id')
+
+        // Get Yearly Withered Product Average Price of a farmer
+        public static function getYearlyWitheredProductAverage(){
+            return DB::table('product_lists')->join('users', 'product_lists.users_id', '=', 'users.id')
+                    ->join('products', 'product_lists.orig_products_id', '=', 'products.id')
+                    ->selectraw('AVG(price) as price, YEAR(harvest_date) year')
                     ->where('users_id', '=', auth()->user()->id)
                     ->where('products.id', '=', 2)
-                    ->avg('price');
+                    ->groupBy(DB::raw('year(harvest_date)'))
+                    // ->orderBy('year','desc')
+                    ->limit(3)
+                    ->pluck('price')    
+                    ;
         }
-    
+
         // Get all rice product average of all farmers
         public static function getAllRiceProductAverage(){
-            return DB::table('current_product_lists')->join('users', 'current_product_lists.users_id', '=', 'users.id')
-                    ->join('products', 'current_product_lists.orig_products_id', '=', 'products.id')
+            return DB::table('product_lists')->join('users', 'product_lists.users_id', '=', 'users.id')
+                    ->join('products', 'product_lists.orig_products_id', '=', 'products.id')
                     ->where('products.id', '=', 1)
                     ->avg('price');
         }
         
         // Get all rice product average of all farmers
         public static function getAllWitheredProductAverage(){
-            return DB::table('current_product_lists')->join('users', 'current_product_lists.users_id', '=', 'users.id')
-                    ->join('products', 'current_product_lists.orig_products_id', '=', 'products.id')
+            return DB::table('product_lists')->join('users', 'product_lists.users_id', '=', 'users.id')
+                    ->join('products', 'product_lists.orig_products_id', '=', 'products.id')
                     ->where('products.id', '=', 2)
                     ->avg('price');
         }

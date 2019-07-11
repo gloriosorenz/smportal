@@ -56,8 +56,8 @@
                                     <i class="fas fa-sun fa-md">
                                     @endif
                                 </td>
-                                <td>{{ $season->season_start }}</td>
-                                <td>{{ $season->season_end }}</td>
+                                <td>{{ \Carbon\Carbon::parse($season->season_start)->format('F j, Y')}}</td>
+                                <td>{{ \Carbon\Carbon::parse($season->season_end)->format('F j, Y')}}</td>
                                 {{-- <td>
                                     @if ($season->season_statuses_id == 1)
                                         <span class="badge badge-warning badge-pill">{{ $season->season_statuses->status }}</span>
@@ -80,6 +80,9 @@
                         </tbody>
                     </table>
                 </div>
+                {{-- <div class="ibox-footer text-center">
+                    <small class="text-muted">With faded secondary text</small>
+                </div> --}}
             </div>
         </div>
 

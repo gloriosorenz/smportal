@@ -209,10 +209,10 @@
                         <br>
                             {{-- <div class="font-weight-bold">Wind Speed Guide:</div> --}}
                             <ul class="list-inline">
-                                <li class="list-inline-item"><i class="fas fa-circle" style="color:green"></i> 0-30km/h - Good Wind Condition</li>
-                                <li class="list-inline-item"><i class="fas fa-circle" style="color:blue"></i> 30-40km/h - Acceptable</li> 
-                                <li class="list-inline-item"><i class="fas fa-circle" style="color:orange"></i> 40-60km/h - Be on Alert</li>
-                                <li class="list-inline-item"><i class="fas fa-circle" style="color:red"></i> 60>km/h - Dangerous</li>
+                                <li class="list-inline-item"><i class="fas fa-circle"></i> 0-30km/h - Good Wind Condition</li>
+                                <li class="list-inline-item"><i class="fas fa-circle"></i> 30-40km/h - Acceptable</li> 
+                                <li class="list-inline-item"><i class="fas fa-circle"></i> 40-60km/h - Be on Alert</li>
+                                <li class="list-inline-item"><i class="fas fa-circle"></i> 60>km/h - Dangerous</li>
                             </ul>
                         <script type='text/javascript' src='https://darksky.net/widget/graph/14.3144,121.1121/ca12/en.js?width=100%&height=320&title=Santa Rosa, Laguna&textColor=333333&bgColor=transparent&transparency=true&fontFamily=Sans-Serif&customFont=&units=ca&graph=wind_graph&timeColor=333333&tempColor=333333&lineColor=333333&markerColor=333333'></script>
                     </div>
@@ -225,10 +225,10 @@
                         <br>
                         {{-- <div class="font-weight-bold">Temperature Guide:</div> --}}
                         <ul class="list-inline">
-                            <li class="list-inline-item"><i class="fas fa-circle" style="color:green"></i> 10-12°C - Minimum</li>
-                            <li class="list-inline-item"><i class="fas fa-circle" style="color:blue"></i> 30-32°C - Optimum</li> 
-                            <li class="list-inline-item"><i class="fas fa-circle" style="color:orange"></i> 13-29°C and 33-35°C - Acceptable</li>
-                            <li class="list-inline-item"><i class="fas fa-circle" style="color:red"></i> 36-38°C - Maximum</li>
+                            <li class="list-inline-item"><i class="fas fa-circle"></i> 10-12°C - Minimum</li>
+                            <li class="list-inline-item"><i class="fas fa-circle"></i> 30-32°C - Optimum</li> 
+                            <li class="list-inline-item"><i class="fas fa-circle"></i> 13-29°C and 33-35°C - Acceptable</li>
+                            <li class="list-inline-item"><i class="fas fa-circle"></i> 36-38°C - Maximum</li>
                         </ul>
                         <script type='text/javascript' src='https://darksky.net/widget/graph/14.3144,121.1121/ca12/en.js?width=100%&height=320&title=Santa Rosa, Laguna&textColor=333333&bgColor=transparent&transparency=true&fontFamily=Sans-Serif&customFont=&units=ca&graph=temperature_graph&timeColor=333333&tempColor=333333&lineColor=333333&markerColor=333333'></script>
                     </div>

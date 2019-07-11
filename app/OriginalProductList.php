@@ -20,7 +20,7 @@ class OriginalProductList extends Model
         // Relations
         // public function orig_products()
         // {
-        //     return $this->belongsTo(Product::class, 'orig_products_id');
+        //     return $this->belongsTo(Product::class, 'products_id');
         // }
     
         public function products()
@@ -45,24 +45,34 @@ class OriginalProductList extends Model
         }
     
     
-        // Get Rice Product Average Price of a farmer
-        public static function getRiceProductAverage(){
-            return DB::table('original_product_lists')->join('users', 'original_product_lists.users_id', '=', 'users.id')
-                    ->join('products', 'original_product_lists.products_id', '=', 'products.id')
+        // Get Yearly Rice Product Average Price of a farmer
+        public static function getYearlyRiceProductAverage(){
+            return DB::table('original_product_lists AS pl')->join('users', 'pl.users_id', '=', 'users.id')
+                    ->join('products', 'pl.products_id', '=', 'products.id')
+                    ->selectraw('AVG(price) as price, YEAR(harvest_date) year')
                     ->where('users_id', '=', auth()->user()->id)
                     ->where('products.id', '=', 1)
-                    ->avg('price');
+                    ->groupBy(DB::raw('year(harvest_date)'))
+                    // ->orderBy('year','desc')
+                    ->limit(3)
+                    ->pluck('price')
+                    ;
         }
-    
-        // Get Withered Product Average Price of a farmer
-        public static function getWitheredProductAverage(){
+
+        // Get Yearly Withered Product Average Price of a farmer
+        public static function getYearlyWitheredProductAverage(){
             return DB::table('original_product_lists')->join('users', 'original_product_lists.users_id', '=', 'users.id')
                     ->join('products', 'original_product_lists.products_id', '=', 'products.id')
+                    ->selectraw('AVG(price) as price, YEAR(harvest_date) year')
                     ->where('users_id', '=', auth()->user()->id)
                     ->where('products.id', '=', 2)
-                    ->avg('price');
+                    ->groupBy(DB::raw('year(harvest_date)'))
+                    // ->orderBy('year','desc')
+                    ->limit(3)
+                    ->pluck('price')    
+                    ;
         }
-    
+
         // Get all rice product average of all farmers
         public static function getAllRiceProductAverage(){
             return DB::table('original_product_lists')->join('users', 'original_product_lists.users_id', '=', 'users.id')
@@ -78,4 +88,7 @@ class OriginalProductList extends Model
                     ->where('products.id', '=', 2)
                     ->avg('price');
         }
+
+
+        
 }

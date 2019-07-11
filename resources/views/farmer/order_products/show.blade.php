@@ -45,7 +45,8 @@
                         <dt class="col-sm-2">Email</dt>
                         <dd class="col-sm-9">{{ $order_product->orders->users->email }}</dd>
                         
-                        
+                        <dt class="col-sm-2">Order Date</dt>
+                        <dd class="col-sm-9">{{ \Carbon\Carbon::parse($order_product->orders->order_date)->format('F j, Y') }}</dd>
                     </dl>
 
                     <p class="h3">Order Details</p>
@@ -92,7 +93,7 @@
         <div class="offset-lg-2 col-lg-8 offset-lg-2">
             <div class="ibox">
                 <div class="ibox-head">
-                    <div class="ibox-title">{{ $order_product->orders->users->first_name }}'s Receipt</div>
+                    <div class="ibox-title">{{ $order_product->orders->users->first_name }}'s Proof of Purchase</div>
                     <div class="ibox-tools">
                         <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                     </div>
