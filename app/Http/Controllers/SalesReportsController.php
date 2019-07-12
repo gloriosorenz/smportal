@@ -8,7 +8,9 @@ use App\DamageReport;
 use App\Order;
 use App\OrderProduct;
 use App\Season;
-use App\ProductList;
+// use App\ProductList;
+use App\OriginalProductList;
+use App\CurrentProductList;
 use App\SeasonList;
 use PDF;
 use DB;
@@ -76,13 +78,13 @@ class SalesReportsController extends Controller
     public function show($id)
     {
         $season = Season::find($id);
-        $product_lists = ProductList::find($id);
+        $product_lists = OriginalProductList::find($id);
         
         // Admin
 
         $allprodperseason = DB::table('seasons')
-            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
-            ->join('order_products','product_lists.id','=','order_products.product_lists_id')
+            ->join('original_product_lists', 'seasons.id', '=', 'original_product_lists.seasons_id')
+            ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
             ->where('order_product_statuses_id','=',3)
             ->where('seasons_id',$season->id)
             // ->groupBy('orders_id')
@@ -91,19 +93,19 @@ class SalesReportsController extends Controller
         // dd($allprodperseason);
 
         $allprodsum = DB::table('seasons')
-            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
-            ->join('order_products','product_lists.id','=','order_products.product_lists_id')
+            ->join('original_product_lists', 'seasons.id', '=', 'original_product_lists.seasons_id')
+            ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
             ->where('seasons_id',$season->id) 
             ->where('order_product_statuses_id','=',3)
-            ->select(DB::raw("SUM(price*quantity) as sum"))  
+            ->select(DB::raw("SUM(price*ordeR_products.quantity) as sum"))  
             ->pluck('sum');
 
         $allprodquan = DB::table('seasons')
-            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
-            ->join('order_products','product_lists.id','=','order_products.product_lists_id')
+            ->join('original_product_lists', 'seasons.id', '=', 'original_product_lists.seasons_id')
+            ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
             ->where('seasons_id',$season->id) 
             ->where('order_product_statuses_id','=',3)
-            ->select(DB::raw("SUM(quantity) as sum"))  
+            ->select(DB::raw("SUM(order_products.quantity) as sum"))  
             ->pluck('sum');
         // dd($allprodquan);
 
@@ -118,8 +120,8 @@ class SalesReportsController extends Controller
         $authid = auth()->user()->id;
 
         $farprodperseason = DB::table('seasons')
-            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
-            ->join('order_products','product_lists.id','=','order_products.product_lists_id')
+            ->join('original_product_lists', 'seasons.id', '=', 'original_product_lists.seasons_id')
+            ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
             ->where('farmers_id','=',$authid)
             ->where('order_product_statuses_id','=',3)
             ->where('seasons_id',$season->id)
@@ -129,21 +131,21 @@ class SalesReportsController extends Controller
         // dd($allprodperseason);
 
         $farprodsum = DB::table('seasons')
-            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
-            ->join('order_products','product_lists.id','=','order_products.product_lists_id')
+            ->join('original_product_lists', 'seasons.id', '=', 'original_product_lists.seasons_id')
+            ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
             ->where('seasons_id',$season->id) 
             ->where('farmers_id','=',$authid)
             ->where('order_product_statuses_id','=',3)
-            ->select(DB::raw("SUM(price*quantity) as sum"))  
+            ->select(DB::raw("SUM(price*order_products.quantity) as sum"))  
             ->pluck('sum');
 
         $farprodquan = DB::table('seasons')
-            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
-            ->join('order_products','product_lists.id','=','order_products.product_lists_id')
+            ->join('original_product_lists', 'seasons.id', '=', 'original_product_lists.seasons_id')
+            ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
             ->where('seasons_id',$season->id) 
             ->where('farmers_id','=',$authid)
             ->where('order_product_statuses_id','=',3)
-            ->select(DB::raw("SUM(quantity) as sum"))  
+            ->select(DB::raw("SUM(order_products.quantity) as sum"))  
             ->pluck('sum');
 
         return view('reports.sales_reports.show')
@@ -208,13 +210,13 @@ class SalesReportsController extends Controller
         //         ->sum('total_price');
 
         $season = Season::find($id);
-        $product_lists = ProductList::find($id);
+        $product_lists = OriginalProductList::find($id);
         
         // Admin
 
         $allprodperseason = DB::table('seasons')
-            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
-            ->join('order_products','product_lists.id','=','order_products.product_lists_id')
+            ->join('original_product_lists', 'seasons.id', '=', 'poriginal_roduct_lists.seasons_id')
+            ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
             ->where('order_product_statuses_id','=',3)
             ->where('seasons_id',$season->id)
             // ->groupBy('orders_id')
@@ -223,16 +225,16 @@ class SalesReportsController extends Controller
         // dd($allprodperseason);
 
         $allprodsum = DB::table('seasons')
-            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
-            ->join('order_products','product_lists.id','=','order_products.product_lists_id')
+            ->join('original_product_lists', 'seasons.id', '=', 'original_product_lists.seasons_id')
+            ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
             ->where('seasons_id',$season->id) 
             ->where('order_product_statuses_id','=',3)
             ->select(DB::raw("SUM(price*quantity) as sum"))  
             ->pluck('sum');
 
         $allprodquan = DB::table('seasons')
-            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
-            ->join('order_products','product_lists.id','=','order_products.product_lists_id')
+            ->join('original_product_lists', 'seasons.id', '=', 'original_product_lists.seasons_id')
+            ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
             ->where('seasons_id',$season->id) 
             ->where('order_product_statuses_id','=',3)
             ->select(DB::raw("SUM(quantity) as sum"))  
@@ -250,8 +252,8 @@ class SalesReportsController extends Controller
         $authid = auth()->user()->id;
 
         $farprodperseason = DB::table('seasons')
-            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
-            ->join('order_products','product_lists.id','=','order_products.product_lists_id')
+            ->join('original_product_lists', 'seasons.id', '=', 'original_product_lists.seasons_id')
+            ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
             ->where('farmers_id','=',$authid)
             ->where('order_product_statuses_id','=',3)
             ->where('seasons_id',$season->id)
@@ -261,8 +263,8 @@ class SalesReportsController extends Controller
         // dd($allprodperseason);
 
         $farprodsum = DB::table('seasons')
-            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
-            ->join('order_products','product_lists.id','=','order_products.product_lists_id')
+            ->join('original_product_lists', 'seasons.id', '=', 'original_product_lists.seasons_id')
+            ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
             ->where('seasons_id',$season->id) 
             ->where('farmers_id','=',$authid)
             ->where('order_product_statuses_id','=',3)
@@ -270,8 +272,8 @@ class SalesReportsController extends Controller
             ->pluck('sum');
 
         $farprodquan = DB::table('seasons')
-            ->join('product_lists', 'seasons.id', '=', 'product_lists.seasons_id')
-            ->join('order_products','product_lists.id','=','order_products.product_lists_id')
+            ->join('original_product_lists', 'seasons.id', '=', 'original_product_lists.seasons_id')
+            ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
             ->where('seasons_id',$season->id) 
             ->where('farmers_id','=',$authid)
             ->where('order_product_statuses_id','=',3)

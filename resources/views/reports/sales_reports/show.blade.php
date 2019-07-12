@@ -63,7 +63,7 @@
                     @foreach ($allprodperseason as $g)
                     @php
                          $order = App\Order::findOrFail($g->orders_id);
-                         $prod = App\Product::findOrFail($g->curr_products_id);
+                         $prod = App\Product::findOrFail($g->products_id);
                          $user = App\User::findOrFail($g->users_id);
                     @endphp
 
@@ -129,7 +129,7 @@
                         @foreach ($farprodperseason as $g)
                         @php
                              $order = App\Order::findOrFail($g->orders_id);
-                             $prod = App\Product::findOrFail($g->curr_products_id);
+                             $prod = App\Product::findOrFail($g->product_types_id);
                              $user = App\User::findOrFail($g->users_id);
                         @endphp
     
@@ -137,7 +137,7 @@
                             <td>{{$order->tracking_id}}</td>
                             <td>{{$prod->type}}</td>
                             <td>{{$g->quantity}} kaban/s</td>
-                            <td>{{presentPrice($g->price)}}</td>
+                            <td>{{presentPrice($g->purchase_price)}}</td>
                             <td>{{presentPrice($g->quantity * $g->price)}}</td>
                             {{-- <td>{{$order->total_price}}</td> --}}
                             <td>{{$g->created_at}}</td>

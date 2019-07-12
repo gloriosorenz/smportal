@@ -275,7 +275,7 @@ class DashboardController extends Controller
             ->join('order_products', 'current_product_lists.id', '=', 'order_products.current_product_lists_id')
             ->where('farmers_id','=', $authid)
             ->where('order_product_statuses_id','=',3)
-            ->where('products_id','=',1)
+            ->where('product_types_id','=',1)
             ->groupBy('seasons_id')
             ->selectRaw('seasons_id, sum(order_products.quantity) as sum')
             // ->get()
