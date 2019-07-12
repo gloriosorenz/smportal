@@ -37,7 +37,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th width="10%">Image</th>
+                                        {{-- <th width="10%">Image</th> --}}
                                         <th width="20%">Product</th>
                                         <th>Quantity</th>
                                         <th>Price</th>
@@ -47,12 +47,12 @@
                                 <tbody>
                                     @foreach ($products as $product)
                                     <tr>
-                                        <td>
+                                        {{-- <td>
                                             <div class="custom-file form-control-sm p-b-10">
                                                 <input type="file" class="custom-file-input" id="image" name="image">
                                                 <label class="custom-file-label" for="image">Choose file</label>
                                             </div>
-                                        </td>
+                                        </td> --}}
                                         <td>
                                             <input type="text" class="form-control" name="product_type" value="{{$product->type}}" disabled/>
                                             <input name="products_id[]" type="hidden" value="{{$product->id}}">

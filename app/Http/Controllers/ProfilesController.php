@@ -57,6 +57,7 @@ class ProfilesController extends Controller
             ->whereYear('orders.created_at', Carbon::now()->year)
             ->whereMonth('orders.created_at', Carbon::now()->month)
             ->pluck('sum');
+        // dd($monthly_income);
 
         // Get Transactions
         $transactions = OrderProduct::where('farmers_id', auth()->user()->id)

@@ -39,6 +39,7 @@ class ProductListsController extends Controller
                 ->where('users_id', auth()->user()->id)
                 ->get();
 
+        // dd(count($user_products));
         // Get All User Products
         $all_user_products = OriginalProductList::where('users_id', auth()->user()->id)
                 ->get();

@@ -25,7 +25,7 @@
                     <div class="ibox-title">Products For Season {{ $latest_season->id }}</div>
                     <!-- Add Product Button -->
                     <div>
-                    @if (auth()->user()->roles_id == 2)
+                    @if (auth()->user()->roles_id == 2 && auth()->user()->active)
                         @if ($count == 0)
                             <a class="btn btn-success btn-sm" href="{{ route('product_lists.create') }}">Add Products</a>
                         @endif
@@ -42,32 +42,32 @@
                                 <th>Initial Quantity</th>
                                 <th>Current Quantity</th>
                                 <th width="15%">Harvest Date</th>
-                                <th>Options</th>
+                                @if (auth()->user()->active)
+                                    <th>Options</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @if(count($user_products > 0)) --}}
-                                @foreach($user_products as $list)
-                                <tr>
-                                    {{-- <td>{{$list->id}}</td> --}}
-                                    <td>{{$list->products->type}}</td>
-                                    <td>{{$list->users->company}}</td>
-                                    <td>{{$list->quantity}}</td>
-                                    <td>{{$list->quantity}}</td>
-                                    <td>{{$list->harvest_date}}</td>
-                                    <td>{{$list->quantity}}</td> {{-- orig =--}}
-                                    <td>{{$list->quantity}}</td>{{--current--}}
-                                    <td>{{ \Carbon\Carbon::parse($list->harvest_date)->format('F j, Y') }}</td>
+                            @foreach($user_products as $list)
+                            <tr>
+                                {{-- <td>{{$list->id}}</td> --}}
+                                <td>{{$list->products->type}}</td>
+                                <td>{{$list->users->company}}</td>
+                                <td>{{$list->quantity}}</td>
+                                <td>{{$list->quantity}}</td>
+                                <td>{{$list->harvest_date}}</td>
+                                <td>{{$list->quantity}}</td> {{-- orig =--}}
+                                <td>{{$list->quantity}}</td>{{--current--}}
+                                <td>{{ \Carbon\Carbon::parse($list->harvest_date)->format('F j, Y') }}</td>
+                                @if (auth()->user()->active)
                                     <td>
                                         <a href="/product_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
                                         {{-- <a href="/product_lists/{{$list->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a> --}}
                                         {{-- <a href="#" class="btn btn-md btn-secondary"> <i class="fas fa-download fa-sm text-white"></i></a> --}}
                                     </td>
-                                </tr>
-                                @endforeach
-                            {{-- @else
-                                <p>No data</p>
-                            @endif --}}
+                                @endif
+                            </tr>
+                            @endforeach
                         </tbody>
 
                     </table>

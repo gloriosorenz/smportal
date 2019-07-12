@@ -23,7 +23,9 @@
                 <div class="ibox-title">Damage Reports</div>
                 <!-- Add Damage Report -->
                 <div>
+                    @if (auth()->user()->active)
                     <a class="btn btn-success btn-sm" href="{{ route('damage_reports.create') }}">Create Report</a>
+                    @endif
                 </div>
             </div>
             <div class="ibox-body">
@@ -46,7 +48,9 @@
                             <td>{{$dr->created_at->toFormattedDateString()}}</td>
                             <td>
                                 <a href="/damage_reports/{{$dr->id}}"><button class="btn btn-warning btn-md btn-fill" id="btn_view" name="btn_view"><i class="fas fa-eye"></i></button></a>
+                                @if (auth()->user()->active)
                                 <a href="/damage_reports/{{$dr->id}}/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                @endif
                                 <a href="/pdf/damage_report/{{$dr->id}}" class="btn btn-primary"><i class="fas fa-download fa-sm text-white"></i></a>
                             </td>
                         </tr>

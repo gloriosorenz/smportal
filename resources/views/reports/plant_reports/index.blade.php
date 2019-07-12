@@ -31,7 +31,11 @@
                 <div class="ibox-title">Plant Reports</div>
                 <!-- Add Plant Report -->
                 <div>
-                    <a class="btn btn-success btn-sm" href="{{ route('plant_reports.create') }}">Create Report</a>
+                    @if (count($check_date) == 0)
+                    {{-- <a class="btn btn-success btn-sm" href="{{ route('plant_reports.create') }}">Create Report</a> --}}
+                    <a class="btn btn-success btn-sm" href="/reports/plant_reports/addPlantReport">+ Add Report</a>
+
+                    @endif
                 </div>
             </div>
             <div class="ibox-body">
@@ -53,7 +57,9 @@
                             <td>{{$pr->created_at->format('M-Y')}}</td>
                             <td>
                                 <a href="/plant_reports/{{$pr->id}}"><button class="btn btn-warning btn-md btn-fill" id="btn_view" name="btn_view"><i class="fas fa-eye"></i></button></a>
+                                @if (auth()->user()->active)
                                 <a href="/plant_reports/{{$pr->id}}/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                @endif
                                 <a href="/pdf/plant_report/{{$pr->id}}" class="btn btn-primary"><i class="fas fa-download fa-sm text-white"></i></a>
                             </td>
                         </tr>
