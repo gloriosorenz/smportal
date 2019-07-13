@@ -36,6 +36,8 @@ class DashboardController extends Controller
 
         $latest_season = Season::getLatestSeason();
 
+        // dd($latest_season);
+
         // ------------------------------------------------------------------------------------------------------------------------
         // Check if user is active (auto deactivate user)
         // ------------------------------------------------------------------------------------------------------------------------
@@ -64,6 +66,17 @@ class DashboardController extends Controller
                 $user->save();
             }
         }
+
+        // ------------------------------------------------------------------------------------------------------------------------
+        // Check if farmer joined the season
+        // ------------------------------------------------------------------------------------------------------------------------
+
+        $season_list = SeasonList::where('seasons_id', $latest_season->id)
+                ->where('users_id', auth()->user()->id)
+                ->first()
+                ;
+
+        // dd($season_list);
 
         // ------------------------------------------------------------------------------------------------------------------------
         // Weather forecasat
@@ -463,6 +476,7 @@ class DashboardController extends Controller
             ->with('transactions', $transactions)
             ->with('all_transactions', $all_transactions)
             ->with('latest_season', $latest_season)
+            ->with('season_list', $season_list)
             ;
     }
 

@@ -5,7 +5,7 @@
 
 <!-- START PAGE CONTENT-->
 <div class="page-heading">
-    <h1 class="page-title font-bold">Hi {{auth()->user()->first_name}}!</h1>
+    <h1 class="page-title font-bold" style="font-size: 40px">Hi {{auth()->user()->first_name}}!</h1>
 </div>
 
 
@@ -14,24 +14,34 @@
 <!-- START PAGE CONTENT-->
 <div class="page-content fade-in-up">
 
-
-    {{-- @if ($latest_season->season_statuses->id == 2) --}}
-    <a class="btn btn-secondary btn-md mb-2" href="/request_season">Request Season</a>
-    {{-- @endif --}}
-
-
     <div class="row">
-        <!-- Plan Season -->
-        <div class="col-lg-3 col-md-6">
-            <a href="{{ route('season_lists') }}">
-                <div class="ibox bg-green color-white widget-stat">
-                    <div class="ibox-body">
-                        <h2 class="m-b-5 font-strong">Plan Season</h2>
-                        <div class="m-b-5">Start a new season</div><i class="fas fa-plus widget-stat-icon"></i>
-                    </div>
+        {{-- @if($latest_season->season_statuses->id == 1) --}}
+            @if($season_list->season_list_statuses->id == 1)
+                <!-- Plan Season -->
+                <div class="col-lg-3 col-md-6">
+                    <a href="{{ route('season_lists') }}">
+                        <div class="ibox bg-green color-white widget-stat">
+                            <div class="ibox-body">
+                                <h2 class="m-b-5 font-strong">Plan Season</h2>
+                                <div class="m-b-5">Start a new season</div><i class="fas fa-plus widget-stat-icon"></i>
+                            </div>
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
+            @else
+                <!-- Request Season -->
+                <div class="col-lg-3 col-md-6">
+                    <a href="{{ route('season_lists') }}">
+                        <div class="ibox bg-green color-white widget-stat">
+                            <div class="ibox-body">
+                                <h2 class="m-b-5 font-strong">Request Season</h2>
+                                <div class="m-b-5">Request for a new season</div><i class="fas fa-plus widget-stat-icon"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @endif
+        {{-- @endif --}}
         <!-- Create Plant Report -->
         <div class="col-lg-3 col-md-6">
             <a href="#">
@@ -167,11 +177,6 @@
                         <div class="ibox-title">Latest Orders</div>
                         <div class="ibox-tools">
                             <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
-                            <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item">option 1</a>
-                                <a class="dropdown-item">option 2</a>
-                            </div>
                         </div>
                     </div>
                     <div class="ibox-body">
@@ -241,7 +246,7 @@
                 <div class="card-body pb-3">
                 
                     <!-- Title -->
-                    <h4 class="card-title font-weight-bold">{{$forecast->timezone()}}</h4>
+                    <h4 class="card-title font-weight-bold">Santa Rosa, Laguna</h4>
                     <!-- Text -->
                     <p class="card-text">{{ date('l', $currently->time()) }}, {{ date('h:i:sa', $currently->time()) }}, {{$currently->summary()}}</p>
                     <div class="d-flex justify-content-between">

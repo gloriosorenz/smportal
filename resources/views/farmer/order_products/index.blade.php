@@ -432,7 +432,7 @@
                         <tbody>
                             @foreach ($order_products as $p)
                             <tr class="active">
-                                <th>{{$p->product_lists->seasons->id}}</th>
+                                <th>{{$p->original_product_lists->seasons->id}}</th>
                                 <td>{{$p->orders->tracking_id}}</td>
                                 <td>{{\Carbon\Carbon::parse($p->orders->order_date)->format('F j, Y')}}</td>
                                 <td>{{$p->orders->users->first_name}} {{$p->orders->users->last_name}}</td>

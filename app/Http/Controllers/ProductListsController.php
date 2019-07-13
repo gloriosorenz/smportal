@@ -39,6 +39,12 @@ class ProductListsController extends Controller
                 ->where('users_id', auth()->user()->id)
                 ->get();
 
+        $user_products2 = CurrentProductList::where('seasons_id', $latest_season->id)
+                ->where('users_id', auth()->user()->id)
+                ->get();
+
+        // dd($user_products2);
+
         // dd(count($user_products));
         // Get All User Products
         $all_user_products = OriginalProductList::where('users_id', auth()->user()->id)
@@ -52,6 +58,13 @@ class ProductListsController extends Controller
         $count = OriginalProductList::where('seasons_id', $latest_season->id)
                 ->where('users_id', auth()->user()->id)->count();
 
+        // Get farmer's latest season list
+        $season_list = SeasonList::where('seasons_id', $latest_season->id)
+                ->where('users_id', auth()->user()->id)
+                ->first()
+                ;
+
+        // dd($season_list);
 
         // // Date Automation
         // $decrease1 = ProductList::where('harvest_date', '<', Carbon::now()->subDays(7))
@@ -120,11 +133,13 @@ class ProductListsController extends Controller
 
         return view('farmer.product_lists.index')
                 ->with('user_products', $user_products)
+                ->with('user_products2', $user_products2)
                 ->with('all_products', $all_products)
                 ->with('all_user_products', $all_user_products)
                 ->with('latest_season', $latest_season)
                 ->with('count', $count)
                 ->with('price_history', $price_history)
+                ->with('season_list', $season_list)
             ;
     }
 

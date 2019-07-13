@@ -53,11 +53,12 @@
                                 {{-- <td>{{$list->id}}</td> --}}
                                 <td>{{$list->products->type}}</td>
                                 <td>{{$list->users->company}}</td>
-                                <td>{{$list->quantity}}</td>
-                                <td>{{$list->quantity}}</td>
-                                <td>{{$list->harvest_date}}</td>
                                 <td>{{$list->quantity}}</td> {{-- orig =--}}
+                                {{-- @foreach($user_products2 as $list2) --}}
                                 <td>{{$list->quantity}}</td>{{--current--}}
+                                {{-- @endforeach --}}
+
+                                {{-- <td>{{$list->harvest_date}}</td> --}}
                                 <td>{{ \Carbon\Carbon::parse($list->harvest_date)->format('F j, Y') }}</td>
                                 @if (auth()->user()->active)
                                     <td>
@@ -69,8 +70,12 @@
                             </tr>
                             @endforeach
                         </tbody>
-
                     </table>
+                    @if (count($user_products) == 3 && count($season_list) == 1)
+                        @if($season_list->season_list_statuses_id == 1)
+                            <a href="/season_lists/{{$season_list->id}}/edit" class="btn btn-md btn-block btn-success">Finish Season<i class="fas fa-check fa-sm text-white"></i></a>
+                        @endif
+                    @endif
                 </div>
             </div>
 
