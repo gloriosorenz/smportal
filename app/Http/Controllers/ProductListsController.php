@@ -43,6 +43,17 @@ class ProductListsController extends Controller
                 ->where('users_id', auth()->user()->id)
                 ->get();
 
+        $user_products3 = 
+
+        /*
+            $allprodperseason = DB::table('seasons')
+            ->join('original_product_lists', 'seasons.id', '=', 'original_product_lists.seasons_id')
+            ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
+            ->where('order_product_statuses_id','=',3)
+            ->where('seasons_id',$season->id)
+            ->get();
+        */
+
         // dd($user_products2);
 
         // dd(count($user_products));

@@ -168,7 +168,7 @@
 
                     <hr>
 
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Animal</label>
                         <div class="col-sm-4">
                             <select class="form-control" id="exampleFormControlSelect1">
@@ -230,7 +230,7 @@
                                 <option>5</option>
                             </select>              
                         </div>
-                    </div>
+                    </div> --}}
                       
                 <!-- End Form -->
             </div>

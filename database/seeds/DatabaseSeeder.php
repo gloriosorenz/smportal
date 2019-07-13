@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(OrderProductStatusTableSeeder::class);
         $this->call(SeasonListStatusTableSeeder::class);
         $this->call(ProductsTableSeeder::class);
+        $this->call(ReportStatusTableSeeder::class);
 
 
         $this->call(SeasonTableSeeder::class);
@@ -33,7 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call(OrderProductTableSeeder::class);
         $this->call(PlantReportTableSeeder::class);
         $this->call(PlantDataTableSeeder::class);
-        $this->call(DamageReportsTableSeeder::class);
+        // $this->call(DamageReportsTableSeeder::class);
         // $this->call(DamageDataTableSeeder::class);
 
 

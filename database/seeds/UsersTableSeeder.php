@@ -15,8 +15,8 @@ class UsersTableSeeder extends Seeder
 
             [
                 'id' => 1,
-                'first_name' => 'Juan',
-                'last_name' => 'Dela Cruz',
+                'first_name' => 'Edwina',
+                'last_name' => 'Morano',
                 'email' => 'admin@admin.com',
                 'phone' => '09171234567',
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',

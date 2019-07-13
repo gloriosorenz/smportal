@@ -117,13 +117,39 @@ class PlantReportsController extends Controller
 
         // $pdatas = PlantData::where('plant_reports_id', $preport->id)->get();
 
+        $check_date = PlantReport::whereYear('created_at', '=', date('Y'))
+        ->whereMonth('created_at', '=', date('m'))
+        ->get();
+
         $pdatas = DB::table('plant_datas')
             ->join('users', 'plant_datas.users_id', '=', 'users.id')
             ->select('users.barangays_id', 	DB::raw("SUM(plant_area) as plant_area"), 	DB::raw("SUM(farmers) as farmers"))
             ->groupBy('barangays_id')
+            ->where('plant_reports_id',$preport->id)
+            // ->where($preport->created_at, '<', date('Y'))
             ->get();
 
+        // $pdatas = DB::table('plant_reports')
+        //     ->join('plant_datas', 'plant_reports.plant_datas_id', '=', 'plant_datas.id')
+        //     ->join('users', 'plant_datas.users_id', '=', 'users.id')
+        //     // ->select('users.barangays_id', 	DB::raw("SUM(plant_area) as plant_area"), 	DB::raw("SUM(farmers) as farmers"))
+        //     ->get();
+
+            // ->join('plant_reports','plant_datas.plant_reports.id','=','plant_reports.id')
+            // ->select('users.barangays_id', 	DB::raw("SUM(plant_area) as plant_area"), 	DB::raw("SUM(farmers) as farmers"))
+            // ->groupBy('barangays_id')
+
         // dd($pdatas);
+
+
+        // $allprodperseason = DB::table('seasons')
+        // ->join('original_product_lists', 'seasons.id', '=', 'original_product_lists.seasons_id')
+        // ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
+        // ->where('order_product_statuses_id','=',3)
+        // ->where('seasons_id',$season->id)
+        // // ->groupBy('orders_id')
+        // ->get();
+
 
         return view('reports.plant_reports.show')
             ->with('preport', $preport)
