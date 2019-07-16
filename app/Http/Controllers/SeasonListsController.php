@@ -8,6 +8,7 @@ use App\SeasonList;
 
 use Notification;
 use App\Notifications\SeasonListCreated;
+use App\Notifications\SeasonEnded;
 
 use DB;
 use Carbon\Carbon;
@@ -37,9 +38,17 @@ class SeasonListsController extends Controller
                     ->where('users_id', auth()->user()->id)
                     ->get()
                     ->count();
-        // dd($active);
 
+        $ongoing_season = Season::getOngoingSeason();
+        
 
+        $farmer_latest_season = SeasonList::where('users_id', auth()->user()->id)
+                ->where('seasons_id', $latest_season->id)
+                ->first()
+                ;
+                
+        // dd($farmer_latest_season);
+        
         $all_season_lists = SeasonList::all();
 
         return view('farmer.season_lists.index')
@@ -48,6 +57,9 @@ class SeasonListsController extends Controller
             ->with('active', $active)
             ->with('farmers', $farmers)
             ->with('latest_season', $latest_season)
+            ->with('ongoing_season', $ongoing_season)
+            // ->with('farmer_ongoing_season', $farmer_ongoing_season)
+            ->with('farmer_latest_season', $farmer_latest_season)
             ;
 
     }
@@ -180,6 +192,10 @@ class SeasonListsController extends Controller
             $season->season_end = Carbon::now();
             $season->season_statuses_id = 2;
             $season->save();
+
+             // Notification
+            $farmers = User::where('roles_id', 2)->get();
+            Notification::send($farmers, new SeasonEnded());
         }
 
 

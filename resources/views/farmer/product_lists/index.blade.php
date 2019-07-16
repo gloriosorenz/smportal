@@ -89,19 +89,19 @@
                     <table class="table table-bordered" id="all_user_products" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th>Season</th>
-                                <th>Product Type</th>
-                                <th>Rice Farmer</th>
-                                <th>Initial Quantity</th>
-                                <th>Current Quantity</th>
-                                <th>Harvest Date</th>
+                                <th class="text-center">Season</th>
+                                <th class="text-center">Product Type</th>
+                                <th class="text-center">Rice Farmer</th>
+                                <th class="text-center">Initial Quantity</th>
+                                <th class="text-center">Current Quantity</th>
+                                <th class="text-center">Harvest Date</th>
                                 {{-- <th width="15%">Options</th> --}}
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($all_user_products as $list)
-                            <tr>
-                                <td>Season {{$list->seasons->id}}</td>
+                            <tr class="text-center">
+                                <td>{{$list->seasons->id}}</td>
                                 <td>{{$list->products->type}}</td>
                                 <td>{{$list->users->company}}</td>
                                 <td>{{$list->quantity}}</td>

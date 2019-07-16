@@ -10,6 +10,8 @@ use App\Region;
 use App\Province;
 use App\Calamity;
 use App\User;
+use App\RiceCropStage;
+
 use PDF;
 use DB;
 
@@ -26,9 +28,13 @@ class DamageReportsController extends Controller
     public function index()
     {
         $dreports = DamageReport::all();
+        $user_dreports = DamageReport::where('farmers_id', auth()->user()->id)->get();
 
+        // dd($user_dreports);
         return view('reports.damage_reports.index')
-            ->with('dreports', $dreports);
+            ->with('dreports', $dreports)
+            ->with('user_dreports', $user_dreports)
+            ;
     }
 
     /**
@@ -41,6 +47,7 @@ class DamageReportsController extends Controller
         $calamities = Calamity::orderBy('id')->get();
         $calabarzon = Region::where('id','=', 4)->get();
         $laguna = Province::where('id','=',19)->get();
+        $rice_crop_stage = RiceCropStage::all();
 
         // dd($calamities);
 
@@ -48,6 +55,7 @@ class DamageReportsController extends Controller
             ->with('calabarzon', $calabarzon)
             ->with('calamities',$calamities)
             ->with('laguna',$laguna)
+            ->with('rice_crop_stage',$rice_crop_stage)
             ;    
     }
 
@@ -65,12 +73,39 @@ class DamageReportsController extends Controller
         // ]);
         
 
-        // $dreport = new DamageReport;
-        // $dreport->calamities_id = $request->get('calamity');
-        // $dreport->narrative = $request->get('narrative');
-        // $dreport->regions_id = $request->get('region');
-        // $dreport->provinces_id = $request->get('province');
-        // $dreport->save();
+        $dreport = new DamageReport;
+        $dreport->calamities_id = $request->get('calamity');
+        $dreport->farmers_id = auth()->user()->id;
+        $dreport->report_statuses_id = 1;
+        $dreport->provinces_id = $request->get('provinces_id');
+        $dreport->regions_id = $request->get('regions_id');
+        $dreport->rice_crop_stages_id = $request->get('rice_crop_stages_id');
+
+        $dreport->initial_report_date = \Carbon\Carbon::now();
+        // $dreport->final_report_date = \Carbon\Carbon::now();
+
+        $dreport->calamity_start = $request->get('calamity_start');
+        $dreport->calamity_end = $request->get('calamity_end');
+        $dreport->crop = $request->get('crop');
+        $dreport->num_farmers = $request->get('num_farmers');
+        $dreport->standing_crop_area = $request->get('standing_crop_area');
+        $dreport->harvest_month = $request->get('harvest_month');
+
+        $dreport->total_area = $request->get('total_area');
+        $dreport->totally_damaged_area = $request->get('totally_damaged_area');
+        $dreport->partially_damaged_area = $request->get('partially_damaged_area');
+        
+        $dreport->yield_before = $request->get('yield_before');
+        $dreport->yield_after = $request->get('yield_after');
+        $dreport->yield_loss = $request->get('yield_loss');
+        
+        $dreport->volume = $request->get('volume');
+        $dreport->grand_total = $request->get('grand_total');
+
+        $dreport->remarks = $request->get('remarks');
+
+
+        $dreport->save();
 
 
 
@@ -154,14 +189,14 @@ class DamageReportsController extends Controller
     {
 
         $dreport = DamageReport::findOrFail($id);
-        $ddatas = DamageData::where('damage_reports_id', $dreport->id)->get();
+        // $ddatas = DamageData::where('damage_reports_id', $dreport->id)->get();
 
         $users = DB::table('users')->get();
         view()->share('users',$users);
 
 
         // pass view file
-        $pdf = PDF::loadView('partials.pdf.damage_report', compact('dreport'), compact('ddatas'))->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('partials.pdf.damage_report', compact('dreport'))->setPaper('a4', 'landscape');
         // download pdf
         return $pdf->stream('damage_report.pdf');
     }

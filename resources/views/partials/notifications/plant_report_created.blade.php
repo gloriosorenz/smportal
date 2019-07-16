@@ -5,9 +5,13 @@
         </div>
         <div class="media-body">
             <div class="media-heading">
-                {{$notification->data['user']['first_name']}} {{$notification->data['user']['last_name']}}<small class="text-muted float-right">{{ $notification->created_at->diffForHumans() }}</small>
+                New Plant Report<small class="text-muted float-right">{{ $notification->created_at->diffForHumans() }}</small>
             </div>
-            <div class="font-13">Added a plant report for the month.</div>
+            @if (auth()->user()->roles->id == 2)
+            <div class="font-13">You can now add your plant report for the month.</div>
+            @else
+            <div class="font-13">A plant report has been added.</div>
+            @endif
         </div>
     </div>
 </a>

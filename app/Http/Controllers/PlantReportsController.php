@@ -30,12 +30,26 @@ class PlantReportsController extends Controller
 
         $check_date = PlantReport::whereYear('created_at', '=', date('Y'))
                     ->whereMonth('created_at', '=', date('m'))
-                    ->get();
+                    ->count();
+
+        // if($check_date == 0){
+        //     $latest_season = Season::getLatestSeason();
+
+        //     $preport = new PlantReport;
+        //     $preport->seasons_id = $latest_season->id;
+        //     $preport->save();
+    
+        //     // Send notification
+        //     $farmers = User::where('roles_id', 1)
+        //         ->orWhere('roles_id', 2)
+        //         ->get();
+        //     Notification::send($farmers, new PlantReportCreated());
+        // }
 
         // dd($check_date);
         return view('reports.plant_reports.index')
-            ->with('preports', $preports)
-            ->with('check_date', $check_date);
+            ->with('preports', $preports);
+            // ->with('check_date', $check_date);
     }
 
     /**

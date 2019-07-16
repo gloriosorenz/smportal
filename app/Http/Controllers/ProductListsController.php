@@ -454,13 +454,15 @@ class ProductListsController extends Controller
                 $fileNameToStore = 'noimage.jpeg';
         };
 
-        $product_list = OriginalProductList::findOrFail($id);
+        $original_product_list = OriginalProductList::findOrFail($id);
+        $current_product_list = CurrentProductList::findOrFail($id);
 
-        $product_list->quantity = $request->input('quantity');
+        $original_product_list->quantity = $request->input('orig_quantity');
         // $product_list->curr_quantity = $request->input('curr_quantity');
-        $product_list->price = $request->input('price');
-        $product_list->image = $fileNameToStore;
-        $product_list->save();
+        $original_product_list->price = $request->input('price');
+        $current_product_list->image = $fileNameToStore;
+        $original_product_list->save();
+        $current_product_list->save();
 
     
         return redirect()->route('product_lists.index')->with('success','Products Updated ');

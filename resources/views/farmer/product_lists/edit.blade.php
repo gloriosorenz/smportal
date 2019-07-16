@@ -54,6 +54,7 @@
                                     {{-- <input name="products_id" type="hidden" value="{{$product_list->orig_products->id}}"/> --}}
                                 </td>
                                 <td><input type="text" class="form-control" name="orig_quantity" value="{{$product_list->quantity}}" /></td>
+                                <td><input type="text" class="form-control"  value="{{$product_list->quantity}}" /></td>
                                 {{-- <td><input type="text" class="form-control" name="curr_quantity" value="{{$product_list->curr_quantity}}" /></td> --}}
                                 <td><input type="text" class="form-control" name="price" value="{{$product_list->price}}"/></td>
                                 <td>

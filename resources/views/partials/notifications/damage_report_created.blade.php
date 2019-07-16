@@ -1,7 +1,7 @@
-<a class="list-group-item" href="{{ route('plant_reports.index')}}" >
+<a class="list-group-item" href="{{ route('damage_reports.index')}}" >
     <div class="media">
         <div class="media-img">
-            <span class="badge badge-info badge-big"><i class="fas fa-plus-circle"></i></span>
+            <span class="badge badge-danger badge-big"><i class="fas fa-bolt"></i></span>
         </div>
         <div class="media-body">
             <div class="media-heading">

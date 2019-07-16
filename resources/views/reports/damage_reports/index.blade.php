@@ -30,33 +30,67 @@
             </div>
             <div class="ibox-body">
                 <!-- Start Form -->
-                <table id="table_id" class="table table-hover">
-                    @if(count($dreports) > 0)
-                    <thead>
-                        <tr>
-                            <th width="">ID</th>
-                            <th width="">Calamity</th>
-                            <th width="">Date Created</th>
-                            <th width="15%">Options</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($dreports as $dr)
-                        <tr class="tr">
-                            <td>{{$dr->id}}</td>
-                            <td>{{$dr->calamities->type}}</td>
-                            <td>{{$dr->created_at->toFormattedDateString()}}</td>
-                            <td>
-                                <a href="/damage_reports/{{$dr->id}}"><button class="btn btn-warning btn-md btn-fill" id="btn_view" name="btn_view"><i class="fas fa-eye"></i></button></a>
-                                @if (auth()->user()->active)
-                                <a href="/damage_reports/{{$dr->id}}/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                                @endif
-                                <a href="/pdf/damage_report/{{$dr->id}}" class="btn btn-primary"><i class="fas fa-download fa-sm text-white"></i></a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    @else
-                        <p>No reports found</p>
+                <table id="table_id" class="table table-bordered table-hover">
+
+                    <!-- If user is admin -->
+                    @if(auth()->user()->roles->id == 1)
+                        @if(count($dreports) > 0)
+                        <thead>
+                            <tr>
+                                <th class="text-center" width="">ID</th>
+                                <th class="text-center" width="">Calamity</th>
+                                <th class="text-center" width="">Date Created</th>
+                                <th class="text-center" width="15%">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            @foreach($dreports as $dr)
+                            <tr class="tr">
+                                <td>{{$dr->id}}</td>
+                                <td>{{$dr->calamities->type}}</td>
+                                <td>{{$dr->created_at->toFormattedDateString()}}</td>
+                                <td>
+                                    <a href="/damage_reports/{{$dr->id}}"><button class="btn btn-warning btn-md btn-fill" id="btn_view" name="btn_view"><i class="fas fa-eye"></i></button></a>
+                                    @if (auth()->user()->active)
+                                    <a href="/damage_reports/{{$dr->id}}/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    @endif
+                                    <a href="/pdf/damage_report/{{$dr->id}}" class="btn btn-primary"><i class="fas fa-download fa-sm text-white"></i></a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        @else
+                            <p>No reports found</p>
+                        @endif
+
+                    <!-- If user is farmer -->
+                    @elseif(auth()->user()->roles->id == 2)
+                        @if(count($user_dreports) > 0)
+                        <thead>
+                            <tr>
+                                <th class="text-center" width="">ID</th>
+                                <th class="text-center" width="">Calamity</th>
+                                <th class="text-center" width="">Date Created</th>
+                                <th class="text-center" width="15%">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            @foreach($user_dreports as $dr)
+                            <tr class="tr">
+                                <td>{{$dr->id}}</td>
+                                <td>{{$dr->calamities->type}}</td>
+                                <td>{{$dr->created_at->toFormattedDateString()}}</td>
+                                <td>
+                                    <a href="/damage_reports/{{$dr->id}}"><button class="btn btn-warning btn-md btn-fill" id="btn_view" name="btn_view"><i class="fas fa-eye"></i></button></a>
+                                    @if (auth()->user()->active)
+                                    <a href="/damage_reports/{{$dr->id}}/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    @endif
+                                    <a href="/pdf/damage_report/{{$dr->id}}" class="btn btn-primary"><i class="fas fa-download fa-sm text-white"></i></a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        @else
+                            <p>No reports found</p>
+                        @endif
                     @endif
                 </table>
                 <!-- End Form -->

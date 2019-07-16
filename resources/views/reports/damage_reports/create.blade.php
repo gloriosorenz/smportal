@@ -9,18 +9,19 @@
         <li class="breadcrumb-item">
             <a href="index.html"><i class="la la-home font-20"></i></a>
         </li>
-        <li class="breadcrumb-item">Damage Reports</li>
+        <li class="breadcrumb-item">Damage Report</li>
     </ol>
 </div>
 <br>
 
-<!-- Form -->
-<form method="post" action="{{action('DamageReportsController@store')}}" enctype="multipart/form-data">
-@csrf
+
 <!-- Damage Report Datatable -->
 <div class="row">
     <div class="offset-lg-2 col-lg-8 offset-lg-2">
         <div class="ibox">
+        <!-- Form -->
+        <form method="post" action="{{action('DamageReportsController@store')}}" enctype="multipart/form-data">
+        @csrf
             <div class="ibox-head">
                 <div class="ibox-title">Damage Reports</div>
             </div>
@@ -38,6 +39,26 @@
                             </select>
                         </div>
                     </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group" id="date_1">
+                            <label for="calamity">Calamity Start:</label>
+                            <div class="input-group date">
+                                <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
+                            <input class="form-control" type="text" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" name="calamity_start">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group" id="date_1">
+                            <label for="calamity">Calamity End:</label>
+                            <div class="input-group date">
+                                <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
+                            <input class="form-control" type="text" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" name="calamity_end">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row">
@@ -45,11 +66,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="region">Region:</label>
-                            {{-- @foreach($calabarzon as $c)
-                                <input readonly type="text" class="form-control" value="{{$c->name}}"/>
-                            @endforeach --}}
-
-                            <select class="form-control" name="region" id="region" readonly>
+                            <select class="form-control" name="regions_id"  readonly>
                                 @foreach ($calabarzon as $c)
                                     <option value="{{ $c['id']}}">{{ $c['name']}}</option>
                                 @endforeach
@@ -65,22 +82,11 @@
                                 <input readonly type="text" class="form-control"  value="{{$l->name}}"/>
                             @endforeach --}}
 
-                            <select class="form-control" name="province" id="province" readonly>
+                            <select class="form-control" name="provinces_id" readonly>
                                 @foreach ($laguna as $l)
                                     <option value="{{ $l['id']}}">{{ $l['name']}}</option>
                                 @endforeach
                             </select>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="row">
-                    <!-- Narrative -->
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="narrative">Narrative:</label>
-                            <textarea type="text" class="form-control" name="narrative" value=""></textarea>
                         </div>
                     </div>
                 </div>
@@ -100,148 +106,170 @@
             </div>
             <div class="ibox-body">
                 <!-- Start Form -->
-                {{-- <div class="form-group">
-                <label for="exampleFormControlInput1">Crop</label>
-                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+
+                <div class="row">
+                    <!-- Crop -->
+                    <div class="col-sm-4 form-group">
+                        <div class="form-group">
+                            <label class="form-control-label">Crop</label>
+                            <select class="form-control" name="crop">
+                                <option selected>Select Crop</option>
+                                <option value="Good Rice">Good rice</option>
+                                <option value="Withered Rice">Withered rice</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Number of farmers affected -->
+                    <div class="col-sm-4 form-group">
+                        <label>Number of farmers affected:</label>
+                        <input class="form-control" type="number" placeholder="Enter number" name="num_farmers" step="1" min="1" max="{{ auth()->user()->no_farmers }}">
+                    </div>
                 </div>
-                <div class="form-group">
-                <label for="exampleFormControlSelect1">Example select</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
+                
+
+                <div class="row">
+                    <!-- Area of standing crop-->
+                    <div class="col-sm-4 form-group">
+                        <label>Area of standing crop:</label>
+                        <input class="form-control" type="number" placeholder="Enter number" name="standing_crop_area" step="1" min="1">
+                    </div>
+
+                    <!-- Stage of crop development-->
+                    <div class="col-sm-4 form-group">
+                        <div class="form-group">
+                            <label class="form-control-label">Stage crop development:</label>
+                            <select class="form-control" name="rice_crop_stages_id">
+                                <option value="0" selected="true" disabled="True">Select Calamity</option>
+                                @foreach ($rice_crop_stage as $stage)
+                                    <option value="{{ $stage['id']}}">{{ $stage['stage']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Month to be harvested -->
+                    <div class="col-sm-4 form-group">
+                        <div class="form-group">
+                            <label class="form-control-label">Month to be harvested:</label>
+                            <select class="form-control" name="harvest_month">
+                                <option selected>Select Month</option>
+                                <option value="January">January</option>
+                                <option value="February">Ferbruary</option>
+                                <option value="March">March</option>
+                                <option value="April">April</option>
+                                <option value="May">May</option>
+                                <option value="June">June</option>
+                                <option value="July">July</option>
+                                <option value="August">August</option>
+                                <option value="September">September</option>
+                                <option value="October">Octover</option>
+                                <option value="November">November</option>
+                                <option value="December">December</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                <label for="exampleFormControlSelect2">Example multiple select</label>
-                <select multiple class="form-control" id="exampleFormControlSelect2">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
+
+                <hr>
+
+                <br>
+                <h5><strong>Area Affected (HA)</strong></h5>
+                <br>
+
+                <div class="row">
+                    <!-- Total area -->
+                    <div class="col-sm-4 form-group">
+                        <label>Total area:</label>
+                        <input class="form-control" type="number" placeholder="Enter number" name="total_area" step="1" min="1">
+                    </div>
+
+                    <!-- Totally damaged area -->
+                    <div class="col-sm-4 form-group">
+                        <label>Totally damaged:</label>
+                        <input class="form-control" type="number" placeholder="Enter number" name="totally_damaged_area" step="1" min="1">
+                    </div>
+
+                    <!-- Partially damaged area -->
+                    <div class="col-sm-4 form-group">
+                        <label>Partially damaged:</label>
+                        <input class="form-control" type="number" placeholder="Enter number" name="partially_damaged_area" step="1" min="1">
+                    </div>
                 </div>
-                <div class="form-group">
-                <label for="exampleFormControlTextarea1">Example textarea</label>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                </div> --}}
+                
 
-                    <div class="form-group row">
-                        <label for="staticEmail" class="col-sm-2 col-form-label">Crop</label>
-                        <div class="col-sm-4">
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>                              
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Crop Stage</label>
-                        <div class="col-sm-4">
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>              
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Production</label>
-                        <div class="col-sm-4">
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>              
-                        </div>
+                <br>
+                <h5><strong>Yield per hectare</strong></h5>
+                <br>
+
+                <div class="row">
+                    <!-- Before calamity -->
+                    <div class="col-sm-4 form-group">
+                        <label>Before calamity:</label>
+                        <input class="form-control" type="number" placeholder="Enter number" name="yield_before" step="1" min="1">
                     </div>
 
-                    <hr>
+                    <!-- After calamity-->
+                    <div class="col-sm-4 form-group">
+                        <label>Yield after:</label>
+                        <input class="form-control" type="number" placeholder="Enter number" name="yield_after" step="1" min="1">
+                    </div>
 
-                    {{-- <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Animal</label>
-                        <div class="col-sm-4">
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>              
-                        </div>
+                    <!-- Yield loss -->
+                    <div class="col-sm-4 form-group">
+                        <label>Yield loss:</label>
+                        <input class="form-control" type="number" placeholder="Enter number" name="yield_loss" step="1" min="1">
                     </div>
-                    <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Animal Head</label>
-                        <div class="col-sm-4">
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>              
-                        </div>
-                    </div>
-            
-                    <hr>
+                </div>
 
-                    <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Fish</label>
-                        <div class="col-sm-4">
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>              
-                        </div>
+                <br>
+                <hr>
+                <br>
+
+                <div class="row">
+                    <!-- Volume -->
+                    <div class="col-sm-4 form-group">
+                        <label>Volume:</label>
+                        <input class="form-control" type="number" placeholder="Enter number" name="volume" step="1" min="1">
                     </div>
-                    <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Area</label>
-                        <div class="col-sm-4">
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>              
-                        </div>
+
+                    <!-- Grand total-->
+                    <div class="col-sm-4 form-group">
+                        <label>Grand total:</label>
+                        <input class="form-control" type="number" placeholder="Enter number" name="grand_total" step="1" min="1">
                     </div>
-                    <div class="form-group row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Fish Pieces</label>
-                        <div class="col-sm-4">
-                            <select class="form-control" id="exampleFormControlSelect1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>              
-                        </div>
-                    </div> --}}
+                </div>
+
+
+                <br>
+                <hr>
+                <br>
+
+                <div class="row">
+                    <!-- Remarks -->
+                    <div class="col-sm-12 form-group">
+                        <label>Remarks:</label>
+                        <textarea class="form-control" type="text" name="remarks" placeholder="Enter text"></textarea>
+                    </div>
+                </div>
+
+
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-success mb-4">Create</button>
+                </form>
                       
                 <!-- End Form -->
             </div>
+            
         </div>
     </div>
+
+    
 </div>
 
 
-    <!-- Submit Button -->
-    <button type="submit" class="btn btn-success mb-4">Create</button>
-    </form>
+    
 
 
     

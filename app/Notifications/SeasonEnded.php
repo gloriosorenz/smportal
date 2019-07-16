@@ -9,9 +9,11 @@ use Illuminate\Notifications\Messages\MailMessage;
 
 use Carbon;
 
-class DamageReportCreated extends Notification
+class SeasonEnded extends Notification
 {
     use Queueable;
+
+    // protected  $user;
 
     /**
      * Create a new notification instance.
@@ -20,7 +22,7 @@ class DamageReportCreated extends Notification
      */
     public function __construct()
     {
-        //
+        // $this->user = $user;
     }
 
     /**
@@ -32,7 +34,7 @@ class DamageReportCreated extends Notification
     public function via($notifiable)
     {
         return [
-            'database', 
+            'database',
             // 'mail'
         ];
     }
@@ -61,7 +63,7 @@ class DamageReportCreated extends Notification
     {
         return [
             'timeCreated'=> Carbon\Carbon::now()->diffForHumans(),
-            'user'=>auth()->user()
+            'user'=> auth()->user()
         ];
     }
 

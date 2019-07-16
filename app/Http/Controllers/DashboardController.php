@@ -15,6 +15,7 @@ use App\SeasonList;
 use App\OrderProduct;
 use App\User;
 use App\Order;
+use App\PlantReport;
 
 use DarkSkyApi;
 use Charts;
@@ -22,6 +23,7 @@ use Carbon\Carbon;
 
 use Notification;
 use App\Notifications\RequestSeason;
+use App\Notifications\PlantReportCreated;
 
 class DashboardController extends Controller
 {
@@ -68,15 +70,40 @@ class DashboardController extends Controller
         }
 
         // ------------------------------------------------------------------------------------------------------------------------
+        // Auto-create plant report
+        // ------------------------------------------------------------------------------------------------------------------------
+
+        $check_date = PlantReport::whereYear('created_at', '=', date('Y'))
+                    ->whereMonth('created_at', '=', date('m'))
+                    ->count();
+
+        if($check_date == 0){
+            $latest_season = Season::getLatestSeason();
+
+            $preport = new PlantReport;
+            $preport->seasons_id = $latest_season->id;
+            $preport->save();
+    
+            // Send notification
+            $farmers = User::where('roles_id', 1)
+                ->orWhere('roles_id', 2)
+                ->get();
+            Notification::send($farmers, new PlantReportCreated());
+        }
+
+
+        // ------------------------------------------------------------------------------------------------------------------------
         // Check if farmer joined the season
         // ------------------------------------------------------------------------------------------------------------------------
+
+        $season = Season::orderBy('id', 'desc')->first();
 
         $season_list = SeasonList::where('seasons_id', $latest_season->id)
                 ->where('users_id', auth()->user()->id)
                 ->first()
                 ;
 
-        // dd($season_list);
+        // dd($season);
 
         // ------------------------------------------------------------------------------------------------------------------------
         // Weather forecasat
@@ -476,6 +503,7 @@ class DashboardController extends Controller
             ->with('transactions', $transactions)
             ->with('all_transactions', $all_transactions)
             ->with('latest_season', $latest_season)
+            ->with('season', $season)
             ->with('season_list', $season_list)
             ;
     }

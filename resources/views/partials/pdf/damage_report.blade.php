@@ -21,8 +21,8 @@
 
         <div class="row">
             <div class="col-lg-12">
-            <p><i>Damage Assessment and Reporting Form 1a (DARF 1a)<br>
-            Form 1a - Pre-Calamity Assessment Report on Would-be Effects to Agriculture & Fisheries (for PSO & RSSO use)</i></p>
+            <p><i><small>Damage Assessment and Reporting Form 4 (DARF 4)<br>
+            Form 4 - Damage Assessment Report for OTHER CROPS (for PSO & RSSO use)</small></i></p>
             </div>
         </div>
         <br>
@@ -34,14 +34,16 @@
         <br>
 
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-md-6">
                 <p><strong>A. Geographoc Information</strong></p>
                 <p>1. Region: {{$dreport->regions->name}}</p>
                 <p>2. Province: {{$dreport->provinces->name}}</p>
-            
-                <hr>
-                <p><strong>B. Narrative Report:</strong> (Brief description of th calamity <strong>and its would-be effects</strong> on agriculture & fisheries)</p>
-                <p>Narrative: {{$dreport->narrative}}</p>
+            </div>
+
+            <div class="col-md-6 text-right">
+                <p><strong>A. Geographoc Information</strong></p>
+                <p>1. Region: {{$dreport->regions->name}}</p>
+                <p>2. Province: {{$dreport->provinces->name}}</p>
             </div>
         </div>
         <hr>
@@ -63,19 +65,17 @@
                         <th width="11.25">Fish Pieces</th>
                     </thead>
                     <tbody>
-                        @foreach ($ddatas as $d)
                         <tr>
-                            <td>{{ $d->id }}</td>
-                            <td>{{ $d->crop }}</td>
-                            <td>{{ $d->crop_stage }}</td>
-                            <td>{{ $d->production }}</td>
-                            <td>{{ $d->animal }}</td>
-                            <td>{{ $d->animal_head }}</td>
-                            <td>{{ $d->fish }}</td>
-                            <td>{{ $d->area }}</td>
-                            <td>{{ $d->fish_pieces }}</td>
+                            <td>{{ $dreport->id }}</td>
+                            <td>{{ $dreport->crop }}</td>
+                            <td>{{ $dreport->rice_crop_stages->stage }}</td>
+                            <td>{{ $dreport->crop }}</td>
+                            <td>{{ $dreport->crop }}</td>
+                            <td>{{ $dreport->crop }}</td>
+                            <td>{{ $dreport->crop }}</td>
+                            <td>{{ $dreport->crop }}</td>
+                            <td>{{ $dreport->crop }}</td>
                         </tr>
-                        @endforeach
                     </tbody>
                 </table>
             </div>

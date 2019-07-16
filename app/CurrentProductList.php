@@ -11,7 +11,7 @@ class CurrentProductList extends Model
         protected $table = 'current_product_lists';
         // Fillables
         protected $fillable = [
-            'id','products_id', 'seasons_id', 'users_id', 'quantity','price', 'harvest_date',
+            'id','products_id', 'seasons_id', 'users_id', 'quantity','price', 'harvest_date','image'
         ];
          // Primary Key
         public $primaryKey = 'id';

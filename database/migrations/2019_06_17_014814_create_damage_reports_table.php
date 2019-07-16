@@ -19,8 +19,8 @@ class CreateDamageReportsTable extends Migration
             $table->integer('report_statuses_id')->unsigned()->nullable();
             $table->date('calamity_start');
             $table->date('calamity_end');
-            $table->date('initial_report_date');
-            $table->date('final_report_date');
+            $table->date('initial_report_date')->nullable();
+            $table->date('final_report_date')->nullable();
 
             $table->integer('provinces_id')->unsigned()->nullable();
             $table->string('crop');

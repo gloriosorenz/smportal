@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         $this->call(SeasonListStatusTableSeeder::class);
         $this->call(ProductsTableSeeder::class);
         $this->call(ReportStatusTableSeeder::class);
+        $this->call(RiceCropStagesTableSeeder::class);
 
 
         $this->call(SeasonTableSeeder::class);

@@ -11,7 +11,7 @@ class OriginalProductList extends Model
         protected $table = 'original_product_lists';
         // Fillables
         protected $fillable = [
-            'products_id', 'seasons_id', 'users_id', 'quantity','price', 'harvest_date',
+            'products_id', 'seasons_id', 'users_id', 'quantity','price', 'harvest_date', 'image'
         ];
          // Primary Key
         public $primaryKey = 'id';

@@ -39,7 +39,7 @@
                         </div>
                         <div class="ibox-body">
                             <!-- Start Form -->
-                            <table id="pending_order_products" class="table table-hover track_tbl">
+                            <table id="pending_order_products" class="table table-bordered table-hover track_tbl">
                                 <thead>
                                     <tr>
                                         <th>Order ID</th>
@@ -93,7 +93,7 @@
                         </div>
                         <div class="ibox-body">
                             <!-- Start Form -->
-                            <table id="confirmed_order_products" class="table table-hover track_tbl">
+                            <table id="confirmed_order_products" class="table table-bordered table-hover track_tbl">
                                 <thead>
                                     <tr>
                                         <th>Order ID</th>
@@ -160,7 +160,7 @@
                         </div>
                         <div class="ibox-body">
                             <!-- Start Form -->
-                            <table id="cancelled_order_products" class="table table-hover track_tbl">
+                            <table id="cancelled_order_products" class="table table-bordered table-hover track_tbl">
                                 <thead>
                                     <tr>
                                         <th>Order ID</th>
@@ -213,7 +213,7 @@
                         </div>
                         <div class="ibox-body">
                             <!-- Start Form -->
-                            <table id="paid_order_products" class="table table-hover track_tbl text-center">
+                            <table id="paid_order_products" class="table table-bordered table-hover track_tbl text-center">
                                 <thead>
                                     <tr>
                                         <th class="text-center">Order ID</th>
@@ -414,25 +414,25 @@
                 </div>
                 <div class="ibox-body">
                     <!-- Start Form -->
-                    <table id="all_order_products" class="table table-hover track_tbl">
+                    <table id="all_order_products" class="table table-bordered table-hover track_tbl">
                         <thead>
                             <tr>
-                                <th>Season</th>
-                                <th>Tracking ID</th>
-                                <th>Order Date</th>
-                                <th>Customer</th>
-                                <th>Number</th>
-                                <th>Product Type</th>
-                                <th>Quantity</th>
-                                <th>Sub Total</th>
-                                <th>Status</th>
+                                <th class="text-center">Season</th>
+                                <th class="text-center">Tracking ID</th>
+                                <th class="text-center">Order Date</th>
+                                <th class="text-center">Customer</th>
+                                <th class="text-center">Number</th>
+                                <th class="text-center">Product Type</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-center">Sub Total</th>
+                                <th class="text-center">Status</th>
                                 <th class="text-center" width="20%">Options</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             @foreach ($order_products as $p)
                             <tr class="active">
-                                <th>{{$p->original_product_lists->seasons->id}}</th>
+                                <th class="text-center">{{$p->original_product_lists->seasons->id}}</th>
                                 <td>{{$p->orders->tracking_id}}</td>
                                 <td>{{\Carbon\Carbon::parse($p->orders->order_date)->format('F j, Y')}}</td>
                                 <td>{{$p->orders->users->first_name}} {{$p->orders->users->last_name}}</td>

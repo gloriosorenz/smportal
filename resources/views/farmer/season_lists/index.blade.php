@@ -17,6 +17,59 @@
 <div class="page-content fade-in-up">
 
     @if (auth()->user()->roles_id == 2)
+
+    {{-- @if ($farmer_latest_season != null)
+    <div class="row">
+        <div class="offset-md-2 col-md-8 offset-md-2">
+            <div class="ibox">
+                <div class="ibox-head bg-warning text-white">
+                    <div class="ibox-title">Ongoing Season: Season</div>
+                    <div class="ibox-tools">
+                        <a class="ibox-collapse"><i class="fa fa-minus text-white"></i></a>
+                    </div>
+                </div>
+                <div class="ibox-body">
+                <!-- Start Form -->
+                <form method="post" action="{{action('SeasonListsController@update', $farmer_latest_season->id)}}">
+                @method('PATCH')
+                @csrf
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Rice Farmer</th>
+                                <th>Planned Hectares</th>
+                                <th>Actual Hectares</th>
+                                <th>Planned Number of Farmers</th>
+                                <th>Actual Number of Farmers</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    {{ $farmer_latest_season->users->company }}
+                                </td>
+                                <td><input type="number" class="form-control" value="{{$farmer_latest_season->planned_hectares}}" disabled/></td>
+                                <td><input type="number" class="form-control" name="actual_hectares" value="{{ $farmer_latest_season->actual_hectares }}" step="0.1" min="1" max="{{ auth()->user()->hectares }}"/></td>
+                                <td><input type="number" class="form-control" value="{{$farmer_latest_season->planned_num_farmers}}" disabled/></td>
+                                <td><input type="number" class="form-control" name="actual_num_farmers" value="{{ $farmer_latest_season->actual_num_farmers }}" step="0.1" min="1" max="{{ auth()->user()->no_farmers }}"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                        <!-- Buttons -->
+                        <div class="form-group">
+                            <a class="btn btn-md btn-secondary" href="{{URL::previous()}}">Back</a>
+                            <button class="btn btn-md btn-success" type="submit">Update</button>
+                        </div>
+                    </form>
+                    <!-- End Form -->
+                </div>
+            </div>
+        </div>
+    </div>
+    @endif --}}
+
+
     <div class="row">
         <!-- Seasons -->
         <div class="offset-md-2 col-md-8 offset-md-2">
@@ -54,11 +107,11 @@
                                 </td>
                                 <td class="text-center">
                                     @if (auth()->user()->active)
-                                        @if ($list->season_list_statuses_id == 1)
+                                        {{-- @if ($list->season_list_statuses_id == 1)
                                             <a href="/season_lists/{{$list->id}}/edit" class="btn btn-md btn-success"><i class="fas fa-check fa-sm text-white"></i></a>
-                                        @else
+                                        @else --}}
                                             <a href="/season_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
-                                        @endif
+                                        {{-- @endif --}}
                                     @endif
                                     <a href="/season_lists/{{$list->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
                                 </td>
@@ -122,7 +175,7 @@
                                         @endif
                                     </td>
                                     <td class="text-center">
-                                        <a href="/season_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
+                                        {{-- <a href="/season_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a> --}}
                                         <a href="/season_lists/{{$list->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
                                     </td>
                                 </tr>

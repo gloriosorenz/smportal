@@ -15,6 +15,7 @@ class CreateRiceCropStagesTable extends Migration
     {
         Schema::create('rice_crop_stages', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('stage');
             $table->timestamps();
         });
     }

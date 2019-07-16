@@ -16,11 +16,11 @@
 
 
 <!-- Add Plant Report -->
-@if (count($check_date) == 1)
+{{-- @if (count($check_date) == 1)
     @if (auth()->user()->roles_id == 1)
         <a class="btn btn-secondary btn-md" href="/reports/plant_reports/addPlantReport">+ Add</a>
     @endif
-@endif
+@endif --}}
 
 
 <!-- Plant Report Datatable -->
@@ -31,16 +31,14 @@
                 <div class="ibox-title">Plant Reports</div>
                 <!-- Add Plant Report -->
                 <div>
-                    @if (count($check_date) == 0)
-                    {{-- <a class="btn btn-success btn-sm" href="{{ route('plant_reports.create') }}">Create Report</a> --}}
+                    {{-- @if (count($check_date) == 0)
                     <a class="btn btn-success btn-sm" href="/reports/plant_reports/addPlantReport">+ Add Report</a>
-
-                    @endif
+                    @endif --}}
                 </div>
             </div>
             <div class="ibox-body">
                 <!-- Start Form -->
-                <table id="plant_reports_table" class="table table-hover">
+                <table id="plant_reports_table" class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th width="">ID</th>

@@ -19,7 +19,7 @@ class CreateProductImagesTable extends Migration
 
             //FK
             $table->foreign('current_product_lists_id')->references('id')->on('current_product_lists');
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

@@ -90,9 +90,9 @@
                                 Good Rice Product
                             </span>
 
-                            {{-- <span class="block1-info stext-102 trans-04 text-white">
+                            <span class="block1-info stext-102 trans-04 text-white">
                                 Spring 2018
-                            </span> --}}
+                            </span>
                         </div>
 
                         <div class="block1-txt-child2 p-b-4 trans-05">

@@ -28,35 +28,30 @@
             </div>
             <div class="ibox-body">
                 <!-- Start Form -->
-                <table id="sales_reports_table" class="table table-hover">
+                <table id="sales_reports_table" class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th width="20%">Season</th>
-                            <th width="">Start Date</th>
-                            <th width="">End Date</th>
-                            <th width="">Status</th>
-                            <th width="15%">Options</th>
+                            <th class="text-center" width="20%">Season</th>
+                            <th class="text-center" width="">Start Date</th>
+                            <th class="text-center" width="">End Date</th>
+                            <th class="text-center" width="">Status</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                         <!-- If user is admin -->
                         @if(Auth::user()->roles_id == 1)
         
                             @foreach($seasons as $season)
                             <tr class="tr">
                                 <td>Season {{ $season->id }}</td>
-                                <td>{{ $season->season_start }}</td>
-                                <td>{{ $season->season_end }}</td>
+                                <td>{{ \Carbon\Carbon::parse($season->season_start)->format('F j, Y') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($season->season_end)->format('F j, Y')}}</td>
                                 <td>
                                     @if ($season->season_statuses_id == 1)
                                         <h5><span class="badge badge-warning">{{ $season->season_statuses->status }}</span></h5>
                                     @else
                                         <h5><span class="badge badge-success">{{ $season->season_statuses->status }}</span></h5>
                                     @endif
-                                </td>
-                                <td>
-                                    {{-- <a href="sales_reports/{{$season->id}}"><button class="btn btn-warning btn-md btn-fill" id="btn_view" name="btn_view"><i class="fas fa-eye"></i></button></a>
-                                    <a href="/pdf/sales_report/{{$season->id}}" class="btn btn-md btn-secondary"><i class="fas fa-download fa-sm text-white"></i></a> --}}
                                 </td>
                             </tr>
                             @endforeach

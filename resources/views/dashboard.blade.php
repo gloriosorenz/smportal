@@ -14,9 +14,35 @@
 <!-- START PAGE CONTENT-->
 <div class="page-content fade-in-up">
 
+    
+      
     <div class="row">
-        {{-- @if($latest_season->season_statuses->id == 1) --}}
-            @if($season_list->season_list_statuses->id == 1)
+        @if($season->season_statuses->id == 2) 
+        <!-- Request Season -->
+        <div class="col-lg-3 col-md-6">
+            <a href="/request_season">
+                <div class="ibox bg-green color-white widget-stat">
+                    <div class="ibox-body">
+                        <h2 class="m-b-5 font-strong">Request Season</h2>
+                        <div class="m-b-5">Request for a new season</div><i class="fas fa-plus widget-stat-icon"></i>
+                    </div>
+                </div>
+            </a>
+        </div>
+        @else
+            @if($season_list)
+                <!-- View Season -->
+                <div class="col-lg-3 col-md-6">
+                    <a href="/season_lists/{{$season_list->id}}">
+                        <div class="ibox bg-green color-white widget-stat">
+                            <div class="ibox-body">
+                                <h2 class="m-b-5 font-strong">View Season</h2>
+                                <div class="m-b-5">View your season</div><i class="fas fa-plus widget-stat-icon"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            @else
                 <!-- Plan Season -->
                 <div class="col-lg-3 col-md-6">
                     <a href="{{ route('season_lists') }}">
@@ -28,20 +54,8 @@
                         </div>
                     </a>
                 </div>
-            @else
-                <!-- Request Season -->
-                <div class="col-lg-3 col-md-6">
-                    <a href="{{ route('season_lists') }}">
-                        <div class="ibox bg-green color-white widget-stat">
-                            <div class="ibox-body">
-                                <h2 class="m-b-5 font-strong">Request Season</h2>
-                                <div class="m-b-5">Request for a new season</div><i class="fas fa-plus widget-stat-icon"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
             @endif
-        {{-- @endif --}}
+        @endif
         <!-- Create Plant Report -->
         <div class="col-lg-3 col-md-6">
             <a href="#">
@@ -66,7 +80,7 @@
         </div>
         <!-- Create Damage Report -->
         <div class="col-lg-3 col-md-6">
-            <a href="#">
+            <a href="{{route('damage_reports.index')}}">
                 <div class="ibox bg-danger color-white widget-stat">
                     <div class="ibox-body">
                         <h2 class="m-b-5 font-strong">Damage Report</h2>

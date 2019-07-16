@@ -18,7 +18,7 @@
 
     <div class="row">
         <!-- Input farmer's hectares and no. of farmers -->
-        <div class="offset-lg-3 col-md-6 offset-lg-3">
+        <div class="offset-lg-2 col-md-8 offset-lg-2">
             <div class="ibox">
                 <div class="ibox-head">
                     <div class="ibox-title">Farmer Season {{$season_list->seasons->id}}</div>
@@ -33,18 +33,18 @@
                 </div>
                 <div class="ibox-body">
                     <table class="table table-bordered text-center" cellspacing="0" width="100%">
-                        <thead class="thead-default">
+                        <thead>
                             <tr>
-                                <th width="15%">Rice Farmer</th>
-                                <th>Planned Hectares</th>
-                                <th>Planned Number of Farmers</th>
-                                <th>Planned Quantity</th>
-                                <th>Actual Hectares</th>
-                                <th>Actual Number of Farmers</th>
-                                <th>Actual Quantity</th>
+                                <th class="text-center" width="15%">Rice Farmer</th>
+                                <th class="text-center">Planned Hectares</th>
+                                <th class="text-center">Planned Number of Farmers</th>
+                                <th class="text-center">Planned Quantity</th>
+                                <th class="text-center">Actual Hectares</th>
+                                <th class="text-center">Actual Number of Farmers</th>
+                                <th class="text-center">Actual Quantity</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="text-center">
                             <tr>
                                 <td>
                                     <p>{{ $season_list->users->company }}</p>
