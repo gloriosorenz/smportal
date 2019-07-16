@@ -23,6 +23,7 @@ class OrderProduct extends Model
     {
         return $this->belongsTo(CurrentProductList::class, 'current_product_lists_id');
     }
+    
     public function original_product_lists()
     {
         return $this->belongsTo(OriginalProductList::class, 'original_product_lists_id');
