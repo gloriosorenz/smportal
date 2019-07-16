@@ -8,6 +8,7 @@ use App\Season;
 use App\SeasonList;
 use App\Product;
 // use App\ProductList;
+use App\OrderProduct;
 use App\OriginalProductList;
 use App\CurrentProductList;
 use App\ProductImage;
@@ -37,14 +38,43 @@ class ProductListsController extends Controller
         // Get User Products for current Season
         $user_products = OriginalProductList::where('seasons_id', $latest_season->id)
                 ->where('users_id', auth()->user()->id)
+                // ->pluck('id');
                 ->get();
 
+
+                // dd($user_products);
         $user_products2 = CurrentProductList::where('seasons_id', $latest_season->id)
                 ->where('users_id', auth()->user()->id)
                 ->get();
+        // dd($user_products);
+        
+        $asd = DB::table('order_products')
+        // ->where('original_product_lists','=',3)
+        ->where('original_product_lists_id','=', $user_products)
+        ->where('farmers_id', auth()->user()->id)
+        ->get();
+        // dd($asd);
 
-        $user_products3 = 
+        // $active = SeasonList::join('seasons', 'season_lists.seasons_id', '=', 'seasons.id')
 
+        // $user_products3 = OriginalProductList::join('products', 'original_product_lists.products_id', '=', 'products.id')
+                // ->join('products','current_product_lists.products_id','=','products.id')
+                // ->join('current_product_lists','products.current_product_lists_id','=','current_product_lists.id')
+        $user_products3 = DB::table('products')
+        // $user_products3 = DB::table('original_product_lists')
+                // ->join('products', 'original_product_lists.products_id', '=', 'products.id')
+                ->join('original_product_lists', 'products.id', '=', 'original_product_lists.products_id')
+                // ->join('products', 'original_product_lists.id', '=', 'products.original_product_lists_id')
+                // ->join('products','current_product_lists.id','=','products.current_product_lists_id')
+                // ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
+
+                ->where('seasons_id', $latest_season->id)
+                ->where('users_id', auth()->user()->id)
+                ->get();
+
+        // dd($user_products3);
+
+                // dd($user_products3);
         /*
             $allprodperseason = DB::table('seasons')
             ->join('original_product_lists', 'seasons.id', '=', 'original_product_lists.seasons_id')

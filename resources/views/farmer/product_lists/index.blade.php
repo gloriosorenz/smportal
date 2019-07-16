@@ -38,7 +38,6 @@
                             <tr>
                                 {{-- <th>ID</th> --}}
                                 <th>Product Type</th>
-                                <th>Rice Farmer</th>
                                 <th>Initial Quantity</th>
                                 <th>Current Quantity</th>
                                 <th width="15%">Harvest Date</th>
@@ -49,17 +48,15 @@
                         </thead>
                         <tbody>
                             @foreach($user_products as $list)
+                            @foreach($user_products2 as $list2)
                             <tr>
-                                {{-- <td>{{$list->id}}</td> --}}
-                                <td>{{$list->products->type}}</td>
-                                <td>{{$list->users->company}}</td>
-                                <td>{{$list->quantity}}</td> {{-- orig =--}}
-                                {{-- @foreach($user_products2 as $list2) --}}
-                                <td>{{$list->quantity}}</td>{{--current--}}
-                                {{-- @endforeach --}}
-
-                                {{-- <td>{{$list->harvest_date}}</td> --}}
-                                <td>{{ \Carbon\Carbon::parse($list->harvest_date)->format('F j, Y') }}</td>
+                                @if($list->id == $list2->id)
+                                    {{-- <td>{{$list->id}}</td> --}}
+                                    <td>{{$list->products->type}}</td>
+                                    <td>{{$list->quantity}}</td> {{-- orig =--}}
+                                    <td>{{$list2->quantity}}</td>{{--current--}}
+                                  
+                                    <td>{{ \Carbon\Carbon::parse($list->harvest_date)->format('F j, Y') }}</td>
                                 @if (auth()->user()->active)
                                     <td>
                                         <a href="/product_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
@@ -67,7 +64,10 @@
                                         {{-- <a href="#" class="btn btn-md btn-secondary"> <i class="fas fa-download fa-sm text-white"></i></a> --}}
                                     </td>
                                 @endif
+                                @endif
+
                             </tr>
+                            @endforeach
                             @endforeach
                         </tbody>
                     </table>
@@ -103,7 +103,6 @@
                             <tr class="text-center">
                                 <td>{{$list->seasons->id}}</td>
                                 <td>{{$list->products->type}}</td>
-                                <td>{{$list->users->company}}</td>
                                 <td>{{$list->quantity}}</td>
                                 <td>{{$list->quantity}}</td>
                                 <td>{{\Carbon\Carbon::parse($list->harvest_date)->format('F j, Y')}}</td>
