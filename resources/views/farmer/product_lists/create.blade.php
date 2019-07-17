@@ -65,7 +65,10 @@
                                                 <input type="hidden" class="form-control" name="price[]" value="0" readonly/>
                                             </td>
                                             @else
-                                            <td><input type="text" class="form-control" name="price[]" value=""/></td>
+                                            <td>
+                                                <input type="text" class="form-control" name="price[]" value=""/>
+                                                <small class="text-muted">Revenue: </small> 
+                                            </td>
                                         @endif
                                         <td>
                                             {{-- {{ Form::date('harvest_date[]', \Carbon\Carbon::now(), ['class' => 'datepicker form-control','id'=>'harvest_date[]'])}} --}}
