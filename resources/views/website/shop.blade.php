@@ -19,21 +19,15 @@
                     {{ session()->get('error_message') }}
                 </div>
             @endif
-
-            <!-- Title and product details -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="display-4 text-left"><strong>Products</strong></h1>
-                    <p>Good Rice:</p>
-                    <p>Withered Rice:</p>
-                    <p>Price computation: 1 kaban = 50 persos</p>
-                </div>
-            </div>
-            <br>
             <!-- Show Products Table -->
                 <div class="row">
                     <div class="col-lg-12">
                         
+                        <div>
+                            <h1 class="display-4"><strong>Products</strong></h1>
+                        </div>
+                        <br>
+
                         <!-- Show Products Datatable -->
                         <div class="card shadow mb-4">
                             {{-- <div class="card-header">
