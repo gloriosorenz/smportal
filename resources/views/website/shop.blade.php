@@ -28,24 +28,24 @@
                                 <h2 class="title">Products</h2>
                             </div>
                             <div class="card-body">
-                                <table id="shop_table" class="table table-hover">
+                                <table id="shop_table" class="table table-responsive table-bordered table-hover">
                                     <thead>
                                         <tr>
-                                            <th width="">Image</th>
-                                            <th width="">Product</th>
-                                            <th width="">Rice Farm Company</th>
-                                            <th width="">Farm Location</th>
-                                            <th width="">Harvest Date</th>
-                                            <th width="">Available</th>
-                                            <th width="">Price</th>
+                                            <th class="text-center" width="">Image</th>
+                                            <th class="text-center" width="">Product</th>
+                                            <th class="text-center" width="">Rice Farm Company</th>
+                                            <th class="text-center" width="">Farm Location</th>
+                                            <th class="text-center" width="">Harvest Date</th>
+                                            <th class="text-center" width="">Available</th>
+                                            <th class="text-center" width="">Price</th>
                                             @guest
                                                 @elseif (auth()->user()->roles_id == 3 && auth()->user()->active || auth()->user()->roles_id == 4 && auth()->user()->active )
-                                                <th width="15%">Options</th>
+                                                <th class="text-center" width="15%">Options</th>
                                             @endguest
                                             
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody class="text-center">
                                         @foreach($product_lists as $curr_product_list)
                                         <tr class="tr">
                                             <td>
@@ -63,7 +63,7 @@
                                             <td>{{$curr_product_list->products->type}}</td>
                                             <td>{{$curr_product_list->users->company}}</td>
                                             <td>{{ $curr_product_list->users->barangays->name }}, {{ $curr_product_list->users->cities->name }}, {{ $curr_product_list->users->provinces->name }}</td>
-                                            <td>{{$curr_product_list->harvest_date}}</td>
+                                            <td>{{Carbon\Carbon::parse($curr_product_list->harvest_date)->format('F j, Y')}}</td>
                                             <td>{{ $curr_product_list->quantity }}</td>
                                             <td>
                                                 <div class="font-weight-bold">{{ presentPrice($curr_product_list->price) }} </div>

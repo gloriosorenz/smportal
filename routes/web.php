@@ -69,7 +69,7 @@ Route::group( ['middleware' => 'auth' ], function()
 
 
     //Profile
-    Route::get('/profile', 'ProfilesController@index')->name('profile');
+    Route::get('profiles/index', 'ProfilesController@index')->name('profile');
 
 
     // Dashboard

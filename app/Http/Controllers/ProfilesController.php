@@ -43,6 +43,14 @@ class ProfilesController extends Controller
         $season_count = SeasonList::where('users_id', auth()->user()->id)
             ->count();
 
+        // Count customers
+        $customers = OrderProduct::join('orders', 'order_products.orders_id', '=', 'orders.id')
+            ->where('farmers_id', auth()->user()->id)
+            ->select('orders.users_id')
+            ->groupby('orders.users_id')
+            ->get();
+        // dd($customers);
+
         // Get order count for the current month
         $orders = Order::join('order_products', 'orders.id', '=', 'order_products.orders_id')
             // ->select(sum)
@@ -66,7 +74,7 @@ class ProfilesController extends Controller
             ->get();
 
         // dd($monthly_income);
-        return view('profile')
+        return view('profiles.index')
             ->with('user', $user)
             ->with('farmers', $farmers)
             ->with('season_count', $season_count)
@@ -77,6 +85,7 @@ class ProfilesController extends Controller
             ->with('calabarzon', $calabarzon)
             ->with('laguna',$laguna)
             ->with('starosa',$starosa)
+            ->with('customers',$customers)
             ;
     }
 
@@ -98,6 +107,10 @@ class ProfilesController extends Controller
      */
     public function store(Request $request)
     {
+        // Validation
+        $request->validate([
+            'phone' => 'regex:/(09)[0-9]{9}/',
+        ]);
 
         $farmer = new FarmerList;
         $farmer->first_name = $request->input('first_name');
@@ -128,7 +141,10 @@ class ProfilesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $farmers = Farmerlist::findOrFail($id);
+
+        return view('profiles.edit')
+            ->with('farmers', $farmers);
     }
 
     /**
@@ -140,7 +156,14 @@ class ProfilesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $farmer = Farmerlist::findOrFail($id);
+        $farmer->first_name = $request->input('first_name');
+        $farmer->last_name = $request->input('last_name');
+        $farmer->phone = $request->input('phone');
+        // $farmer->users_id = $request->input('users_id');
+        $farmer->save();
+
+        return redirect()->route('profile')->with('success','Farmer Updated ');
     }
 
     /**

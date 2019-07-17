@@ -37,9 +37,9 @@
 								<a href="{{ url('weather') }}">Weather Statistics</a>
 							</li>
 
-							<li>
+							{{-- <li>
 								<a href="about.html">About</a>
-							</li>
+							</li> --}}
 
 							<li class="{{Request:: is('contact') ? 'active-menu' : ''}}"> 
 								<a href="{{ url('contact') }}">Contact</a>

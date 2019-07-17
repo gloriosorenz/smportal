@@ -249,7 +249,7 @@
                     <!-- Remarks -->
                     <div class="col-sm-12 form-group">
                         <label>Remarks:</label>
-                        <textarea class="form-control" type="text" name="remarks" placeholder="Enter text"></textarea>
+                        <textarea class="form-control" type="text" name="remarks" rows="8" placeholder="Enter text"></textarea>
                     </div>
                 </div>
 

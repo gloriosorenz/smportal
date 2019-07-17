@@ -57,13 +57,13 @@
                                     <td>{{$list2->quantity}}</td>{{--current--}}
                                   
                                     <td>{{ \Carbon\Carbon::parse($list->harvest_date)->format('F j, Y') }}</td>
-                                @if (auth()->user()->active)
+                                    @if (auth()->user()->active)
                                     <td>
                                         <a href="/product_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
                                         {{-- <a href="/product_lists/{{$list->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a> --}}
                                         {{-- <a href="#" class="btn btn-md btn-secondary"> <i class="fas fa-download fa-sm text-white"></i></a> --}}
                                     </td>
-                                @endif
+                                    @endif
                                 @endif
 
                             </tr>
@@ -91,7 +91,7 @@
                             <tr>
                                 <th class="text-center">Season</th>
                                 <th class="text-center">Product Type</th>
-                                <th class="text-center">Rice Farmer</th>
+                                {{-- <th class="text-center">Rice Farmer</th> --}}
                                 <th class="text-center">Initial Quantity</th>
                                 <th class="text-center">Current Quantity</th>
                                 <th class="text-center">Harvest Date</th>
