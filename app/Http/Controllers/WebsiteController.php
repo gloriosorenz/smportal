@@ -67,6 +67,8 @@ class WebsiteController extends Controller
 
                 // dd($whut);
 
+          
+
             
 
             // will update price and product type to withered, the original withered to damaged
@@ -223,28 +225,29 @@ class WebsiteController extends Controller
 
 
         // ------------------------------------------------------------------------------------------------------------------------
-        // Check customer orders
+        // Check customer orders (Auto-Wither Notif)
         // ------------------------------------------------------------------------------------------------------------------------
         
         
 
         if(auth()->user()){
             $customer_orders = OrderProduct::join('orders', 'order_products.orders_id', '=', 'orders.id')
+            // ->where('users_id', 7)
             ->where('order_statuses_id', 1)
-            ->where('users_id', auth()->user()->id)
             ->get()
             ;
+
+            // dd($customer_orders);
 
 
             foreach($customer_orders as $order){
                 $id = $order->users_id;
                 $user = User::findOrFail($id);
                 // dd($user);
-                if($order->original_product_lists->harvest_date > Carbon::now()->subDays(6)){
+                if($order->original_product_lists->harvest_date < Carbon::now()->subDays(7)){
                     Notification::send($user, new AutoWitherProduct());
                 }
             }
-
         }
         
 

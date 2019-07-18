@@ -14,6 +14,7 @@ use App\Role;
 use Notification;
 use App\Notifications\NewCustomerCreated;
 use App\Notifications\ChangePassword;
+use App\Notifications\ActivateCustomer;
 
 class CustomersController extends Controller
 {
@@ -199,7 +200,7 @@ class CustomersController extends Controller
     
         // Notification
         // $customer = $orderproduct->orders->users;
-        // Notification::send($customer, new OrderCancelled($orderproduct));
+        Notification::send($user, new ActivateCustomer());
 
         return redirect()->back()->with('success', 'User Activated');
     }

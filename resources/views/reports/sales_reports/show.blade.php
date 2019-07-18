@@ -165,23 +165,31 @@
                 <br>
                 <br>
     
-                @foreach($farprodquan as $kabs)
-                    <div class="text-right">
-                        <h4> Total Quantity: {{$kabs}} kaban/s</h4>
+                <div class="row">
+                    <div class="col-lg-6">
+                        
                     </div>
-                @endforeach
-
-                @foreach ($target as $tg)
-                    <div class="text-right">
-                        <h4> Target Sales: {{presentPrice($tg->target_sales)}} <h4>
+                    <div class="col-lg-6">
+                        @foreach($farprodquan as $kabs)
+                            <div class="text-right">
+                                <h4> Total Quantity: {{$kabs}} kaban/s</h4>
+                            </div>
+                        @endforeach
+        
+                        @foreach ($target as $tg)
+                            <div class="text-right">
+                                <h4> Target Sales: {{presentPrice($tg->target_sales)}} <h4>
+                            </div>
+                        @endforeach
+            
+                        @foreach($farprodsum as $sum)
+                            <div class="text-right">
+                                <h4> Total Sales: {{presentPrice($sum)}} </h4>
+                            </div>
+                        @endforeach
                     </div>
-                @endforeach
-    
-                @foreach($farprodsum as $sum)
-                    <div class="text-right">
-                        <h4> Total Sales: {{presentPrice($sum)}} </h4>
-                    </div>
-                @endforeach
+                </div>
+               
     
             </div>
             <!-- End col-lg-12 -->

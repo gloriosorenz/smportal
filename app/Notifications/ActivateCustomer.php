@@ -7,9 +7,9 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-use Carbon; 
+use Carbon;
 
-class AutoWitherProduct extends Notification
+class ActivateCustomer extends Notification
 {
     use Queueable;
 
@@ -46,12 +46,9 @@ class AutoWitherProduct extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Product Withering') // 
-            ->greeting('Good day!') //
-            ->line('Your order has now withered.')  // INDICATE WHICH PRODUCT ID, WHEN IT WILL WITHER
-            // ->action('Notification Action', url('/'))
-            // ->line('Thank you and regards, SMSRL Administrator!');
-            ;
+                ->subject('Account Activated') // it will use this class name if you don't specify
+                ->greeting('Your account has been activated! You may now visit the site and make your first order.') 
+                ;
     }
 
     /**
@@ -64,7 +61,8 @@ class AutoWitherProduct extends Notification
     {
         return [
             'timeCreated'=> Carbon\Carbon::now()->diffForHumans(),
-            'user'=>auth()->user()
+            // 'user'=> auth()->user(),
+            // 'customer'=>$this->customer
         ];
     }
 

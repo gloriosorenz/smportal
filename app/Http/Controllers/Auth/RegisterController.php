@@ -10,6 +10,9 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 use App\RequestForm;
 
+use Notification;
+use App\Notifications\CustomerRequest;
+
 class RegisterController extends Controller
 {
     /*
@@ -74,6 +77,12 @@ class RegisterController extends Controller
         $random = str_shuffle('abcdefghjklmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890');
         $password = substr($random, 0, 6);
         // $user->password = Hash::make($password);
+
+        // Notification
+        $users = User::where('roles_id', 1)
+            ->get();
+        // Notify all admin that there is a new farmer
+        Notification::send($users, new CustomerRequest());
 
         return User::create([
             'first_name' => $data['first_name'],
