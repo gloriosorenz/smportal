@@ -91,7 +91,7 @@
                             </span>
 
                             <span class="block1-info stext-102 trans-04 text-white">
-                                Spring 2018
+                                The good rice product is the main product output by the farmers it is planted and harvested in a span of 90-120 days, ready to be milled and stored for potential buyers.
                             </span>
                         </div>
 
@@ -115,9 +115,9 @@
                                 Withered Rice Product
                             </span>
 
-                            {{-- <span class="block1-info stext-102 trans-04 text-white">
-                                Spring 2018
-                            </span> --}}
+                            <span class="block1-info stext-102 trans-04 text-white">
+                                Withered Rice is the result of Rice Product being exposed to the open after harvesting for a week, the rice will be dry and already shriveled up usually used as food for farm animals.
+                            </span>
                         </div>
 
                         <div class="block1-txt-child2 p-b-4 trans-05">
@@ -135,18 +135,16 @@
 
 
 <!-- Privacy Policy -->
-<div class="sec-banner bg0 w-100 h-100 p-t-200 p-r-250 p-l-250 p-b-150">
+{{-- <div class="sec-banner bg0 w-100 h-100 p-t-200 p-r-250 p-l-250 p-b-150">
     <div class="container">
         <h3 class="text-center text-grey ltext-103 cl5 p-b-150">
             Privacy Policy
         </h3>
 
-        <h5 class="text-center">
-            <!-- Text here -->
-            asdfassdfd
-        </h5>
+        
+
     </div>
-</div>
+</div> --}}
 
 
 

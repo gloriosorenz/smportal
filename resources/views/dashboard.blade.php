@@ -215,7 +215,7 @@
                                         <td>{{$t->orders->users->first_name}} {{$t->orders->users->last_name}}</td>
                                         <td>{{$t->orders->users->phone}}</td>
                                         <td>{{$t->original_product_lists->products->type}}</td>
-                                        <td>{{ presentPrice($t->orders->total_price) }}</td>
+                                        <td>{{ presentPrice($t->quantity * $t->original_product_lists->price * 50) }}</td>
                                         @if($t->order_product_statuses->id == 1)
                                             <td><span class="badge badge-warning">{{$t->order_product_statuses->status}}</span></td>
                                         @elseif($t->order_product_statuses->id == 2)
@@ -236,7 +236,7 @@
 
         <!-- ALERTS AND WEATHER -->
         <div class="col-lg-4">
-            <div class="ibox">
+            {{-- <div class="ibox">
                 <div class="ibox-head">
                     <div class="ibox-title">Alerts</div>
                     <div class="ibox-tools">
@@ -253,7 +253,7 @@
                         <li>Description: {{ $forecast->currently()->summary() }}</li>
                     </ul>
                 </div>
-            </div>
+            </div> --}}
             <!-- Card -->
             <div class="card weather-card m-b-20">
                 <!-- Card content -->
@@ -372,9 +372,9 @@
                             {!! Charts::scripts() !!}
                             {!! $orderlinechart->script() !!}
                     </div>
-                    {{-- <div>
-                        <canvas id="bar_chart" style="height:260px;"></canvas>
-                    </div> --}}
+                    <div>
+                        <p class="text-muted text-center"> Season</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -432,6 +432,9 @@
                             {!! Charts::scripts() !!}
                             {!! $revlinechart->script() !!}
                     </div>
+                    <div>
+                        <p class="text-muted text-center"> Season</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -461,9 +464,9 @@
                             {!! Charts::scripts() !!}
                             {!! $fmvcbarchart->script() !!}
                     </div>
-                    {{-- <div>
-                        <canvas id="bar_chart" style="height:260px;"></canvas>
-                    </div> --}}
+                    <div>
+                        <p class="text-muted text-center">Customers</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -726,9 +729,9 @@
                             {!! Charts::scripts() !!}
                             {!! $mvcbarchart->script() !!}
                     </div>
-                    {{-- <div>
-                        <canvas id="bar_chart" style="height:260px;"></canvas>
-                    </div> --}}
+                    <div>
+                        <p class="text-muted text-center">Customers</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -755,9 +758,9 @@
                             {!! Charts::scripts() !!}
                             {!! $bestfarmerbarchart->script() !!}
                     </div>
-                    {{-- <div>
-                        <canvas id="bar_chart" style="height:260px;"></canvas>
-                    </div> --}}
+                    <div>
+                        <p class="text-muted text-center">Farmers</p>
+                    </div>
                 </div>
             </div>
         </div>

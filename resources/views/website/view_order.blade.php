@@ -37,6 +37,7 @@
                         <div class="col-lg-6">
                             <address>
                                     <strong>{{$value['0']->users->company}}</strong><br>
+                                    Email: {{$value['0']->users->email}}<br>
                                     Contact Number: {{$value['0']->users->phone}}<br>
                                     Location: {{$seller->street}}, {{$seller->barangays->name}}, {{$seller->cities->name}}, {{$seller->provinces->name}} <br>
                             </address>
@@ -124,7 +125,6 @@
         </div>
     </div>
     @endforeach
-
 </div>
 
 

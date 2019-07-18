@@ -89,7 +89,16 @@
                     <tr>
                         <td>
                             <figure class="media">
-                                <div class="img-wrap"><img src="/img/image.png" class="img-thumbnail img-sm">{{$item->image}}</div>
+                                @if($item->model->image == 'noimage.jpeg' || $item->model->image == null)
+                                    <div class="img-wrap">
+                                        <img src="/img/image.png" width="auto" height="80"/>
+                                    </div>
+                                @elseif($item->model->image)
+                                    <div class="img-wrap">
+                                        <img src="/storage/images/{{$item->model->image}}" width="auto" height="80"/>
+                                    </div>
+                                @endif
+                                {{-- <div class="img-wrap"><img src="/img/image.png" class="img-thumbnail img-sm">{{$item->image}}</div> --}}
                                 <figcaption class="media-body">
                                     <h6 class="title text-truncate">{{ $item->model->products->type }} </h6>
                                     <br>
@@ -106,7 +115,7 @@
                             </div>
                         </td>
                         <td> 
-                            <select class="quantity form-control" data-id="{{ $item->rowId }}" data-productQuantity="{{ $item->model->quantity }}">
+                            <select class="quantity form-control" data-id="{{ $item->rowId }}" data-productQuantity="{{ $item->model->quantity*50 }}">
                                 @for ($i = 1; $i < $item->model->quantity + 1 ; $i++)
                                     <option {{ $item->qty == $i ? 'selected' : '' }}>{{ $i }}</option>
                                 @endfor                                
@@ -120,7 +129,7 @@
                         </td>
                         <td> 
                             <div class="price-wrap"> 
-                                <var class="price">{{ presentPrice($item->subtotal*50) }}</var> 
+                                <var class="price"> ₱ {{ $item->subtotal() }}</var> 
                                 <small class="text-muted">({{ $item->model->presentPrice() }} per kbn x 50kg)</small> 
                             </div> <!-- price-wrap .// -->
                         </td>
@@ -141,7 +150,7 @@
                         <td><a href="{{ route('shop') }}" class="btn btn-lg btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
                         <td colspan="2" class="hidden-xs"></td>
                         <td colspan="1" class="hidden-xs"></td>
-                        <td class="hidden-xs text-center"><strong>Total ₱{{ Cart::instance('default')->subtotal()*50 }}</strong></td>
+                        <td class="hidden-xs text-center"><strong>Total ₱{{ Cart::instance('default')->subtotal() }}</strong></td>
                         <td><a href="{{ url('checkout') }}" class="btn btn-success btn-lg btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
                     </tr>
                 </tfoot>

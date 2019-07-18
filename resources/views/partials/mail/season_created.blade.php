@@ -8,5 +8,5 @@ Button Text
 @endcomponent
 
 Thanks,<br>
-{{ config('app.name') }}
+Samahan ng Magsasaka sa Sta. Rosa Laguna
 @endcomponent

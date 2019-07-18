@@ -219,6 +219,8 @@ class DashboardController extends Controller
         
         $totalorderline = Charts::database(Order::where('order_statuses_id','=',2)->get(),'line', 'highcharts')
                 ->title('For the current year (per Month)')
+                ->yAxisTitle('Number of Orders')
+                ->xAxisTitle('Months')
                 ->elementLabel("Number of Orders")
                 ->dimensions(700,450)
                 ->responsive(true)
@@ -227,6 +229,14 @@ class DashboardController extends Controller
 
 
         // dd($totalorderline);
+
+
+
+
+
+
+
+
 
 
 
@@ -370,9 +380,11 @@ class DashboardController extends Controller
 
         $fmvcbarchart = Charts::create('bar', 'highcharts')
             ->title('Customer with Most Orders')
+            ->yAxisTitle("Number of Orders")
+            ->xAxisTitle("Customers")
             ->labels($fmvcbarlabel)
             ->values($fmvc)
-            ->elementLabel('Number of Orders')
+            // ->elementLabel('Number of Orders')
             ->dimensions(1000, 500)
             ->responsive(true)
             ;
@@ -407,6 +419,8 @@ class DashboardController extends Controller
         $origcurrprodbar = Charts::multi('bar', 'highcharts')
             ->title('Product Comparison For the Latest Season')
             ->labels(['Rice','Withered','Damaged'])
+            ->yAxisTitle("Quantity")
+            ->xAxisTitle("Season")
             ->dataset('Original Quantity',$origprod)
             ->dataset('Current Quantity',$currprod)
             ->dimensions(1000,500)
@@ -492,10 +506,10 @@ class DashboardController extends Controller
     public function request_season(){
 
         // Notification
-        $users = User::where('id', '!=', auth()->user()->id)
-            ->where('roles_id', '!=', 3)
-            ->where('roles_id', '!=', 4)
+        $users = User::where('roles_id', '=', 1)
+            // ->where('roles_id', '!=', 4)
             ->get();
+        // dd($users);
         Notification::send($users, new RequestSeason());
 
         return redirect()->back()->with('success', 'Season Requested');

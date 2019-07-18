@@ -48,7 +48,7 @@
                                             <td>₱ {{ number_format($p->total_price, 2) }}</td>
                                             <td>
                                                 <a href="/website/view_order/{{$p->id}}" class="btn btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
-                                                {{-- <a href="/pdf/invoice/{{$p->id}}" class="btn btn-secondary"><i class="fas fa-download fa-sm text-white"></i></a> --}}
+                                                <a href="/pdf/invoice/{{$p->id}}" class="btn btn-secondary"><i class="fas fa-download fa-sm text-white"></i></a>
                                             </td>
                                         </tr>
                                         @endif
@@ -131,6 +131,7 @@
                                             <td>{{$order->created_at->toFormattedDateString()}}</td>
                                             <td>₱ {{ number_format($order->total_price, 2) }}</td>
                                             <td>
+                                                <a href="/website/view_order/{{$order->id}}" class="btn btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
                                                 <a href="/pdf/invoice/{{$order->id}}" class="btn btn-secondary"><i class="fas fa-download fa-sm text-white"></i></a>
                                             </td>
                                         </tr>

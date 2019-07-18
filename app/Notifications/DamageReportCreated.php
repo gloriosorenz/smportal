@@ -33,7 +33,7 @@ class DamageReportCreated extends Notification
     {
         return [
             'database', 
-            // 'mail'
+            'mail'
         ];
     }
 
@@ -46,9 +46,13 @@ class DamageReportCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Damage Report Submitted') // it will use this class name if you don't specify
+                    ->greeting('Good Day!') // example: Dear Sir, Hello Madam, etc ...
+                    ->line('A damage report has been created by a farmer.')
+                    // ->line('The introduction to the notification.')
+                    // ->action('Notification Action', url('/'))
+                    // ->line('Thank you for using our application!');
+                    ;
     }
 
     /**

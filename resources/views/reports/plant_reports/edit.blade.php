@@ -29,7 +29,7 @@
                 @csrf
                     <!-- Admin Functionality -->
                     @if (auth()->user()->roles_id == 1)
-                    <table class="table table-bordered">
+                    {{-- <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Rice Farmer</th>
@@ -54,7 +54,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <center><input type="button" class="btn btn-lg btn-warning addRow" value="+"></center>
+                    <center><input type="button" class="btn btn-lg btn-warning addRow" value="+"></center> --}}
 
 
                     <!-- Farmer Functionality -->
@@ -73,8 +73,8 @@
                                     <input name="users_id[]" type="hidden" value="{{auth()->user()->id}}">
                                     {{auth()->user()->barangays->name}}
                                 </td>
-                                <td><input type="text" class="form-control" name="plant_area[]" value="{{$pdata->plant_area}}"/></td>
-                                <td><input type="text" class="form-control" name="farmers[]" value="{{$pdata->farmers}}" /></td>
+                                <td><input type="text" class="form-control" name="plant_area[]" /></td>
+                                <td><input type="text" class="form-control" name="farmers[]" /></td>
                             </tr>
                         </tbody>
                     </table>

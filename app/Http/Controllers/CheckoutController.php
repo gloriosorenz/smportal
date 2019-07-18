@@ -111,9 +111,9 @@ class CheckoutController extends Controller
             ]);
 
             // Notification
-            $farmer = $item->model->users;
+            $customer = $order->users;
             // dd($farmer);
-            Notification::send($farmer, new OrderCreated());
+            Notification::send($customer, new OrderCreated());
         }
 
 

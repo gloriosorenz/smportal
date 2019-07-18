@@ -35,7 +35,7 @@ class NewSeasonCreated extends Notification
     {
         return [
             'database', 
-            // 'mail'
+            'mail'
         ];
     }
 
@@ -52,8 +52,9 @@ class NewSeasonCreated extends Notification
             ->subject('A new season has been created for SMPortal') // it will use this class name if you don't specify
             ->greeting('Good Day!') // example: Dear Sir, Hello Madam, etc ...
             ->line('A new season has been created by the administrator.')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you for using our application!');
+            // ->action('Notification Action', url('/'))
+            // ->line('Thank you for using our application!');
+            ;
     }
 
     /**

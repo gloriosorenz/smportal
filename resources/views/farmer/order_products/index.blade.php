@@ -61,7 +61,7 @@
                                         <td>{{$p->orders->users->first_name}} {{$p->orders->users->last_name}}</td>
                                         <td>{{$p->orders->users->phone}}</td>
                                         <td>{{$p->original_product_lists->products->type}}</td>
-                                        <td>{{ presentPrice($p->quantity * $p->original_product_lists->price) }}</td>
+                                        <td>{{ presentPrice($p->quantity * $p->original_product_lists->price * 50) }}</td>
                                         <td>
                                             <a href="/order_products/{{$p->id}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
                                             @if (auth()->user()->active)
@@ -115,7 +115,7 @@
                                         <td>{{$c->orders->users->first_name}} {{$c->orders->users->last_name}}</td>
                                         <td>{{$c->orders->users->phone}}</td>
                                         <td>{{$c->original_product_lists->products->type}}</td>
-                                        <td>{{ presentPrice($c->quantity * $c->original_product_lists->price) }}</td>
+                                        <td>{{ presentPrice($c->quantity * $c->original_product_lists->price *50) }}</td>
                                         <td>
                                             <!-- Form -->
                                             <form method="POST" action="{{action('OrderProductsController@store')}}" enctype="multipart/form-data">

@@ -13,6 +13,8 @@ class SeasonListCreated extends Notification
 {
     use Queueable;
 
+    // protected $season_list;
+
     /**
      * Create a new notification instance.
      *
@@ -20,7 +22,7 @@ class SeasonListCreated extends Notification
      */
     public function __construct()
     {
-        //
+        // $this->season_list = $season_list;
     }
 
     /**
@@ -33,7 +35,7 @@ class SeasonListCreated extends Notification
     {
         return [
             'database',
-            // 'mail'
+            'mail'
         ];
     }
 
@@ -46,9 +48,13 @@ class SeasonListCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Season End') 
+                    ->greeting('Good day!') // example: Dear Sir, Hello Madam, etc ...
+                    ->line('A farmer is done with his/her season.')
+                    // ->markdown('partials.mail.season_list_created', [
+                    //                                             'season_list' => $this->season_list,
+                    //                                             ]);
+                    ;
     }
 
     /**

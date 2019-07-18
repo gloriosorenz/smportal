@@ -25,9 +25,6 @@
                 </div>
                 <div class="ibox-body">
                     <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
-                            <p> <i class="fas fa-sun fa-md"> </i> Dry Season = March 16 -> Sept. 15 (March, April, May, June, July, August, September) </p>
-                            <p> <i class="fas fa-cloud-rain fa-md"> </i>  Wet Season = Sept. 16 -> March 15 (September, October, November, December, January, February, March) </p>
-                            @csrf
                         <thead>
                             <tr>
                                 <th class="text-center">Season</th>
@@ -72,13 +69,13 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
-                <div class="ibox-footer text-center">
+                    <br>
+                    <br>
                     <div class="row">
                         <div class="col-lg-12">
-                            <p class="font-bold">Season Type Guide</p>
-                            <p><strong><i class="fas fa-cloud-rain fa-md"></i> :</strong> March 16 - September 14</p>
-                            <p><strong><i class="fas fa-sun fa-md"></i> :</strong> Septmeber 15 - March 15</p>
+                            {{-- <p class="font-bold">Season Type Guide</p> --}}
+                            <p><strong><i class="fas fa-cloud-rain fa-md"></i> :</strong> Dry Season = March 16 -> Sept. 15 (March, April, May, June, July, August, September) </p>
+                            <p><strong><i class="fas fa-sun fa-md"></i> :</strong>  Wet Season = Sept. 16 -> March 15 (September, October, November, December, January, February, March)</p>
                         </div>
                     </div>
                 </div>

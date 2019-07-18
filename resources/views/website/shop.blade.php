@@ -30,12 +30,17 @@
 
                         <!-- Title and product details -->
                         <div class="row">
-                                <div class="col-lg-12">
-                                <h1 class="display-4 text-left"><strong>Products</strong></h1>
-                                <br>
-                                <p>Good Rice:</p>
-                                <p>Withered Rice:</p>
-                                <p>Price computation: 1 kaban = 50 persos</p>
+                            <div class="col-lg-12">
+                            <h1 class="display-4 text-left"><strong>Products</strong></h1>
+                            <br>
+                            <p><b>Good Rice</b><br>
+                                The good rice product is the main product output by the farmers it is planted and harvested in a span of 90-120 days, ready to be milled and stored for potential buyers.
+                            </p>
+                            <p><b>Withered Rice</b><br>
+                                Withered Rice is the result of Rice Product being exposed to the open after harvesting for a week, the rice will be dry and already shriveled up usually used as food for farm animals.
+                            </p>
+                            <br>
+                            <p>Price computation: 1 kaban = 50 persos</p>
                             </div>
                         </div>
                         <br>
@@ -95,7 +100,7 @@
                                                             @csrf
                                                             <input type="hidden" name="id" value="{{ $curr_product_list->id }}">
                                                             <input type="hidden" name="price" value="{{ $curr_product_list->price }}">
-                                                            <input type="hidden" name="quantity" value="{{ $curr_product_list->quantity }}">
+                                                            <input type="hidden" name="quantity" value="{{ $curr_product_list->quantity*50 }}">
                                                             <button type="submit" class="btn btn-success btn-md btn-block">Add to Cart</button>
                                                         </form>
                                                     {{-- @endif --}}

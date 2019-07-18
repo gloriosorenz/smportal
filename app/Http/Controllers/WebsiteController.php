@@ -45,7 +45,7 @@ class WebsiteController extends Controller
             ->whereNotIn('id', array(11218, 11219, 11223,11224,11225,11228))
             ->count();
 
-
+        // dd(Carbon::now());
 
         // AUTOMATED WITHERING PRODUCTS
             // Get all good from current
@@ -439,6 +439,11 @@ class WebsiteController extends Controller
             ->with('starosa',$starosa)
             ;    
         
+    }
+
+    public function privacy(){
+        
+        return view('website.privacy');
     }
 
 

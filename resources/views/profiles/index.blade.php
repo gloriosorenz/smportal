@@ -195,7 +195,7 @@
                                                 <td>{{$t->orders->users->first_name}} {{$t->orders->users->last_name}}</td>
                                                 <td>{{$t->orders->users->phone}}</td>
                                                 <td>{{$t->original_product_lists->products->type}}</td>
-                                                <td>{{ presentPrice($t->orders->total_price) }}</td>
+                                                <td>{{ presentPrice($t->quantity * $t->original_product_lists->price *50) }}</td>
                                                 @if($t->order_product_statuses->id == 1)
                                                     <td><span class="badge badge-warning">{{$t->order_product_statuses->status}}</span></td>
                                                 @elseif($t->order_product_statuses->id == 2)

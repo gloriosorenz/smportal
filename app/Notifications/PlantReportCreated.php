@@ -33,7 +33,7 @@ class PlantReportCreated extends Notification
     {
         return [
             'database',
-            // 'mail'
+            'mail'
         ];
     }
 
@@ -46,9 +46,12 @@ class PlantReportCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('New Season Request') // it will use this class name if you don't specify
+                    ->greeting('A farmer is Requesting for a new season') // example: Dear Sir, Hello Madam, etc ...
+                    // ->line('The introduction to the notification.')
+                    // ->action('Notification Action', url('/'))
+                    // ->line('Thank you for using our application!');
+                    ;
     }
 
     /**

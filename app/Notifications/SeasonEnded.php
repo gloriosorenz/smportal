@@ -35,7 +35,7 @@ class SeasonEnded extends Notification
     {
         return [
             'database',
-            // 'mail'
+            'mail'
         ];
     }
 
@@ -50,9 +50,9 @@ class SeasonEnded extends Notification
             return (new MailMessage)
                 ->subject('Season End') 
                 ->greeting('Good day!') // example: Dear Sir, Hello Madam, etc ...
-                ->line('Season ___ has now ended.')
-                ->action('Notification Action', url('/'))
-                ->line('Thank you for using our application!');
+                ->line('The season has now ended.');
+                // ->action('Notification Action', url('/'))
+                // ->line('Thank you for using our application!');
     }
 
     /**

@@ -54,6 +54,8 @@ class UsersTableSeeder extends Seeder
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
                 'company' => 'Sta. Rosa Rice Millers',
                 'roles_id' => 3, //Customer
+                'cities_id'=> 433,
+                'provinces_id'=> 19,
                 'barangays_id'=> 4,
                 'remember_token' => '',
                 'active' => true,

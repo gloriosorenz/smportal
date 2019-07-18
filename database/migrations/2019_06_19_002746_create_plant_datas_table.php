@@ -15,8 +15,8 @@ class CreatePlantDatasTable extends Migration
     {
         Schema::create('plant_datas', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('plant_area');
-            $table->integer('farmers');
+            $table->double('plant_area')->nullable();
+            $table->integer('farmers')->nullable();
             $table->boolean('active')->nullable();
 
             $table->integer('plant_reports_id')->unsigned()->nullable();

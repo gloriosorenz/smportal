@@ -35,6 +35,9 @@ Route::get('/contact','WebsiteController@contact')->name('contact');
 //     return view('website.weather');
 //     });
 
+Route::get('/privacy','WebsiteController@privacy')->name('privacy');
+
+
 
 // Checkout
 Route::get('/checkout', 'CheckoutController@index')->name('checkout.index')->middleware('auth');

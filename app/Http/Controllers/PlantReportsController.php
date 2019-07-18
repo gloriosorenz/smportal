@@ -111,8 +111,7 @@ class PlantReportsController extends Controller
         $preport->seasons_id = $latest_season->id;
         $preport->save();
 
-        $farmers = User::where('roles_id', 1)
-            ->orWhere('roles_id', 2)
+        $farmers = User::Where('roles_id', 2)
             ->get();
         Notification::send($farmers, new PlantReportCreated());
 
@@ -180,7 +179,9 @@ class PlantReportsController extends Controller
     {
         $preport = PlantReport::findOrFail($id);
         $users = User::where('roles_id', '=', 2)->get()->pluck('company', 'id');
-        $pdata = PlantData::where('plant_reports_id', $preport->id)->first();
+        $pdata = PlantData::where('plant_reports_id', $preport->id)
+            // ->where('users_id', auth()->user()->id)
+            ->first();
 
         // dd($pdata);
 
