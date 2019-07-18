@@ -29,3 +29,9 @@ INSERT INTO plant_reports VALUES (17,'0',5,'2018-12-10','2018-12-10');
 INSERT INTO plant_reports VALUES (18,'0',5,'2019-01-24','2019-01-24');
 INSERT INTO plant_reports VALUES (19,'0',5,'2019-02-24','2019-02-24');
 INSERT INTO plant_reports VALUES (20,'0',5,'2019-03-26','2019-03-26');
+
+-- season 6
+INSERT INTO plant_reports VALUES (21,'0',6,'2019-04-15','2019-04-15');
+INSERT INTO plant_reports VALUES (22,'0',6,'2019-05-16','2019-05-16');
+INSERT INTO plant_reports VALUES (23,'0',6,'2019-06-17','2019-06-17');
+INSERT INTO plant_reports VALUES (24,'0',6,'2019-07-20','2019-07-20');
