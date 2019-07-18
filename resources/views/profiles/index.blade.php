@@ -286,7 +286,7 @@
                                             <div class="form-group">
                                                 <label class="form-control-label">Barangay</label>
                                                 <select class="form-control" name="barangay" id="barangay">
-                                                    <option value="0" selected="true" disabled="True" value="{{$user->barangays->name}}">{{$user->barangays->name}}</option>
+                                                    <option selected="true" value="{{$user->barangays->id}}">{{$user->barangays->name}}</option>
                                                     @foreach ($lagunabarangays as $lagbarangay)
                                                         <option value="{{ $lagbarangay['id']}}">{{ $lagbarangay['name']}}</option>
                                                     @endforeach
@@ -300,7 +300,7 @@
                                         <!-- Company -->
                                         <div class="col-sm-6 form-group">
                                             <label>Company</label>
-                                            <input class="form-control" type="text" placeholder="Company" name="company" {{$user->company}}>
+                                            <input class="form-control" type="text" placeholder="Company" name="company" value="{{$user->company}}">
                                         </div>
                                     </div>
     
@@ -308,12 +308,12 @@
                                         <!-- Number of Farmers -->
                                         <div class="col-sm-6 form-group">
                                             <label>Number of Farmers</label>
-                                            <input class="form-control" type="text" placeholder="Number of Farmers" name="no_farmers" {{$user->no_farmers}}> 
+                                            <input class="form-control" type="text" placeholder="Number of Farmers" name="no_farmers" value="{{$user->no_farmers}}"> 
                                         </div>
                                         <!-- Hectares -->
                                         <div class="col-sm-6 form-group">
                                             <label>Hectares</label>
-                                            <input class="form-control" type="text" placeholder="Hectares" name="hectares" {{$user->hectares}}>
+                                            <input class="form-control" type="text" placeholder="Hectares" name="hectares" value="{{$user->hectares}}">
                                         </div>
                                     </div>
 
@@ -329,10 +329,122 @@
                                     <div class="row">
                                         <div class="col-sm-6 form-group">
                                             <label>New Password:</label>
-                                            <input class="form-control" type="password" placeholder="Password">
+                                            <input class="form-control" type="password" placeholder="Password" name="password">
                                         </div>
                                     </div>
     
+                                    <!-- Submit Button -->
+                                    <div class="form-group">
+                                        <button class="btn btn-success" type="submit">Submit</button>
+                                    </div>
+                                </form>
+
+                                @elseif (auth()->user()->roles_id == 1)
+                                <form method="post" action="{{action('AdministratorsController@update', $user->id)}}">
+                                @method('PATCH')
+                                @csrf
+                                    <div class="row">
+                                        <!-- First Name -->
+                                        <div class="col-sm-6 form-group">
+                                            <label>First Name</label>
+                                            <input class="form-control" type="text" placeholder="First Name" name="first_name" value="{{ $user->first_name }}">
+                                        </div>
+                                        <!-- Last Name -->
+                                        <div class="col-sm-6 form-group">
+                                            <label>Last Name</label>
+                                            <input class="form-control" type="text" placeholder="Last Name" name="last_name" value="{{ $user->last_name }}">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <!-- Phone -->
+                                        <div class="col-sm-6 form-group">
+                                            <label>Phone</label>
+                                            <input class="form-control" type="text" placeholder="Phone" name="phone" value="{{ $user->phone }}">
+                                        </div>
+                                        <!-- Email -->
+                                        <div class="col-sm-6 form-group">
+                                            <label>Email</label>
+                                            <input class="form-control" type="text" placeholder="Email" name="email" value="{{ $user->email }}">
+                                        </div>
+                                    </div>
+            
+            
+                                    <!-- Address -->
+                                    <h5><strong>Address</strong></h5>
+            
+                                    <!-- Street -->
+                                    <div class="form-group">
+                                        <label>Street</label>
+                                        <input class="form-control" type="text" placeholder="Street" name="street" value="{{ $user->street }}">
+                                    </div>
+            
+                                    <div class="row">
+                                        <!-- Provice-->
+                                        <div class="col-sm-4 form-group">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Province</label>
+                                                <select class="form-control select2_demo_1" name="province" id="province">
+                                                    <option selected="true" value="{{$user->provinces->id}}">{{ $user->provinces->name }}</option>
+                                                    @foreach ($provinces as $province)
+                                                        <option value="{{ $province['id']}}">{{ $province['name']}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+            
+                                        <!-- City-->
+                                        <div class="col-sm-4 form-group">
+                                            <div class="form-group">
+                                                <label class="form-control-label">City</label>
+                                                <select class="form-control select2_demo_1" name="city" id="city">
+                                                    <option selected="true" value="{{$user->cities->id}}">{{ $user->cities->name }}</option>
+                                                    @foreach ($cities as $city)
+                                                        <option value="{{ $city['id']}}">{{ $city['name']}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+            
+            
+                                        <!-- Barangay-->
+                                        {{-- <div class="col-sm-4 form-group">
+                                            <div class="form-group">
+                                                <label class="form-control-label">Barangay</label>
+                                                <select class="form-control select2_demo_1" name="barangay" id="barangay">
+                                                    <option selected="true" value="{{$user->barangays->id}}">{{ $user->barangays->name }}</option>
+                                                    @foreach ($barangays as $barangay)
+                                                        <option value="{{ $barangay['id']}}">{{ $barangay['name']}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div> --}}
+                                    </div>
+            
+            
+                                    <div class="row">
+                                        <!-- Company -->
+                                        <div class="col-sm-6 form-group">
+                                            <label>Company</label>
+                                            <input class="form-control" type="text" placeholder="Company" name="company" value="{{ $user->company }}">
+                                        </div>
+                                    </div>
+
+                                     <!-- Change Password -->
+                                     <h5><strong>Change Password</strong></h5>
+                                     <div class="row">
+                                         <div class="col-sm-6 form-group">
+                                             <label>Old Password:</label>
+                                             <input class="form-control" type="password" placeholder="Password">
+                                         </div>
+                                     </div>
+                                     
+                                     <div class="row">
+                                         <div class="col-sm-6 form-group">
+                                             <label>New Password:</label>
+                                             <input class="form-control" type="password" placeholder="Password">
+                                         </div>
+                                     </div>
+            
                                     <!-- Submit Button -->
                                     <div class="form-group">
                                         <button class="btn btn-success" type="submit">Submit</button>

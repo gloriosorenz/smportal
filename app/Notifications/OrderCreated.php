@@ -46,9 +46,11 @@ class OrderCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                ->subject('Thank you for ordering!') // it will use this class name if you don't specify
+                ->markdown('partials.mail.order_created', [
+                                                            // 'days' => $this->days,
+                                                            'order' => $this->order,
+                                                            ]);
     }
 
     /**

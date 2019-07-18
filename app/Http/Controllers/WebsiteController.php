@@ -16,11 +16,17 @@ use App\Region;
 use App\Product;
 use App\OrderProduct;
 use App\Order;
+use App\Season;
+use App\SeasonList;
 
 use DB;
 use DarkSkyApi;
 use Carbon\Carbon;
 use Gmopx\LaravelOWM\LaravelOWM;
+
+use Notification;
+use App\Notifications\AutoWitherProduct;
+use App\Notifications\AutoDamageProduct;
 
 class WebsiteController extends Controller
 {
@@ -61,6 +67,11 @@ class WebsiteController extends Controller
 
                 // dd($whut);
 
+            // get recipients
+            $users = User::where('roles_id', 2)
+                // ->where('roles_id', 4)
+                ->get();
+
             // will update price and product type to withered, the original withered to damaged
                 foreach($goodid as $pr){
                     foreach($witheredid as $wh){
@@ -68,10 +79,14 @@ class WebsiteController extends Controller
                             if($pr->id+1 == $wh->id){
                                 $pr->update(['products_id' => 2]);
                                 $pr->update(['price' => $wh->price] );
+
+                                // Notification::send($users, new AutoWitherProduct());
                             }
                             if($pr->id+2 == $dg->id){
                                 $pr->update(['products_id' => 3]);
                                 $pr->update(['price' => 0] );
+
+                                // Notification::send($users, new AutoDamageProduct());
                             }
                         }
                     }
@@ -110,43 +125,43 @@ class WebsiteController extends Controller
         //                 ->where('curr_quantity', '>', 0)
         //                 ->get();
                         
-        $lowm = new LaravelOWM();
+        // $lowm = new LaravelOWM();
 
-        $forecast = $lowm->getWeatherForecast(array('lat' => 14.2936, 'lon' => 121.1067),null,null,5);
-        $current_weather = $lowm->getCurrentWeather(array('lat' => 14.2936, 'lon' => 121.1067));
+        // $forecast = $lowm->getWeatherForecast(array('lat' => 14.2936, 'lon' => 121.1067),null,null,5);
+        // $current_weather = $lowm->getCurrentWeather(array('lat' => 14.2936, 'lon' => 121.1067));
         // $current_weather = $lowm->getCurrentWeather(array('lat' => 14.2471, 'lon' => 121.1367));
         // $forecast = $lowm->getWeatherForecast($query, $lang = 'en', $units = 'metric', $days = 5, $cache = false, $time = 600);
         // dd($forecast);
 
-        // if ($forecast)
-        foreach ($forecast as $f){
-            // dd($f);
+        // // if ($forecast)
+        // foreach ($forecast as $f){
+        //     // dd($f);
 
-            //
+        //     //
 
-            // $alert = 'normal';
+        //     // $alert = 'normal';
 
-            $wind = $f->wind->speed;
-            // $wind = $f->wind;
-            strval($wind);
-            // dd($wind);
+        //     $wind = $f->wind->speed;
+        //     // $wind = $f->wind;
+        //     strval($wind);
+        //     // dd($wind);
 
-            // $was = $f->wind;
+        //     // $was = $f->wind;
 
-            // dd($wind);
-            // if ($wind >= 40 && $wind <= 60){
-            //     $alert = 'Alert';
-            //     // dd($alert);
-            // } else {
-            //     $alert = 'Safe winds.';
-            // }
+        //     // dd($wind);
+        //     // if ($wind >= 40 && $wind <= 60){
+        //     //     $alert = 'Alert';
+        //     //     // dd($alert);
+        //     // } else {
+        //     //     $alert = 'Safe winds.';
+        //     // }
 
-            // dd($alert);
+        //     // dd($alert);
 
-            // $whut = $f->city->name;
-            // dd($whut);
-            // dd($wind);
-        }
+        //     // $whut = $f->city->name;
+        //     // dd($whut);
+        //     // dd($wind);
+        // }
 
         $farmers = DB::table('product_lists')
                         ->groupBy('rice_farmers_id', 'seasons_id', 'curr_products_id');
@@ -209,15 +224,77 @@ class WebsiteController extends Controller
                 $pee->orders->update(['order_statuses_id'=>1]); // Pending
         }
 
+
+
+
+
+
+
+
+        // ------------------------------------------------------------------------------------------------------------------------
+        // Check if user is active (auto deactivate user)
+        // ------------------------------------------------------------------------------------------------------------------------
+
+        $count_seasons = Season::where('season_statuses_id', '!=', 1)->count();
+        $counter = 0;
+        $counter2 = 0;
+        if(auth()->user()){
+            for($i=$count_seasons-3; $i <= $count_seasons; $i++){
+                // checks if farmer has been active in the past 3 seasons
+                $check_farmer_active = SeasonList::join('seasons', 'season_lists.seasons_id', '=', 'seasons.id')
+                    ->where('seasons_id', $i)
+                    ->where('users_id', auth()->user()->id)
+                    ->count()
+                    ;
+
+                $check_customer_active = Order::join('order_products', 'orders.id', '=', 'order_products.orders_id')
+                    ->join('original_product_lists', 'order_products.original_product_lists_id', '=', 'original_product_lists.id')
+                    // ->select('orders.users_id')
+                    // ->where('seasons_id', $i)
+                    // ->where('orders.users_id', auth()->user()->id)
+                    ->get()
+                    ;
+
+                // dd($check_customer_active);
+
+                if($check_farmer_active == 0)
+                    $counter ++;
+
+                // if($check_customer_active == 0)
+                //     $counter2 ++;
+            }
+
+            // dd($counter2);
+
+
+            if($counter > 3){
+                // Deactivates farmer
+                if(auth()->user()->roles_id == 2){
+                    $id = auth()->user()->id;
+                    $user = User::findOrfail($id);
+                    $user->active = false;
+                    $user->save();
+                }
+            }
+        
+            
+        }
+        
+
+
+
+
+
+
         return view('/website')
                 ->with('products', $products)
                 ->with('farmers', $farmers)
                 ->with('farmergroups', $farmergroups)
                 ->with('clients', $clients)
                 ->with('lagunabarangays', $lagunabarangays)
-                ->with('forecast',$forecast)
-                ->with('current_weather',$current_weather)
-                ->with('wind',$wind)
+                // ->with('forecast',$forecast)
+                // ->with('current_weather',$current_weather)
+                // ->with('wind',$wind)
         ;
     }
 

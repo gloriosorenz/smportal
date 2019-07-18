@@ -119,7 +119,7 @@ class OrderProductsController extends Controller
 
        // Notification
        $customer = $order->orders->users;
-       Notification::send($customer, new OrderPaid());
+       Notification::send($customer, new OrderPaid($order));
 
     
 
@@ -145,9 +145,10 @@ class OrderProductsController extends Controller
 
         $days = $now->diffIndays($end_date);
 
+
         // Notification
         $customer = $order->orders->users;
-        Notification::send($customer, new OrderConfirmed());
+        Notification::send($customer, new OrderConfirmed($order, $days));
 
         
 
@@ -163,7 +164,7 @@ class OrderProductsController extends Controller
 
         // Notification
         $customer = $orderproduct->orders->users;
-        Notification::send($customer, new OrderCancelled());
+        Notification::send($customer, new OrderCancelled($orderproduct));
 
         return redirect()->back()->with('success', 'Order Cancelled');
     }

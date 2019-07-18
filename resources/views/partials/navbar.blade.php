@@ -120,7 +120,7 @@
                     <span></span>{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}<i class="fa fa-angle-down m-l-5"></i></a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="{{ url('profile' )}}"><i class="fa fa-user"></i>Profile</a>
-                    <a class="dropdown-item" href="{{ url('profile' )}}"><i class="fa fa-cog"></i>Settings</a>
+                    {{-- <a class="dropdown-item" href="{{ url('profile' )}}"><i class="fa fa-cog"></i>Settings</a> --}}
                     <li class="dropdown-divider"></li>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                        onclick="event.preventDefault();

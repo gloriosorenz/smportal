@@ -28,8 +28,12 @@
         <br>
 
         <div class="row text-center">
-            <h3><strong>PRE-CALAMITY ASSESSMENT REPORT ON WOULD-BE EFFECTS TO AGRICULTURE & FISHERIES </strong></h3>
-            <h4>Type of Calamity: {{$dreport->calamity}}</h4>
+            <h3><strong>DAMAGE ASSESSMENT REPORT FOR OTHER CROPS</strong></h3>
+            <small>Cause of Damage: {{$dreport->calamities->type}}</small><br>
+            <small>Date of Occurrence: {{\Carbon\Carbon::parse($dreport->calamity_start)->format('F j, Y')}}</small><br>
+            <small>End of Calamity: {{\Carbon\Carbon::parse($dreport->calamity_end)->format('F j, Y')}}</small><br>
+            <small>Report as of: {{\Carbon\Carbon::now()->format('F j, Y')}}</small><br>
+            <small>Type: {{$dreport->report_statuses->status}}</small><br>
         </div>
         <br>
 
@@ -40,11 +44,11 @@
                 <p>2. Province: {{$dreport->provinces->name}}</p>
             </div>
 
-            <div class="col-md-6 text-right">
+            {{-- <div class="col-md-6 text-right">
                 <p><strong>A. Geographoc Information</strong></p>
                 <p>1. Region: {{$dreport->regions->name}}</p>
                 <p>2. Province: {{$dreport->provinces->name}}</p>
-            </div>
+            </div> --}}
         </div>
         <hr>
         <p><strong>C. Particulars:</strong></p>
@@ -54,27 +58,39 @@
             <div class="col-lg-12">
                 <table class="table table-striped">
                     <thead>
-                        <th width="10">ID</th>
-                        <th width="11.25">Crop</th>
-                        <th width="11.25">Stages of <br>Development (ha)</th>
-                        <th width="11.25">Rejected Production <br>(in Metric Ton)</th>
-                        <th width="11.25">Animal Type</th>
-                        <th width="11.25">Head/Birds</th>
-                        <th width="11.25">Fish</th>
-                        <th width="11.25">Area</th>
-                        <th width="11.25">Fish Pieces</th>
+                        <th class="text-center" width="10">ID</th>
+                        <th class="text-center"  width="11.25">Name of Crop</th>
+                        <th class="text-center"  width="11.25">Number of Farmers Affected</th>
+                        <th class="text-center"  width="11.25">Area of Standing Crop (HA)</th>
+                        <th class="text-center"  width="11.25">Stage of Crop Development</th>
+                        <th class="text-center"  width="11.25">Month to be Harvested</th>
+                        <th class="text-center"  width="11.25">Total Area Affected (HA)</th>
+                        <th class="text-center"  width="11.25">Totally Damaged (HA)</th>
+                        <th class="text-center"  width="11.25">Partially Damaged (HA)</th>
+                        <th class="text-center"  width="11.25">Yield Before Calamity (Kbn)</th>
+                        <th class="text-center"  width="11.25">Yield After Calamity (Kbn)</th>
+                        <th class="text-center"  width="11.25">Yield Loss</th>
+                        <th class="text-center"  width="11.25">Volume (Kbn)</th>
+                        <th class="text-center"  width="11.25">Grand Total</th>
+                        <th class="text-center"  width="11.25">Remarks</th>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                         <tr>
                             <td>{{ $dreport->id }}</td>
                             <td>{{ $dreport->crop }}</td>
+                            <td>{{ $dreport->num_farmers }}</td>
+                            <td>{{ $dreport->standing_crop_area }}</td>
                             <td>{{ $dreport->rice_crop_stages->stage }}</td>
-                            <td>{{ $dreport->crop }}</td>
-                            <td>{{ $dreport->crop }}</td>
-                            <td>{{ $dreport->crop }}</td>
-                            <td>{{ $dreport->crop }}</td>
-                            <td>{{ $dreport->crop }}</td>
-                            <td>{{ $dreport->crop }}</td>
+                            <td>{{ $dreport->harvest_month }}</td>
+                            <td>{{ $dreport->total_area }}</td>
+                            <td>{{ $dreport->totally_damaged_area }}</td>
+                            <td>{{ $dreport->partially_damaged_area }}</td>
+                            <td>{{ $dreport->yield_before }}</td>
+                            <td>{{ $dreport->yield_after }}</td>
+                            <td>{{ $dreport->yield_loss }}</td>
+                            <td>{{ $dreport->volume }}</td>
+                            <td>{{ $dreport->grand_total }}</td>
+                            <td>{{ $dreport->remarks }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -94,8 +110,8 @@
         <div class="row">
             <div class="col-lg-6">
                 <p><strong>D. Collector's Information</strong></p>
-                <p>Prepared By: </p>
-                <p>Date: {{\Carbon\Carbon::now()->format('m-d-Y')}}</p>
+                <p>Prepared By: {{$dreport->users->first_name}} {{$dreport->users->last_name}}</p>
+                <p>Date: {{\Carbon\Carbon::now()->format('F j, Y')}}</p>
             </div>
             <div class="col-lg-6 ">
                 <p>Reviewed By:</p>

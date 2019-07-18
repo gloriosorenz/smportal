@@ -106,11 +106,11 @@
                 </li>
                 <li class="heading">FUNCTIONS</li>
                 <!-- Season -->
-                <li class="{{Request:: is('seasons') ? 'active' : ''}}">
+                {{-- <li class="{{Request:: is('seasons') ? 'active' : ''}}">
                     <a href="{{ route('seasons.index') }}"><i class="sidebar-item-icon fa fa-cloud-sun-rain"></i>
                         <span class="nav-label">Seasons</span>
                     </a>
-                </li>
+                </li> --}}
                 <!-- Season List-->
                 <li class="{{Request:: is('season_lists') ? 'active' : ''}}">
                     <a href="{{ route('season_lists.index') }}"><i class="sidebar-item-icon fas fa-list"></i>

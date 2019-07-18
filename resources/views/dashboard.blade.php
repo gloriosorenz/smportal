@@ -326,11 +326,6 @@
                     <div class="ibox-title">Production Overview per Season</div>
                     <div class="ibox-tools">
                         <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
-                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item">option 1</a>
-                            <a class="dropdown-item">option 2</a>
-                        </div>
                     </div>
                 </div>
                 <div class="ibox-body">
@@ -347,9 +342,9 @@
                             {!! Charts::scripts() !!}
                             {!! $rice_production_line->script() !!}
                     </div>
-                    {{-- <div>
-                        <canvas id="bar_chart" style="height:260px;"></canvas>
-                    </div> --}}
+                    <div>
+                        <p class="text-muted text-center"> Season</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -361,11 +356,6 @@
                     <div class="ibox-title">Products Sold for Season {{$last_com_season->id}}</div>
                     <div class="ibox-tools">
                         <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
-                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item">option 1</a>
-                            <a class="dropdown-item">option 2</a>
-                        </div>
                     </div>
                 </div>
                 <div class="ibox-body">
@@ -399,11 +389,6 @@
                     <div class="ibox-title">Product Comparison for Season {{$last_com_season->id}}</div>
                     <div class="ibox-tools">
                         <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
-                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item">option 1</a>
-                            <a class="dropdown-item">option 2</a>
-                        </div>
                     </div>
                 </div>
                 <div class="ibox-body">
@@ -431,11 +416,6 @@
                     <div class="ibox-title">Revenue</div>
                     <div class="ibox-tools">
                         <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
-                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item">option 1</a>
-                            <a class="dropdown-item">option 2</a>
-                        </div>
                     </div>
                 </div>
                 <div class="ibox-body">
@@ -598,11 +578,6 @@
                         <div class="ibox-title">Monthly Orders</div>
                         <div class="ibox-tools">
                             <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
-                            <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item">option 1</a>
-                                <a class="dropdown-item">option 2</a>
-                            </div>
                         </div>
                     </div>
                     <div class="ibox-body">
@@ -677,11 +652,6 @@
                     <div class="ibox-title">Total Order Overview</div>
                     <div class="ibox-tools">
                         <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
-                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item">option 1</a>
-                            <a class="dropdown-item">option 2</a>
-                        </div>
                     </div>
                 </div>
                 <div class="ibox-body">
@@ -708,11 +678,6 @@
                     <div class="ibox-title">Product Output for Season {{$last_com_season->id}}</div>
                     <div class="ibox-tools">
                         <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
-                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item">option 1</a>
-                            <a class="dropdown-item">option 2</a>
-                        </div>
                     </div>
                 </div>
                 <div class="ibox-body">

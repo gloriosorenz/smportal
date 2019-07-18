@@ -23,14 +23,14 @@
                 <div class="ibox-title">Damage Reports</div>
                 <!-- Add Damage Report -->
                 <div>
-                    @if (auth()->user()->active)
+                    @if (auth()->user()->active && auth()->user()->roles->id == 2)
                     <a class="btn btn-success btn-sm" href="{{ route('damage_reports.create') }}">Create Report</a>
                     @endif
                 </div>
             </div>
             <div class="ibox-body">
                 <!-- Start Form -->
-                <table id="table_id" class="table table-bordered table-hover">
+                <table id="damage_reports_table" class="table table-bordered table-hover">
 
                     <!-- If user is admin -->
                     @if(auth()->user()->roles->id == 1)
@@ -40,6 +40,7 @@
                                 <th class="text-center" width="">ID</th>
                                 <th class="text-center" width="">Calamity</th>
                                 <th class="text-center" width="">Date Created</th>
+                                <th class="text-center" width="">Status</th>
                                 <th class="text-center" width="15%">Options</th>
                             </tr>
                         </thead>
@@ -50,11 +51,21 @@
                                 <td>{{$dr->calamities->type}}</td>
                                 <td>{{$dr->created_at->toFormattedDateString()}}</td>
                                 <td>
+                                    @if ($dr->report_statuses->id == 1)
+                                        <h5><span class="badge badge-warning badge-pill">{{$dr->report_statuses->status}}</span></h5>
+                                    @else
+                                        <h5><span class="badge badge-success badge-pill">{{$dr->report_statuses->status}}</span></h5>
+                                    @endif                                
+                                </td>
+                                <td>
                                     <a href="/damage_reports/{{$dr->id}}"><button class="btn btn-warning btn-md btn-fill" id="btn_view" name="btn_view"><i class="fas fa-eye"></i></button></a>
                                     @if (auth()->user()->active)
                                     <a href="/damage_reports/{{$dr->id}}/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
                                     @endif
                                     <a href="/pdf/damage_report/{{$dr->id}}" class="btn btn-primary"><i class="fas fa-download fa-sm text-white"></i></a>
+                                    {{-- @if ($dr->report_statuses->id == 1)
+                                        <a href="/damage_reports/report_final/{{$dr->id}}" class="btn btn-success"><i class="fas fa-check"></i></a>
+                                    @endif --}}
                                 </td>
                             </tr>
                             @endforeach
@@ -70,6 +81,7 @@
                                 <th class="text-center" width="">ID</th>
                                 <th class="text-center" width="">Calamity</th>
                                 <th class="text-center" width="">Date Created</th>
+                                <th class="text-center" width="">Status</th>
                                 <th class="text-center" width="15%">Options</th>
                             </tr>
                         </thead>
@@ -80,11 +92,18 @@
                                 <td>{{$dr->calamities->type}}</td>
                                 <td>{{$dr->created_at->toFormattedDateString()}}</td>
                                 <td>
-                                    <a href="/damage_reports/{{$dr->id}}"><button class="btn btn-warning btn-md btn-fill" id="btn_view" name="btn_view"><i class="fas fa-eye"></i></button></a>
-                                    @if (auth()->user()->active)
-                                    <a href="/damage_reports/{{$dr->id}}/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    @if ($dr->report_statuses->id == 1)
+                                    <h5><span class="badge badge-warning badge-pill">{{$dr->report_statuses->status}}</span></h5>
+                                    @else
+                                        <h5><span class="badge badge-success badge-pill">{{$dr->report_statuses->status}}</span></h5>
                                     @endif
-                                    <a href="/pdf/damage_report/{{$dr->id}}" class="btn btn-primary"><i class="fas fa-download fa-sm text-white"></i></a>
+                                </td>
+                                <td>
+                                    <a href="/damage_reports/{{$dr->id}}"><button class="btn btn-warning btn-md btn-fill" id="btn_view" name="btn_view"><i class="fas fa-eye"></i></button></a>
+                                    {{-- @if (auth()->user()->active)
+                                        <a href="/damage_reports/{{$dr->id}}/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    @endif --}}
+                                    {{-- <a href="/pdf/damage_report/{{$dr->id}}" class="btn btn-primary"><i class="fas fa-download fa-sm text-white"></i></a> --}}
                                 </td>
                             </tr>
                             @endforeach

@@ -13,14 +13,16 @@ class OrderCancelled extends Notification
 {
     use Queueable;
 
+    protected $order;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($order)
     {
-        //
+        $this->order = $order;
     }
 
     /**
@@ -46,9 +48,11 @@ class OrderCancelled extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                ->subject('Order Cancelled') // it will use this class name if you don't specify
+                ->markdown('partials.mail.order_cancelled', [
+                                                            // 'days' => $this->days,
+                                                            'order' => $this->order,
+                                                            ]);
     }
 
     /**

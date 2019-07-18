@@ -140,11 +140,11 @@ class AdministratorsController extends Controller
         $user->street = $request->input('street');
 
         // $user->barangays_id = $request->input('barangay');
-        // $user->cities_id = $request->input('city');
-        // $user->provinces_id = $request->input('province');
+        $user->cities_id = $request->input('city');
+        $user->provinces_id = $request->input('province');
 
         $user->company = $request->input('company');
-        $user->active = true;
+        $user->password = $request->input('password');
         $user->save();
 
         // dd($user);

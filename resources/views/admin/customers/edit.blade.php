@@ -75,7 +75,7 @@
                                 <div class="form-group">
                                     <label class="form-control-label">Province</label>
                                     <select class="form-control select2_demo_1" name="province" id="province">
-                                        <option value="0" selected="true" disabled="True">{{ $customer->provinces->name }}</option>
+                                        <option selected="true" value="{{$customer->provinces->id}}">{{ $customer->provinces->name }}</option>
                                         @foreach ($provinces as $province)
                                             <option value="{{ $province['id']}}">{{ $province['name']}}</option>
                                         @endforeach
@@ -88,7 +88,7 @@
                                 <div class="form-group">
                                     <label class="form-control-label">City</label>
                                     <select class="form-control select2_demo_1" name="city" id="city">
-                                        <option value="0" selected="true" disabled="True">{{ $customer->cities->name }}</option>
+                                        <option selected="true" value="{{$customer->cities->id}}">{{ $customer->cities->name }}</option>
                                         @foreach ($cities as $city)
                                             <option value="{{ $city['id']}}">{{ $city['name']}}</option>
                                         @endforeach
@@ -102,7 +102,7 @@
                                 <div class="form-group">
                                     <label class="form-control-label">Barangay</label>
                                     <select class="form-control select2_demo_1" name="barangay" id="barangay">
-                                        <option value="0" selected="true" disabled="True">{{ $customer->barangays->name }}</option>
+                                        <option selected="true" value="{{$customer->provinces->id}}">{{ $customer->barangays->name }}</option>
                                         @foreach ($barangays as $barangay)
                                             <option value="{{ $barangay['id']}}">{{ $barangay['name']}}</option>
                                         @endforeach

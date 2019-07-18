@@ -191,6 +191,7 @@ class FarmersController extends Controller
         $farmer->company = $request->input('company');
         $farmer->no_farmers = $request->input('no_farmers');
         $farmer->hectares = $request->input('hectares');
+        $farmer->password = $request->input('password');
         $farmer->save();
 
         // dd($farmer);

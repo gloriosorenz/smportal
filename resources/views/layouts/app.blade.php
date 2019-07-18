@@ -194,6 +194,11 @@
                 pageLength: 10,
                 order: [[ 1, 'desc' ]],
             });
+            // Damage Report
+            $('#damage_reports_table').DataTable({
+                pageLength: 10,
+                order: [[ 1, 'desc' ]],
+            });
 
 
             

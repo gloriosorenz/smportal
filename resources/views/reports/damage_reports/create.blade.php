@@ -112,11 +112,7 @@
                     <div class="col-sm-4 form-group">
                         <div class="form-group">
                             <label class="form-control-label">Crop</label>
-                            <select class="form-control select2_demo_1" name="crop">
-                                <option selected="True" disabled="True">Select Crop</option>
-                                <option value="Good Rice">Good rice</option>
-                                <option value="Withered Rice">Withered rice</option>
-                            </select>
+                            <input class="form-control" type="text" name="crop" value="Rice" readonly/>
                         </div>
                     </div>
 
@@ -140,7 +136,7 @@
                         <div class="form-group">
                             <label class="form-control-label">Stage crop development:</label>
                             <select class="form-control select2_demo_1" name="rice_crop_stages_id">
-                                <option value="0" selected="true" disabled="True">Select Calamity</option>
+                                <option value="0" selected="true" disabled="True">Select Stage</option>
                                 @foreach ($rice_crop_stage as $stage)
                                     <option value="{{ $stage['id']}}">{{ $stage['stage']}}</option>
                                 @endforeach

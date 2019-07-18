@@ -101,7 +101,7 @@
                                 <div class="form-group">
                                     <label class="form-control-label">Barangay</label>
                                     <select class="form-control select2_demo_1" name="barangay" id="barangay">
-                                        <option value="0" selected="true" disabled="True" value="{{$farmer->barangays->name}}">{{$farmer->barangays->name}}</option>
+                                        <option selected="true" value="{{$farmer->barangays->id}}">{{$farmer->barangays->name}}</option>
                                         @foreach ($lagunabarangays as $lagbarangay)
                                             <option value="{{ $lagbarangay['id']}}">{{ $lagbarangay['name']}}</option>
                                         @endforeach

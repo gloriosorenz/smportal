@@ -37,6 +37,11 @@ class ProfilesController extends Controller
         $calabarzon = Region::where('id','=', 4)->get();
         $starosa = City::where('id','=', 433)->get();
         $laguna = Province::where('id','=',19)->get();
+
+        // For admin
+        // $barangays = Barangay::orderBy('name')->get();
+        $provinces = Province::orderBy('name')->get();
+        $cities = City::orderBy('name')->get();
     
 
         // Count total seasons of farmer
@@ -86,6 +91,8 @@ class ProfilesController extends Controller
             ->with('calabarzon', $calabarzon)
             ->with('laguna',$laguna)
             ->with('starosa',$starosa)
+            ->with('cities',$cities)
+            ->with('provinces',$provinces)
             ->with('customers',$customers)
             ;
     }

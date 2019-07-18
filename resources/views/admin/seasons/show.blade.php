@@ -26,7 +26,7 @@
                     {{-- <div class="card-subtitle">subtitle</div>
                     <p class="card-text">Season Start: {{ $season->season_start }}</p>
                     <p class="card-text">Season End: {{ $season->season_end }}</p> --}}
-                    <p class="card-text">Staus: {{ $season->season_statuses->status }}</p>
+                    <p class="card-text">Status: {{ $season->season_statuses->status }}</p>
                 </div>
             </div><br>
         </div>

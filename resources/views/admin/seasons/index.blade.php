@@ -16,15 +16,6 @@
 
 <div class="page-content fade-in-up">
 
-    <!-- Complete Season-->
-    {{-- @if ($latest_season->season_statuses_id == 1)
-        @if ($count != 0)
-            @if (auth()->user()->roles_id == 1)
-                <a class="btn btn-secondary btn-md mb-3" href="/seasons/complete_season/{{$latest_season->id}}">Complete Season {{$latest_season->id}} <i class="fas fa-check"></i></a>
-            @endif
-        @endif
-    @endif --}}
-
     <div class="row">
         <!-- Season History -->
         <div class="col-md-8">
@@ -50,9 +41,9 @@
                                 <td>Season {{ $season->id }}</td>
                                 <td>
                                     @if ($season->season_types->id == 1)
-                                    <i class="fas fa-cloud-rain fa-md">
+                                    <i class="fas fa-cloud-rain fa-md"></i>
                                     @elseif ($season->season_types->id == 2)
-                                    <i class="fas fa-sun fa-md">
+                                    <i class="fas fa-sun fa-md"></i>
                                     @endif
                                 </td>
                                 <td>{{ \Carbon\Carbon::parse($season->season_start)->format('F j, Y')}}</td>
@@ -65,11 +56,11 @@
                                     @endif
                                 </td> --}}
                                 <td class="text-center">
-                                    @if ($season->season_statuses_id == 1)
+                                    {{-- @if ($season->season_statuses_id == 1)
                                     <a href="/seasons/{{$season->id}}/edit" class="btn btn-md btn-success"><i class="fas fa-check fa-sm text-white"></i></a>
                                     @elseif ($season->season_statuses_id == 2)
                                     <a href="/seasons/{{$season->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
-                                    @endif
+                                    @endif --}}
 
                                     <a href="/seasons/{{$season->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
                                     <a href="pdf/season_report/{{$season->id}}" class="btn btn-md btn-secondary"> <i class="fas fa-download fa-sm text-white"></i></a>
@@ -79,16 +70,22 @@
                         </tbody>
                     </table>
                 </div>
-                {{-- <div class="ibox-footer text-center">
-                    <small class="text-muted">With faded secondary text</small>
-                </div> --}}
+                <div class="ibox-footer text-center">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <p class="font-bold">Season Type Guide</p>
+                            <p><strong><i class="fas fa-cloud-rain fa-md"></i> :</strong> March 16 - September 14</p>
+                            <p><strong><i class="fas fa-sun fa-md"></i> :</strong> Septmeber 15 - March 15</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!-- Ongoing Season -->
         <div class="col-md-4">
             @if ($latest_season->season_statuses_id == 1)
-                <div class="ibox">
+                {{-- <div class="ibox">
                     <div class="ibox-head bg-warning text-white">
                         <div class="ibox-title">Ongoing Season: Season {{$ongoing_season->id}}</div>
                         <div class="ibox-tools">
@@ -120,21 +117,25 @@
                         </form>
                         <!-- End Form -->
                     </div>
-                </div>
+                </div> --}}
+                <div class="card bg-warning text-white">
+                    <div class="card-body">
+                        <h4 class="card-title">Ongoing Season: Season {{$ongoing_season->id}}</h4>
+                        {{-- <div class="card-subtitle">subtitle</div>
+                        <p class="card-text">Season Start: {{ $season->season_start }}</p>
+                        <p class="card-text">Season End: {{ $season->season_end }}</p> --}}
+                        {{-- <p class="card-text">Status: {{ $season->season_statuses->status }}</p> --}}
+                    </div>
+                </div><br>
             @endif
 
             <!-- Create Season -->
             @if (count($seasons) == count($complete))
                 <div class="ibox">
-                    <div class="ibox-head">
+                    <div class="ibox-head bg-primary text-white">
                         <div class="ibox-title">Create New Season</div>
                         <div class="ibox-tools">
-                            <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
-                            <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item">option 1</a>
-                                <a class="dropdown-item">option 2</a>
-                            </div>
+                            <a class="ibox-collapse"><i class="fa fa-minus text-white"></i></a>
                         </div>
                     </div>
                     <div class="ibox-body">

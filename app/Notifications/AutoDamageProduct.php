@@ -7,7 +7,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class AutoWitherProduct extends Notification
+class AutoDamageProduct extends Notification
 {
     use Queueable;
 
@@ -30,7 +30,7 @@ class AutoWitherProduct extends Notification
     public function via($notifiable)
     {
         return [
-            // 'mail',
+            'mail',
             'database'
         ];
     }
@@ -44,11 +44,9 @@ class AutoWitherProduct extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Product Withering') // it will use this class name if you don't specify
-            ->greeting('Good day!') // example: Dear Sir, Hello Madam, etc ...
-            ->line('The following product is withering in _____ days')
-            ->action('Notification Action', url('/'))
-            ->line('Thank you and regards, SMSRL Administrator!');
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**

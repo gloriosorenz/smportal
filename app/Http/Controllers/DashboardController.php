@@ -40,34 +40,7 @@ class DashboardController extends Controller
 
         // dd($latest_season);
 
-        // ------------------------------------------------------------------------------------------------------------------------
-        // Check if user is active (auto deactivate user)
-        // ------------------------------------------------------------------------------------------------------------------------
-
-        $count_seasons = Season::count();
-        $counter = 0;
-        for($i=$count_seasons-3; $i <= $count_seasons; $i++){
-            $check_if_active = SeasonList::join('seasons', 'season_lists.seasons_id', '=', 'seasons.id')
-                ->where('seasons_id', $i)
-                ->where('users_id', auth()->user()->id)
-                ->count()
-                ;
-
-            // dd($check_if_active);
-            if($check_if_active == 0)
-                $counter ++;
-        }
-
-        // dd($counter);
-        if($counter > 3){
-            // Deactivates farmer
-            if(auth()->user()->roles_id == 2){
-                $id = auth()->user()->id;
-                $user = User::findOrfail($id);
-                $user->active = false;
-                $user->save();
-            }
-        }
+       
 
         // ------------------------------------------------------------------------------------------------------------------------
         // Auto-create plant report

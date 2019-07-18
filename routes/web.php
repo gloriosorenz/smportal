@@ -109,7 +109,9 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('reports/plant_reports/addPlantReport','PlantReportsController@addPlantReport');
     Route::get('reports/plant_reports/plant_report_created', 'PlantReportsController@plant_report_created');
 
-    
+    // Damage Report
+    Route::get('/damage_reports/report_final/{id}', 'DamageReportsController@report_final');
+
     Route::resource('administrators', 'AdministratorsController');
     Route::resource('farmers', 'FarmersController');
     Route::resource('customers', 'CustomersController');

@@ -13,14 +13,17 @@ class OrderConfirmed extends Notification
 {
     use Queueable;
 
+    protected $order, $days;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($order, $days)
     {
-        //
+        $this->order = $order;
+        $this->days = $days;
     }
 
     /**
@@ -46,11 +49,16 @@ class OrderConfirmed extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Your order is confirmed') // it will use this class name if you don't specify
-                    ->greeting('Hello Customer!') // example: Dear Sir, Hello Madam, etc ...
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Order Confirmed') // it will use this class name if you don't specify
+                    // ->greeting('Hello Customer!') // example: Dear Sir, Hello Madam, etc ...
+                    // ->line('The introduction to the notification.')
+                    // ->action('Notification Action', url('/'))
+                    // ->line('Thank you for using our application!');
+                    ->markdown('partials.mail.order_confirmed', [
+                                                                'days' => $this->days,
+                                                                'order' => $this->order,
+                                                                ]);
+
     }
 
     /**
