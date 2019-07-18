@@ -45,6 +45,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
+                                        {{-- <td><input type="text" name="s" id="quantity"/></td>
+                                        <td><input type="text" name="a" id="price"/></td> --}}
+                                        {{-- <td><input type="text" name="revenue" id="revenue" readonly/></td> --}}
+
                                     @foreach ($products as $product)
                                     <tr>
                                         {{-- <td>
@@ -58,7 +63,7 @@
                                             <input name="products_id[]" type="hidden" value="{{$product->id}}">
                                             <input name="users_id[]" type="hidden" value="{{auth()->user()->id}}">
                                         </td>
-                                        <td><input type="text" class="form-control" name="quantity[]" value=""/></td>
+                                        <td><input type="text" class="form-control" name="quantity[]" id="quantity"/></td>
                                         @if ($product->id == 3)
                                             <td>
                                                 <input type="text" class="form-control" value="" readonly/>
@@ -66,8 +71,8 @@
                                             </td>
                                             @else
                                             <td>
-                                                <input type="text" class="form-control" name="price[]" value=""/>
-                                                <small class="text-muted">Revenue: </small> 
+                                                <input type="text" class="form-control" name="price[]" id="price"/>
+                                                <small class="text-muted">Revenue: <input id="revenue"></p> </small> 
                                             </td>
                                         @endif
                                         <td>

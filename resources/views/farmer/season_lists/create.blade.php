@@ -147,7 +147,7 @@
 
     <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-    <!-- Admin Functionality  -->
+    <!-- ADMIN Functionality  -->
     @elseif (auth()->user()->roles_id == 1)
         <div class="row">
             <!-- Input farmer's hectares and no. of farmers -->

@@ -9,5 +9,4 @@
 -- INSERT INTO damage_reports VALUES(2,'1','2','Flood damaged the crops and drowned some animals','5','4',19,now(),now());
 
 -- 
--- INSERT INTO damage_reports VALUES(1, 1
--- );
+-- INSERT INTO damage_reports VALUES(1, , 1);

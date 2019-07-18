@@ -86,6 +86,16 @@
 
 
     <!-- PAGE LEVEL SCRIPTS-->
+
+    <script>
+        $(function(){
+            $("#price, #quantity").on("keydown keyup", revenue);
+            function revenue(){
+                $("#revenue").val(Number($("#price").val()) * Number($("#quantity").val()) * 50);
+            }
+        });
+    </script>
+
     <script type="text/javascript">
         $(function() {
             $('#example-table').DataTable({

@@ -313,6 +313,8 @@ class DashboardController extends Controller
             ->pluck('sum')
         ;
 
+        // dd($withersoldperse);
+
 
         // Products sold per season labels
         $prodsoldperselbl = DB::table('current_product_lists')
@@ -421,7 +423,7 @@ class DashboardController extends Controller
         ->where('order_product_statuses_id','=',3)
         ->where('products_id','=',1)
         ->groupBy('seasons_id')
-        ->selectRaw('seasons_id,sum(order_products.quantity*price) as sum')
+        ->selectRaw('seasons_id,sum(order_products.quantity*price*50) as sum')
         ->pluck('sum')
         ;
 
@@ -434,7 +436,7 @@ class DashboardController extends Controller
             ->where('order_product_statuses_id','=',3)
             ->where('products_id','=',2)
             ->groupBy('seasons_id')
-            ->selectRaw('seasons_id,sum(order_products.quantity*price) as sum')
+            ->selectRaw('seasons_id,sum(order_products.quantity*price*50) as sum')
             ->pluck('sum')
         ;
 

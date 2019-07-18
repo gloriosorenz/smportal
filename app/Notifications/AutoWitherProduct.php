@@ -44,9 +44,9 @@ class AutoWitherProduct extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Product Withering') // it will use this class name if you don't specify
-            ->greeting('Good day!') // example: Dear Sir, Hello Madam, etc ...
-            ->line('The following product is withering in _____ days')
+            ->subject('Product Withering') // 
+            ->greeting('Good day!') //
+            ->line('The following product is withering in _____ days')  // INDICATE WHICH PRODUCT ID, WHEN IT WILL WITHER
             ->action('Notification Action', url('/'))
             ->line('Thank you and regards, SMSRL Administrator!');
     }

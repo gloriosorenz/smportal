@@ -1,7 +1,7 @@
 -- id, seasons_id, users_id, original_pr_id, current_pr_id, harvest_date,or_qty,curr_qty,price
 -- id, seasons_id, users_id, pr_id, , harvest_date,or_qty,curr_qty,price
 -- season 1
-INSERT INTO original_product_lists VALUES (1, '1','10','1','2017-11-17','20',17.0,now(),now());
+INSERT INTO original_product_lists VALUES (1, '1','10','1','2017-11-17','150',17.0,now(),now());
 INSERT INTO original_product_lists VALUES (2, '1','10','2','2017-11-17','0',13.0,now(),now());
 INSERT INTO original_product_lists VALUES (3, '1','10','3','2017-11-17','10',0.0,now(),now());
 INSERT INTO original_product_lists VALUES (4, '1','11','1','2017-11-17','10',17.0,now(),now());
@@ -45,7 +45,7 @@ INSERT INTO original_product_lists VALUES (35, '4','12','2','2018-11-20','14',11
 INSERT INTO original_product_lists VALUES (36, '4','12','3','2018-11-20','6',0.0,now(),now());
 
 -- season 5
-INSERT INTO original_product_lists VALUES (37, '5','10','1','2019-03-25','20',19.0,now(),now());
+INSERT INTO original_product_lists VALUES (37, '5','10','1','2019-03-25','180',19.0,now(),now());
 INSERT INTO original_product_lists VALUES (38, '5','10','2','2019-03-25','6',14.0,now(),now());
 INSERT INTO original_product_lists VALUES (39, '5','10','3','2019-03-25','1',0.0,now(),now());
 INSERT INTO original_product_lists VALUES (40, '5','11','1','2019-03-26','80',19.0,now(),now());
@@ -66,13 +66,13 @@ INSERT INTO original_product_lists VALUES (52, '5','19','1','2019-03-24','290',1
 INSERT INTO original_product_lists VALUES (53, '5','19','2','2019-03-24','16',14.0,now(),now());
 INSERT INTO original_product_lists VALUES (54, '5','19','3','2019-03-24','4',0.0,now(),now());
 
--- season 4 farmers 17-19
-INSERT INTO original_product_lists VALUES (55, '4','17','1','2019-07-01','110',19.0,now(),now());
-INSERT INTO original_product_lists VALUES (56, '4','17','2','2019-07-01','10',14.0,now(),now());
-INSERT INTO original_product_lists VALUES (57, '4','17','3','2019-07-01','5',0.0,now(),now());
-INSERT INTO original_product_lists VALUES (58, '4','18','1','2019-07-01','80',19.0,now(),now());
-INSERT INTO original_product_lists VALUES (59, '4','18','2','2019-07-01','22',14.0,now(),now());
-INSERT INTO original_product_lists VALUES (60, '4','18','3','2019-07-01','8',0.0,now(),now());
-INSERT INTO original_product_lists VALUES (61, '4','19','1','2019-07-01','290',19.0,now(),now());
-INSERT INTO original_product_lists VALUES (62, '4','19','2','2019-07-01','16',14.0,now(),now());
-INSERT INTO original_product_lists VALUES (63, '4','19','3','2019-07-01','4',0.0,now(),now());
+-- season 6
+INSERT INTO original_product_lists VALUES (55, '6','10','1','2019-07-20','110',13.0,now(),now());
+INSERT INTO original_product_lists VALUES (56, '6','10','2','2019-07-20','10',9.0,now(),now());
+INSERT INTO original_product_lists VALUES (57, '6','10','3','2019-07-20','5',0.0,now(),now());
+INSERT INTO original_product_lists VALUES (58, '6','18','1','2019-07-20','80',13.0,now(),now());
+INSERT INTO original_product_lists VALUES (59, '6','18','2','2019-07-20','22',9.0,now(),now());
+INSERT INTO original_product_lists VALUES (60, '6','18','3','2019-07-20','8',0.0,now(),now());
+INSERT INTO original_product_lists VALUES (61, '6','19','1','2019-07-20','290',12.0,now(),now());
+INSERT INTO original_product_lists VALUES (62, '6','19','2','2019-07-20','16',8.0,now(),now());
+INSERT INTO original_product_lists VALUES (63, '6','19','3','2019-07-20','4',0.0,now(),now());
