@@ -78,7 +78,7 @@
                 <tr>
                 <th>Product</th>
                 <th class="text-center" width="30%">Farmer Organization</th>
-                <th class="text-center" width="15%">Quantity per Kaban</th>
+                <th class="text-center" width="15%">Quantity (kbn)</th>
                 <th class="text-center" width="18%">Individual Price per Kaban</th>
                 <th class="text-center" width="15%">Subtotal</th>
                 <th class="text-center" width="15%">Action</th>
@@ -121,7 +121,7 @@
                                 @endfor                                
                             </select>
                             <dl class="p-t-20 param param-inline small">
-                                <dt>Available: {{ $item->model->quantity }}</dt>
+                                <dt>Available: {{ $item->model->quantity }} kbn/s</dt>
                             </dl>
                         </td>
                         <td>

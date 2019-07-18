@@ -8,7 +8,7 @@ INSERT INTO plant_datas VALUES(4,'2.0','2','0','1','12',now(),now());
 INSERT INTO plant_datas VALUES(5,'1.0','1','0','1','17',now(),now());
 INSERT INTO plant_datas VALUES(6,'1.0','1','0','2','19',now(),now());
 
--- 2
+-- 2 (Season 6)
 INSERT INTO plant_datas VALUES(7,'5.9','3','0','21','18',now(),now());
 INSERT INTO plant_datas VALUES(8,'2.3','3','0','21','10',now(),now());
 INSERT INTO plant_datas VALUES(9,'3.8','5','0','22','10',now(),now());

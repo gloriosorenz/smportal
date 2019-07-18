@@ -393,6 +393,7 @@ class WebsiteController extends Controller
         $daily = $current->daily()->data();
         $week = $current->daily();
 
+        // dd($daily);
         $current = $current->currently();
         $three_days = $timemachine->currently();
 
