@@ -46,9 +46,9 @@ class OrderConfirmed extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Your order is confirmed') // it will use this class name if you don't specify
-                    ->greeting('Hello Customer!') // example: Dear Sir, Hello Madam, etc ...
-                    ->line('The introduction to the notification.')
+                    ->subject('Your order has been confirmed!') // it will use this class name if you don't specify
+                    ->greeting('Good day!') // example: Dear Sir, Hello Madam, etc ...
+                    ->line('Your order (____) has been confirmed by ______')
                     ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }

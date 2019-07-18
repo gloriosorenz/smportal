@@ -49,12 +49,13 @@ class SeasonTableSeeder extends Seeder
                 'season_start'=> '2018-12-10',
                 'season_end'=> '2019-03-26',
             ],
-            // [
-            //     'id' => 6,
-            //     'season_types_id' => 2, //wet
-            //     'season_statuses_id' => 1,
-            //     'season_start'=> '2019-03-16',
-            // ],
+            [
+                'id' => 6,
+                'season_types_id' => 1, //dry
+                'season_statuses_id' => 2,
+                'season_start'=> '2019-04-15',
+                'season_end'=> '2019-07-20',
+            ],
 
         ];
 

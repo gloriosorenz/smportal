@@ -34,6 +34,9 @@
                 </div>
                 <div class="ibox-body">
                     <table class="table table-striped table-bordered table-hover" id="example-table" cellspacing="0" width="100%">
+                            <p> <i class="fas fa-sun fa-md"> </i> Dry Season = March 16 -> Sept. 15 (March, April, May, June, July, August, September) </p>
+                            <p> <i class="fas fa-cloud-rain fa-md"> </i>  Wet Season = Sept. 16 -> March 15 (September, October, November, December, January, February, March) </p>
+                            @csrf
                         <thead>
                             <tr>
                                 <th class="text-center">Season</th>
@@ -100,6 +103,8 @@
                         <form method="post" action="{{action('SeasonsController@update', $latest_season->id)}}">
                         @method('PATCH')
                         @csrf
+                        
+
                             <div class="form-group" id="date_1">
                                 <label class="font-normal">Start Date</label>
                                 <div class="input-group date">
@@ -140,6 +145,8 @@
                     <div class="ibox-body">
                         <!-- Start Form -->
                         <form method="post" action="{{action('SeasonsController@store')}}" enctype="multipart/form-data">
+                        {{-- <p> Dry Season = March 16 -> Sept. 15 (March, April, May, June, July, August, September) </p>
+                        <p> Wet Season = Sept. 16 -> March 15 (September, October, November, December, January, February, March) </p> --}}
                         @csrf
                             <div class="form-group" id="date_1">
                                 <label class="font-normal">Start Date</label>

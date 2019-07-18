@@ -46,9 +46,11 @@ class OrderCancelled extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->subject('Order Cancelled') 
+            ->greeting('Good day!') // example: Dear Sir, Hello Madam, etc ...
+            ->line('Your order ______ has been cancelled. In the case that you would  want to order again please visit again the website via __')
+            ->action('Notification Action', url('/'))
+            ->line('Thank you for using our application!');
     }
 
     /**
