@@ -137,6 +137,7 @@ class CustomersController extends Controller
     {
         $customer = User::findOrFail($id);
 
+        
         $barangays = Barangay::orderBy('name')->get();
         $provinces = Province::orderBy('name')->get();
         $cities = City::orderBy('name')->get();
