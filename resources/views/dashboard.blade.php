@@ -405,6 +405,9 @@
                             {!! Charts::scripts() !!}
                             {!! $origcurrprodbar->script() !!}
                     </div>
+                    <div>
+                        <p class="text-muted text-center">Products</p>
+                    </div>
                 </div>
             </div>
         </div>
