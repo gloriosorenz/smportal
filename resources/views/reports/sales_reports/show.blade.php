@@ -167,7 +167,9 @@
     
                 <div class="row">
                     <div class="col-lg-6">
-                        
+                        <div class="text-left">
+                            <h4>Prepared By: {{auth()->user()->first_name}} {{auth()->user()->last_name}}</h4>
+                        </div>
                     </div>
                     <div class="col-lg-6">
                         @foreach($farprodquan as $kabs)

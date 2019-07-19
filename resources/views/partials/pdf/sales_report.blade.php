@@ -60,7 +60,7 @@
                         @foreach ($allprodperseason as $g)
                         @php
                                 $order = App\Order::findOrFail($g->orders_id);
-                                $prod = App\Product::findOrFail($g->curr_products_id);
+                                $prod = App\Product::findOrFail($g->products_id);
                                 $user = App\User::findOrFail($g->users_id);
                         @endphp
     
@@ -126,7 +126,7 @@
                             @foreach ($farprodperseason as $g)
                             @php
                                     $order = App\Order::findOrFail($g->orders_id);
-                                    $prod = App\Product::findOrFail($g->curr_products_id);
+                                    $prod = App\Product::findOrFail($g->products_id);
                                     $user = App\User::findOrFail($g->users_id);
                             @endphp
         
@@ -137,7 +137,7 @@
                                 <td>{{presentPrice($g->price)}}</td>
                                 <td>{{presentPrice($g->quantity * $g->price)}}</td>
                                 {{-- <td>{{$order->total_price}}</td> --}}
-                                <td>{{$g->created_at}}</td>
+                                <td>{{\Carbon\Carbon::parse($g->created_at)->format('F j, Y')}}</td>
                             </tr>
                             @endforeach 
                             {{-- <tr>
@@ -156,18 +156,36 @@
                     </table>
                     <br>
                     <br>
-        
-                    @foreach($farprodquan as $kabs)
-                        <div class="text-center">
-                            <h4> Total Quantity: {{$kabs}} kaban/s</h4>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="text-left">
+                                <h4>Prepared By: {{auth()->user()->first_name}} {{auth()->user()->last_name}}</h4>
+                            </div>
                         </div>
-                    @endforeach
+                        <div class="col-lg-6">
+                            @foreach($farprodquan as $kabs)
+                                <div class="text-right">
+                                    <h4> Total Quantity: {{$kabs}} kaban/s</h4>
+                                </div>
+                            @endforeach
         
-                    @foreach($farprodsum as $sum)
-                        <div class="text-right">
-                            <h4> Total Amount: {{presentPrice($sum)}} </h4>
+                            @foreach ($target as $tg)
+                                <div class="text-right">
+                                    <h4> Target Sales: {{presentPrice($tg->target_sales)}} <h4>
+                                </div>
+                            @endforeach
+                
+                            @foreach($farprodsum as $sum)
+                                <div class="text-right">
+                                    <h4> Total Amount: {{presentPrice($sum)}} </h4>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
+                    </div>
+                   
+        
+                   
         
                 </div>
                 <!-- End col-lg-12 -->

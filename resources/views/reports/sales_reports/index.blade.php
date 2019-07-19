@@ -80,7 +80,7 @@
                                 </td>
                                 <td>
                                     <a href="sales_reports/{{$season->seasons_id}}"><button class="btn btn-warning btn-md btn-fill" id="btn_view" name="btn_view"><i class="fas fa-eye"></i></button></a>
-                                    {{-- <a href="/pdf/sales_report/{{$season->seasons_id}}" class="btn btn-md btn-secondary"><i class="fas fa-download fa-sm text-white"></i></a> --}}
+                                    <a href="/pdf/sales_report/{{$season->seasons_id}}" class="btn btn-md btn-secondary"><i class="fas fa-download fa-sm text-white"></i></a>
                                 </td>
                             </tr>
                             @endforeach

@@ -226,7 +226,7 @@ class SalesReportsController extends Controller
         // Admin
 
         $allprodperseason = DB::table('seasons')
-            ->join('original_product_lists', 'seasons.id', '=', 'poriginal_roduct_lists.seasons_id')
+            ->join('original_product_lists', 'seasons.id', '=', 'original_product_lists.seasons_id')
             ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
             ->where('order_product_statuses_id','=',3)
             ->where('seasons_id',$season->id)
@@ -240,7 +240,7 @@ class SalesReportsController extends Controller
             ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
             ->where('seasons_id',$season->id) 
             ->where('order_product_statuses_id','=',3)
-            ->select(DB::raw("SUM(price*quantity) as sum"))  
+            ->select(DB::raw("SUM(price*ordeR_products.quantity) as sum"))  
             ->pluck('sum');
 
         $allprodquan = DB::table('seasons')
@@ -248,7 +248,7 @@ class SalesReportsController extends Controller
             ->join('order_products','original_product_lists.id','=','order_products.original_product_lists_id')
             ->where('seasons_id',$season->id) 
             ->where('order_product_statuses_id','=',3)
-            ->select(DB::raw("SUM(quantity) as sum"))  
+            ->select(DB::raw("SUM(order_products.quantity) as sum"))  
             ->pluck('sum');
         // dd($allprodquan);
 
@@ -279,7 +279,7 @@ class SalesReportsController extends Controller
             ->where('seasons_id',$season->id) 
             ->where('farmers_id','=',$authid)
             ->where('order_product_statuses_id','=',3)
-            ->select(DB::raw("SUM(price*quantity) as sum"))  
+            ->select(DB::raw("SUM(price*order_products.quantity) as sum"))  
             ->pluck('sum');
 
         $farprodquan = DB::table('seasons')
@@ -288,13 +288,19 @@ class SalesReportsController extends Controller
             ->where('seasons_id',$season->id) 
             ->where('farmers_id','=',$authid)
             ->where('order_product_statuses_id','=',3)
-            ->select(DB::raw("SUM(quantity) as sum"))  
+            ->select(DB::raw("SUM(order_products.quantity) as sum"))  
             ->pluck('sum');
+
+        $target = DB::table('season_lists')
+            ->where('users_id','=',$authid)
+            ->where('seasons_id',$season->id)
+            // ->groupBy('orders_id')
+            ->get();
 
     
 
         // pass view file
-        $pdf = PDF::loadView('pdf.sales_report', compact('season', 'lists', 'allprodperseason', 'allprodsum', 'allprodquan', 'farprodperseason', 'farprodsum', 'farprodquan'))->setPaper('a4', 'landscape');
+        $pdf = PDF::loadView('partials.pdf.sales_report', compact('season', 'lists', 'allprodperseason', 'allprodsum', 'allprodquan', 'farprodperseason', 'farprodsum', 'farprodquan', 'target'))->setPaper('a4', 'landscape');
         // download pdf
         return $pdf->stream('sales_report.pdf');
     }
