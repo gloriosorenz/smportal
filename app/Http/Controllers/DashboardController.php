@@ -316,7 +316,7 @@ class DashboardController extends Controller
         ->join('order_products', 'current_product_lists.id', '=', 'order_products.current_product_lists_id')
         ->where('farmers_id','=', $authid)
         ->where('order_product_statuses_id','=',3)
-        ->where('products_id','=',2)
+        ->where('product_types_id','=',2)
         ->groupBy('seasons_id')
         ->selectRaw('seasons_id, sum(order_products.quantity) as sum')
             // ->get()
@@ -464,6 +464,8 @@ class DashboardController extends Controller
 
         $revlinechart = Charts::multi('line', 'highcharts')
             ->title('Revenue Earned')
+            ->yAxisTitle("REVENUE")
+            ->xAxistitle("SEASON")
             ->labels($prodsoldpriperselbl)
             ->dataset('Rice',$ricesoldpriperse)
             ->dataset('Withered',$withersoldpriperse)
@@ -474,7 +476,43 @@ class DashboardController extends Controller
 
         // ------------------------------------------------------------------------------------------------------------------------
 
+        // Target Sales Vs. Actual Sales
 
+        $targetsales = DB::table('season_lists')
+        // ->join('order_products', 'original_product_lists.id', '=', 'order_products.original_product_lists_id')
+        ->where('users_id','=', auth()->user()->id)
+        ->where('season_list_statuses_id','=',2)
+        // ->where('products_id','=',1)
+        // ->groupBy('seasons_id')
+        // ->selectRaw('seasons_id,sum(order_products.quantity*price*50) as sum')
+        // ->pluck('sum')
+        ->pluck('target_sales')
+
+        // ->get();
+        ;
+
+        $actualsales = DB::table('original_product_lists')
+        ->join('order_products', 'original_product_lists.id', '=', 'order_products.original_product_lists_id')
+        ->where('farmers_id','=', auth()->user()->id)
+        ->where('order_product_statuses_id','=',3)
+        ->where('products_id','!=',3)
+        ->groupBy('seasons_id')
+        ->selectRaw('seasons_id,sum(order_products.quantity*price*50) as sum')
+        ->pluck('sum')
+        ;
+
+        // dd($actualsales);
+
+        $targetlinechart = Charts::multi('line', 'highcharts')
+            ->title('Target Vs. Actual Earned')
+            ->yAxisTitle("REVENUE")
+            ->xAxistitle("SEASON")
+            ->labels($prodsoldpriperselbl)
+            ->dataset('Target',$targetsales)
+            ->dataset('Actual',$actualsales)
+            ->dimensions(1000,500)
+            ->responsive(true)
+        ;
 
         return view('dashboard')
             ->with('last_com_season', $last_com_season)
@@ -497,6 +535,9 @@ class DashboardController extends Controller
             ->with('latest_season', $latest_season)
             ->with('season', $season)
             ->with('season_list', $season_list)
+            ->with('targetsales', $targetsales)
+            ->with('actualsales', $actualsales)
+            ->with('targetlinechart', $targetlinechart)
             ;
     }
 

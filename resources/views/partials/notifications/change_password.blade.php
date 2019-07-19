@@ -8,7 +8,7 @@
                 {{$notification->data['user']['first_name']}} {{$notification->data['user']['last_name']}}<small class="text-muted float-right">{{ $notification->created_at->diffForHumans() }}</small>
             </div>
             <div class="font-13">
-                Thank you for joining! We recommend you to change your password as soon as possible.
+                Thank you for joining! Please change your generated password as soon as possible.
             </div>
         </div>
     </div>

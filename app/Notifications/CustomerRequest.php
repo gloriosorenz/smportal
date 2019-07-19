@@ -47,7 +47,7 @@ class CustomerRequest extends Notification
     {
         return (new MailMessage)
                     ->subject('Customer Request') // it will use this class name if you don't specify
-                    ->greeting('Someone wants to join the group!') 
+                    ->greeting('A new customer wants to join the group!') 
                     // ->line('The introduction to the notification.')
                     // ->action('Notification Action', url('/'))
                     // ->line('Thank you for using our application!');

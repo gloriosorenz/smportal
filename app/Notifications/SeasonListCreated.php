@@ -48,9 +48,9 @@ class SeasonListCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Season End') 
+                    ->subject('Season Plan Created') 
                     ->greeting('Good day!') // example: Dear Sir, Hello Madam, etc ...
-                    ->line('A farmer is done with his/her season.')
+                    ->line('A farmer has input their plan for the season.')
                     // ->markdown('partials.mail.season_list_created', [
                     //                                             'season_list' => $this->season_list,
                     //                                             ]);

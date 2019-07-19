@@ -2,7 +2,7 @@
 # Good Day {{$order->orders->users->first_name}}!
 
 {{$order->users->company}} confirmed your order! <br>
-Please contact the seller within 3 days to pick up your order. <br>
+Please contact the seller within 3 days to pick up your order at the farm location stated below. <br>
 <br>
 You have {{$days}} day/s before the product looses its current quality. <br>
 Product Harvest Date: {{\Carbon\Carbon::parse($order->original_product_lists->harvest_date)->format('F j, Y')}}

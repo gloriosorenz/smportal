@@ -8,7 +8,7 @@
                 {{$notification->data['user']['first_name']}} {{$notification->data['user']['last_name']}}<small class="text-muted float-right">{{ $notification->created_at->diffForHumans() }}</small>
             </div>
             <div class="font-13">
-                {{$notification->data['farmer']['first_name']}} {{$notification->data['farmer']['last_name']}} has joined the group.
+                {{$notification->data['farmer']['first_name']}} {{$notification->data['farmer']['last_name']}} has joined the group as a rice farmer.
             </div>
         </div>
     </div>

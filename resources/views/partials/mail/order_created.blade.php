@@ -1,5 +1,5 @@
 @component('mail::message')
-# Your order has been processed!
+# Your order has now been processed!
 
 Please wait for the seller to confirm your order. <br>
 An email will be sent to you within 3 days.

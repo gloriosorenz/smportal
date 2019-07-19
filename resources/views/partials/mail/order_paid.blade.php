@@ -1,7 +1,7 @@
 @component('mail::message')
 # Good Day {{$order->orders->users->first_name}}!
 
-# You have successfully paid. <br>
+# Your payment has been successfully logged.<br>
 
 
 <hr>

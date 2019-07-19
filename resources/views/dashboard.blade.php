@@ -473,6 +473,38 @@
                 </div>
             </div>
         </div>
+
+        <!-- TARGET VS. ACTUAL EARNED -->
+        <div class="col-lg-6">
+                <div class="ibox">
+                    <div class="ibox-head">
+                        <div class="ibox-title">Target Vs. Actual Revenue</div>
+                        <div class="ibox-tools">
+                            <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                        </div>
+                    </div>
+                    <div class="ibox-body">
+                        <div class="flexbox mb-4">
+                            {!! Charts::styles() !!}
+                            <div class="container">
+                                <div class="app">
+                                    <center>
+                                        {!! $targetlinechart->html() !!}
+                                    </center>
+                                </div>
+                            </div>
+                                <!-- End Of Main Application -->
+                                {!! Charts::scripts() !!}
+                                {!! $targetlinechart->script() !!}
+                        </div>
+                        <div>
+                            <p class="text-muted text-center"> Season</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+
         <!-- BEST SELLING FARMER -->
         {{-- <div class="col-lg-6">
             <div class="ibox">

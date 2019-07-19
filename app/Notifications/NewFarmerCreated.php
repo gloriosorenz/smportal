@@ -50,7 +50,7 @@ class NewFarmerCreated extends Notification
         return (new MailMessage)
                     ->subject('A new Farmer has been added for SMPortal') // it will use this class name if you don't specify
                     ->greeting('Good Day!') // example: Dear Sir, Hello Madam, etc ...
-                    ->line('A new farmer has been created by the administrator.')
+                    ->line('A new farmer has been added by the administrator.')
                     // ->line('The introduction to the notification.')
                     // ->action('Notification Action', url('/'))
                     // ->line('Thank you for using our application!');

@@ -9,7 +9,7 @@
             </div>
             <div class="font-13">
                 {{$notification->data['customer']['first_name']}} {{$notification->data['customer']['last_name']}}
-                has joined the group.
+                has joined the group as a customer.
             </div>
         </div>
     </div>

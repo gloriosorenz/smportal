@@ -8,7 +8,7 @@
                 Customer Request <small class="text-muted float-right">{{ $notification->created_at->diffForHumans() }}</small>
             </div>
             <div class="font-13">
-                Someone wants to join the group!
+                    A new customer wants to join the group!
             </div>
         </div>
     </div>

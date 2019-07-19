@@ -41,9 +41,9 @@
                         <div class="col-md-8">
 
                             @foreach($season_list as $tg)
-                                Planned Quantity: {{($tg->planned_qty)}} kbn/s
+                                Planned Quantity for this Season: {{($tg->planned_qty)}} kbn/s
                                 <br>
-                                Target Sales: {{presentPrice($tg->target_sales)}}
+                                {{-- Target Sales: {{presentPrice($tg->target_sales)}} --}}
                             @endforeach
                         </div>
                         <div class="ibox-body" style="height: 420px">
@@ -153,10 +153,10 @@
                             <div class="ibox-tools">
                                 <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                                 <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-                                <div class="dropdown-menu dropdown-menu-right">
+                                {{-- <div class="dropdown-menu dropdown-menu-right">
                                     <a class="dropdown-item">option 1</a>
                                     <a class="dropdown-item">option 2</a>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="ibox-body">

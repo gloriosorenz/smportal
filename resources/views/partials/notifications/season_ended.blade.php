@@ -5,7 +5,7 @@
         </div>
         <div class="media-body">
             <div class="media-heading">
-                Season ended<small class="text-muted float-right">{{ $notification->created_at->diffForHumans() }}</small>
+                The current season ended<small class="text-muted float-right">{{ $notification->created_at->diffForHumans() }}</small>
             </div>
             <div class="font-13">You may now request for a new season.</div>
         </div>

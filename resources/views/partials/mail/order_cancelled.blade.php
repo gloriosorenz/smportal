@@ -1,7 +1,7 @@
 @component('mail::message')
 # Good Day {{$order->orders->users->first_name}}!
 
-# {{$order->users->company}} cancelled your order! <br>
+# The {{$order->users->company}} cancelled your order! <br>
 
 <hr>
 Contact Details: <br>
