@@ -123,8 +123,9 @@
                 <div class="card bg-warning text-white">
                     <div class="card-body">
                         <h4 class="card-title">Ongoing Season: {{$ongoing_season->id}}</h4>
-                        {{-- <div class="card-subtitle">subtitle</div>
-                        <p class="card-text">Season Start: {{ $season->season_start }}</p>
+                        <br>
+                        <div class="card-subtitle">Date Start: {{\Carbon\Carbon::parse($ongoing_season->season_start)->format('F j, Y')}}</div>
+                        {{-- <p class="card-text">Season Start: {{ $season->season_start }}</p>
                         <p class="card-text">Season End: {{ $season->season_end }}</p> --}}
                         {{-- <p class="card-text">Status: {{ $season->season_statuses->status }}</p> --}}
                     </div>
@@ -150,7 +151,7 @@
                                 <label class="font-normal">Start Date</label>
                                 <div class="input-group date">
                                     <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
-                                    <input class="form-control" type="text" name="season_start" value="{{\Carbon\Carbon::now()->format('Y-m-d') }}">
+                                    <input class="form-control" type="text" name="season_start" value="{{\Carbon\Carbon::now()->format('Y-m-d') }}" readonly/>
                                 </div>
                             </div>
                             <div class="form-group">

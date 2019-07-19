@@ -144,7 +144,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="invoice-title">
-                                <h2>Invoice</h2><h3 class="pull-right">Order # 12345</h3>
+                                <h2>Invoice</h2><h3 class="pull-right">Order # {{ $order->id }}</h3>
                             </div>
                             <hr>
                             <div class="row">
@@ -176,7 +176,7 @@
                                 <div class="col-xs-6 text-right">
                                     <address>
                                         <strong>Order Date:</strong><br>
-                                        March 7, 2014<br><br>
+                                        {{\Carbon\Carbon::parse($value['0']->orders->order_date)->format('F j, Y')}}<br><br>
                                     </address>
                                 </div>
                             </div>

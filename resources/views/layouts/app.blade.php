@@ -93,6 +93,11 @@
             function revenue(){
                 $("#revenue").val(Number($("#price").val()) * Number($("#quantity").val()) * 50);
             }
+
+            $("#price1, #quantity1").on("keydown keyup", revenue1);
+            function revenue1(){
+                $("#revenue1").val(Number($("#price1").val()) * Number($("#quantity1").val()) * 50);
+            }
         });
     </script>
 

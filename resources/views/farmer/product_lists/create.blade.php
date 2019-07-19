@@ -64,14 +64,9 @@
                                         <td><input type="text" name="a" id="price"/></td> --}}
                                         {{-- <td><input type="text" name="revenue" id="revenue" readonly/></td> --}}
 
-                                    @foreach ($products as $product)
+
+                                    {{-- @foreach ($products as $product)
                                     <tr>
-                                        {{-- <td>
-                                            <div class="custom-file form-control-sm p-b-10">
-                                                <input type="file" class="custom-file-input" id="image" name="image">
-                                                <label class="custom-file-label" for="image">Choose file</label>
-                                            </div>
-                                        </td> --}}
                                         <td>
                                             <input type="text" class="form-control" name="product_type" value="{{$product->type}}" disabled/>
                                             <input name="products_id[]" type="hidden" value="{{$product->id}}">
@@ -86,11 +81,10 @@
                                             @else
                                             <td>
                                                 <input type="text" class="form-control" name="price[]" id="price"/>
-                                                {{-- <small class="text-muted">Revenue: <input id="revenue"></p> </small>  --}}
+                                                <small class="text-muted">Revenue: <input id="revenue"></p> </small> 
                                             </td>
                                         @endif
                                         <td>
-                                            {{-- {{ Form::date('harvest_date[]', \Carbon\Carbon::now(), ['class' => 'datepicker form-control','id'=>'harvest_date[]'])}} --}}
                                             <div class="form-group" id="date_1">
                                                 <div class="input-group date">
                                                     <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
@@ -99,7 +93,81 @@
                                             </div>
                                         </td>
                                     </tr>
-                                    @endforeach
+                                    @endforeach --}}
+
+
+                                    <!-- good rice product -->
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" name="product_type" value="Rice Product" disabled/>
+                                            <input name="products_id[]" type="hidden" value="1">
+                                            <input name="users_id[]" type="hidden" value="{{auth()->user()->id}}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="quantity[]" id="quantity"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="price[]" id="price"/>
+                                            <small class="text-muted">Revenue: <input id="revenue"></p> </small> 
+                                        </td>
+                                        <td>
+                                            <div class="form-group" id="date_1">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
+                                                <input class="form-control" type="text" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" name="harvest_date[]">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- withered rice product -->
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" name="product_type" value="Withered Product" disabled/>
+                                            <input name="products_id[]" type="hidden" value="2">
+                                            <input name="users_id[]" type="hidden" value="{{auth()->user()->id}}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="quantity[]" id="quantity1"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="price[]" id="price1"/>
+                                            <small class="text-muted">Revenue: <input id="revenue1"></p> </small> 
+                                        </td>
+                                        <td>
+                                            <div class="form-group" id="date_1">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
+                                                <input class="form-control" type="text" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" name="harvest_date[]">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- damaged rice product -->
+                                    <tr>
+                                        <td>
+                                            <input type="text" class="form-control" name="product_type" value="Damaged Product" disabled/>
+                                            <input name="products_id[]" type="hidden" value="3">
+                                            <input name="users_id[]" type="hidden" value="{{auth()->user()->id}}">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" name="quantity[]"/>
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control"  disabled/>
+                                            <input type="hidden" class="form-control" name="price[]" value="0"/>
+                                        </td>
+                                        <td>
+                                            <div class="form-group" id="date_1">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon bg-white"><i class="fa fa-calendar"></i></span>
+                                                <input class="form-control" type="text" value="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" name="harvest_date[]">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    
                                 </tbody>
                             </table>
                             <!-- Submit Button -->
@@ -108,6 +176,12 @@
                         </div>
                     </div>
 
+
+
+
+
+
+                    
                     <!-- Price History Chart-->
                     <div class="ibox">
                         <div class="ibox-head">

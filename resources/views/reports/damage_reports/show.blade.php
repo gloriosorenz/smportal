@@ -210,7 +210,7 @@
                     <!-- Remarks -->
                     <div class="col-sm-12 form-group">
                         <label>Remarks:</label>
-                        <textarea class="form-control" type="text" name="remarks" rows="8" value="{{$dreport->remarks}}" readonly>{{$dreport->partially_damaged_area}}</textarea>
+                        <textarea class="form-control" type="text" name="remarks" rows="8" value="{{$dreport->remarks}}" readonly>{{$dreport->remarks}}</textarea>
                     </div>
                 </div>
                 <!-- End Form -->

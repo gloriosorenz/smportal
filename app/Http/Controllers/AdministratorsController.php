@@ -144,7 +144,7 @@ class AdministratorsController extends Controller
         $user->provinces_id = $request->input('province');
 
         $user->company = $request->input('company');
-        $user->password = $request->input('password');
+        $user->password = Hash::make($request->input('password'));
         $user->save();
 
         // dd($user);

@@ -33,7 +33,7 @@
                                 <div class="text-muted">Orders</div>
                             </div>
                             <div class="col-4">
-                                <div class="font-24 profile-stat-count">{{ presentPrice($monthly_income[0]) }}</div>
+                                <div class="font-24 profile-stat-count">₱ {{ number_format($monthly_income[0], 2,'.', ',') }}</div>
                                 <div class="text-muted">Sales</div>
                             </div>
                             <div class="col-4">
@@ -65,7 +65,8 @@
                                 <div class="row">
                                     <div class="col-md-6" style="border-right: 1px solid #eee;">
                                         <h5 class="text-info m-b-20 m-t-10"><i class="fa fa-bar-chart"></i> Month Statistics</h5>
-                                        <div class="h2 m-0">{{ presentPrice($monthly_income[0]) }}</div>
+                                        <div class="h2 m-0">₱ {{ number_format($monthly_income[0], 2,'.', ',')
+                                            }}</div>
                                         <div><small>Month income</small></div>
                                         <br>
                                         <br>
@@ -195,7 +196,7 @@
                                                 <td>{{$t->orders->users->first_name}} {{$t->orders->users->last_name}}</td>
                                                 <td>{{$t->orders->users->phone}}</td>
                                                 <td>{{$t->original_product_lists->products->type}}</td>
-                                                <td>{{ presentPrice($t->quantity * $t->original_product_lists->price *50) }}</td>
+                                                <td>₱ {{ number_format($t->quantity * $t->original_product_lists->price *50, 2,'.', ',')}}</td>
                                                 @if($t->order_product_statuses->id == 1)
                                                     <td><span class="badge badge-warning">{{$t->order_product_statuses->status}}</span></td>
                                                 @elseif($t->order_product_statuses->id == 2)
@@ -425,7 +426,7 @@
                                         <!-- Company -->
                                         <div class="col-sm-6 form-group">
                                             <label>Company</label>
-                                            <input class="form-control" type="text" placeholder="Company" name="company" value="{{ $user->company }}">
+                                            <input class="form-control" type="text" placeholder="Company" name="company" value="{{ $user->company }}" />
                                         </div>
                                     </div>
 
@@ -434,14 +435,14 @@
                                      <div class="row">
                                          <div class="col-sm-6 form-group">
                                              <label>Old Password:</label>
-                                             <input class="form-control" type="password" placeholder="Password">
+                                             <input class="form-control" type="password" placeholder="Password" name="password" />
                                          </div>
                                      </div>
                                      
                                      <div class="row">
                                          <div class="col-sm-6 form-group">
                                              <label>New Password:</label>
-                                             <input class="form-control" type="password" placeholder="Password">
+                                             <input class="form-control" type="password" placeholder="Password" name="password" />
                                          </div>
                                      </div>
             
