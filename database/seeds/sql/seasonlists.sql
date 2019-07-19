@@ -9,21 +9,21 @@ INSERT INTO season_lists VALUES(3,'12','1','16.3','12.1','7','5','320','310','30
 
 -- season 2 dry
 INSERT INTO season_lists VALUES(4,'10','2','3.8','3.2','12','11','150','145','142500','2',now(),now()); -- Larry
-INSERT INTO season_lists VALUES(5,'11','2','4.1','7.0','6','6','120','115','142500','2',now(),now()); -- Gregorio
-INSERT INTO season_lists VALUES(6,'12','2','14.2','12','20','19','340','320','142500','2',now(),now());
+INSERT INTO season_lists VALUES(5,'11','2','4.1','7.0','6','6','120','115','96000','2',now(),now()); -- Gregorio
+INSERT INTO season_lists VALUES(6,'12','2','14.2','12','20','19','340','320','27200','2',now(),now());
 
 -- season 3 wet
-INSERT INTO season_lists VALUES(7,'10','3','2.5','2.2','10','12','115','107','142500','2',now(),now()); -- Larry
-INSERT INTO season_lists VALUES(8,'11','3','7.8','8.1','10','9','105','98','142500','2',now(),now()); -- Gregorio
-INSERT INTO season_lists VALUES(9,'12','3','12','14','13','17','270','258','142500','2',now(),now());
+INSERT INTO season_lists VALUES(7,'10','3','2.5','2.2','10','12','115','107','92000','2',now(),now()); -- Larry
+INSERT INTO season_lists VALUES(8,'11','3','7.8','8.1','10','9','105','98','84000','2',now(),now()); -- Gregorio
+INSERT INTO season_lists VALUES(9,'12','3','12','14','13','17','270','258','216000','2',now(),now());
 
 -- season 4 wet
-INSERT INTO season_lists VALUES(10,'10','4','2.2','1.3','11','10','90','85','142500','2',now(),now()); -- Larry
+INSERT INTO season_lists VALUES(10,'10','4','2.2','1.3','11','10','90','85','85500','2',now(),now()); -- Larry
 INSERT INTO season_lists VALUES(11,'11','4','7.8','7.4','9','9','100','94','142500','2',now(),now()); -- Gregorio
 INSERT INTO season_lists VALUES(12,'12','4','19','8.5','19','18','240','220','142500','2',now(),now());
 
 -- season 5 dry
-INSERT INTO season_lists VALUES(13,'10','5','3.9','3.7','12','12','130','125','142500','2',now(),now()); -- Larry
+INSERT INTO season_lists VALUES(13,'10','5','3.9','3.7','12','12','130','125','117000','2',now(),now()); -- Larry
 INSERT INTO season_lists VALUES(14,'11','5','8.9','8.5','15','13','120','110','142500','2',now(),now()); -- Gregorio
 INSERT INTO season_lists VALUES(15,'12','5','12','11','23','20','350','320','142500','2',now(),now());
 
@@ -42,16 +42,16 @@ INSERT INTO season_lists VALUES(24,'18','4','1.2','1.0','9','8','80','79','14250
 INSERT INTO season_lists VALUES(25,'18','5','1.9','1.4','12','11','95','93','142500','2',now(),now());
 
 -- Ines farmer
-INSERT INTO season_lists VALUES(26,'19','1','4.0','3.7','13','11','180','175','142500','2',now(),now());
-INSERT INTO season_lists VALUES(27,'19','2','4.3','3.8','11','10','173','165','142500','2',now(),now());
-INSERT INTO season_lists VALUES(28,'19','3','3.5','3.5','10','9','120','110','142500','2',now(),now());
-INSERT INTO season_lists VALUES(29,'19','4','3.2','6.0','11','11','110','105','142500','2',now(),now());
-INSERT INTO season_lists VALUES(30,'19','5','4.5','7.4','12','11','170','164','142500','2',now(),now());
+INSERT INTO season_lists VALUES(26,'19','1','4.0','3.7','13','11','180','175','171000','2',now(),now());
+INSERT INTO season_lists VALUES(27,'19','2','4.3','3.8','11','10','175','163','166250','2',now(),now());
+INSERT INTO season_lists VALUES(28,'19','3','3.5','3.5','10','9','120','110','114000','2',now(),now());
+INSERT INTO season_lists VALUES(29,'19','4','3.2','6.0','11','11','110','105','82500','2',now(),now());
+INSERT INTO season_lists VALUES(30,'19','5','4.5','7.4','12','11','170','164','161500','2',now(),now());
 
 -- season 6 dry
-INSERT INTO season_lists VALUES(31,'10','6','3.9','3.7','12','12','200','200','142500','2',now(),now()); -- Larry
-INSERT INTO season_lists VALUES(32,'11','6','8.9','8.5','15','13','120','110','142500','2',now(),now()); -- Gregorio
-INSERT INTO season_lists VALUES(33,'12','6','12','11','23','20','350','320','142500','2',now(),now());
+INSERT INTO season_lists VALUES(31,'10','6','3.9','3.7','12','12','200','200','130000','2',now(),now()); -- Larry
+INSERT INTO season_lists VALUES(32,'11','6','8.9','8.5','15','13','120','110','78000','2',now(),now()); -- Gregorio
+INSERT INTO season_lists VALUES(33,'12','6','12','11','23','20','250','220','162500','2',now(),now());
 
 --season 6 wet
 -- INSERT INTO season_lists VALUES(16,'12','6','9.1',null,'10',null,'110',null,'1',now(),now());

@@ -28,9 +28,23 @@
                     <div class="ibox">
                         <div class="ibox-head">
                             <div class="ibox-title">Add Products</div>
+
+
+
                             <div class="ibox-tools">
                                 <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                             </div>
+
+                           
+                        </div>
+                        <br>
+                        <div class="col-md-8">
+
+                            @foreach($season_list as $tg)
+                                Planned Quantity: {{($tg->planned_qty)}} kbn/s
+                                <br>
+                                Target Sales: {{presentPrice($tg->target_sales)}}
+                            @endforeach
                         </div>
                         <div class="ibox-body" style="height: 420px">
                             <!-- Start Form -->
@@ -72,7 +86,7 @@
                                             @else
                                             <td>
                                                 <input type="text" class="form-control" name="price[]" id="price"/>
-                                                <small class="text-muted">Revenue: <input id="revenue"></p> </small> 
+                                                {{-- <small class="text-muted">Revenue: <input id="revenue"></p> </small>  --}}
                                             </td>
                                         @endif
                                         <td>
@@ -123,7 +137,7 @@
                                         {{-- <td>{{$list->orig_quantity}}</td>
                                         <td>{{$list->curr_quantity}}</td>
                                         <td>{{$list->harvest_date}}</td> --}}
-                                        <td>{{$list->price}}</td>
+                                        <td>{{presentPrice($list->price)}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

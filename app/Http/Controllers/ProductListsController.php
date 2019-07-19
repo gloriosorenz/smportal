@@ -299,7 +299,7 @@ class ProductListsController extends Controller
 
         // Rice Production Line Chart
         $rice_production_line = Charts::multi('line', 'highcharts')
-            ->title('Seasonal Production')
+            ->title('Seasonal Production (kbn/s)')
             ->yAxisTitle('Quantity')
             ->xAxisTitle('Season')
             ->labels($rice_production_label)
@@ -323,6 +323,7 @@ class ProductListsController extends Controller
             ->with('all_withered_prod_ave', $all_withered_prod_ave)
             ->with('price_history', $price_history)
             ->with('rice_production_line', $rice_production_line)
+            ->with('season_list',$season_list)
             ;
     }
 
