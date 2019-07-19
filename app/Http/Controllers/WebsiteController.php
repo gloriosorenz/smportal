@@ -65,21 +65,32 @@ class WebsiteController extends Controller
                 ->where('products_id','=', 3)
                 ->get();
 
-                // dd($whut);
+            // dd($goodid);
 
           
-
-            
 
             // will update price and product type to withered, the original withered to damaged
                 foreach($goodid as $pr){
                     foreach($witheredid as $wh){
                         foreach($damagedid as $dg){
                             if($pr->id+1 == $wh->id){
+                                // if(auth()->user()){
+                                //     $id = auth()->user()->id;
+                                //     $farmer = CurrentProductLIst::where('id', $pr->id)
+                                //         ->where('products_id', 1)
+                                //         // ->where('users_id', '=', $id)
+                                //         ->first();
+                                //         ;
+                                //     dd($farmer);
+
+                                //     if($farmer){
+                                //         dd($farmer);
+                                //         // $user = User::findOrFail($farmer->users_id);
+                                //         // Notification::send($user, new AutoWitherProduct());
+                                //     }
+                                // }
                                 $pr->update(['products_id' => 2]);
                                 $pr->update(['price' => $wh->price] );
-
-                                // Notification::send($users, new AutoWitherProduct());
                             }
                             if($pr->id+2 == $dg->id){
                                 $pr->update(['products_id' => 3]);
@@ -230,25 +241,52 @@ class WebsiteController extends Controller
         
         
 
-        if(auth()->user()){
-            $customer_orders = OrderProduct::join('orders', 'order_products.orders_id', '=', 'orders.id')
-            // ->where('users_id', 7)
-            ->where('order_statuses_id', 1)
-            ->get()
-            ;
+        // if(auth()->user()){
+        //     $id = auth()->user()->id;
+        //     // Auto withered products
+        //     $good_rice_orders = OrderProduct::join('orders', 'order_products.orders_id', '=', 'orders.id')
+        //         ->join('original_product_lists', 'order_products.original_product_lists_id', '=', 'original_product_lists.id')
+        //         ->where('products_id', '=', 1)
+        //         ->select('order_products.*', 'orders.users_id')
+        //         ->where('orders.users_id', '=', $id)
+        //         // ->pluck('orders.users_id')
+        //         ->get()
+        //         ;
 
-            // dd($customer_orders);
+        //         foreach($good_rice_orders as $order){
+        //             // Get recipient
+        //             $id = $order->users_id;
+        //             $user = User::findOrFail($id);
+        //             // dd($user);
+        //             if($order->original_product_lists->harvest_date <= Carbon::now()->subDays(7)){
+        //                 Notification::send($user, new AutoWitherProduct());
+        //             }
+        //         }
+
+        //     // Auto damage products
+        //     $wither_rice_orders = OrderProduct::join('orders', 'order_products.orders_id', '=', 'orders.id')
+        //         ->join('original_product_lists', 'order_products.original_product_lists_id', '=', 'original_product_lists.id')
+        //         ->where('products_id', '=', 2)
+        //         ->select('order_products.*', 'orders.users_id')
+        //         ->where('orders.users_id', '=', $id)
+        //         // ->pluck('orders.users_id')
+        //         ->get()
+        //         ;
+        //         // dd($wither_rice_orders);
 
 
-            foreach($customer_orders as $order){
-                $id = $order->users_id;
-                $user = User::findOrFail($id);
-                // dd($user);
-                if($order->original_product_lists->harvest_date < Carbon::now()->subDays(7)){
-                    Notification::send($user, new AutoWitherProduct());
-                }
-            }
-        }
+        //         foreach($wither_rice_orders as $order){
+        //             // Get recipient
+        //             $id = $order->users_id;
+        //             $user = User::findOrFail($id);
+        //             // dd($user);
+        //             if($order->original_product_lists->harvest_date <= Carbon::now()->subDays(7)){
+        //                 Notification::send($user, new AutoDamageProduct());
+        //             }
+        //         }
+
+            
+        // }
         
 
         // ------------------------------------------------------------------------------------------------------------------------

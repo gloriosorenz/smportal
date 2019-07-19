@@ -28,8 +28,8 @@
                 <strong>
                 <p>City of Sta. Rosa</p>
                 <p>Cropping Season: {{$season->season_types->type}}</p>
-                <p>Season Start: {{$season->season_start}}</p>
-                <p>Season End: {{$season->season_end}}</p>
+                <p>Season Start: {{\Carbon\Carbon::parse($season->season_start)->format('F j, Y')}}</p>
+                <p>Season End: {{\Carbon\Carbon::parse($season->season_end)->format('F j, Y')}}</p>
                 </strong>
             </div>
         </div>
@@ -74,10 +74,13 @@
 
         <div class="row">
             <div class="col-lg-6">
-                <p><strong>Submitted By: </strong></p>
+                <p><strong>Prepared By: </strong>{{auth()->user()->first_name}} {{auth()->user()->last_name}}</p>
             </div>
             <div class="col-lg-6 ">
                 <p><strong>Noted By:</strong></p>
+            </div>
+            <div class="col-lg-6 ">
+                <p><strong>Certified By:</strong></p>
             </div>
         </div>
     </div>

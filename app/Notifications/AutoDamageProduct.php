@@ -7,6 +7,8 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
+use Carbon;
+
 class AutoDamageProduct extends Notification
 {
     use Queueable;
@@ -44,9 +46,24 @@ class AutoDamageProduct extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                ->subject('Damaged Product!') // 
+                ->greeting('Good day!') //
+                ->line('Your order has now become damaged.')  // INDICATE WHICH PRODUCT ID, WHEN IT WILL WITHER
+                ;
+    }
+
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toDatabase($notifiable)
+    {
+        return [
+            'timeCreated'=> Carbon\Carbon::now()->diffForHumans(),
+            'user'=>auth()->user()
+        ];
     }
 
     /**

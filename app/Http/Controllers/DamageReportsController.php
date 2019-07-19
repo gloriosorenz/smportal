@@ -195,8 +195,8 @@ class DamageReportsController extends Controller
         $dreport->regions_id = $request->get('regions_id');
         $dreport->rice_crop_stages_id = $request->get('rice_crop_stages_id');
 
-        $dreport->initial_report_date = \Carbon\Carbon::now();
-        // $dreport->final_report_date = \Carbon\Carbon::now();
+        // $dreport->initial_report_date = \Carbon\Carbon::now();
+        $dreport->final_report_date = \Carbon\Carbon::now();
 
         $dreport->calamity_start = $request->get('calamity_start');
         $dreport->calamity_end = $request->get('calamity_end');

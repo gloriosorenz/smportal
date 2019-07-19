@@ -111,11 +111,11 @@
             <div class="col-lg-6">
                 <p><strong>D. Collector's Information</strong></p>
                 <p>Prepared By: {{$dreport->users->first_name}} {{$dreport->users->last_name}}</p>
-                <p>Date: {{\Carbon\Carbon::now()->format('F j, Y')}}</p>
+                <p>Date: {{$dreport->initial_report_date}}</p>
             </div>
             <div class="col-lg-6 ">
-                <p>Reviewed By:</p>
-                <p>Date: </p>
+                <p>Reviewed By: {{auth()->user()->first_name}} {{auth()->user()->last_name}}</p>
+                <p>Date: {{$dreport->final_report_date}}</p>
             </div>
         </div>
     </div>

@@ -2,7 +2,7 @@
 <html>
     
 <head>
-    <title>Damage Report {{\Carbon\Carbon::now()->format('Y-m')}}</title>
+    <title>Plant Report {{\Carbon\Carbon::now()->format('Y-m')}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -27,7 +27,7 @@
             <div class="col-lg-12">
                 <strong>
                 <p>City of Sta. Rosa</p>
-                {{-- <p>Cropping Season: {{$season->season_types->type}}</p> --}}
+                <p>Cropping Season: {{$preport->seasons->season_types->type}}</p>
                 <p>For the month of {{$preport->created_at->format('M-Y')}}</p>
                 {{-- <p>Season End: {{$season->season_end}}</p> --}}
                 </strong>
@@ -68,10 +68,13 @@
 
     <div class="row">
         <div class="col-lg-6">
-            <p><strong>Submitted By: </strong></p>
+            <p><strong>Prepared By: </strong>{{auth()->user()->first_name}} {{auth()->user()->last_name}}</p>
         </div>
         <div class="col-lg-6 ">
             <p><strong>Noted By:</strong></p>
+        </div>
+        <div class="col-lg-6 ">
+            <p><strong>Certified By:</strong></p>
         </div>
     </div>
 </div>
