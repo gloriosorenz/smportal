@@ -19,7 +19,7 @@
         <div class="offset-md-2 col-md-8 offset-md-2">
             <div class="ibox">
                 <div class="ibox-head">
-                    <div class="ibox-title">Customer Information</div>
+                    <div class="ibox-title">Customer Information asdfasfd</div>
                     <div class="ibox-tools">
                         <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                         <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
@@ -85,12 +85,12 @@
 
 
                         <!-- Barangay-->
-                        <div class="col-sm-4 form-group">
+                        {{-- <div class="col-sm-4 form-group">
                             <div class="form-group">
                                 <label class="form-control-label">Barangay</label>
                                 <input class="form-control" type="text" placeholder="Barangay" name="barangay" value="{{ $customer->barangays->name }}" disabled>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
 

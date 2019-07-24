@@ -140,7 +140,7 @@
                                 <div class="m-b-5"><strong>Invoice To</strong></div>
                                 <div>{{auth()->user()->first_name}} {{auth()->user()->last_name}}</div>
                                 <ul class="list-unstyled m-t-10">
-                                    <li class="m-b-5">{{ auth()->user()->barangays->name }}, {{ auth()->user()->cities->name }}, {{ auth()->user()->provinces->name }}</li>
+                                    <li class="m-b-5">{{ auth()->user()->cities->name }}, {{ auth()->user()->provinces->name }}</li>
                                     <li class="m-b-5">{{ auth()->user()->email }}</li>
                                     <li>{{ auth()->user()->phone }}</li>
                                 </ul>

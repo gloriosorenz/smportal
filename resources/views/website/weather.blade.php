@@ -90,7 +90,7 @@
                             @endif
 
                             <!-- Dangerous temperature condition alert -->
-                            @if($current->windspeed() > 37)
+                            @if($current->temperature() > 37)
                             <div class="alert alert-danger text-center" role="alert">
                             Dangerous Temperature for Rice Growth  
                             <p class="lead m-0"> Current Temperature {{ $current->temperature() }}°C</p>         

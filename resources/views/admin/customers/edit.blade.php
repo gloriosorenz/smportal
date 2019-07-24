@@ -98,7 +98,7 @@
 
 
                             <!-- Barangay-->
-                            <div class="col-sm-4 form-group">
+                            {{-- <div class="col-sm-4 form-group">
                                 <div class="form-group">
                                     <label class="form-control-label">Barangay</label>
                                     <select class="form-control select2_demo_1" name="barangay" id="barangay">
@@ -108,7 +108,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
 
 

@@ -97,18 +97,18 @@ class CustomersController extends Controller
         $user->save();
 
 
-         // Notification
-         $users = User::where('roles_id', 1)
+        // Notification
+        $users = User::where('roles_id', 1)
             ->orWhere('roles_id', 2)
             ->get();
         $data = array(
                 'password' => $password,
-                'first_name' => $first_name,
+                'first_name' => $user->first_name,
             );
         // Notify all farmers that there is a new farmer
         Notification::send($users, new NewCustomerCreated($user));
         // Promt user to change password
-        Notification::send($farmer, new ChangePassword($data));
+        Notification::send($user, new ChangePassword($data));
 
 
         return redirect()->route('customers.index')->with('success','Customer Created ');

@@ -36,7 +36,7 @@
                         
                         <dt class="col-sm-2">Address</dt>
                         <dd class="col-sm-9">
-                            <p>{{ $order_product->orders->users->street }} , {{ $order_product->orders->users->barangays->name }} , {{ $order_product->orders->users->cities->name }} , {{ $order_product->orders->users->provinces->name }} </p>
+                            <p>{{ $order_product->orders->users->street }} , {{ $order_product->orders->users->cities->name }} , {{ $order_product->orders->users->provinces->name }} </p>
                         </dd>
                         
                         <dt class="col-sm-2">Phone</dt>

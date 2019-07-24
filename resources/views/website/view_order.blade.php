@@ -47,7 +47,6 @@
                             <strong>Shipped To:</strong><br>
                                 {{$value['0']->orders->users->first_name}} {{$value['0']->orders->users->last_name}}<br>
                                 {{$value['0']->orders->users->street}}<br>
-                                {{$value['0']->orders->users->barangays->name}}<br>
                                 {{$value['0']->orders->users->cities->name}} {{$value['0']->orders->users->provinces->name}}
                             </address>
                         </div>

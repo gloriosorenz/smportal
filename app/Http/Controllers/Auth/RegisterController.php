@@ -12,6 +12,7 @@ use App\RequestForm;
 
 use Notification;
 use App\Notifications\CustomerRequest;
+use App\Notifications\ChangePassword;
 
 class RegisterController extends Controller
 {
@@ -63,6 +64,7 @@ class RegisterController extends Controller
             'province' => ['required'],
             'city' => ['required'],
             'role' => ['required'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
 
@@ -74,15 +76,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $random = str_shuffle('abcdefghjklmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890');
-        $password = substr($random, 0, 6);
+        // $random = str_shuffle('abcdefghjklmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890');
+        // $password = substr($random, 0, 6);
         // $user->password = Hash::make($password);
 
         // Notification
         $users = User::where('roles_id', 1)
             ->get();
+        // $data1 = array(
+        //         'password' => $password,
+        //         'first_name' => $data['first_name'],
+        //     );
+            
         // Notify all admin that there is a new farmer
         Notification::send($users, new CustomerRequest());
+        // Promt user to change password
+        // Notification::send($users, new ChangePassword($data1));
 
         return User::create([
             'first_name' => $data['first_name'],
@@ -92,9 +101,10 @@ class RegisterController extends Controller
             'street' => $data['street'],
             'company' => $data['company'],
             'provinces_id' => $data['province'],
+            'barangays_id' => 1,
             'cities_id' => $data['city'],
             'roles_id' => $data['role'],
-            'password' => Hash::make($password),
+            'password' => Hash::make($data['password']),
             'active' => false,
         ]);
         
