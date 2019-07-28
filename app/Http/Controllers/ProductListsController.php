@@ -160,7 +160,7 @@ class ProductListsController extends Controller
                 ->where('users_id', auth()->user()->id)
                 ->get();
 
-        dd($season_list);
+        // dd($season_list);
 
         // Get rice product average of the user 
         // $rice_prod_ave = OriginalProductList::getRiceProductAverage();
@@ -310,6 +310,8 @@ class ProductListsController extends Controller
             ->responsive(true)
         ;
 
+       
+
         return view('farmer.product_lists.create')
             ->with('users', $users)
             ->with('season', $season)
@@ -343,6 +345,7 @@ class ProductListsController extends Controller
         $latest_season = DB::table('seasons')->orderBy('id', 'desc')->first();
 
         $counter = 0;
+        $target = 0;
         foreach($request->products_id as $key => $value) {
             $orig_product_list = new OriginalProductList;
             $orig_product_list->users_id = $request->input('users_id') [$key];
@@ -365,19 +368,27 @@ class ProductListsController extends Controller
             $current_product_list->save();
 
             
-            $season_list = SeasonList::where('seasons_id', $orig_product_list->seasons_id)
-                        ->where('users_id', $orig_product_list->users_id)
-                        ->first();
-                // dd($season_list);
+            $season_list = SeasonList::where('seasons_id', $latest_season->id)
+                ->where('users_id', $orig_product_list->users_id)
+                ->first();
 
             $counter = $orig_product_list->quantity + $counter;
+
+
+            $quantity = $request->input('quantity') [$key];
+            $price = $request->input('price') [$key];
+            $target += $quantity * 50 * $price;
             
+        //     dd($price);
+
         }
+        // dd($target);
 
         
-                $season_list = SeasonList::findOrFail($season_list->id);
-                $season_list->actual_qty = $counter;
-                $season_list->save();
+        $season_list = SeasonList::findOrFail($season_list->id);
+        $season_list->actual_qty = $counter;
+        $season_list->target_sales = $target;
+        $season_list->save();
                 
 
 

@@ -13,7 +13,14 @@ class SeasonList extends Model
     protected $table = 'season_lists';
     // Fillables
     protected $fillable = [
-        'planned_hectares', 'actual_hectares', 'planned_num_farmers', 'actual_num_farmers', 'planned_qty', 'actual_qty', 'season_list_statuses_id', 'users_id',
+        'planned_hectares', 
+        'actual_hectares', 
+        'planned_num_farmers', 
+        'actual_num_farmers', 
+        'planned_qty', 
+        'actual_qty', 
+        'season_list_statuses_id',
+         'users_id', 'target_sales'
     ];
      // Primary Key
     public $primaryKey = 'id';

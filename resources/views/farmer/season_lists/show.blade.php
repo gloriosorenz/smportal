@@ -42,6 +42,7 @@
                                 <th class="text-center">Actual Hectares</th>
                                 <th class="text-center">Actual Number of Farmers</th>
                                 <th class="text-center">Actual Quantity</th>
+                                <th class="text-center">Target Sales</th>
                             </tr>
                         </thead>
                         <tbody class="text-center">
@@ -66,6 +67,9 @@
                                 </td>
                                 <td>
                                     <p>{{$season_list->actual_qty}}</p>
+                                </td>
+                                <td>
+                                    <p>{{$season_list->target_sales}}</p>
                                 </td>
                             </tr>
                         </tbody>
