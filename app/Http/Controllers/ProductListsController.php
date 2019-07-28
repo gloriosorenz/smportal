@@ -156,6 +156,12 @@ class ProductListsController extends Controller
         $products = Product::where('id', '!=', 4)->get();
         $users = User::where('roles_id', 2)->get()->pluck('company');
 
+        $season_list = SeasonList::where('seasons_id', $season->id)
+                ->where('users_id', auth()->user()->id)
+                ->get();
+
+        dd($season_list);
+
         // Get rice product average of the user 
         // $rice_prod_ave = OriginalProductList::getRiceProductAverage();
         $product_history = OriginalProductList::join('products', 'original_product_lists.products_id', '=', 'products.id')

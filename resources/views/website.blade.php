@@ -132,19 +132,30 @@
     </div>
 </div>
 
-
-
-<!-- Privacy Policy -->
-{{-- <div class="sec-banner bg0 w-100 h-100 p-t-200 p-r-250 p-l-250 p-b-150">
-    <div class="container">
-        <h3 class="text-center text-grey ltext-103 cl5 p-b-150">
-            Privacy Policy
-        </h3>
-
-        
-
+<div class="sec-banner bg7 w-100 h-70 p-t-100 p-r-250 p-l-250 p-b-150">
+    <div class="container text-center text-white">
+        <div class="row">
+            <div class="col-md-4 mb-sm-30">
+                <div class="counter-item">
+                    <h1 style="font-size: 100px">{{$farmergroups}}</h1>
+                    <h5>Farmer Groups</h5>
+                </div>
+            </div>
+            <div class="col-md-4 mb-sm-30">
+                <div class="counter-item">
+                    <h1 style="font-size: 100px">{{$clients}}</h1>
+                    <h5>Clients</h5>
+                </div>
+            </div>
+            <div class="col-md-4 mb-sm-30">
+                <div class="counter-item">
+                    <h1 style="font-size: 100px">{{$lagunabarangays}}</h1>
+                    <h5>Barangays</h5>
+                </div>
+            </div>
+        </div>
     </div>
-</div> --}}
+</div>
 
 
 
