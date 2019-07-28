@@ -56,8 +56,12 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="/customers/{{ $customer->id }}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
-                                    <a href="/customers/{{ $customer->id }}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
+                                    @if($customer->active)
+                                        <a href="/customers/{{ $customer->id }}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
+                                        <a href="/customers/{{ $customer->id }}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
+                                    @else
+                                        <a href="/customers/activate/{{$customer->id}}" class="btn btn-success">Activate <i class="fas fa-check"></i></a>
+                                    @endif
                                 </td>
                             </tr>
                             @endforeach

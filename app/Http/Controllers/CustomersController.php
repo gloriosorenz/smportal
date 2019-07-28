@@ -13,6 +13,7 @@ use App\Role;
 
 use Notification;
 use App\Notifications\NewCustomerCreated;
+use App\Notifications\ChangePassword;
 
 class CustomersController extends Controller
 {
@@ -99,7 +100,14 @@ class CustomersController extends Controller
          $users = User::where('roles_id', 1)
             ->orWhere('roles_id', 2)
             ->get();
-         Notification::send($users, new NewCustomerCreated($user));
+        $data = array(
+                'password' => $password,
+                'first_name' => $first_name,
+            );
+        // Notify all farmers that there is a new farmer
+        Notification::send($users, new NewCustomerCreated($user));
+        // Promt user to change password
+        Notification::send($farmer, new ChangePassword($data));
 
 
         return redirect()->route('customers.index')->with('success','Customer Created ');
@@ -180,5 +188,18 @@ class CustomersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function activate(Request $request, $id){
+        $user = User::findOrFail($id);
+        
+        $user->active = true;
+        $user->save();           
+    
+        // Notification
+        // $customer = $orderproduct->orders->users;
+        // Notification::send($customer, new OrderCancelled($orderproduct));
+
+        return redirect()->back()->with('success', 'User Activated');
     }
 }

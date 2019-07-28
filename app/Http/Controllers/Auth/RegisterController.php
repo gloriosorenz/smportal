@@ -88,5 +88,6 @@ class RegisterController extends Controller
             'password' => Hash::make($password),
             'active' => false,
         ]);
+        
     }
 }

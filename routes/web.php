@@ -115,6 +115,9 @@ Route::group( ['middleware' => 'auth' ], function()
     // Damage Report
     Route::get('/damage_reports/report_final/{id}', 'DamageReportsController@report_final');
 
+    // Customer Activation
+    Route::get('/customers/activate/{id}', 'CustomersController@activate');
+
     Route::resource('administrators', 'AdministratorsController');
     Route::resource('farmers', 'FarmersController');
     Route::resource('customers', 'CustomersController');
