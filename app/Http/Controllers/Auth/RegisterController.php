@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
+use App\RequestForm;
+
 class RegisterController extends Controller
 {
     /*
@@ -28,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -49,9 +51,15 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'phone' => ['required'],
+            'street' => ['required', 'string', 'max:255'],
+            'company' => ['required', 'string', 'max:255'],
+            'province' => ['required'],
+            'city' => ['required'],
+            'role' => ['required'],
         ]);
     }
 
@@ -63,10 +71,22 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $random = str_shuffle('abcdefghjklmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ234567890');
+        $password = substr($random, 0, 6);
+        // $user->password = Hash::make($password);
+
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'phone' => $data['phone'],
+            'street' => $data['street'],
+            'company' => $data['company'],
+            'provinces_id' => $data['province'],
+            'cities_id' => $data['city'],
+            'roles_id' => $data['role'],
+            'password' => Hash::make($password),
+            'active' => false,
         ]);
     }
 }

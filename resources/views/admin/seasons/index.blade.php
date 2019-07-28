@@ -122,7 +122,7 @@
                 </div> --}}
                 <div class="card bg-warning text-white">
                     <div class="card-body">
-                        <h4 class="card-title">Ongoing Season: Season {{$ongoing_season->id}}</h4>
+                        <h4 class="card-title">Ongoing Season: {{$ongoing_season->id}}</h4>
                         {{-- <div class="card-subtitle">subtitle</div>
                         <p class="card-text">Season Start: {{ $season->season_start }}</p>
                         <p class="card-text">Season End: {{ $season->season_end }}</p> --}}
@@ -166,7 +166,7 @@
             <!-- Active Farmers -->
             <div class="ibox">
                 <div class="ibox-head">
-                    <div class="ibox-title">Farmers for (Season {{ $season->id }})</div>
+                    <div class="ibox-title">Farmers for this Season</div>
                 </div>
                 <div class="ibox-body">
                       <ul class="media-list media-list-divider m-0">

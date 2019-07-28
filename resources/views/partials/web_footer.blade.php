@@ -50,7 +50,9 @@
                             2F Cityhall B, City Govenment Center<br>
 							Santa Rosa City, Laguna <br>
 							<i class="fa fa-phone"></i> : 049 530 0015	<br>
-							<i class="fa fa-envelope"></i> : cityagricultureoffice_csrl@yahoo.com
+							<i class="fa fa-envelope"></i> : cityagricultureoffice_csrl@yahoo.com <br>
+							<a href="https://www.facebook.com/citygovernmentofsantarosa/"><i class="fab fa-facebook-square"></i> Facebook</a> <br>
+							<a href="https://twitter.com/cityofsantarosa?lang=en"><i class="fab fa-twitter-square"></i> Twitter</a>
 					</p>
 				</div>
 			</div>

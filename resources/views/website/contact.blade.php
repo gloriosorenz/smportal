@@ -7,7 +7,7 @@
         <div class="flex-w flex-tr">
 
             <!-- Form -->
-            {{-- <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
+            <div class="size-210 bor10 p-lr-70 p-t-55 p-b-70 p-lr-15-lg w-full-md">
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Customer</a>
@@ -19,7 +19,8 @@
                         <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                             <br>
 
-                            <form method="post" action="{{action('CustomersController@store')}}" enctype="multipart/form-data">
+                            {{-- <form method="POST" action="{{action('RequestFormsController@store')}}" enctype="multipart/form-data"> --}}
+                            <form method="POST" action="{{ route('register') }}">
                             @csrf
                                 <!-- Customer Information -->
                                 <h4><strong>Customer Information</strong></h4>
@@ -77,10 +78,10 @@
                                     <div class="col-sm-4 form-group">
                                         <div class="form-group">
                                             <label class="form-control-label">City</label>
-                                            <select class="form-control" name="province" id="province">
+                                            <select class="form-control" name="city" id="city">
                                                 <option value="0" selected="true" disabled="True">Select Province</option>
-                                                @foreach ($provinces as $province)
-                                                    <option value="{{ $province['id']}}">{{ $province['name']}}</option>
+                                                @foreach ($cities as $city)
+                                                    <option value="{{ $city['id']}}">{{ $city['name']}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -238,7 +239,7 @@
                     </div>
 
                     
-            </div> --}}
+            </div>
 
             <!-- Contact us -->
             <div class="size-210 bor10 flex-w flex-col-m p-lr-93 p-tb-30 p-lr-15-lg w-full-md">

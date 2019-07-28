@@ -128,6 +128,7 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::resource('plant_reports', 'PlantReportsController');
     Route::resource('sales_reports', 'SalesReportsController');
     Route::resource('profiles', 'ProfilesController');
+    Route::resource('request_forms', 'RequestFormsController');
 
     // Route::resource('dashboard', 'DashboardController');
 

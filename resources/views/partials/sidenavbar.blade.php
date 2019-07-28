@@ -54,6 +54,9 @@
                     <a href="javascript:;"><i class="sidebar-item-icon fas fa-users"></i>
                         <span class="nav-label">User Management</span><i class="fas fa-angle-left arrow"></i></a>
                     <ul class="nav-2-level collapse">
+                        {{-- <li>
+                            <a href="{{ route('request_forms.index') }}">Requests</a>
+                        </li> --}}
                         <li>
                             <a href="{{ route('administrators.index') }}">Administrators</a>
                         </li>
