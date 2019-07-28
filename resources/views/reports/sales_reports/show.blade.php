@@ -30,6 +30,8 @@
     <br>
     <br>
 
+
+
     <div class="row">
         <div class="offset-2 col-lg-4">
             <h4>
@@ -41,10 +43,13 @@
                     <div class="text-right">Season End: {{$season->season_end}}</div>
             </h4>
         </div>
+
     </div>
     
     <br>
     <br>
+
+
 
     @if(Auth::user()->roles_id == 1)
     <div class="row">
@@ -161,8 +166,14 @@
                 <br>
     
                 @foreach($farprodquan as $kabs)
-                    <div class="text-center">
+                    <div class="text-right">
                         <h4> Total Quantity: {{$kabs}} kaban/s</h4>
+                    </div>
+                @endforeach
+
+                @foreach ($target as $tg)
+                    <div class="text-right">
+                        <h4> Target Sales: {{presentPrice($tg->target_sales)}} <h4>
                     </div>
                 @endforeach
     

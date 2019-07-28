@@ -148,6 +148,16 @@ class SalesReportsController extends Controller
             ->select(DB::raw("SUM(order_products.quantity) as sum"))  
             ->pluck('sum');
 
+
+        $target = DB::table('season_lists')
+            ->where('users_id','=',$authid)
+            ->where('seasons_id',$season->id)
+            // ->groupBy('orders_id')
+            ->get();
+
+        // dd($target);
+
+
         return view('reports.sales_reports.show')
             ->with('season', $season)
             ->with('lists', $lists)
@@ -157,6 +167,7 @@ class SalesReportsController extends Controller
             ->with('farprodperseason',$farprodperseason)
             ->with('farprodsum',$farprodsum)
             ->with('farprodquan',$farprodquan)
+            ->with('target',$target)
             // ->with('what', $what)
             // ->with('product_lists', $product_lists)
             ;

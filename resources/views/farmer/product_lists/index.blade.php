@@ -131,10 +131,10 @@
                     <div class="ibox-tools">
                         <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                         <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right">
+                        {{-- <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item">option 1</a>
                             <a class="dropdown-item">option 2</a>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="ibox-body">
@@ -153,6 +153,9 @@
                         {!! $price_history->script() !!}
                     </div>
                     <!-- End Form -->
+                        <div>
+                            <p class="text-muted text-center">SEASONS</p>
+                        </div>
                 </div>
             </div>
         </div>

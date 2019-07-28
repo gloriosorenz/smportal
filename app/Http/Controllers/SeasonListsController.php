@@ -110,6 +110,7 @@ class SeasonListsController extends Controller
                         'planned_num_farmers'=>$request->planned_num_farmers [$key],
                         'planned_qty'=>$request->planned_qty [$key],
                         'season_list_statuses_id' => 1,
+                        'target_sales' => 0,
                         'created_at' =>  \Carbon\Carbon::now(), # \Datetime()
                         'updated_at' => \Carbon\Carbon::now(),  # \Datetime()
                     );
