@@ -282,8 +282,8 @@ class DashboardController extends Controller
         // Rice Production Line Chart
         $rice_production_line = Charts::multi('line', 'highcharts')
             ->title('Seasonal Production')
+            ->xAxisTitle("Season")
             ->yAxisTitle('Quantity')
-            ->xAxisTitle('Season')
             ->labels($rice_production_label)
             ->dataset('Rice Products',$rice_products)
             ->dataset('Withered Products',$withered_products)
@@ -336,7 +336,6 @@ class DashboardController extends Controller
 
         $orderlinechart = Charts::multi('line', 'highcharts')
             ->title('Products Sold per Season')
-            // ->template('material')
             ->yAxisTitle("Quantity")
             ->xAxisTitle("Season")
             ->labels($prodsoldperselbl)
@@ -381,7 +380,7 @@ class DashboardController extends Controller
         $fmvcbarchart = Charts::create('bar', 'highcharts')
             ->title('Customer with Most Orders')
             ->yAxisTitle("Number of Orders")
-            ->xAxisTitle("Customers")
+            ->xAxisTitle("CUSTOMERS")
             ->labels($fmvcbarlabel)
             ->values($fmvc)
             // ->elementLabel('Number of Orders')

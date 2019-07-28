@@ -33,14 +33,14 @@
                             <div class="col-lg-12">
                             <h1 class="display-4 text-left"><strong>Products</strong></h1>
                             <br>
-                            <p><b>Good Rice</b><br>
-                                The good rice product is the main product output by the farmers it is planted and harvested in a span of 90-120 days, ready to be milled and stored for potential buyers.
+                            <p><b>Rice Product</b><br>
+                                The Rice Product is the main product output by the farmers it is planted and harvested in a span of 90-120 days, ready to be milled and stored for potential buyers.
                             </p>
-                            <p><b>Withered Rice</b><br>
-                                Withered Rice is the result of Rice Product being exposed to the open after harvesting for a week, the rice will be dry and already shriveled up usually used as food for farm animals.
+                            <p><b>Withered Product</b><br>
+                                Withered Product is the result of Rice Product being exposed to either the rain, dampening it or after harvesting it is left for a week, the rice will be dry and already shriveled up usually used as food for farm animals.
                             </p>
                             <br>
-                            <p>Price computation: 1 kaban = 50 persos</p>
+                            <p> 1 Kbn/Kaban = 50 Kg/Kilos</p>
                             </div>
                         </div>
                         <br>
@@ -59,8 +59,8 @@
                                             <th class="text-center" width="">Rice Farm Company</th>
                                             <th class="text-center" width="">Farm Location</th>
                                             <th class="text-center" width="">Harvest Date</th>
-                                            <th class="text-center" width="">Available</th>
-                                            <th class="text-center" width="">Price</th>
+                                            <th class="text-center" width="">Available Kabans</th>
+                                            <th class="text-center" width="">Price per kilo</th>
                                             @guest
                                                 @elseif (auth()->user()->roles_id == 3 && auth()->user()->active || auth()->user()->roles_id == 4 && auth()->user()->active )
                                                 <th class="text-center" width="15%">Options</th>
@@ -87,7 +87,7 @@
                                             <td>{{$curr_product_list->users->company}}</td>
                                             <td>{{ $curr_product_list->users->barangays->name }}, {{ $curr_product_list->users->cities->name }}, {{ $curr_product_list->users->provinces->name }}</td>
                                             <td>{{Carbon\Carbon::parse($curr_product_list->harvest_date)->format('F j, Y')}}</td>
-                                            <td>{{ $curr_product_list->quantity }}</td>
+                                            <td>{{ $curr_product_list->quantity }} kbn/s</td>
                                             <td>
                                                 <div class="font-weight-bold">{{ presentPrice($curr_product_list->price) }} </div>
                                             </td>

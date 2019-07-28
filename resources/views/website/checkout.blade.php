@@ -153,9 +153,9 @@
                     <table class="table table-striped no-margin table-invoice">
                         <thead>
                             <tr>
-                                <th>Item Description</th>
+                                <th>Item </th>
                                 <th>Seller</th>
-                                <th>Price</th>
+                                <th>Price per Kaban</th>
                                 <th>Quantity</th>
                                 <th class="text-right">Subtotal</th>
                             </tr>
@@ -165,8 +165,8 @@
                             <tr>
                                 <td>{{ $item->model->products->type }}</td>
                                 <td>{{ $item->model->users->company }}</td>
-                                <td class="text-center">{{ $item->model->presentPrice() }}</td>
-                                <td class="text-center">{{ $item->qty }} kaban/s</td>
+                                <td class="text-left">{{ $item->model->presentPrice() }}</td>
+                                <td class="text-left">{{ $item->qty }} kaban/s</td>
                                 <td class="text-right"> ₱ {{ $item->subtotal() }}</td>
                             </tr>
                             @endforeach

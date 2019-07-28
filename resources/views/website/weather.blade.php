@@ -172,7 +172,7 @@
                                                     <p class="lead m-0 small">Wind Speed: {{ $item->windSpeed() }} kph</p>
                                                     <p class="lead m-0 small">Hi Temp: {{ $item->temperatureHigh() }}°C</p>
                                                     <p class="lead m-0 small">Lo Temp: {{ $item->temperatureLow() }}°C</p>
-                                                    <p class="lead m-0 small">Humidity: {{ $item->humidity() }}</p>
+                                                    <p class="lead m-0 small">Rain Probability: {{ $item->precipProbability() * 10 }}%</p>
                                                 </div> 
                                             </a>
                                         </div>
@@ -238,16 +238,24 @@
                     {{-- PRECIPITATION GRAPH --}}
                     <div class="container text-center">
                         <h2>Precipitation Graph</h2>
+                        <br>
+                        {{-- <div class="font-weight-bold">Temperature Guide:</div> --}}
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><i class="fas fa-circle"></i> 0-15% - Small Probability</li>
+                            <li class="list-inline-item"><i class="fas fa-circle"></i> 15-50% - Moderate Probability</li> 
+                            <li class="list-inline-item"><i class="fas fa-circle"></i> 50-80%- Big Probability of Rain</li>
+                            <li class="list-inline-item"><i class="fas fa-circle"></i> 80-100%% - Maximum Probability of Rain</li>
+                        </ul>
                         <script type='text/javascript' src='https://darksky.net/widget/graph/14.3144,121.1121/ca12/en.js?width=100%&height=320&title=Santa Rosa, Laguna&textColor=333333&bgColor=transparent&transparency=true&fontFamily=Sans-Serif&customFont=&units=ca&graph=precip_graph&timeColor=333333&tempColor=333333&lineColor=333333&markerColor=333333'></script>
                     </div>
         
                     <hr>
 
                     {{-- HUMIDITY GRAPH --}}
-                    <div class="container text-center">
+                    {{-- <div class="container text-center">
                         <h2>Humidity Graph</h2>
                         <script type='text/javascript' src='https://darksky.net/widget/graph/14.3144,121.1121/ca12/en.js?width=100%&height=320&title=Santa Rosa, Laguna&textColor=333333&bgColor=transparent&transparency=true&fontFamily=Sans-Serif&customFont=&units=ca&graph=humidity_graph&timeColor=333333&tempColor=333333&lineColor=333333&markerColor=333333'></script>
-                    </div>
+                    </div> --}}
                    
                 </div>
             </div>
