@@ -61,7 +61,7 @@
                                             <th class="text-center" width="">Harvest Date</th>
                                             <th class="text-center" width="">Available Kabans</th>
                                             <th class="text-center" width="">Price per kilo</th>
-                                            <th class="text-center" width="">Quantity</th>
+                                            <th class="text-center" width="10%">Quantity</th>
                                             @guest
                                                 @elseif (auth()->user()->roles_id == 3 && auth()->user()->active || auth()->user()->roles_id == 4 && auth()->user()->active )
                                                 <th class="text-center" width="15%">Options</th>
@@ -71,46 +71,45 @@
                                     </thead>
                                     <tbody class="text-center">
                                         @foreach($product_lists as $curr_product_list)
-                                        <tr class="tr">
-                                            <td>
-                                                @if($curr_product_list->image == 'noimage.jpeg' || $curr_product_list->image == null)
-                                                    <div class="img-wrap">
-                                                        <img src="/img/image.png" width="auto" height="80"/>
-                                                    </div>
-                                                @elseif($curr_product_list->image)
-                                                    <div class="img-wrap">
-                                                        {{-- <img src="/storage/logos/{{$item->logo}}" class="img-thumbnail img-sm" width="100%" height="100%"> --}}
-                                                        <img src="/storage/images/{{$curr_product_list->image}}" width="auto" height="80"/>
-                                                    </div>
-                                                @endif
-                                            </td>
-                                            <td>{{$curr_product_list->products->type}}</td>
-                                            <td>{{$curr_product_list->users->company}}</td>
-                                            <td>{{ $curr_product_list->users->barangays->name }}, {{ $curr_product_list->users->cities->name }}, {{ $curr_product_list->users->provinces->name }}</td>
-                                            <td>{{Carbon\Carbon::parse($curr_product_list->harvest_date)->format('F j, Y')}}</td>
-                                            <td>{{ $curr_product_list->quantity }} kbn/s</td>
-                                            <td>
-                                                <div class="font-weight-bold">{{ presentPrice($curr_product_list->price) }} </div>
-                                            </td>
-                                            <td>
-                                               
-                                            </td>
-                                            @guest
-                                            
-                                                @elseif (auth()->user()->roles_id == 3 && auth()->user()->active || auth()->user()->roles_id == 4 && auth()->user()->active)
+                                        
+                                            <tr class="tr">
+                                                <form method="POST" action="{{action('CartController@store')}}">
+                                                @csrf
                                                 <td>
-                                                    {{-- @if ($product_list->quantity > 0) --}}
-                                                        <form method="post" action="{{action('CartController@store')}}">
-                                                            @csrf
+                                                    @if($curr_product_list->image == 'noimage.jpeg' || $curr_product_list->image == null)
+                                                        <div class="img-wrap">
+                                                            <img src="/img/image.png" width="auto" height="80"/>
+                                                        </div>
+                                                    @elseif($curr_product_list->image)
+                                                        <div class="img-wrap">
+                                                            {{-- <img src="/storage/logos/{{$item->logo}}" class="img-thumbnail img-sm" width="100%" height="100%"> --}}
+                                                            <img src="/storage/images/{{$curr_product_list->image}}" width="auto" height="80"/>
+                                                        </div>
+                                                    @endif
+                                                </td>
+                                                <td>{{$curr_product_list->products->type}}</td>
+                                                <td>{{$curr_product_list->users->company}}</td>
+                                                <td>{{ $curr_product_list->users->barangays->name }}, {{ $curr_product_list->users->cities->name }}, {{ $curr_product_list->users->provinces->name }}</td>
+                                                <td>{{Carbon\Carbon::parse($curr_product_list->harvest_date)->format('F j, Y')}}</td>
+                                                <td>{{ $curr_product_list->quantity }} kbn/s</td>
+                                                <td>
+                                                    <div class="font-weight-bold">{{ presentPrice($curr_product_list->price) }} </div>
+                                                </td>
+                                                <td>
+                                                    <input type="number" class="form-control" placeholder="0" step="1" min="1" max="{{$curr_product_list->quantity}}" name="quantity">
+                                                </td>
+                                                @guest
+                                                    @elseif (auth()->user()->roles_id == 3 && auth()->user()->active || auth()->user()->roles_id == 4 && auth()->user()->active)
+                                                    <td>
+                                                        
                                                             <input type="hidden" name="id" value="{{ $curr_product_list->id }}">
                                                             <input type="hidden" name="price" value="{{ $curr_product_list->price }}">
-                                                            <input type="hidden" name="quantity" value="{{ $curr_product_list->quantity*50 }}">
+                                                            {{-- <input type="hidden" name="quantity" value="22"> --}}
                                                             <button type="submit" class="btn btn-success btn-md btn-block">Add to Cart</button>
-                                                        </form>
-                                                    {{-- @endif --}}
-                                                </td>
-                                            @endguest
-                                        </tr>
+                                                    </td>
+                                                </form>
+                                                @endguest
+                                            </tr>
                                         @endforeach
                                 </table>
                             </div>

@@ -107,7 +107,7 @@
                                             <input type="text" class="form-control" name="quantity[]" id="quantity"/>
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" name="price[]" id="price"/>
+                                            <input type="text" class="form-control" name="price[]" id="price" placeholder="{{number_format($suggested_rice, 2)}}"/>
                                             <small class="text-muted">Revenue: <input id="revenue"></p> </small> 
                                         </td>
                                         <td>
@@ -131,7 +131,7 @@
                                             <input type="text" class="form-control" name="quantity[]" id="quantity1"/>
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" name="price[]" id="price1"/>
+                                            <input type="text" class="form-control" name="price[]" id="price1" placeholder="{{number_format($suggested_withered, 2)}}"/>
                                             <small class="text-muted">Revenue: <input id="revenue1"></p> </small> 
                                         </td>
                                         <td>
