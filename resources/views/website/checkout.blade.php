@@ -111,6 +111,32 @@
                 <div class="invoice-header">
                     <div class="row">
                         <div class="col-md-6">
+                            <div class="purchase-terms">
+                                <h2>Purchasing Terms and Conditions</h2>
+                            </div>
+                            <div>
+                                    <div class="m-b-5"><strong>Order Pick-Up</strong></div>
+                                    <div>Orders are only for <u>pick-up</u>. Pick-up shall be done from the respective farm locations of the products.</div>
+                                    <ul class="list-unstyled m-t-10">
+                                        <div class="m-b-5"><strong>Order Cancellation</strong></div>
+                                        <div>Orders will automatically be cancelled by the system if the farmer has not confirmed it by <u>3 DAYS</u>.</div>
+                                        <div>The customer may only manually cancel the order for up to <u>2 DAYS</u> after the order has been made. </u>
+                                        <div>When confirmed by the farmer the customer will recieve a notification and the products are considered sold and awaiting payment and pick-up.</div>
+
+                                        <br>
+                                        <div class="m-b-5"><strong>Mode of Payment</strong></div>
+                                        <div>The farm organizations will only accept cash, this is to be done during pick-up.</div>
+
+                                        <br>
+                                        <div class="m-b-5"><strong>Product Quality</strong></div>
+                                        <div>It is recommended that the products are to be picked up as soon as the customer can as the product quality may change due to time effects.</div>
+                                        <div>The Product Quality Assurance Time Span will be sent to the customer, this will show how long the product will retain it's quality before spoilage.</div>
+
+                                    </ul>
+                                </div>
+                                <br>
+
+
                             <div class="invoice-logo">
                                 <h2>Order Summary</h2>
                             </div>

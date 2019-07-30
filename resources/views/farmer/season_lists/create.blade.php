@@ -27,9 +27,117 @@
                     <div class="ibox-tools">
                         <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                     </div>
+
+
                 </div>
                 <div class="ibox-body">
                     <!-- Start Form -->
+
+                    <!-- ALERTS -->
+                    <div class="row">
+                            <div class="col-lg-4">
+                                {{-- WINDSPEED ALERT --}}
+                                @if($current->windspeed() <= 30)
+                                <div class="alert alert-success text-center" role="alert">
+                                Good Wind Condition     
+                                - Perfect for planting and harvesting!  
+                                <p class="lead m-0"> Current Wind Speed {{ $current->windspeed() }} km/h</p>             
+                                </div>
+                                @endif
+    
+                                <!-- Acceptable wind condition alert -->
+                                @if($current->windspeed() > 30 && $current->windspeed() <= 40)
+                                <div class="alert alert-info text-center" role="alert">
+                                Acceptable Wind Condition  
+                                <p class="lead m-0">Wind Speed {{ $current->windspeed() }} km/h</p>         
+                                </div>
+                                @endif
+    
+                                <!-- Be on Alert wind condition alert -->
+                                @if($current->windspeed() > 40 && $current->windspeed() <= 60)
+                                <div class="alert alert-warning text-center" role="alert">
+                                Be on Alert 
+                                <p class="lead m-0">Wind Speed {{ $current->windspeed() }} km/h</p>         
+                                </div>
+                                @endif
+    
+                                <!-- Dangerous wind condition alert -->
+                                @if($current->windspeed() > 60)
+                                <div class="alert alert-danger text-center" role="alert">
+                                Dangerous Wind Condition  
+                                <p class="lead m-0">Wind Speed {{ $current->windspeed() }} km/h</p>         
+                                </div>
+                                @endif
+                            </div>
+                            <div class="col-lg-4">
+                                {{-- TEMPERATURE ALERT --}}
+                                @if($current->temperature() <= 29)
+                                <div class="alert alert-danger text-center" role="alert">
+                                Temperature is too low for Rice Growth
+                                <p class="lead m-0"> Current Temperature {{ $current->temperature() }}°C</p>             
+                                </div>
+                                @endif
+    
+                                <!-- Acceptable temperature condition alert -->
+                                @if($current->temperature() > 29 && $current->temperature() <= 32)
+                                <div class="alert alert-primary text-center" role="alert">
+                                Optimal Temperature for Rice Growth                        
+                                <p class="lead m-0"> Current Temperature {{ $current->temperature() }}°C</p>         
+                                </div>
+                                @endif
+    
+                                <!-- Be on Alert temperature condition alert -->
+                                @if($current->temperature() > 32 && $current->temperature() <= 37)
+                                <div class="alert alert-warning text-center" role="alert">
+                                Acceptable Temperature for Rice Growth
+                                <p class="lead m-0"> Current Temperature {{ $current->temperature() }}°C</p>         
+                                </div>
+                                @endif
+    
+                                <!-- Dangerous temperature condition alert -->
+                                @if($current->temperature() > 37)
+                                <div class="alert alert-danger text-center" role="alert">
+                                Dangerous Temperature for Rice Growth  
+                                <p class="lead m-0"> Current Temperature {{ $current->temperature() }}°C</p>         
+                                </div>
+                                @endif
+                            </div>
+                            <div class="col-lg-4">
+                                {{-- PRECIPITATIONS ALERT --}}
+                                @if($current->precipProbability()*100 <= 15)
+                                <div class="alert alert-success text-center" role="alert">
+                                Rain Probability is Low
+                                <p class="lead m-0"> Chance of Rain: {{ $current->precipProbability()*100 }}%</p>             
+                                </div>
+                                @endif
+    
+                                <!-- Acceptable temperature condition alert -->
+                                @if($current->precipProbability()*100 > 15 && $current->precipProbability()*100 <= 50)
+                                <div class="alert alert-warning text-center" role="alert">
+                                Rain Probability is Medium
+                                <p class="lead m-0"> Chance of Rain: {{ $current->precipProbability()*100 }}%</p>         
+                                </div>
+                                @endif
+    
+                                <!-- Be on Alert temperature condition alert -->
+                                @if($current->precipProbability()*100 > 50 && $current->precipProbability()*100 <= 80)
+                                <div class="alert alert-warning text-center" role="alert">
+                                Rain Probability is High
+                                <p class="lead m-0"> Chance of Rain: {{ $current->precipProbability()*100 }}%</p>         
+                                </div>
+                                @endif
+    
+                                <!-- Dangerous temperature condition alert -->
+                                @if($current->precipProbability()*100 > 80)
+                                <div class="alert alert-danger text-center" role="alert">
+                                Currently Raining
+                                <p class="lead m-0"> Chance of Rain: {{ $current->precipProbability()*100 }}%</p>         
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+
+                        <script type='text/javascript' src='https://darksky.net/widget/default/14.3144,121.1121/ca12/en.js?width=100%&height=350&title=Santa Rosa, Laguna&textColor=333333&bgColor=FFFFFF&transparency=false&skyColor=undefined&fontFamily=Default&customFont=&units=ca&htColor=333333&ltColor=e3e3e3&displaySum=yes&displayHeader=yes'></script>
                     
                     <!-- End Form -->
                 </div>

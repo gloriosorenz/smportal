@@ -79,6 +79,7 @@
                 <th>Product</th>
                 <th class="text-center" width="30%">Farmer Organization</th>
                 <th class="text-center" width="15%">Quantity (kbn)</th>
+                <th class="text-center" width="18%">Individual Price per Kilo</th>
                 <th class="text-center" width="18%">Individual Price per Kaban</th>
                 <th class="text-center" width="15%">Subtotal</th>
                 <th class="text-center" width="15%">Action</th>
@@ -125,12 +126,22 @@
                             </dl>
                         </td>
                         <td>
-                            {{ $item->model->presentPrice() }}
+                                {{ $item->model->presentPrice() }}
+
+                            {{-- <select class="quantity form-control" data-id="{{ $item->rowId }}" data-productQuantity="{{ $item->model->quantity*50 }}"> --}}
+
                         </td>
+                        <td>
+                            {{ presentPrice($item->model->price*50) }}
+
+                            {{-- <div class="font-weight-bold">{{ presentPrice($curr_product_list->price*50) }} </div> --}}
+
+                        </td>
+                        
                         <td> 
                             <div class="price-wrap"> 
                                 <var class="price"> ₱ {{ $item->subtotal() }}</var> 
-                                <small class="text-muted">({{ $item->model->presentPrice() }} per kbn x 50kg)</small> 
+                                <small class="text-muted">({{ $item->model->presentPrice() }} per kilo x ₱50.00 x Quantity)</small> 
                             </div> <!-- price-wrap .// -->
                         </td>
                         <td> 

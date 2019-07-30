@@ -36,7 +36,7 @@
                             <div class="alert alert-success text-center" role="alert">
                             Good Wind Condition     
                             - Perfect for planting and harvesting!  
-                            <p class="lead m-0"> Current Wind Speed {{ $current->windspeed() }}</p>             
+                            <p class="lead m-0"> Current Wind Speed {{ $current->windspeed() }} km/h</p>             
                             </div>
                             @endif
 
@@ -44,7 +44,7 @@
                             @if($current->windspeed() > 30 && $current->windspeed() <= 40)
                             <div class="alert alert-info text-center" role="alert">
                             Acceptable Wind Condition  
-                            <p class="lead m-0">Wind Speed {{ $current->windspeed() }}</p>         
+                            <p class="lead m-0">Wind Speed {{ $current->windspeed() }} km/h</p>         
                             </div>
                             @endif
 
@@ -52,7 +52,7 @@
                             @if($current->windspeed() > 40 && $current->windspeed() <= 60)
                             <div class="alert alert-warning text-center" role="alert">
                             Be on Alert 
-                            <p class="lead m-0">Wind Speed {{ $current->windspeed() }}</p>         
+                            <p class="lead m-0">Wind Speed {{ $current->windspeed() }} km/h</p>         
                             </div>
                             @endif
 
@@ -60,14 +60,14 @@
                             @if($current->windspeed() > 60)
                             <div class="alert alert-danger text-center" role="alert">
                             Dangerous Wind Condition  
-                            <p class="lead m-0">Wind Speed {{ $current->windspeed() }}</p>         
+                            <p class="lead m-0">Wind Speed {{ $current->windspeed() }} km/h</p>         
                             </div>
                             @endif
                         </div>
                         <div class="col-lg-4">
                             {{-- TEMPERATURE ALERT --}}
                             @if($current->temperature() <= 29)
-                            <div class="alert alert-success text-center" role="alert">
+                            <div class="alert alert-danger text-center" role="alert">
                             Temperature is too low for Rice Growth
                             <p class="lead m-0"> Current Temperature {{ $current->temperature() }}°C</p>             
                             </div>
@@ -169,7 +169,7 @@
                                                     <h5 class="lead m-0">{{ date('F j', $item->time()) }}</h5>
                                                     <p class="lead m-0 small">{{ $item->summary() }}</p>
                                                     <br>
-                                                    <p class="lead m-0 small">Wind Speed: {{ $item->windSpeed() }} kph</p>
+                                                    <p class="lead m-0 small">Wind Speed: {{ $item->windSpeed() }} km/h</p>
                                                     <p class="lead m-0 small">Hi Temp: {{ $item->temperatureHigh() }}°C</p>
                                                     <p class="lead m-0 small">Lo Temp: {{ $item->temperatureLow() }}°C</p>
                                                     <p class="lead m-0 small">Rain Probability: {{ $item->precipProbability() * 10 }}%</p>

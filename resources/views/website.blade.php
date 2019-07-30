@@ -25,7 +25,7 @@
         </div>
 
         <div class="col-lg-6">
-            <script type='text/javascript' src='https://darksky.net/widget/default/14.3144,121.1121/us12/en.js?width=100%&height=350&title=Santa Rosa, Laguna&textColor=333333&bgColor=transparent&transparency=true&skyColor=undefined&fontFamily=Verdana&customFont=&units=us&htColor=333333&ltColor=C7C7C7&displaySum=yes&displayHeader=yes'></script>
+            <script type='text/javascript' src='https://darksky.net/widget/default/14.3144,121.1121/ca12/en.js?width=100%&height=350&title=Santa Rosa, Laguna&textColor=333333&bgColor=transparent&transparency=true&skyColor=undefined&fontFamily=Verdana&customFont=&units=us&htColor=333333&ltColor=C7C7C7&displaySum=yes&displayHeader=yes'></script>
         </div>
         
     </div>
@@ -78,9 +78,15 @@
             Product Overview
         </h3>
 
+        {{-- <h6 class="text-center text-grey ltext-70 cl5 p-b-100">
+            All products sold in the website are for <u>pick-up only</u>. Pick-up shall be done in the respective farm locations.
+        </h6> --}}
+
         <div class="row">
+
             <div class="col-md-6 col-xl-6 p-b-30 m-lr-auto">
                 <!-- Block1 -->
+
                 <div class="block1 wrap-pic-w">
                     <img src="/img/good_rice.jpeg" alt="IMG-BANNER">
 
@@ -101,6 +107,10 @@
                             </div>
                         </div>
                     </a>
+
+                    
+
+                    
                 </div>
             </div>
 
@@ -126,8 +136,28 @@
                             </div>
                         </div>
                     </a>
+                    
                 </div>
             </div>
+
+            <div class="m-b-5"><strong>Order Pick-Up</strong></div>
+            <div>Orders are only for <u>pick-up</u>. Pick-up shall be done from the respective farm locations of the products.</div>
+            <ul class="list-unstyled m-t-10">
+                <div class="m-b-5"><strong>Order Cancellation</strong></div>
+                <div>Orders will automatically be cancelled by the system if the farmer has not confirmed it by <u>3 DAYS</u>.</div>
+                <div>The customer may only manually cancel the order for up to <u>2 DAYS</u> after the order has been made. </u>
+                <div>When confirmed by the farmer the customer will recieve a notification and the products are considered sold and awaiting payment and pick-up.</div>
+
+                <br>
+                <div class="m-b-5"><strong>Mode of Payment</strong></div>
+                <div>The farm organizations will only accept cash, this is to be done during pick-up.</div>
+
+                <br>
+                <div class="m-b-5"><strong>Product Quality</strong></div>
+                <div>It is recommended that the products are to be picked up as soon as the customer can as the product quality may change due to time effects.</div>
+                <div>The Product Quality Assurance Time Span (PQATS) will be sent to the customer, this will show how long the product will retain its quality before spoilage.</div>
+
+            </ul>
         </div>
     </div>
 </div>

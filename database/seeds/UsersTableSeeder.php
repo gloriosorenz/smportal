@@ -15,8 +15,8 @@ class UsersTableSeeder extends Seeder
 
             [
                 'id' => 1,
-                'first_name' => 'Edwina',
-                'last_name' => 'Morano',
+                'first_name' => 'Wendy',
+                'last_name' => 'Morning',
                 'email' => 'admin@admin.com',
                 'phone' => '09171234567',
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
@@ -47,8 +47,8 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'first_name' => 'Adrian',
-                'last_name' => 'Valero',
+                'first_name' => 'Ades',
+                'last_name' => 'Velcro',
                 'email' => 'a@d.c',
                 'phone' => '09178416388',
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
@@ -89,8 +89,8 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'id' => 6,
-                'first_name' => 'Carlo',
-                'last_name' => 'Ortega',
+                'first_name' => 'Carl',
+                'last_name' => 'Orange',
                 'email' => 'c@o.c',
                 'phone' => '09178484154',
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
@@ -105,8 +105,8 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'id' => 7,
-                'first_name' => 'Renz',
-                'last_name' => 'Glorioso',
+                'first_name' => 'Loren',
+                'last_name' => 'Glorious',
                 'email' => 'renzgloriosooo@gmail.com',
                 'phone' => '09178416388',
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
@@ -155,9 +155,9 @@ class UsersTableSeeder extends Seeder
             //FARMER SEEDERS
             [
                 'id' => 10,
-                'first_name' => 'Larry',
-                'last_name' => 'Aristorenas',
-                'email' => 'larryaristorenas@yahoo.com',  //temp
+                'first_name' => 'Lardo',
+                'last_name' => 'Aristocrat',
+                'email' => 'lardoaristocrat@yahoo.com',  //temp
                 'phone' => '09178484154', //temp
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
                 'company' => 'Samahan ng Magsasaka sa Sta. Rosa Laguna', //temp
@@ -174,12 +174,12 @@ class UsersTableSeeder extends Seeder
 
             [
                 'id' => 11,
-                'first_name' => 'Gregorio',
-                'last_name' => 'Trinidad',
-                'email' => 'gregtrinidad@yahoo.com',  //temp
+                'first_name' => 'Gregory',
+                'last_name' => 'Trinity',
+                'email' => 'gregorytrinity@yahoo.com',  //temp
                 'phone' => '09178484154', //temp
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
-                'company' => 'Makabling River Irrigators',
+                'company' => 'Trinity River Irrigators',
                 'no_farmers' => 18, //temp
                 'hectares' => 5.0, //temp
                 'roles_id' => 2,
@@ -192,12 +192,12 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'id' => 12,
-                'first_name' => 'Eduardo',
-                'last_name' => 'Umali',
-                'email' => 'eduardo_umali@example.com',  //temp
+                'first_name' => 'Eddy',
+                'last_name' => 'Umail',
+                'email' => 'eddyumail@example.com',  //temp
                 'phone' => '09178484154', //temp
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
-                'company' => 'Diezmo River Irrigators Association',
+                'company' => 'Diezzy River Irrigators Association',
                 'no_farmers' => 18, //temp
                 'hectares' => 14.5, //temp 2.5 ,1.5 3.5 (5.0)
                 'roles_id' => 2,
@@ -213,12 +213,12 @@ class UsersTableSeeder extends Seeder
 
             [
                 'id' => 13,
-                'first_name' => 'Judith',
-                'last_name' => 'Velasco',
-                'email' => 'jmvricemillers@gmail.com',  //temp
+                'first_name' => 'Judas',
+                'last_name' => 'Vargase',
+                'email' => 'judasvargase@gmail.com',  //temp
                 'phone' => '09189277549', //temp
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
-                'company' => 'JMV Ricemill',
+                'company' => 'JV Ricemillers',
                 'roles_id' => 3,
                 'street'=> 'Blk 843 Francis 7 Subd.', //temp
                 'barangays_id'=> 2,//11217, //Dita
@@ -229,9 +229,9 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'id' => 14,
-                'first_name' => 'Luigi',
-                'last_name' => 'Panaguiton',
-                'email' => 'luigipanaguiton@gmail.com',  //temp
+                'first_name' => 'Lui-g',
+                'last_name' => 'Pana-g',
+                'email' => 'luigpanag@gmail.com',  //temp
                 'phone' => '09170928492', //temp
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
                 'roles_id' => 3,
@@ -244,9 +244,9 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'id' => 15,
-                'first_name' => 'Jan',
-                'last_name' => 'Domingo',
-                'email' => 'jandomingo@gmail.com',  //temp
+                'first_name' => 'Han',
+                'last_name' => 'Homingo',
+                'email' => 'hanhomingo@gmail.com',  //temp
                 'phone' => '09170194829', //temp
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
                 'roles_id' => 4,
@@ -259,8 +259,8 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'id' => 16,
-                'first_name' => 'Don',
-                'last_name' => 'Macadat',
+                'first_name' => 'Donny',
+                'last_name' => 'Mcdonalds',
                 'email' => 'donmac@yahoo.com',  //temp
                 'phone' => '09179528529', //temp
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
@@ -276,12 +276,12 @@ class UsersTableSeeder extends Seeder
             //FARMER SEEDERS
             [
                 'id' => 17,
-                'first_name' => 'Julio',
-                'last_name' => 'Ronquillo',
-                'email' => 'julioronquillo@yahoo.com',  //temp
+                'first_name' => 'Yulio',
+                'last_name' => 'Roarkills',
+                'email' => 'yulioroarkills@yahoo.com',  //temp
                 'phone' => '09178484154', //temp
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
-                'company' => 'AUP', //temp
+                'company' => 'Roar Kills', //temp
                 'no_farmers' => 14, //temp
                 'hectares' => 3.5,
                 'roles_id' => 2,
@@ -296,11 +296,11 @@ class UsersTableSeeder extends Seeder
             [
                 'id' => 18,
                 'first_name' => 'Margarita',
-                'last_name' => 'Velasco',
-                'email' => 'margaritavelasco@yahoo.com',  //temp
+                'last_name' => 'Vaseco',
+                'email' => 'margaritacaseco@yahoo.com',  //temp
                 'phone' => '09178484154', //temp
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
-                'company' => 'Aglipayan Church',
+                'company' => 'Malampayan Church',
                 'no_farmers' => 12, //temp
                 'hectares' => 2.0, //temp
                 'roles_id' => 2,
@@ -313,12 +313,12 @@ class UsersTableSeeder extends Seeder
             ],
             [
                 'id' => 19,
-                'first_name' => 'Ines',
-                'last_name' => 'Ong-iko',
-                'email' => 'inesongiko@yahoo.com',  //temp
+                'first_name' => 'Na-ines',
+                'last_name' => 'Ilong-ko',
+                'email' => 'nainesilongko@yahoo.com',  //temp
                 'phone' => '0915892840', //temp
                 'password' => '$2y$10$Y9SOOUb2O3guzgGIqHyUMe8JLaYwIcwCT6l30/YRPAzjZNZqEgcMS',
-                'company' => 'Wenceslao Alger',
+                'company' => 'Winchester Albro',
                 'no_farmers' => 17, //temp
                 'hectares' => 4.5, //temp 2.5 ,1.5 3.5 (5.0)
                 'roles_id' => 2,
