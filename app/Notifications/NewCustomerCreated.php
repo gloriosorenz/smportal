@@ -35,7 +35,7 @@ class NewCustomerCreated extends Notification
     {
         return [
             'database',
-            'mail',
+            // 'mail',
         ];
     }
 

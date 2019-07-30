@@ -106,14 +106,16 @@
                                     <img class="img-circle" src="/img/admin-avatar.png" width="40" />
                                 </a>
                                 <div class="media-body">
-                                    <div class="media-heading">
-                                        {{ $list->users->first_name }}  {{ $list->users->last_name }}
-                                        @if ($list->season_list_statuses->id == 2)
-                                            <span class="float-right badge badge-success badge-pill">{{$list->season_list_statuses->status }}</span>
-                                        @else
-                                            <span class="float-right badge badge-warning badge-pill">{{$list->season_list_statuses->status }}</span>
-                                        @endif
-                                    </div>
+                                    <a href="/season_lists/{{$list->id}}" style="color:dimgray">
+                                        <div class="media-heading">
+                                            {{ $list->users->first_name }}  {{ $list->users->last_name }}
+                                            @if ($list->season_list_statuses->id == 2)
+                                                <span class="float-right badge badge-success badge-pill">{{$list->season_list_statuses->status }}</span>
+                                            @else
+                                                <span class="float-right badge badge-warning badge-pill">{{$list->season_list_statuses->status }}</span>
+                                            @endif
+                                        </div>
+                                    </a>
                                     <div class="font-13">{{ $list->users->company }}</div>
                                 </div>
                             </li>

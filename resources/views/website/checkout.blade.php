@@ -112,10 +112,10 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="invoice-logo">
-                                <h2>Invoice</h2>
+                                <h2>Order Summary</h2>
                             </div>
                             <div>
-                                <div class="m-b-5"><strong>Invoice from</strong></div>
+                                <div class="m-b-5"><strong>From</strong></div>
                                 <div>Samahan ng Magsasaka sa Santa Rosa Laguna</div>
                                 <ul class="list-unstyled m-t-10">
                                     <li class="m-b-5">
@@ -137,7 +137,7 @@
                                 </dl>
                             </div>
                             <div>
-                                <div class="m-b-5"><strong>Invoice To</strong></div>
+                                <div class="m-b-5"><strong>To</strong></div>
                                 <div>{{auth()->user()->first_name}} {{auth()->user()->last_name}}</div>
                                 <ul class="list-unstyled m-t-10">
                                     <li class="m-b-5">{{ auth()->user()->cities->name }}, {{ auth()->user()->provinces->name }}</li>

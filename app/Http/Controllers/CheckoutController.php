@@ -79,12 +79,6 @@ class CheckoutController extends Controller
 
         $orders = Order::all();
 
-        // foreach($oredrs as $order){
-        //     do{
-
-        //     }while($order);
-        // }
-
 
         // Insert into orders table
         $order = Order::create([
@@ -99,7 +93,7 @@ class CheckoutController extends Controller
 
         // Insert into order_product table
         foreach (Cart::content() as $item) {
-            OrderProduct::create([
+            $order_product = OrderProduct::create([
                 'orders_id' => $order->id,
                 'original_product_lists_id' => $item->model->id,
                 'current_product_lists_id' => $item->model->id,
@@ -111,9 +105,9 @@ class CheckoutController extends Controller
             ]);
 
             // Notification
-            $customer = $order->users;
-            // dd($farmer);
-            Notification::send($customer, new OrderCreated());
+            // $customer = $order->users;
+            $farmers = $order_product->users;
+            Notification::send($farmers, new OrderCreated());
         }
 
 

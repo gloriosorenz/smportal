@@ -33,7 +33,7 @@ class OrderCreated extends Notification
     {
         return [
             'database',
-            'mail'
+            // 'mail'
         ];
     }
 

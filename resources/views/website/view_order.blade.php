@@ -70,9 +70,16 @@
             
             <div class="row">
                 <div class="col-md-12">
+                    {{-- @foreach ($value as $v) --}}
                     <div class="card card-default">
                         <div class="card-header">
-                            <h3 class="card-title"><strong>Order summary</strong></h3>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h3 class="card-title"><strong>Order summary</strong></h3>
+                                </div>
+                                <div class="col-md-6">
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -83,14 +90,15 @@
                                             <td class="text-center"><strong>Company</strong></td>
                                             <td class="text-center"><strong>Price</strong></td>
                                             <td class="text-center"><strong>Quantity</strong></td>
-                                            <td class="text-right"><strong>Subtotal</strong></td>
+                                            <td class="text-center"><strong>Subtotal</strong></td>
+                                            <td class="text-right"><strong>Cancel</strong></td>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach ($value as $v)
                                         @php
                                             $sub_total = 0;
                                         @endphp
-                                        @foreach ($value as $v)
                                         @php
                                             // dd($value);
                                             $product = App\OriginalProductList::findOrFail($v->original_product_lists_id);
@@ -104,7 +112,13 @@
                                             <td class="text-center">{{$seller->company}}</td>
                                             <td class="text-center">{{$product->price}}</td>
                                             <td class="text-center">{{$v->quantity}} kaban/s</td>
-                                            <td class="text-right">{{ presentPrice($v->original_product_lists->price *  $v->quantity)}}</td>
+                                            <td class="text-center">{{ presentPrice($v->original_product_lists->price *  $v->quantity)}}</td>
+                                            <td class="text-right">
+                                                @if ($v->order_product_statuses_id != 4)
+                                                    <a href="/order_products/cancel_order/{{$v->id}}" class="btn btn-md btn-danger float-right"></i><i class="fas fa-times"></i> Cancel</a>
+                                                @endif
+                                                
+                                            </td>
                                         </tr>
                                         @endforeach
                                         <tr>
@@ -112,18 +126,49 @@
                                             <td class="thick-line"></td>
                                             <td class="thick-line"></td>
                                             <td class="thick-line text-center"><strong>Total</strong></td>
-                                            <td class="thick-line text-right">{{presentPrice($sub_total)}}</td>
+                                            <td class="thick-line text-center">{{presentPrice($sub_total)}}</td>
+                                            <td class="thick-line"></td>
                                         </tr>
                                     </tbody>
                                 </table>
+                                
                             </div>
                         </div>
                     </div>
+                    {{-- @endforeach --}}
                 </div>
             </div>
         </div>
     </div>
     @endforeach
+
+
+
+
+
+
+    <!-- Cancel Order Modal -->
+    {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Delete form?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to cancel your order?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <a href="/order_products/cancel_order/{{$v->id}}" class="btn btn-md btn-success float-right"></i>Yes</a>
+                </div>
+            </div>
+        </div>
+    </div> --}}
+
+
 </div>
 
 

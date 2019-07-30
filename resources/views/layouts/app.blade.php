@@ -216,7 +216,8 @@
             });
 
 
-            
+            // Tooltip
+            $('[data-toggle="tooltip"]').tooltip()
 
             // Select 2
             $(".select2_demo_1").select2();

@@ -215,7 +215,7 @@
                                         <td>{{$t->orders->users->first_name}} {{$t->orders->users->last_name}}</td>
                                         <td>{{$t->orders->users->phone}}</td>
                                         <td>{{$t->original_product_lists->products->type}}</td>
-                                        <td>{{ presentPrice($t->quantity * $t->original_product_lists->price * 50) }}</td>
+                                        <td>₱ {{ number_format($t->quantity * $t->original_product_lists->price * 50, 2) }}</td>
                                         @if($t->order_product_statuses->id == 1)
                                             <td><span class="badge badge-warning">{{$t->order_product_statuses->status}}</span></td>
                                         @elseif($t->order_product_statuses->id == 2)
@@ -353,7 +353,7 @@
         <div class="col-lg-6">
             <div class="ibox">
                 <div class="ibox-head">
-                    <div class="ibox-title">Products Sold for Season {{$last_com_season->id}}</div>
+                    <div class="ibox-title">Products Sold per Season</div>
                     <div class="ibox-tools">
                         <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                     </div>

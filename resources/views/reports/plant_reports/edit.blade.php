@@ -73,8 +73,8 @@
                                     <input name="users_id[]" type="hidden" value="{{auth()->user()->id}}">
                                     {{auth()->user()->barangays->name}}
                                 </td>
-                                <td><input type="text" class="form-control" name="plant_area[]" /></td>
-                                <td><input type="text" class="form-control" name="farmers[]" /></td>
+                                <td><input type="text" class="form-control" name="plant_area[]" value="{{$season_list->planned_hectares}}"/></td>
+                                <td><input type="text" class="form-control" name="farmers[]"  value="{{$season_list->planned_num_farmers}}"/></td>
                             </tr>
                         </tbody>
                     </table>

@@ -259,7 +259,7 @@ class WebsiteController extends Controller
                     $user = User::findOrFail($id);
                     // dd($user);
                     if($order->original_product_lists->harvest_date <= Carbon::now()->subDays(7)){
-                        Notification::send($user, new AutoWitherProduct());
+                        // Notification::send($user, new AutoWitherProduct());
                     }
                 }
 
@@ -281,7 +281,7 @@ class WebsiteController extends Controller
                     $user = User::findOrFail($id);
                     // dd($user);
                     if($order->original_product_lists->harvest_date <= Carbon::now()->subDays(7)){
-                        Notification::send($user, new AutoDamageProduct());
+                        // Notification::send($user, new AutoDamageProduct());
                     }
                 }
 

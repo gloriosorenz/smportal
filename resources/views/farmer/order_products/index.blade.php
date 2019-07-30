@@ -61,12 +61,12 @@
                                         <td>{{$p->orders->users->first_name}} {{$p->orders->users->last_name}}</td>
                                         <td>{{$p->orders->users->phone}}</td>
                                         <td>{{$p->original_product_lists->products->type}}</td>
-                                        <td>{{ presentPrice($p->quantity * $p->original_product_lists->price * 50) }}</td>
+                                        <td>₱ {{ number_format($p->quantity * $p->original_product_lists->price * 50, 2) }}</td>
                                         <td>
-                                            <a href="/order_products/{{$p->id}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                            <a href="/order_products/{{$p->id}}" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="View Order"><i class="fas fa-eye"></i></a>
                                             @if (auth()->user()->active)
-                                                <a href="/order_products/confirm_order/{{$p->id}}" class="btn btn-success"><i class="fas fa-check"></i></a>
-                                                <a href="/order_products/cancel_order/{{$p->id}}" class="btn btn-danger"><i class="fas fa-times"></i></a>
+                                                <a href="/order_products/confirm_order/{{$p->id}}" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Confirm Order"><i class="fas fa-check"></i></a>
+                                                <a href="/order_products/cancel_order/{{$p->id}}" class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Cancel Order"><i class="fas fa-times"></i></a>
                                             @endif
                                         </td>
                                     </tr>
@@ -115,7 +115,7 @@
                                         <td>{{$c->orders->users->first_name}} {{$c->orders->users->last_name}}</td>
                                         <td>{{$c->orders->users->phone}}</td>
                                         <td>{{$c->original_product_lists->products->type}}</td>
-                                        <td>{{ presentPrice($c->quantity * $c->original_product_lists->price *50) }}</td>
+                                        <td>₱ {{ number_format($c->quantity * $c->original_product_lists->price * 50, 2) }}</td>
                                         <td>
                                             <!-- Form -->
                                             <form method="POST" action="{{action('OrderProductsController@store')}}" enctype="multipart/form-data">
@@ -128,10 +128,10 @@
                                                     </div>
                                                 @endif
 
-                                                <a href="/order_products/{{$c->id}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                                <a href="/order_products/{{$c->id}}" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="View Order"><i class="fas fa-eye"></i></a>
 
                                                 @if (auth()->user()->active)
-                                                    <button type="submit" class="btn btn-success">Paid</button>
+                                                    <button type="submit" class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Order Paid">Paid</button>
                                                 @endif
                                             </form>
                                             <!-- End Form -->
@@ -182,11 +182,11 @@
                                         <td>{{$c->orders->users->first_name}} {{$c->orders->users->last_name}}</td>
                                         <td>{{$c->orders->users->phone}}</td>
                                         <td>{{$c->original_product_lists->products->type}}</td>
-                                        <td>{{ presentPrice($c->quantity * $c->original_product_lists->price) }}</td>
+                                        <td>₱ {{ number_format($c->quantity * $c->original_product_lists->price * 50, 2) }}</td>
                                         <td>
-                                            <a href="/order_products/{{$c->id}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                            <a href="/order_products/{{$c->id}}" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="View Order"><i class="fas fa-eye"></i></a>
                                             @if (auth()->user()->active)
-                                                <a href="/order_products/pending_order/{{$c->id}}" class="btn btn-warning">Return to Pending</a>
+                                                <a href="/order_products/pending_order/{{$c->id}}" class="btn btn-warning" data-toggle="tooltip" data-placement="top" title="Return to Pending"><i class="fas fa-undo"></i></a>
                                             @endif
                                         </td>
                                     </tr>
@@ -236,7 +236,7 @@
                                         <td>{{$p->orders->users->first_name}} {{$p->orders->users->last_name}}</td>
                                         <td>{{$p->orders->users->phone}}</td>
                                         <td>{{$p->original_product_lists->products->type}}</td>
-                                        <td>{{ presentPrice($p->quantity * $p->original_product_lists->price) }}</td>
+                                        <td>₱ {{ number_format($p->quantity * $p->original_product_lists->price * 50, 2) }}</td>
                                         <td>
                                             @if($p->receipt == 'noimage.jpeg' || $p->receipt == null)
                                                 <div class="img-wrap">
@@ -249,7 +249,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="/order_products/{{$p->id}}" class="btn btn-info"><i class="fas fa-eye"></i></a>
+                                            <a href="/order_products/{{$p->id}}" class="btn btn-info" data-toggle="tooltip" data-placement="top" title="View Order"><i class="fas fa-eye"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -439,7 +439,7 @@
                                 <td>{{$p->orders->users->phone}}</td>
                                 <td>{{$p->original_product_lists->products->type}}</td>
                                 <td>{{$p->quantity}}</td>
-                                <td>{{ presentPrice($p->orders->total_price) }}</td>
+                                <td>₱ {{ number_format($p->orders->total_price, 2) }}</td>
                                 <td>
                                     @if ($p->order_product_statuses->id == 1)
                                         <span class="float-right badge badge-warning badge-pill">{{$p->order_product_statuses->status }}</span>

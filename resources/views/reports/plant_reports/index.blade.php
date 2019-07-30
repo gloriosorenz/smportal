@@ -66,9 +66,22 @@
                         @endforeach
                 </table>
                 <!-- End Form -->
+                <hr>
+                <!-- Legends -->
+                <p>Legend</p>
+                <p><button type="button" class="btn btn-md btn-warning" disabled><i class="fas fa-eye fa-sm text-white"></i></button> View Button</p>
+                <p><button type="button" class="btn btn-md btn-success" disabled><i class="fas fa-edit fa-sm text-white"></i></button> Edit Button</p>
+                <p><button type="button" class="btn btn-md btn-primary" disabled><i class="fas fa-download fa-sm text-white"></i></button> Download Button</p>
             </div>
         </div>
     </div>
+    {{-- <div class="col-lg-2">
+        <!-- Legends -->
+        <p>Legend</p>
+        <p><button type="button" class="btn btn-md btn-warning" disabled><i class="fas fa-eye fa-sm text-white"></i></button> View Button</p>
+        <p><button type="button" class="btn btn-md btn-success" disabled><i class="fas fa-edit fa-sm text-white"></i></button> Edit Button</p>
+        <p><button type="button" class="btn btn-md btn-primary" disabled><i class="fas fa-download fa-sm text-white"></i></button> Download Button</p>
+    </div> --}}
 </div>
 
     

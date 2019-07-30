@@ -69,7 +69,6 @@
     </div>
     @endif --}}
 
-
     <div class="row">
         <!-- Seasons -->
         <div class="offset-md-2 col-md-8 offset-md-2">
@@ -79,9 +78,11 @@
                     <!-- Add Season Button -->
                     @if ($active == 0)
                         @if (auth()->user()->active)
-                            <div>
-                                <a class="btn btn-success btn-sm" href="{{ route('season_lists.create') }}">Plan Season</a>
-                            </div>
+                            @if ($latest_season->season_start > Carbon\Carbon::now()->subDays(14))
+                                <div>
+                                    <a class="btn btn-success btn-sm" href="{{ route('season_lists.create') }}">Plan Season</a>
+                                </div>
+                            @endif
                         @endif
                     @endif
                 </div>
@@ -110,33 +111,29 @@
                                         {{-- @if ($list->season_list_statuses_id == 1)
                                             <a href="/season_lists/{{$list->id}}/edit" class="btn btn-md btn-success"><i class="fas fa-check fa-sm text-white"></i></a>
                                         @else --}}
-                                            <a href="/season_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
+                                            <a href="/season_lists/{{$list->id}}/edit" class="btn btn-md btn-warning" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-edit fa-sm text-white"></i></a>
                                         {{-- @endif --}}
                                     @endif
-                                    <a href="/season_lists/{{$list->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
+                                    <a href="/season_lists/{{$list->id}}" class="btn btn-md btn-info" data-toggle="tooltip" data-placement="top" title="View"><i class="fas fa-eye fa-sm text-white"></i></a>
                                 </td>
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <hr>
+                    <!-- Legends -->
+                    <p>Legend</p>
+                    <p><button type="button" class="btn btn-md btn-warning" disabled><i class="fas fa-edit fa-sm text-white"></i></button> Edit Button</p>
+                    <p><button type="button" class="btn btn-md btn-info" disabled><i class="fas fa-eye fa-sm text-white"></i></button> View Button</p>
                 </div>
             </div>
         </div>
         <!-- END COLUMN-->
-
-        <!-- Projected Sales -->
-        {{-- <div class="col-lg-3 col-md-6">
-            <div class="ibox bg-info color-white widget-stat">
-                <div class="ibox-body">
-                    <h2 class="m-b-5 font-strong">P5,000.00</h2>
-                    <div class="m-b-5">Projected Sales</div><i class="fas fa-money-bill widget-stat-icon"></i>
-                    <div><i class="fa fa-level-up m-r-5"></i><small>25% higher</small></div>
-                </div>
-            </div>
-        </div> --}}
-        <!-- END COLUMN-->
     </div>
     <!-- END ROW-->
+
+    
+
 
 
     <!-- -------------------------------------------------------------------------------------------------------------------------------------------- -->

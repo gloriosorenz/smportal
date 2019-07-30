@@ -6,10 +6,9 @@
     {{-- <div class="container"> --}}
     <div class="container-fluid w-00 h-100 p-t-150 p-r-250 p-l-250 p-b-150 bg0">
         <div class="thank-you-section">
-                <h1 class="text-left">Our Privacy Policy</h1>
-
                 <div class="row">
                     <div class="offset-lg-2 col-lg-7 offset-lg-2">
+                        <h1 class="text-left">Our Privacy Policy</h1>
                         <br>               
                         <br>
                         <br>

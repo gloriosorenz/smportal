@@ -53,8 +53,8 @@
                                     <tr>
                                         {{-- <th width="10%">Image</th> --}}
                                         <th width="20%">Product</th>
-                                        <th>Quantity</th>
-                                        <th>Price</th>
+                                        <th>Quantity per Kaban</th>
+                                        <th>Price per Kilo</th>
                                         <th>Harvest Date</th>
                                     </tr>
                                 </thead>
@@ -170,8 +170,21 @@
                                     
                                 </tbody>
                             </table>
-                            <!-- Submit Button -->
-                            <button type="submit" class="btn btn-success">Create</button>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <!-- Submit Button -->
+                                    <button type="submit" class="btn btn-success">Create</button>
+                                </div>
+                                <div class="col-md-6">
+                                    {{-- <div class="float-right"> --}}
+                                        <!-- Suggested Prices -->
+                                        <p class="font-bold">Suggested Price</p>
+                                        <p>Rice Product: <b>₱ {{number_format($suggested_rice, 2)}}</b></p>
+                                        <p>Withered Product: <b>₱ {{number_format($suggested_withered, 2)}}</b></p>
+                                    {{-- </div> --}}
+                                </div>
+                            </div>
+                            
                             <!-- End Form -->
                         </div>
                     </div>

@@ -54,8 +54,10 @@ class OriginalProductList extends Model
                     ->where('products.id', '=', 1)
                     ->groupBy(DB::raw('year(harvest_date)'))
                     // ->orderBy('year','desc')
+                    // ->orderBy('year', 'desc')
                     ->limit(3)
                     ->pluck('price')
+                    // ->first()
                     ;
         }
 
@@ -87,6 +89,39 @@ class OriginalProductList extends Model
                     ->join('products', 'original_product_lists.products_id', '=', 'products.id')
                     ->where('products.id', '=', 2)
                     ->avg('price');
+        }
+
+
+
+        // Get Yearly Rice Product Average Price of a farmer
+        public static function getSuggestedRicePrice(){
+            return DB::table('original_product_lists AS pl')->join('users', 'pl.users_id', '=', 'users.id')
+                    ->join('products', 'pl.products_id', '=', 'products.id')
+                    ->selectraw('AVG(price) as price, YEAR(harvest_date) year')
+                    ->where('users_id', '=', auth()->user()->id)
+                    ->where('products.id', '=', 1)
+                    ->groupBy(DB::raw('year(harvest_date)'))
+                    // ->orderBy('year','desc')
+                    ->orderBy('year', 'desc')
+                    ->pluck('price')
+                    ->first()
+                    ;
+        }
+
+
+        // Get Yearly Withered Product Average Price of a farmer
+        public static function getSuggestedWitheredPrice(){
+            return DB::table('original_product_lists')->join('users', 'original_product_lists.users_id', '=', 'users.id')
+                    ->join('products', 'original_product_lists.products_id', '=', 'products.id')
+                    ->selectraw('AVG(price) as price, YEAR(harvest_date) year')
+                    ->where('users_id', '=', auth()->user()->id)
+                    ->where('products.id', '=', 2)
+                    ->groupBy(DB::raw('year(harvest_date)'))
+                    // ->orderBy('year','desc')
+                    ->orderBy('year', 'desc')
+                    ->pluck('price')    
+                    ->first()
+                    ;
         }
 
 

@@ -19,18 +19,31 @@
     <!-- Farmer Functionality  -->
     @if(auth()->user()->roles_id == 2)
     <div class="row">
+         <!-- Weather -->
+         <div class="col-md-3">
+            <div class="ibox">
+                <div class="ibox-head">
+                    <div class="ibox-title">Weather</div>
+                    <div class="ibox-tools">
+                        <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                    </div>
+                </div>
+                <div class="ibox-body">
+                    <!-- Start Form -->
+                    
+                    <!-- End Form -->
+                </div>
+            </div>
+        </div>
+
+        
         <!-- Input farmer's hectares and no. of farmers -->
-        <div class="offset-md-3 col-md-6 offset-md-3">
+        <div class="col-md-6">
             <div class="ibox">
                 <div class="ibox-head">
                     <div class="ibox-title">Plan</div>
                     <div class="ibox-tools">
                         <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
-                        <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <a class="dropdown-item">option 1</a>
-                            <a class="dropdown-item">option 2</a>
-                        </div>
                     </div>
                 </div>
                 <div class="ibox-body">

@@ -61,6 +61,7 @@
                                             <th class="text-center" width="">Harvest Date</th>
                                             <th class="text-center" width="">Available Kabans</th>
                                             <th class="text-center" width="">Price per kilo</th>
+                                            <th class="text-center" width="">Quantity</th>
                                             @guest
                                                 @elseif (auth()->user()->roles_id == 3 && auth()->user()->active || auth()->user()->roles_id == 4 && auth()->user()->active )
                                                 <th class="text-center" width="15%">Options</th>
@@ -90,6 +91,9 @@
                                             <td>{{ $curr_product_list->quantity }} kbn/s</td>
                                             <td>
                                                 <div class="font-weight-bold">{{ presentPrice($curr_product_list->price) }} </div>
+                                            </td>
+                                            <td>
+                                               
                                             </td>
                                             @guest
                                             

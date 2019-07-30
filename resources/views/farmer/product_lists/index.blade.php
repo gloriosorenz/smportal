@@ -59,7 +59,7 @@
                                     <td>{{ \Carbon\Carbon::parse($list->harvest_date)->format('F j, Y') }}</td>
                                     @if (auth()->user()->active)
                                     <td>
-                                        <a href="/product_lists/{{$list->id}}/edit" class="btn btn-md btn-warning"><i class="fas fa-edit fa-sm text-white"></i></a>
+                                        <a href="/product_lists/{{$list->id}}/edit" class="btn btn-md btn-warning" data-toggle="tooltip" data-placement="top" title="Edit Product"><i class="fas fa-edit fa-sm text-white"></i></a>
                                         {{-- <a href="/product_lists/{{$list->id}}" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a> --}}
                                         {{-- <a href="#" class="btn btn-md btn-secondary"> <i class="fas fa-download fa-sm text-white"></i></a> --}}
                                     </td>

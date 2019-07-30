@@ -154,7 +154,7 @@
 
                 <div class="row m-b-50">
                     <!-- WEATHER UPDATES -->
-                    <div class="offset-lg-2 col-lg-12 offset-lg-2">
+                    <div class="col-lg-12">
                         {{-- <div class="card">
                             <div class="card-header">
                                 <div class="card-title">Daily Weather Updates</div>

@@ -35,7 +35,7 @@ class RequestSeason extends Notification
     {
         return [
             'database', 
-            'mail'
+            // 'mail'
         ];
     }
 

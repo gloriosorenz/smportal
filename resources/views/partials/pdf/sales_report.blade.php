@@ -30,12 +30,12 @@
         <div class="row">
             <div class="offset-2 col-lg-4">
                 <h4>
-                <div class="text-left">Season Start: {{$season->season_start}}</div>
+                <div><b>Season Start:</b>  {{Carbon\Carbon::parse($season->season_start)->format('F j, Y')}}</div>
+                <div><b>Season End:</b> {{Carbon\Carbon::parse($season->season_end)->format('F j, Y')}}</div>
                 </h4>
             </div>
             <div class="col-lg-4">
                 <h4>
-                        <div class="text-right">Season End: {{$season->season_end}}</div>
                 </h4>
             </div>
         </div>

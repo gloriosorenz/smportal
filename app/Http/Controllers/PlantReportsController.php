@@ -62,8 +62,10 @@ class PlantReportsController extends Controller
         $users = User::where('roles_id', '=', 2)->get()->pluck('company', 'id');
 
         
+        
         return view('reports.plant_reports.create')
-            ->with('users', $users);
+            ->with('users', $users)
+            ->with('season_list', $season_list);
     }
 
     /**
@@ -185,10 +187,20 @@ class PlantReportsController extends Controller
 
         // dd($pdata);
 
+
+        $latest_season = Season::getLatestSeason();
+
+        $season_list = SeasonList::where('seasons_id', $latest_season->id)
+            ->where('users_id', auth()->user()->id)
+            ->first()
+            ;
+        // dd($season_list);
+
         return view('reports.plant_reports.edit')
             ->with('preport', $preport)
             ->with('pdata', $pdata)
             ->with('users', $users)
+            ->with('season_list', $season_list)
             ;
     }
 

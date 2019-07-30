@@ -7,21 +7,18 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-use Carbon;
-
-class OrderPaid extends Notification
+class HarvestCrop extends Notification
 {
     use Queueable;
 
-    protected $order;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($order)
+    public function __construct()
     {
-        $this->order = $order;
+        //
     }
 
     /**
@@ -32,10 +29,7 @@ class OrderPaid extends Notification
      */
     public function via($notifiable)
     {
-        return [
-            'database',
-            // 'mail'
-        ];
+        return ['mail'];
     }
 
     /**
@@ -47,25 +41,9 @@ class OrderPaid extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                ->subject('Order Paid') // it will use this class name if you don't specify
-                ->markdown('partials.mail.order_paid', [
-                                                        // 'days' => $this->days,
-                                                        'order' => $this->order,
-                                                        ]);
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toDatabase($notifiable)
-    {
-        return [
-            'timeCreated'=> Carbon\Carbon::now()->diffForHumans(),
-            'user'=>auth()->user()
-        ];
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**

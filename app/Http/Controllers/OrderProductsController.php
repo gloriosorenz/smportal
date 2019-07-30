@@ -162,9 +162,20 @@ class OrderProductsController extends Controller
         $orderproduct->current_product_lists->update(['quantity' => $orderproduct->current_product_lists->quantity + $orderproduct->quantity]);                
     
 
-        // Notification
-        $customer = $orderproduct->orders->users;
-        Notification::send($customer, new OrderCancelled($orderproduct));
+        // If user is a farmer
+        if(auth()->user()->roles->id == 2){
+            // Notification
+            $customer = $orderproduct->orders->users;
+            Notification::send($customer, new OrderCancelled($orderproduct));
+        }
+
+        // If user is a customer
+        elseif (auth()->user()->roles->id == 3 ||  auth()->user()->roles->id == 4) {
+             // Notification
+             $farmer = $orderproduct->users;
+             Notification::send($farmer, new OrderCancelled($orderproduct));
+        }
+        
 
         return redirect()->back()->with('success', 'Order Cancelled');
     }

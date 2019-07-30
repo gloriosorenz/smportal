@@ -87,9 +87,15 @@
 
                         @endif
                     </tbody>
-        
                 </table>
                 <!-- End Form -->
+                <hr>
+                <!-- Legends -->
+                <p>Legend</p>
+                @if (auth()->user()->roles->id == 2)
+                    <p><button type="button" class="btn btn-md btn-warning" disabled><i class="fas fa-eye fa-sm text-white"></i></button> View Button</p>
+                    <p><button type="button" class="btn btn-md btn-secondary" disabled><i class="fas fa-download fa-sm text-white"></i></button> Download Button</p>
+                @endif
             </div>
         </div>
     </div>

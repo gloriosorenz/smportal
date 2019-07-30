@@ -188,6 +188,13 @@ class ProductListsController extends Controller
         $all_withered_prod_ave = OriginalProductList::getAllWitheredProductAverage();
 
 
+        // Suggested Prices
+        $suggested_rice = OriginalProductList::getSuggestedRicePrice();
+        $suggested_withered = OriginalProductList::getSuggestedWitheredPrice();
+
+        // dd($suggested_rice);
+
+
         // ------------------------------------------------------------------------------------------------------------------------
 
         // Farmer Yearly Rice Product Average Chart
@@ -218,7 +225,6 @@ class ProductListsController extends Controller
                 ->dataset('Withered Products',$withered_prod_ave)
                 ->dimensions(500,300)
                 ->responsive(true);
-
 
 
         // ------------------------------------------------------------------------------------------------------------------------
@@ -324,6 +330,8 @@ class ProductListsController extends Controller
             ->with('price_history', $price_history)
             ->with('rice_production_line', $rice_production_line)
             ->with('season_list',$season_list)
+            ->with('suggested_rice',$suggested_rice)
+            ->with('suggested_withered', $suggested_withered)
             ;
     }
 
