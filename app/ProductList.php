@@ -43,10 +43,10 @@ class ProductList extends Model
     }
 
     // Present Price
-    public function presentPrice()
-    {
-        return '₱'.number_format($this->price / 100 * 100, 2);
-    }
+    // public function presentPrice()
+    // {
+    //     return '₱'.number_format($this->price / 100 * 100, 2);
+    // }
 
 
     // Get Yearly Rice Product Average Price of a farmer

@@ -11,7 +11,9 @@ use App\Notifications\SeasonListCreated;
 use App\Notifications\SeasonEnded;
 
 use DB;
+use DarkSkyApi;
 use Carbon\Carbon;
+use Gmopx\LaravelOWM\LaravelOWM;
 
 use Illuminate\Http\Request;
 
@@ -75,9 +77,40 @@ class SeasonListsController extends Controller
                     ->get();
         $users = User::getAllFarmers();
 
+
+        $current = DarkSkyApi::location(14.2843, 121.0889)
+            ->units('ca')
+            ->forecast(['currently', 'daily'])
+            ;
+
+        // $week = DarkSkyApi::location(14.2843, 121.0889)
+        //     ->units('ca')
+        //     ->forecast(['daily', 'flags'])
+        //     ;
+            // dd($current);
+
+        $timemachine = DarkSkyApi::location(14.2843, 121.0889)
+            ->units('ca')
+            ->timeMachine(Carbon::now()->addDays(4)->format('Y-m-d'), ['currently', 'flags']);
+            ;
+        // dd($forecast);
+
+
+        $daily = $current->daily()->data();
+        $week = $current->daily();
+
+        // dd($daily);
+        $current = $current->currently();
+        $three_days = $timemachine->currently();
+
+
         return view('farmer.season_lists.create')
             ->with('season_lists', $season_lists)
             ->with('users', $users)
+            ->with('three_days', $three_days)
+            ->with('current', $current)
+            ->with('daily', $daily)
+            ->with('week', $week)
             ;
     }
     
