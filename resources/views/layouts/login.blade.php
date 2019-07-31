@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 
 
@@ -41,7 +41,7 @@
 
 
 </head>
-<body class="text-center">
+<body>
     {{-- <div class="container">
         <div class="content"> --}}
             {{-- @include('partials.messages') --}}
@@ -52,17 +52,17 @@
 
     <!-- -------------------------------------------------------------------------------------------------------------------------------- -->
     <!-- CORE PLUGINS-->
-    {{-- <script type="text/javascript" src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script> --}}
-    {{-- <script type="text/javascript" src="{{ asset('vendors/popper.js/dist/umd/popper.min.js') }}"></script> --}}
-    {{-- <script type="text/javascript" src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script> --}}
-    {{-- <script type="text/javascript" src="{{ asset('vendors/metisMenu/dist/metisMenu.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendors/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script> --}}
+    <script type="text/javascript" src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendors/popper.js/dist/umd/popper.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendors/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendors/metisMenu/dist/metisMenu.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('vendors/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 
     <!-- PAGE LEVEL PLUGINS-->
     {{-- <script type="text/javascript" src="{{ asset('vendors/jquery-validation/dist/jquery.validate.min.js') }}"></script> --}}
 
     <!-- CORE SCRIPTS-->
-    {{-- <script src="{{ asset('js/app.min.js') }}" defer></script> --}}
+    <script src="{{ asset('js/app.min.js') }}" defer></script>
 
 
      <!-- PAGE LEVEL SCRIPTS-->

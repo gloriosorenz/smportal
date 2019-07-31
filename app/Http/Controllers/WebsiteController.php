@@ -500,6 +500,25 @@ class WebsiteController extends Controller
         
     }
 
+    public function signup(){
+
+         // For customers
+        // $barangays = Barangay::orderBy('name')->get();
+        $provinces = Province::orderBy('name')->get();
+        $cities = City::orderBy('name')->get();
+        $roles = Role::where('id','>',2)->get();
+
+
+        return view('website.signup')
+            // ->with('barangays', $barangays)
+            ->with('provinces', $provinces)
+            ->with('cities', $cities)
+            ->with('roles', $roles)
+            ;    
+
+
+    }
+
     public function privacy(){
         
         return view('website.privacy');

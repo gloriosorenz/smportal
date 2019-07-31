@@ -190,7 +190,7 @@ class PlantReportsController extends Controller
 
         $latest_season = Season::getLatestSeason();
 
-        $season_list = SeasonList::where('seasons_id', $latest_season->id)
+        $season_list = SeasonList::where('seasons_id', $preport->seasons->id)
             ->where('users_id', auth()->user()->id)
             ->first()
             ;

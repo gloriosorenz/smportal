@@ -101,7 +101,6 @@
                                                 @guest
                                                     @elseif (auth()->user()->roles_id == 3 && auth()->user()->active || auth()->user()->roles_id == 4 && auth()->user()->active)
                                                     <td>
-                                                        
                                                             <input type="hidden" name="id" value="{{ $curr_product_list->id }}">
                                                             <input type="hidden" name="price" value="{{ $curr_product_list->price }}">
                                                             {{-- <input type="hidden" name="quantity" value="22"> --}}
