@@ -24,7 +24,7 @@ use Carbon\Carbon;
 use Notification;
 use App\Notifications\RequestSeason;
 use App\Notifications\PlantReportCreated;
-use App\Notifications\JoinSeason;
+// use App\Notifications\JoinSeason;
 
 class DashboardController extends Controller
 {
@@ -37,20 +37,20 @@ class DashboardController extends Controller
 
         // Get Latest Season
         $latest_season = Season::getLatestSeason();
-        $ongoing_season = Season::getOngoingSeason();
+        // $ongoing_season = Season::getOngoingSeason();
         // dd($ongoing_season);
 
         // ------------------------------------------------------------------------------------------------------------------------
         // Notify Farmer to join the season
         // ------------------------------------------------------------------------------------------------------------------------
-        if($ongoing_season != null){
-            if ($ongoing_season->season_start > Carbon::now()->subDays(14)) {
-                // Send notification
-                $farmers = User::Where('roles_id', 2)
-                    ->get();
-                Notification::send($farmers, new JoinSeason());
-            }
-        }
+        // if($ongoing_season != null){
+        //     if ($ongoing_season->season_start > Carbon::now()->subDays(14)) {
+        //         // Send notification
+        //         $farmers = User::Where('roles_id', 2)
+        //             ->get();
+        //         Notification::send($farmers, new JoinSeason());
+        //     }
+        // }
         
        
         // ------------------------------------------------------------------------------------------------------------------------

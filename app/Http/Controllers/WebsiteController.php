@@ -27,6 +27,7 @@ use Gmopx\LaravelOWM\LaravelOWM;
 use Notification;
 use App\Notifications\AutoWitherProduct;
 use App\Notifications\AutoDamageProduct;
+use App\Notifications\JoinSeason;
 
 class WebsiteController extends Controller
 {
@@ -46,6 +47,23 @@ class WebsiteController extends Controller
             ->count();
 
         // dd(Carbon::now());
+
+        $ongoing_season = Season::getOngoingSeason();
+
+
+        // ------------------------------------------------------------------------------------------------------------------------
+        // Notify Farmer to join the season
+        // ------------------------------------------------------------------------------------------------------------------------
+        if($ongoing_season != null){
+            if ($ongoing_season->season_start > Carbon::now()->subDays(14)) {
+                // Send notification
+                $farmers = User::Where('roles_id', 2)
+                    ->get();
+                Notification::send($farmers, new JoinSeason());
+            }
+        }
+
+        // ------------------------------------------------------------------------------------------------------------------------
 
         // AUTOMATED WITHERING PRODUCTS
             // Get all good from current

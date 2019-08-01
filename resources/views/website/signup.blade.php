@@ -15,24 +15,24 @@
                         <!-- First Name -->
                         <div class="col-sm-6 form-group">
                             <label>First Name</label>
-                            <input class="form-control" type="text" placeholder="First Name" name="first_name">
+                            <input class="form-control" type="text" placeholder="First Name" name="first_name" required/>
                         </div>
                         <!-- Last Name -->
                         <div class="col-sm-6 form-group">
                             <label>Last Name</label>
-                            <input class="form-control" type="text" placeholder="Last Name" name="last_name">
+                            <input class="form-control" type="text" placeholder="Last Name" name="last_name" required/>
                         </div>
                     </div>
                     <div class="row">
                         <!-- Phone -->
                         <div class="col-sm-6 form-group">
                             <label>Phone</label>
-                            <input class="form-control" type="text" placeholder="Phone" name="phone">
+                            <input class="form-control" type="text" placeholder="Phone" name="phone" required/>
                         </div>
                         <!-- Email -->
                         <div class="col-sm-6 form-group">
                             <label>Email</label>
-                            <input class="form-control" type="text" placeholder="Email" name="email">
+                            <input class="form-control" type="text" placeholder="Email" name="email" required/>
                         </div>
                     </div>
 
@@ -45,7 +45,7 @@
                     <!-- Street -->
                     <div class="form-group">
                         <label>Street</label>
-                        <input class="form-control" type="text" placeholder="Street" name="street">
+                        <input class="form-control" type="text" placeholder="Street" name="street" required/>
                     </div>
 
                     <div class="row">
@@ -53,7 +53,7 @@
                         <div class="col-sm-4 form-group">
                             <div class="form-group">
                                 <label class="form-control-label">Province</label>
-                                <select class="form-control" name="province" id="province">
+                                <select class="form-control" name="province" id="province" required>
                                     <option value="0" selected="true" disabled="True">Select Province</option>
                                     @foreach ($provinces as $province)
                                         <option value="{{ $province['id']}}">{{ $province['name']}}</option>
@@ -66,7 +66,7 @@
                         <div class="col-sm-4 form-group">
                             <div class="form-group">
                                 <label class="form-control-label">City</label>
-                                <select class="form-control" name="city" id="city">
+                                <select class="form-control" name="city" id="city" required>
                                     <option value="0" selected="true" disabled="True">Select Province</option>
                                     @foreach ($cities as $city)
                                         <option value="{{ $city['id']}}">{{ $city['name']}}</option>
@@ -82,7 +82,7 @@
                         <!-- Company -->
                         <div class="col-sm-6 form-group">
                             <label>Company</label>
-                            <input class="form-control" type="text" placeholder="Company" name="company">
+                            <input class="form-control" type="text" placeholder="Company" name="company" required/>
                         </div>
                     </div>
 

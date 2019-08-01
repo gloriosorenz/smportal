@@ -166,12 +166,11 @@
                                 <br>
                                 <br>
                                 <div class="text-center">
-                                <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                    <label class="custom-control-label" for="customCheck1">I agree to the <u>terms and conditions</u></label>
-                                </div>
-                                <br>
-                                <a href="{{route('signup')}}" class="btn btn-success">Agree</a>
+                                    <input type="checkbox" id="toggle" checked />
+                                    <span>I agree to the <u>terms and conditions</u></span>
+
+                                    <br>
+                                    <a href="{{route('signup')}}"><input type="submit" class="btn btn-success" id="sendNewSms" value=" Agree " /></a>
                                 </div>
                             </div>
                         </div>
@@ -179,12 +178,24 @@
                 </div>
 
 
-
-            
-
         </div>
     </div>
 
+    <script type="text/javascript" src="{{ asset('vendors/jquery/dist/jquery.min.js') }}"></script>
+    <script>
+        $(function(){
+
+            $('#toggle').click(function () {
+                //check if checkbox is checked
+                if ($(this).is(':checked')) {
+                    $('#sendNewSms').removeAttr('disabled'); //enable input
+                    
+                } else {
+                    $('#sendNewSms').attr('disabled', true); //disable input
+                }
+            });
+        });
+    </script>
 
 
 

@@ -69,12 +69,12 @@
 </section> --}}
 
 <!-- Banner -->
-<div class="sec-banner bg2 w-100 h-100 p-t-200 p-r-250 p-l-250 p-b-150">
+<div class="sec-banner bg2 w-100 h-100 p-t-100 p-r-250 p-l-250 p-b-150">
     <div class="container">
         {{-- <div class="row p-b-50">
                 <script type='text/javascript' src='https://darksky.net/widget/default/14.3144,121.1121/us12/en.js?width=100%&height=350&title=Santa Rosa, Laguna&textColor=333333&bgColor=transparent&transparency=true&skyColor=undefined&fontFamily=Verdana&customFont=&units=us&htColor=333333&ltColor=C7C7C7&displaySum=yes&displayHeader=yes'></script>
         </div> --}}
-        <h3 class="text-center text-grey ltext-103 cl5 p-b-150">
+        <h3 class="text-center text-grey ltext-103 cl5 p-b-50">
             Product Overview
         </h3>
 
@@ -97,7 +97,7 @@
                             </span>
 
                             <span class="block1-info stext-102 trans-04 text-white">
-                                The good rice product is the main product output by the farmers it is planted and harvested in a span of 90-120 days, ready to be milled and stored for potential buyers.
+                                <font size="4">The good rice product is the main product output by the farmers it is planted and harvested in a span of 90-120 days, ready to be milled and stored for potential buyers.</font>
                             </span>
                         </div>
 
@@ -108,9 +108,6 @@
                         </div>
                     </a>
 
-                    
-
-                    
                 </div>
             </div>
 
@@ -126,7 +123,7 @@
                             </span>
 
                             <span class="block1-info stext-102 trans-04 text-white">
-                                Withered Rice is the result of Rice Product being exposed to the open after harvesting for a week, the rice will be dry and already shriveled up usually used as food for farm animals.
+                                <font size="4">Withered Rice is the result of Rice Product being exposed to the open after harvesting for a week, the rice will be dry and already shriveled up usually used as food for farm animals.</font>
                             </span>
                         </div>
 
@@ -136,29 +133,33 @@
                             </div>
                         </div>
                     </a>
-                    
                 </div>
             </div>
-
-            <div class="m-b-5"><strong>Order Pick-Up</strong></div>
-            <div>Orders are only for <u>pick-up</u>. Pick-up shall be done from the respective farm locations of the products.</div>
-            <ul class="list-unstyled m-t-10">
-                <div class="m-b-5"><strong>Order Cancellation</strong></div>
-                <div>Orders will automatically be cancelled by the system if the farmer has not confirmed it by <u>3 DAYS</u>.</div>
-                <div>The customer may only manually cancel the order for up to <u>2 DAYS</u> after the order has been made. </u>
-                <div>When confirmed by the farmer the customer will recieve a notification and the products are considered sold and awaiting payment and pick-up.</div>
-
-                <br>
-                <div class="m-b-5"><strong>Mode of Payment</strong></div>
-                <div>The farm organizations will only accept cash, this is to be done during pick-up.</div>
-
-                <br>
-                <div class="m-b-5"><strong>Product Quality</strong></div>
-                <div>It is recommended that the products are to be picked up as soon as the customer can as the product quality may change due to time effects.</div>
-                <div>The Product Quality Assurance Time Span (PQATS) will be sent to the customer, this will show how long the product will retain its quality before spoilage.</div>
-
-            </ul>
         </div>
+        <div class="row">
+            <div class="col-md-10">
+                    <ul class="list-unstyled m-t-10">
+                        <div class="m-b-5"><strong>Order Pick-Up</strong></div>
+                        <div>Orders are only for <u>pick-up</u>. Pick-up shall be done from the respective farm locations of the products.</div>
+        
+                        <br>
+                        <div class="m-b-5"><strong>Order Cancellation</strong></div>
+                        <div>Orders will automatically be cancelled by the system if the farmer has not confirmed it by <u>3 DAYS</u>.</div>
+                        <div>The customer may only manually cancel the order for up to <u>2 DAYS</u> after the order has been made. </u>
+                        <div>When confirmed by the farmer the customer will recieve a notification and the products are considered sold and awaiting payment and pick-up.</div>
+        
+                        <br>
+                        <div class="m-b-5"><strong>Mode of Payment</strong></div>
+                        <div>The farm organizations will only accept cash, this is to be done during pick-up.</div>
+        
+                        <br>
+                        <div class="m-b-5"><strong>Product Quality</strong></div>
+                        <div>It is recommended that the products are to be picked up as soon as the customer can as the product quality may change due to time effects.</div>
+                        <div>The Product Quality Assurance Time Span (PQATS) will be sent to the customer, this will show how long the product will retain its quality before spoilage.</div>
+                    </ul>
+            </div>
+        </div>
+            
     </div>
 </div>
 

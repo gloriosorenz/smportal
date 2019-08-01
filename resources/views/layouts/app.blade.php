@@ -87,6 +87,23 @@
 
     <script>
         $(function(){
+            // $('#customCheck1').click(function () {
+            //     //check if checkbox is checked
+            //     if ($(this).is(':checked')) {
+            //         alert('123');
+            //         $('#sendbtn').removeAttr('disabled'); //enable input
+
+            //     } else {
+            //         $('#sendbtn').attr('disabled', true); //disable input
+            //     }
+            // });
+
+
+        });
+    </script>
+
+    <script>
+        $(function(){
             $("#price, #quantity").on("keydown keyup", revenue);
             function revenue(){
                 $("#revenue").val(Number($("#price").val()) * Number($("#quantity").val()) * 50);
