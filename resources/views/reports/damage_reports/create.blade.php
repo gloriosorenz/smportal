@@ -128,7 +128,7 @@
                     <!-- Area of standing crop-->
                     <div class="col-sm-4 form-group">
                         <label>Area of standing crop:</label>
-                        <input class="form-control" type="number" placeholder="Enter number" name="standing_crop_area" step="1" min="1">
+                        <input class="form-control" type="number" placeholder="Enter number" name="standing_crop_area" step="0.1" min="1">
                     </div>
 
                     <!-- Stage of crop development-->
@@ -177,19 +177,19 @@
                     <!-- Total area -->
                     <div class="col-sm-4 form-group">
                         <label>Total area:</label>
-                        <input class="form-control" type="number" placeholder="Enter number" name="total_area" step="1" min="1">
+                        <input class="form-control" type="number" placeholder="Enter number" name="total_area" step="0.1" min="1">
                     </div>
 
                     <!-- Totally damaged area -->
                     <div class="col-sm-4 form-group">
                         <label>Totally damaged:</label>
-                        <input class="form-control" type="number" placeholder="Enter number" name="totally_damaged_area" step="1" min="1">
+                        <input class="form-control" type="number" placeholder="Enter number" name="totally_damaged_area" step="0.1" min="1">
                     </div>
 
                     <!-- Partially damaged area -->
                     <div class="col-sm-4 form-group">
                         <label>Partially damaged:</label>
-                        <input class="form-control" type="number" placeholder="Enter number" name="partially_damaged_area" step="1" min="1">
+                        <input class="form-control" type="number" placeholder="Enter number" name="partially_damaged_area" step="0.1" min="1">
                     </div>
                 </div>
                 

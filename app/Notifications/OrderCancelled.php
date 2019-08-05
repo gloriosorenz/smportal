@@ -35,7 +35,7 @@ class OrderCancelled extends Notification
     {
         return [
             'database',
-            // 'mail'
+            'mail'
         ];
     }
 

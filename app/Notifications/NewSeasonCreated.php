@@ -35,7 +35,7 @@ class NewSeasonCreated extends Notification
     {
         return [
             'database', 
-            // 'mail'
+            'mail'
         ];
     }
 

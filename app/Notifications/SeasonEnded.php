@@ -35,7 +35,7 @@ class SeasonEnded extends Notification
     {
         return [
             'database',
-            // 'mail'
+            'mail'
         ];
     }
 

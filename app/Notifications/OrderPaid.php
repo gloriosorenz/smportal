@@ -34,7 +34,7 @@ class OrderPaid extends Notification
     {
         return [
             'database',
-            // 'mail'
+            'mail'
         ];
     }
 

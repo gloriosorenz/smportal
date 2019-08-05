@@ -36,7 +36,7 @@ class OrderConfirmed extends Notification
     {
         return [
             'database',
-            // 'mail'
+            'mail'
         ];
     }
 

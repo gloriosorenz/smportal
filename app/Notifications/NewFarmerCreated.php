@@ -35,7 +35,7 @@ class NewFarmerCreated extends Notification
     {
         return [
             'database',
-            // 'mail',
+            'mail',
         ];
     }
 

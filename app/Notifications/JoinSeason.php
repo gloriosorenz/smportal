@@ -32,7 +32,7 @@ class JoinSeason extends Notification
     public function via($notifiable)
     {
         return [
-            // 'mail',
+            'mail',
             'database'
         ];
     }

@@ -58,11 +58,11 @@
                                     @endif                                
                                 </td>
                                 <td>
-                                    <a href="/damage_reports/{{$dr->id}}"><button class="btn btn-warning btn-md btn-fill" id="btn_view" name="btn_view"><i class="fas fa-eye"></i></button></a>
+                                    <a href="/damage_reports/{{$dr->id}}"><button class="btn btn-info btn-md btn-fill" id="btn_view" name="btn_view"><i class="fas fa-eye"></i></button></a>
                                     @if (auth()->user()->active)
-                                    <a href="/damage_reports/{{$dr->id}}/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    <a href="/damage_reports/{{$dr->id}}/edit" class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                     @endif
-                                    <a href="/pdf/damage_report/{{$dr->id}}" class="btn btn-primary"><i class="fas fa-download fa-sm text-white"></i></a>
+                                    <a href="/pdf/damage_report/{{$dr->id}}" class="btn btn-secondary"><i class="fas fa-download fa-sm text-white"></i></a>
                                     {{-- @if ($dr->report_statuses->id == 1)
                                         <a href="/damage_reports/report_final/{{$dr->id}}" class="btn btn-success"><i class="fas fa-check"></i></a>
                                     @endif --}}
@@ -72,6 +72,7 @@
                         @else
                             <p>No reports found</p>
                         @endif
+                        </tbody>
 
                     <!-- If user is farmer -->
                     @elseif(auth()->user()->roles->id == 2)
@@ -99,19 +100,28 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="/damage_reports/{{$dr->id}}"><button class="btn btn-warning btn-md btn-fill" id="btn_view" name="btn_view"><i class="fas fa-eye"></i></button></a>
+                                    <a href="/damage_reports/{{$dr->id}}"><button class="btn btn-info btn-md btn-fill" id="btn_view" name="btn_view"><i class="fas fa-eye"></i></button></a>
                                     {{-- @if (auth()->user()->active)
                                         <a href="/damage_reports/{{$dr->id}}/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
                                     @endif --}}
                                     {{-- <a href="/pdf/damage_report/{{$dr->id}}" class="btn btn-primary"><i class="fas fa-download fa-sm text-white"></i></a> --}}
                                 </td>
                             </tr>
+                        
                             @endforeach
                         @else
                             <p>No reports found</p>
                         @endif
+                        </tbody>
                     @endif
                 </table>
+                <!-- Legends -->
+                <p>Legend</p>
+                <p><button type="button" class="btn btn-md btn-info" disabled><i class="fas fa-eye fa-sm text-white"></i></button> View Button</p>
+                @if(auth()->user()->roles->id == 1)
+                <p><button type="button" class="btn btn-md btn-warning" disabled><i class="fas fa-edit fa-sm text-white"></i></button> Edit Button</p>
+                <p><button type="button" class="btn btn-md btn-secondary" disabled><i class="fas fa-download fa-sm text-white"></i></button> Download Button</p>
+                @endif
                 <!-- End Form -->
             </div>
         </div>

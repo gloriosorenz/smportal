@@ -62,9 +62,9 @@
                                             <th class="text-center" width="">Available Kabans</th>
                                             <th class="text-center" width="">Price per kilo</th>
                                             <th class="text-center" width="">Price per kaban</th>
-                                            <th class="text-center" width="10%">Quantity</th>
                                             @guest
                                                 @elseif (auth()->user()->roles_id == 3 && auth()->user()->active || auth()->user()->roles_id == 4 && auth()->user()->active )
+                                                <th class="text-center" width="10%">Quantity</th>
                                                 <th class="text-center" width="15%">Options</th>
                                             @endguest
                                             
@@ -98,11 +98,12 @@
                                             <td>
                                                 <div class="font-weight-bold">{{ presentPrice($curr_product_list->price*50) }} </div>
                                             </td>
-                                            <td>
-                                                <input type="number" class="form-control" placeholder="0" step="1" min="1" max="{{$curr_product_list->quantity}}" name="quantity"  value="0"/>
-                                            </td>
+                                            
                                                 @guest
                                                     @elseif (auth()->user()->roles_id == 3 && auth()->user()->active || auth()->user()->roles_id == 4 && auth()->user()->active)
+                                                    <td>
+                                                        <input type="number" class="form-control" placeholder="0" step="1" min="1" max="{{$curr_product_list->quantity}}" name="quantity"  value="0"/>
+                                                    </td>
                                                     <td>
                                                             <input type="hidden" name="id" value="{{ $curr_product_list->id }}">
                                                             <input type="hidden" name="price" value="{{ $curr_product_list->price }}">

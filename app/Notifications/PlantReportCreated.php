@@ -33,7 +33,7 @@ class PlantReportCreated extends Notification
     {
         return [
             'database',
-            // 'mail'
+            'mail'
         ];
     }
 
