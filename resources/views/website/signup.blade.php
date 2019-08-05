@@ -9,7 +9,7 @@
                 <form method="POST" action="{{ route('register') }}">
                 @csrf
                     <!-- Customer Information -->
-                    <h4 class="text-center"><strong>Signup</strong></h4>
+                    <h1 class="text-center"><strong>Sign Up</strong></h1>
                     <br>
                     <div class="row">
                         <!-- First Name -->

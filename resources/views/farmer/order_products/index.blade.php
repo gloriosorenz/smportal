@@ -452,7 +452,7 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    <a href="/order_products/{{$p->id}}" class="btn btn-warning">View</a>
+                                    <a href="/order_products/{{$p->id}}" class="btn btn-warning"><i class="fas fa-eye fa-sm text-white"></i></a>
                                     {{-- <input type="button" name="view" value="view" id="{{$p->id}}" class="btn btn-info btn-xs view_data" /> --}}
                                     {{-- <button data-toggle="modal" data-target="#view-modal" id="viewOrder" class="btn btn-md btn-warning" data-url="{{ route('dynamicModal',['id'=>$p->id])}}">View</button> --}}
                                 </td>

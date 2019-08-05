@@ -66,8 +66,8 @@
                             @foreach($seasonfarmer as $season)
                             <tr class="tr">
                                 <td>Season {{ $season->seasons_id }}</td>
-                                <td>{{ $season->season_start }}</td>
-                                <td>{{ $season->season_end }}</td>
+                                <td>{{ \Carbon\Carbon::parse($season->season_start)->format('F j, Y') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($season->season_end)->format('F j, Y') }}</td>
                                 <td>
                                     @php
                                         $seasonstatus = App\SeasonStatus::findOrFail($season->season_statuses_id);

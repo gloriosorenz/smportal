@@ -179,6 +179,10 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <hr>
+                        <!-- Legends -->
+                        <p>Legend</p>
+                        <p><button type="button" class="btn btn-md btn-info" disabled><i class="fas fa-eye fa-sm text-white"></i></button> View Button</p>
                     </div>
                 </div>
             </div>

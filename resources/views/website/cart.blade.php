@@ -140,7 +140,7 @@
                         
                         <td> 
                             <div class="price-wrap"> 
-                                <var class="price"> ₱ {{ $item->subtotal() }}</var> 
+                                <var class="price"> ₱ {{ number_format($item->subtotal(), 2) }}</var> 
                                 <small class="text-muted">({{ $item->model->presentPrice() }} per kilo x ₱50.00 x Quantity)</small> 
                             </div> <!-- price-wrap .// -->
                         </td>

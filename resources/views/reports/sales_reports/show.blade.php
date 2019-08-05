@@ -33,17 +33,12 @@
 
 
     <div class="row">
-        <div class="offset-2 col-lg-4">
-            <h4>
-            <div class="text-left">Season Start: {{$season->season_start}}</div>
-            </h4>
-        </div>
         <div class="col-lg-4">
             <h4>
-                    <div class="text-right">Season End: {{$season->season_end}}</div>
+                <div class="text-left">Season Start: {{\Carbon\Carbon::parse($season->season_start)->format('F j, Y')}}</div>
+                <div class="text-left">Season End: {{\Carbon\Carbon::parse($season->season_end)->format('F j, Y')}}</div>
             </h4>
         </div>
-
     </div>
     
     <br>
@@ -142,8 +137,8 @@
                             <td>{{$order->tracking_id}}</td>
                             <td>{{$prod->type}}</td>
                             <td>{{$g->quantity}} kaban/s</td>
-                            <td>{{presentPrice($g->purchase_price)}}</td>
-                            <td>{{presentPrice($g->quantity * $g->price)}}</td>
+                            <td>₱ {{number_format($g->purchase_price, 2)}}</td>
+                            <td>₱ {{number_format($g->quantity * $g->price, 2)}}</td>
                             {{-- <td>{{$order->total_price}}</td> --}}
                             <td>{{\Carbon\Carbon::parse($order->order_date)->format('F j, Y')}}</td>
                         </tr>
@@ -180,13 +175,13 @@
         
                         @foreach ($target as $tg)
                             <div class="text-right">
-                                <h4> Target Sales: {{presentPrice($tg->target_sales)}} <h4>
+                                <h4> Target Sales: ₱ {{number_format($tg->target_sales, 2)}} <h4>
                             </div>
                         @endforeach
             
                         @foreach($farprodsum as $sum)
                             <div class="text-right">
-                                <h4> Total Sales: {{presentPrice($sum)}} </h4>
+                                <h4> Total Sales: ₱ {{number_format($sum, 2)}} </h4>
                             </div>
                         @endforeach
                     </div>

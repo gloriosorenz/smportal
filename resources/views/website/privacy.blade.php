@@ -43,10 +43,32 @@
                                 <br>
                                 <ul>
                                     <li>Email address</li>
+                                        <ul>
+                                            <li>
+                                                Will be used for logging in the system
+                                            </li>
+                                            <li>
+                                                To contact users regarding orders
+                                            </li>
+                                        </ul>
                                     <li>First name and last name</li>
+                                        <ul>
+                                            <li>
+                                                To be kept for user verification and as contact details
+                                            </li>
+                                        </ul>
                                     <li>Phone number</li>
+                                        <ul>
+                                            <li>
+                                                For contact purposes
+                                            </li>
+                                        </ul>
                                     <li>Address, State, Province, ZIP/Postal code, City</li>
-                                    <li>Cookies and Usage Data </li>
+                                        <ul>
+                                            <li>
+                                                To know if customers are near enough to pick up orders in the days allotted
+                                            </li>
+                                        </ul>
                                 </ul>                
                                 <br>
                                 <h5>Usage Data</h5>
@@ -135,6 +157,47 @@
                                 The security of your data is important to us, but remember that no method of transmission over the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your Personal Data, we cannot guarantee its absolute security.
                                 <br>
                                 <br>
+                                <h2>Retention Of Data</h2>
+                                <br>
+                                <br>
+                                All data that you will provide us will be stored and kept in our database. This will allow us to organize your data, search and access them for future reference. This policy applies to all System Administrators, Farm Leaders and Customers that may collect, process, or have access to data (including personal data and/or sensitive personal data).  It is the responsibility of all of the above to familiarise themselves with this Policy and ensure adequate compliance with it.
+                                <br>
+                                This policy applies to all information used at the Company:
+                                <br>
+                                <ul>
+                                    <li>Email address</li>
+                                        <ul>
+                                            <li>
+                                                Will be used for logging in the system
+                                            </li>
+                                            <li>
+                                                To contact users regarding orders
+                                            </li>
+                                        </ul>
+                                    <li>First name and last name</li>
+                                        <ul>
+                                            <li>
+                                                To be kept for user verification and as contact details
+                                            </li>
+                                        </ul>
+                                    <li>Phone number</li>
+                                        <ul>
+                                            <li>
+                                                For contact purposes
+                                            </li>
+                                        </ul>
+                                    <li>Address, State, Province, ZIP/Postal code, City</li>
+                                        <ul>
+                                            <li>
+                                                To know if customers are near enough to pick up orders in the days allotted
+                                            </li>
+                                        </ul>
+                                </ul>  
+                                <br>
+                                Any unneeded information will be disposed of.
+                                <br>
+                                <br>
+
                                 <h2>Service Providers</h2>
                                 <br>
                                 <br>

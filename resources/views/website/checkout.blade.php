@@ -193,7 +193,7 @@
                                 <td>{{ $item->model->users->company }}</td>
                                 <td class="text-left">{{ $item->model->presentPrice() }}</td>
                                 <td class="text-left">{{ $item->qty }} kaban/s</td>
-                                <td class="text-right"> ₱ {{ $item->subtotal() }}</td>
+                                <td class="text-right"> ₱ {{ number_format($item->subtotal(), 2) }}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -208,7 +208,7 @@
                         <tbody>
                             <tr class="text-right">
                                 <td class="font-bold font-18">TOTAL:</td>
-                                <td class="font-bold font-18"> ₱ {{ Cart::instance('default')->subtotal() }}</td>
+                                <td class="font-bold font-18"> ₱ {{ number_format(Cart::instance('default')->subtotal(), 2) }}</td>
                             </tr>
                             <tr>
                                 <td>

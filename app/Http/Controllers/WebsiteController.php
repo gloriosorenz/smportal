@@ -54,14 +54,17 @@ class WebsiteController extends Controller
         // ------------------------------------------------------------------------------------------------------------------------
         // Notify Farmer to join the season
         // ------------------------------------------------------------------------------------------------------------------------
-        if($ongoing_season != null){
-            if ($ongoing_season->season_start > Carbon::now()->subDays(14)) {
-                // Send notification
-                $farmers = User::Where('roles_id', 2)
-                    ->get();
-                Notification::send($farmers, new JoinSeason());
+        if(auth()->user()){
+            if($ongoing_season != null){
+                if ($ongoing_season->season_start > Carbon::now()->subDays(14)) {
+                    // Send notification
+                    $farmers = User::Where('roles_id', 2)
+                        ->get();
+                    Notification::send(auth()->user(), new JoinSeason());
+                }
             }
         }
+        
 
         // ------------------------------------------------------------------------------------------------------------------------
 
