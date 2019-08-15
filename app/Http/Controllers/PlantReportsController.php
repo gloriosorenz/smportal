@@ -180,10 +180,13 @@ class PlantReportsController extends Controller
     {
         $preport = PlantReport::findOrFail($id);
         $users = User::where('roles_id', '=', 2)->get()->pluck('company', 'id');
+        $pdata = PlantData::where('plant_reports_id', $preport->id)->first();
 
+        // dd($pdata);
 
         return view('reports.plant_reports.edit')
             ->with('preport', $preport)
+            ->with('pdata', $pdata)
             ->with('users', $users)
             ;
     }

@@ -92,9 +92,9 @@
                                             <label class="form-control-label">Barangay</label>
                                             <select class="form-control" name="barangay" id="barangay">
                                                 <option value="0" selected="true" disabled="True">Select Barangay</option>
-                                                @foreach ($barangays as $barangay)
+                                                {{-- @foreach ($barangays as $barangay)
                                                     <option value="{{ $barangay['id']}}">{{ $barangay['name']}}</option>
-                                                @endforeach
+                                                @endforeach --}}
                                             </select>
                                         </div>
                                     </div>

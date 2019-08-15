@@ -45,7 +45,7 @@
             @else
                 <!-- Plan Season -->
                 <div class="col-lg-3 col-md-6">
-                    <a href="{{ route('season_lists') }}">
+                    <a href="{{ route('season_lists.create') }}">
                         <div class="ibox bg-green color-white widget-stat">
                             <div class="ibox-body">
                                 <h2 class="m-b-5 font-strong">Plan Season</h2>
@@ -58,7 +58,7 @@
         @endif
         <!-- Create Plant Report -->
         <div class="col-lg-3 col-md-6">
-            <a href="#">
+            <a href="{{route('plant_reports.index')}}">
                 <div class="ibox bg-info color-white widget-stat">
                     <div class="ibox-body">
                         <h2 class="m-b-5 font-strong">Plant Report</h2>
@@ -188,7 +188,7 @@
         <div class="col-lg-8">
                 <div class="ibox">
                     <div class="ibox-head">
-                        <div class="ibox-title">Latest Orders</div>
+                        <div class="ibox-title">Monthly Orders</div>
                         <div class="ibox-tools">
                             <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                         </div>
@@ -198,19 +198,19 @@
                         <table class="table table-striped table-hover" id="transactions_table">
                             <thead>
                                 <tr>
-                                    <th>Order ID</th>
-                                    <th>Tracking ID</th>
-                                    <th>Customer</th>
-                                    <th>Number</th>
-                                    <th>Product Type</th>
-                                    <th>Sub Total</th>
-                                    <th width="20%">Status</th>
+                                    <th class="text-center">Order ID</th>
+                                    <th class="text-center">Tracking ID</th>
+                                    <th class="text-center">Customer</th>
+                                    <th class="text-center">Number</th>
+                                    <th class="text-center">Product Type</th>
+                                    <th class="text-center">Sub Total</th>
+                                    <th class="text-center" width="15%">Status</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-center">
                                 @foreach ($transactions as $t)
                                     <tr class="active">
-                                        <th>{{$t->orders->id}}</th>
+                                        <th class="text-center"><a href="/order_products/{{$t->id}}">{{$t->orders->id}}</a></th>
                                         <td>{{$t->orders->tracking_id}}</td>
                                         <td>{{$t->orders->users->first_name}} {{$t->orders->users->last_name}}</td>
                                         <td>{{$t->orders->users->phone}}</td>
@@ -534,6 +534,12 @@
 </div>
 
 
+
+
+
+
+
+
 <!-- Admin Functionalities -->
 @elseif(Auth::user()->roles_id == 1)
 <div class="page-content fade-in-up">
@@ -589,7 +595,7 @@
         <div class="col-lg-8">
                 <div class="ibox">
                     <div class="ibox-head">
-                        <div class="ibox-title">Latest Orders</div>
+                        <div class="ibox-title">Monthly Orders</div>
                         <div class="ibox-tools">
                             <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
                             <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-v"></i></a>
@@ -604,19 +610,19 @@
                         <table class="table table-striped table-hover" id="transactions_table">
                             <thead>
                                 <tr>
-                                    <th>Order ID</th>
-                                    <th>Tracking ID</th>
-                                    <th>Customer</th>
-                                    <th>Number</th>
-                                    <th>Product Type</th>
-                                    <th>Sub Total</th>
-                                    <th width="20%">Status</th>
+                                    <th class="text-center">Order ID</th>
+                                    <th class="text-center">Tracking ID</th>
+                                    <th class="text-center">Customer</th>
+                                    <th class="text-center">Number</th>
+                                    <th class="text-center">Product Type</th>
+                                    <th class="text-center">Sub Total</th>
+                                    <th class="text-center" width="15%">Status</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="text-center">
                                 @foreach ($all_transactions as $t)
                                     <tr class="active">
-                                        <th>{{$t->orders->id}}</th>
+                                        <th><a href="/order_products/{{$t->id}}">{{$t->orders->id}}</a></th>
                                         <td>{{$t->orders->tracking_id}}</td>
                                         <td>{{$t->orders->users->first_name}} {{$t->orders->users->last_name}}</td>
                                         <td>{{$t->orders->users->phone}}</td>

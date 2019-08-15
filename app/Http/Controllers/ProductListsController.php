@@ -175,11 +175,11 @@ class ProductListsController extends Controller
         // $withered_prod_ave = OriginalProductList::getWitheredProductAverage();
 
         // Get all rice product average of all farmers
-        // $all_rice_prod_ave = OriginalProductList::getAllRiceProductAverage();
+        $all_rice_prod_ave = OriginalProductList::getAllRiceProductAverage();
         
-            
+        // dd($all_rice_prod_ave);
         // Get all withered product average of all farmers
-        // $all_withered_prod_ave = OriginalProductList::getAllWitheredProductAverage();
+        $all_withered_prod_ave = OriginalProductList::getAllWitheredProductAverage();
 
 
         // ------------------------------------------------------------------------------------------------------------------------
@@ -311,8 +311,8 @@ class ProductListsController extends Controller
             ->with('product_history', $product_history)
             ->with('yearly_rice_prod_ave', $yearly_rice_prod_ave)
             ->with('withered_prod_ave', $withered_prod_ave)
-        //     ->with('all_rice_prod_ave', $all_rice_prod_ave)
-        //     ->with('all_withered_prod_ave', $all_withered_prod_ave)
+            ->with('all_rice_prod_ave', $all_rice_prod_ave)
+            ->with('all_withered_prod_ave', $all_withered_prod_ave)
             ->with('price_history', $price_history)
             ->with('rice_production_line', $rice_production_line)
             ;

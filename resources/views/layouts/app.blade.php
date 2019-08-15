@@ -108,6 +108,7 @@
             $('#farmers_table').DataTable({
                 pageLength: 10,
                 order: [[ 0, 'asc' ]],
+                // scrollY: 200
             });
             $('#administrators_table').DataTable({
                 pageLength: 10,
@@ -165,9 +166,9 @@
                 order: [[ 0, 'asc' ]],
             });
             $('#all_user_products').DataTable({
-                pageLength: 100,
+                pageLength: 7,
                 order: [[ 0, 'desc' ]],
-                scrollY: 200,
+                // scrollY: 320,
             });
             // Shop Table
             $('#shop_table').DataTable({

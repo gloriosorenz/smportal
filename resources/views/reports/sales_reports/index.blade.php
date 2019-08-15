@@ -35,6 +35,9 @@
                             <th class="text-center" width="">Start Date</th>
                             <th class="text-center" width="">End Date</th>
                             <th class="text-center" width="">Status</th>
+                            @if(auth()->user()->roles_id == 2)
+                            <th class="text-center" width="">Options</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody class="text-center">

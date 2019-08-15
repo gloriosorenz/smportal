@@ -75,7 +75,7 @@
                         <td>{{presentPrice($g->price)}}</td>
                         <td>{{presentPrice($g->quantity * $g->price)}}</td>
                         {{-- <td>{{$order->total_price}}</td> --}}
-                        <td>{{$g->created_at}}</td>
+                        <td>{{\Carbon\Carbon::parse($order->order_date)->format('F j, Y')}}</td>
                     </tr>
                     @endforeach 
                     {{-- <tr>
@@ -140,7 +140,7 @@
                             <td>{{presentPrice($g->purchase_price)}}</td>
                             <td>{{presentPrice($g->quantity * $g->price)}}</td>
                             {{-- <td>{{$order->total_price}}</td> --}}
-                            <td>{{$g->created_at}}</td>
+                            <td>{{\Carbon\Carbon::parse($order->order_date)->format('F j, Y')}}</td>
                         </tr>
                         @endforeach 
                         {{-- <tr>

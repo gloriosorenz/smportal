@@ -78,8 +78,13 @@
                     @endif
                 </div>
             </div>
+        </div>
 
+    </div>
 
+    <div class="row">
+        
+        <div class="col-md-6">
             <!-- Product History -->
             <div class="ibox">
                 <div class="ibox-head">
@@ -93,7 +98,7 @@
                                 <th class="text-center">Product Type</th>
                                 {{-- <th class="text-center">Rice Farmer</th> --}}
                                 <th class="text-center">Initial Quantity</th>
-                                <th class="text-center">Current Quantity</th>
+                                {{-- <th class="text-center">Current Quantity</th> --}}
                                 <th class="text-center">Harvest Date</th>
                                 {{-- <th width="15%">Options</th> --}}
                             </tr>
@@ -104,7 +109,7 @@
                                 <td>{{$list->seasons->id}}</td>
                                 <td>{{$list->products->type}}</td>
                                 <td>{{$list->quantity}}</td>
-                                <td>{{$list->quantity}}</td>
+                                {{-- <td>{{$list->quantity}}</td> --}}
                                 <td>{{\Carbon\Carbon::parse($list->harvest_date)->format('F j, Y')}}</td>
                                 {{-- <td>
                                     <a href="#" class="btn btn-md btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
@@ -118,10 +123,8 @@
             </div>
         </div>
 
-
-
-        <!-- Price History Chart-->
         <div class="col-md-6">
+            <!-- Price History Chart-->
             <div class="ibox">
                 <div class="ibox-head">
                     <div class="ibox-title">Price History</div>
@@ -155,6 +158,7 @@
         </div>
 
     </div>
+    
 </div>
 <!-- END PAGE CONTENT-->
 @endsection

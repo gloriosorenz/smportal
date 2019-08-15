@@ -18,7 +18,7 @@
 
     <div class="row">
         <!-- Customers -->
-        <div class="col-md-8">
+        <div class="offset-md-2 col-md-8 offset-md-2">
             <div class="ibox">
                 <div class="ibox-head">
                     <div class="ibox-title">Customers Data Table</div>

@@ -103,16 +103,16 @@
         <div class="page-content fade-in-up">
 
             <!-- Buttons -->
-            <div class="text-right">
+            {{-- <div class="text-right">
                 <button class="btn btn-info" type="button" onclick="javascript:window.print();"><i class="fa fa-print"></i> Print</button>
-            </div>
+            </div> --}}
 
             <div class="ibox invoice">
                 <div class="invoice-header">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="invoice-logo">
-                                <h2>Invoice #</h2>
+                                <h2>Invoice</h2>
                             </div>
                             <div>
                                 <div class="m-b-5"><strong>Invoice from</strong></div>
@@ -130,14 +130,10 @@
                             </div>
                         </div>
                         <div class="col-md-6 text-right">
-                            <div class="clf" style="margin-bottom:150px;">
+                            <div class="clf" style="margin-bottom:80px;">
                                 <dl class="row pull-right" style="width:250px;">
-                                    <dt class="col-sm-6">Invoice Date</dt>
-                                        <dd class="col-sm-6">{{ $order_date->englishMonth }} {{ $order_date->day }}, {{$order_date->year}}</dd>
                                     <dt class="col-sm-6">Issue Date</dt>
                                         <dd class="col-sm-6">{{ $order_date->englishMonth }} {{ $order_date->day }}, {{$order_date->year}}</dd>
-                                    {{-- <dt class="col-sm-6">Account No.</dt>
-                                        <dd class="col-sm-6">1450012</dd> --}}
                                 </dl>
                             </div>
                             <div>
@@ -171,7 +167,7 @@
                                 <td>{{ $item->model->users->company }}</td>
                                 <td class="text-center">{{ $item->model->presentPrice() }}</td>
                                 <td class="text-center">{{ $item->qty }} kaban/s</td>
-                                <td class="text-right">{{ presentPrice($item->subtotal) }}</td>
+                                <td class="text-right">{{ presentPrice($item->subtotal()*50) }}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -186,7 +182,7 @@
                         <tbody>
                             <tr class="text-right">
                                 <td class="font-bold font-18">TOTAL:</td>
-                                <td class="font-bold font-18">₱{{ Cart::instance('default')->subtotal() }}</td>
+                                <td class="font-bold font-18">{{ presentPrice(Cart::instance('default')->subtotal()*50) }}</td>
                             </tr>
                             <tr>
                                 <td>

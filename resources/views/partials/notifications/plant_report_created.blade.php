@@ -5,7 +5,7 @@
         </div>
         <div class="media-body">
             <div class="media-heading">
-                New Plant Report<small class="text-muted float-right">{{ $notification->created_at->diffForHumans() }}</small>
+                Plant Report<small class="text-muted float-right">{{ $notification->created_at->diffForHumans() }}</small>
             </div>
             @if (auth()->user()->roles->id == 2)
             <div class="font-13">You can now add your plant report for the month.</div>

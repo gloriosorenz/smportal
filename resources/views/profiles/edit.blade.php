@@ -51,13 +51,13 @@
                             </div>
                             
                             <div class="row">
-                                    <div class="col-sm-4 form-group">
-                                        <form action="{{ route('profiles.destroy',$farmers->id ?? 'Not set') }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-md btn-danger float-center">Remove Farmer <i class="fas fa-times fa-sm text-white"></i></button>
-                                        </form>                                    
-                                    </div>
+                                <div class="col-sm-4 form-group">
+                                    <form action="{{ route('profiles.destroy',$farmers->id ?? 'Not set') }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-md btn-danger float-center">Remove Farmer <i class="fas fa-times fa-sm text-white"></i></button>
+                                    </form>                                    
+                                </div>
                             </div>
 
                             <!-- Buttons -->

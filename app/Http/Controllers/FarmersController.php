@@ -13,6 +13,7 @@ use App\Region;
 
 use Notification;
 use App\Notifications\NewFarmerCreated;
+use App\Notifications\ChangePassword;
 
 class FarmersController extends Controller
 {
@@ -77,19 +78,18 @@ class FarmersController extends Controller
         $password = substr($random, 0, 6);
 
         // Validation
-        $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'unique:users,email,$this->id,id',
-            'phone' => 'required|string|max:255',
-            'street' => 'required|string|max:255',
-            // 'barangay' => 'required',
-            // 'city' => 'required',
-            // 'province' => 'required',
-            'company' => 'required|string|max:255',
-            'active' => true,
-
-        ]);
+        // $request->validate([
+        //     'first_name' => 'required|string|max:255',
+        //     'last_name' => 'required|string|max:255',
+        //     'email' => 'unique:users,email,$this->id,id',
+        //     'phone' => 'required|string|max:255',
+        //     'street' => 'required|string|max:255',
+        //     // 'barangay' => 'required',
+        //     // 'city' => 'required',
+        //     // 'province' => 'required',
+        //     'company' => 'required|string|max:255',
+        //     'active' => true,
+        // ]);
 
         $farmer = new User;
         $farmer->first_name = $request->input('first_name');
@@ -108,12 +108,22 @@ class FarmersController extends Controller
         $farmer->hectares = $request->input('hectares');
         $farmer->password = Hash::make($password);
         $farmer->roles_id = 2;
+        $farmer->active = true;
         $farmer->save();
 
         // Notification
         $users = User::where('roles_id', 2)
         ->get();
+        $first_name = $farmer->first_name;
+        $data = array(
+            'password' => $password,
+            'first_name' => $first_name,
+        );
+        // Notify all farmers that there is a new farmer
         Notification::send($users, new NewFarmerCreated($farmer));
+        // Promt user to change password
+        Notification::send($farmer, new ChangePassword($data));
+
 
         return redirect()->route('farmers.index')->with('success','Farmer Created ');
     }

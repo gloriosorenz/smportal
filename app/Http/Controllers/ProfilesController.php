@@ -59,6 +59,7 @@ class ProfilesController extends Controller
             ->whereMonth('orders.created_at', Carbon::now()->month)
             ->count();
 
+        // Get monthy income
         $monthly_income = Order::join('order_products', 'orders.id', '=', 'order_products.orders_id')
             ->selectRaw('sum(orders.total_price) as sum')
             ->where('order_products.farmers_id', auth()->user()->id)

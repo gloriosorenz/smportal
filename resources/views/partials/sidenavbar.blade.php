@@ -13,26 +13,26 @@
             <!-- Admin Functionalities -->
             @if(auth()->user()->roles_id == 1)
             <!-- Dashboard -->
-            <li>
-                <a class="active" href="{{ route('dashboard') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
+            <li class="{{Request:: is('dashboard') ? 'active' : ''}}">
+                <a href="{{ route('dashboard') }}"><i class="sidebar-item-icon fa fa-th-large"></i>
                     <span class="nav-label">Dashboard</span>
                 </a>
             </li>
                 <!-- Profile -->
-                <li>
-                    <a class="active" href="{{ route('profile') }}"><i class="sidebar-item-icon fas fa-user-circle"></i>
+                <li class="{{Request:: is('profile') ? 'active' : ''}}">
+                    <a href="{{ route('profile') }}"><i class="sidebar-item-icon fas fa-user-circle"></i>
                         <span class="nav-label">Profile</span>
                     </a>
                 </li>
                 <li class="heading">FUNCTIONS</li>
                 <!-- Season -->
-                <li>
+                <li class="{{Request:: is('seasons') ? 'active' : ''}}">
                     <a href="{{ route('seasons.index') }}"><i class="sidebar-item-icon fa fa-cloud-sun-rain"></i>
                         <span class="nav-label">Seasons</span>
                     </a>
                 </li>
                 <!-- Season List-->
-                <li>
+                <li class="{{Request:: is('season_lists') ? 'active' : ''}}">
                     <a href="{{ route('season_lists.index') }}"><i class="sidebar-item-icon fas fa-list"></i>
                         <span class="nav-label">Seasons List</span>
                     </a>
@@ -63,9 +63,9 @@
                         <li>
                             <a href="{{ route('customers.index') }}">Customers</a>
                         </li>
-                        <li>
+                        {{-- <li>
                             <a href="{{ route('roles.index') }}">Roles</a>
-                        </li>
+                        </li> --}}
                     </ul>
                 </li>
                 

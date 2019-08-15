@@ -61,7 +61,7 @@
                         <div class="col-lg-6 text-right">
                             <address>
                                 <strong>Order Date:</strong><br>
-                                March 7, 2014<br><br>
+                                {{\Carbon\Carbon::parse($value['0']->orders->order_date)->format('F j, Y')}}<br><br>
                             </address>
                         </div>
                     </div>

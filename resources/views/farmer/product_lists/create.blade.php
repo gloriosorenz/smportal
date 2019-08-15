@@ -85,74 +85,8 @@
                             <!-- End Form -->
                         </div>
                     </div>
-                </div>
 
-
-                <!-- Yearly Product Price Averages -->
-                <div class="col-md-4">
-                    <div class="ibox">
-                        <div class="ibox-head">
-                            <div class="ibox-title"> Your Yearly Price Average</div>
-                            <div class="ibox-tools">
-                                <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
-                            </div>
-                        </div>
-                        <div class="ibox-body">
-                            <!-- Start Form -->
-                            <div class="flexbox mb-4">
-                                {!! Charts::styles() !!}
-                                <div class="container">
-                                    <div class="app">
-                                        <center>
-                                            {!! $yearly_rice_prod_ave->html() !!}
-                                        </center>
-                                    </div>
-                                </div>
-                                <!-- End Of Main Application -->
-                                {!! Charts::scripts() !!}
-                                {!! $yearly_rice_prod_ave->script() !!}
-                            </div>
-                            <!-- End Form -->
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Price Statistics -->
-                {{-- <div class="col-md-3">
-                    <!-- Rice Product Average -->
-                    <div class="ibox">
-                        <div class="ibox-body">
-                            <h2 class="m-b-5 font-strong">{{$rice_prod_ave }}</h2>
-                            <div class="m-b-5 text-primary">Your Rice Product Average Price</div>
-                        </div>
-                    </div>
-                    <!-- Withered Product Average -->
-                    <div class="ibox">
-                        <div class="ibox-body">
-                            <h2 class="m-b-5 font-strong">{{ presentPrice($withered_prod_ave) }}</h2>
-                            <div class="m-b-5 text-warning">Your Withered Product Average Price</div>
-                        </div>
-                    </div>
-                    <!-- All Rice Product Average -->
-                    <div class="ibox">
-                        <div class="ibox-body">
-                            <h2 class="m-b-5 font-strong">{{ presentPrice($all_rice_prod_ave) }}</h2>
-                            <div class="m-b-5 text-primary">All Rice Product Average Price</div>
-                        </div>
-                    </div>
-                    <!-- All Withered Product Average -->
-                    <div class="ibox">
-                        <div class="ibox-body">
-                            <h2 class="m-b-5 font-strong">{{ presentPrice($all_withered_prod_ave) }}</h2>
-                            <div class="m-b-5 text-warning">All Withered Product Average Price</div>
-                        </div>
-                    </div>
-                </div> --}}
-            </div>
-
-            <!-- Price History Chart-->
-            <div class="row">
-                <div class="col-lg-6">
+                    <!-- Price History Chart-->
                     <div class="ibox">
                         <div class="ibox-head">
                             <div class="ibox-title">Price History</div>
@@ -189,10 +123,8 @@
                             <!-- End Form -->
                         </div>
                     </div>
-                </div>
 
-                <!-- Seasonal Rice Production -->
-                <div class="col-lg-6">
+                    <!-- Seasonal Rice Production -->
                     <div class="ibox">
                         <div class="ibox-head">
                             <div class="ibox-title">Production Overview for Season</div>
@@ -225,9 +157,74 @@
                         </div>
                     </div>
                 </div>
+
+
+                <!-- Yearly Product Price Averages -->
+                <div class="col-md-4">
+
+                    <!-- Your Yearly Price Average -->
+                    <div class="ibox">
+                        <div class="ibox-head">
+                            <div class="ibox-title"> Your Yearly Price Average</div>
+                            <div class="ibox-tools">
+                                <a class="ibox-collapse"><i class="fa fa-minus"></i></a>
+                            </div>
+                        </div>
+                        <div class="ibox-body">
+                            <!-- Start Form -->
+                            <div class="flexbox mb-4">
+                                {!! Charts::styles() !!}
+                                <div class="container">
+                                    <div class="app">
+                                        <center>
+                                            {!! $yearly_rice_prod_ave->html() !!}
+                                        </center>
+                                    </div>
+                                </div>
+                                <!-- End Of Main Application -->
+                                {!! Charts::scripts() !!}
+                                {!! $yearly_rice_prod_ave->script() !!}
+                            </div>
+                            <!-- End Form -->
+                        </div>
+                    </div>
+
+                    <!-- All Rice Product Average -->
+                    <div class="ibox">
+                        <div class="ibox-body">
+                            <h2 class="m-b-5 font-strong">{{ presentPrice($all_rice_prod_ave) }}</h2>
+                            <div class="m-b-5 text-primary">All Rice Product Average Price</div>
+                        </div>
+                    </div>
+                    <!-- All Withered Product Average -->
+                    <div class="ibox">
+                        <div class="ibox-body">
+                            <h2 class="m-b-5 font-strong">{{ presentPrice($all_withered_prod_ave) }}</h2>
+                            <div class="m-b-5 text-warning">All Withered Product Average Price</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Price Statistics -->
+                {{-- <div class="offset-md-8 col-md-4">
+                    <!-- Rice Product Average -->
+                    <div class="ibox">
+                        <div class="ibox-body">
+                            <h2 class="m-b-5 font-strong">{{$rice_prod_ave }}</h2>
+                            <div class="m-b-5 text-primary">Your Rice Product Average Price</div>
+                        </div>
+                    </div>
+                    <!-- Withered Product Average -->
+                    <div class="ibox">
+                        <div class="ibox-body">
+                            <h2 class="m-b-5 font-strong">{{ presentPrice($withered_prod_ave) }}</h2>
+                            <div class="m-b-5 text-warning">Your Withered Product Average Price</div>
+                        </div>
+                    </div>
+                </div> --}}
             </div>
 
-
+            
 
 
 

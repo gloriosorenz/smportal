@@ -64,7 +64,144 @@
         @endif
 
         
-        {{-- @if (sizeof(Cart::content()) > 0)
+       
+        <div>
+            <h1 class="display-4"><strong>Cart</strong></h1>
+        </div>
+
+
+        <br>
+        @if (sizeof(Cart::content()) > 0)
+        <div class="card">
+            <table class="table table-hover shopping-cart-wrap">
+                <thead class="text-muted">
+                <tr>
+                <th>Product</th>
+                <th class="text-center" width="30%">Farmer Organization</th>
+                <th class="text-center" width="15%">Quantity per Kaban</th>
+                <th class="text-center" width="18%">Individual Price per Kaban</th>
+                <th class="text-center" width="15%">Subtotal</th>
+                <th class="text-center" width="15%">Action</th>
+                </tr>
+                </thead>
+                <tbody class="text-center">
+                    @foreach (Cart::content() as $item)
+                    <tr>
+                        <td>
+                            <figure class="media">
+                                <div class="img-wrap"><img src="/img/image.png" class="img-thumbnail img-sm">{{$item->image}}</div>
+                                <figcaption class="media-body">
+                                    <h6 class="title text-truncate">{{ $item->model->products->type }} </h6>
+                                    <br>
+                                    <dl class="param param-inline small">
+                                        <dt>Harvest Date: </dt>
+                                        <dd>{{ \Carbon\Carbon::parse($item->model->harvest_date)->format('F j, Y') }}</dd>
+                                    </dl>
+                                </figcaption>
+                            </figure> 
+                        </td>
+                        <td>
+                            <div class="p-t-20">
+                                {{ $item->model->users->company }}
+                            </div>
+                        </td>
+                        <td> 
+                            <select class="quantity form-control" data-id="{{ $item->rowId }}" data-productQuantity="{{ $item->model->quantity }}">
+                                @for ($i = 1; $i < $item->model->quantity + 1 ; $i++)
+                                    <option {{ $item->qty == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                @endfor                                
+                            </select>
+                            <dl class="p-t-20 param param-inline small">
+                                <dt>Available: {{ $item->model->quantity }}</dt>
+                            </dl>
+                        </td>
+                        <td>
+                            {{ $item->model->presentPrice() }}
+                        </td>
+                        <td> 
+                            <div class="price-wrap"> 
+                                <var class="price">{{ presentPrice($item->subtotal*50) }}</var> 
+                                <small class="text-muted">({{ $item->model->presentPrice() }} per kbn x 50kg)</small> 
+                            </div> <!-- price-wrap .// -->
+                        </td>
+                        <td> 
+                            <form action=" {{route ('cart.destroy',$item->rowId) }}" method="POST">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+
+                                <button type="submit" class="btn btn-danger btn-md m-t-20"> x Remove</button>
+                            </form>
+                            {{-- <a href="" class="btn btn-outline-danger"> × Remove</a> --}}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><a href="{{ route('shop') }}" class="btn btn-lg btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
+                        <td colspan="2" class="hidden-xs"></td>
+                        <td colspan="1" class="hidden-xs"></td>
+                        <td class="hidden-xs text-center"><strong>Total ₱{{ Cart::instance('default')->subtotal()*50 }}</strong></td>
+                        <td><a href="{{ url('checkout') }}" class="btn btn-success btn-lg btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div> <!-- card.// -->
+
+        @else
+
+            <h3>You have no items in your shopping cart</h3>
+            <br>
+            {{-- <a href="{{ route('shop') }}" class="btn btn-primary btn-lg">Continue Shopping</a> --}}
+            <a href="{{ route('shop') }}" class="btn btn-lg btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a>
+
+        @endif
+
+       
+
+
+
+
+    </div>
+</div>
+
+
+
+@endsection
+
+@section('extra-js')
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    (function(){
+        const classname = document.querySelectorAll('.quantity.form-control')
+
+        Array.from(classname).forEach(function(element) {
+            element.addEventListener('change', function() {
+                const id = element.getAttribute('data-id')
+                const productQuantity = element.getAttribute('data-productQuantity')
+                // console.log('error 1');
+
+                axios.patch(`/cart/${id}`, {
+                    quantity: this.value,
+                    productQuantity: productQuantity
+                })
+                .then(function (response) {
+                    // console.log('error 2');
+                    window.location.href = '{{ route('cart.index') }}'
+                })
+                .catch(function (error) {
+                    // console.log('error 3');
+                    window.location.href = '{{ route('cart.index') }}'
+                });
+            })
+        })
+    })();
+</script>
+@endsection
+
+
+
+ {{-- @if (sizeof(Cart::content()) > 0)
         <div class="row">
             <div class="col-md-12">
                 <table class="table table-hover">
@@ -134,138 +271,3 @@
             <a href="{{ route('shop') }}" class="btn btn-primary btn-lg">Continue Shopping</a>
 
         @endif --}}
-
-
-
-
-        <div>
-            <h1 class="display-4"><strong>Cart</strong></h1>
-        </div>
-
-
-        <br>
-        @if (sizeof(Cart::content()) > 0)
-        <div class="card">
-            <table class="table table-hover shopping-cart-wrap">
-                <thead class="text-muted">
-                <tr>
-                <th scope="col">Product</th>
-                <th scope="col">Farmer Organization</th>
-                <th scope="col" width="120">Quantity</th>
-                <th scope="col">Individual Price</th>
-                <th scope="col" width="150">Subtotal</th>
-                <th scope="col" width="150" class="text-right">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                    @foreach (Cart::content() as $item)
-                    <tr>
-                        <td>
-                            <figure class="media">
-                                <div class="img-wrap"><img src="http://placehold.it/100x100" class="img-thumbnail img-sm"></div>
-                                <figcaption class="media-body">
-                                    <h6 class="title text-truncate">{{ $item->model->products->type }} </h6>
-                                    <br>
-                                    <dl class="param param-inline small">
-                                        <dt>Harvest Date: </dt>
-                                        <dd>{{ $item->model->harvest_date }}</dd>
-                                    </dl>
-                                </figcaption>
-                            </figure> 
-                        </td>
-                        <td>
-                            <div class="p-t-20">
-                                {{ $item->model->users->company }}
-                            </div>
-                        </td>
-                        <td> 
-                            <select class="quantity form-control" data-id="{{ $item->rowId }}" data-productQuantity="{{ $item->model->quantity }}">
-                                @for ($i = 1; $i < $item->model->quantity + 1 ; $i++)
-                                    <option {{ $item->qty == $i ? 'selected' : '' }}>{{ $i }}</option>
-                                @endfor                                
-                            </select>
-                            <dl class="p-t-20 param param-inline small">
-                                <dt>Available: {{ $item->model->quantity }}</dt>
-                            </dl>
-                        </td>
-                        <td>{{ $item->model->presentPrice() }}</td>
-                        <td> 
-                            <div class="price-wrap"> 
-                                <var class="price">{{ presentPrice($item->subtotal) }}</var> 
-                                <small class="text-muted">({{ $item->model->presentPrice() }} per kaban)</small> 
-                            </div> <!-- price-wrap .// -->
-                        </td>
-                        <td class="text-right"> 
-                            <form action=" {{route ('cart.destroy',$item->rowId) }}" method="POST">
-                                {{ csrf_field() }}
-                                {{ method_field('DELETE') }}
-
-                                <button type="submit" class="btn btn-danger btn-md m-t-20"> x Remove</button>
-                            </form>
-                            {{-- <a href="" class="btn btn-outline-danger"> × Remove</a> --}}
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td><a href="{{ route('shop') }}" class="btn btn-lg btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a></td>
-                        <td colspan="2" class="hidden-xs"></td>
-                        <td colspan="1" class="hidden-xs"></td>
-                        <td class="hidden-xs text-center"><strong>Total ₱{{ Cart::instance('default')->subtotal() }}</strong></td>
-                        <td><a href="{{ url('checkout') }}" class="btn btn-success btn-lg btn-block">Checkout <i class="fa fa-angle-right"></i></a></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div> <!-- card.// -->
-
-        @else
-
-            <h3>You have no items in your shopping cart</h3>
-            <br>
-            {{-- <a href="{{ route('shop') }}" class="btn btn-primary btn-lg">Continue Shopping</a> --}}
-            <a href="{{ route('shop') }}" class="btn btn-lg btn-warning"><i class="fa fa-angle-left"></i> Continue Shopping</a>
-
-        @endif
-
-       
-
-
-
-
-    </div>
-</div>
-
-
-
-@endsection
-
-@section('extra-js')
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script>
-    (function(){
-        const classname = document.querySelectorAll('.quantity.form-control')
-
-        Array.from(classname).forEach(function(element) {
-            element.addEventListener('change', function() {
-                const id = element.getAttribute('data-id')
-                const productQuantity = element.getAttribute('data-productQuantity')
-                // console.log('error 1');
-
-                axios.patch(`/cart/${id}`, {
-                    quantity: this.value,
-                    productQuantity: productQuantity
-                })
-                .then(function (response) {
-                    // console.log('error 2');
-                    window.location.href = '{{ route('cart.index') }}'
-                })
-                .catch(function (error) {
-                    // console.log('error 3');
-                    window.location.href = '{{ route('cart.index') }}'
-                });
-            })
-        })
-    })();
-</script>
-@endsection

@@ -9,20 +9,20 @@ use Illuminate\Notifications\Messages\MailMessage;
 
 use Carbon;
 
-class NewFarmerCreated extends Notification
+class ChangePassword extends Notification
 {
     use Queueable;
 
-    protected $farmer;
+    protected $data;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($farmer)
+    public function __construct($data)
     {
-        $this->farmer = $farmer;
+        $this->data = $data;
     }
 
     /**
@@ -34,8 +34,8 @@ class NewFarmerCreated extends Notification
     public function via($notifiable)
     {
         return [
-            'database',
-            // 'mail',
+            'mail',
+            'database'
         ];
     }
 
@@ -48,9 +48,12 @@ class NewFarmerCreated extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    // ->line('The introduction to the notification.')
+                    // ->action('Notification Action', route('profile'))
+                    // ->line('Your pass word: ', $data['password'])
+                    ->subject('Change Password')
+                    ->markdown('partials.mail.change_password', ['data' => $this->data]);
+                    ;
     }
 
     /**
@@ -64,7 +67,7 @@ class NewFarmerCreated extends Notification
         return [
             'timeCreated'=> Carbon\Carbon::now()->diffForHumans(),
             'user'=> auth()->user(),
-            'farmer'=>$this->farmer
+            'data'=>$this->data
         ];
     }
 

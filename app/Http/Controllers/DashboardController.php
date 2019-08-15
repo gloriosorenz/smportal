@@ -128,13 +128,17 @@ class DashboardController extends Controller
         // ------------------------------------------------------------------------------------------------------------------------
 
         // Get Transactions
-        $transactions = OrderProduct::where('farmers_id', auth()->user()->id)
-            ->whereYear('created_at', Carbon::now()->year)
-            ->whereMonth('created_at', Carbon::now()->month)
+        $transactions = OrderProduct::join('orders', 'order_products.orders_id', '=', 'orders.id')
+            ->where('farmers_id', auth()->user()->id)
+            ->whereYear('order_date', Carbon::now()->year)
+            ->whereMonth('order_date', Carbon::now()->month)
             ->get();
+        
+        // dd($transactions);
 
-        $all_transactions = OrderProduct::whereYear('created_at', Carbon::now()->year)
-            ->whereMonth('created_at', Carbon::now()->month)
+        $all_transactions = OrderProduct::join('orders', 'order_products.orders_id', '=', 'orders.id')
+            ->whereYear('order_date', Carbon::now()->year)
+            ->whereMonth('order_date', Carbon::now()->month)
             ->get();
 
 

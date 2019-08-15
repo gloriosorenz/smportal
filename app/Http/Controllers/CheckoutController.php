@@ -92,6 +92,7 @@ class CheckoutController extends Controller
             'users_id' => auth()->user()->id,
             'total_price' =>  getNumbers()->get('newTotal'),
             'order_statuses_id' => 1,
+            'order_date' => \Carbon\Carbon::now(),
             'tracking_id' => $tracking_id,
         ]);
 

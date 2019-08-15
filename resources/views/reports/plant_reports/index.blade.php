@@ -41,13 +41,13 @@
                 <table id="plant_reports_table" class="table table-bordered table-hover">
                     <thead>
                         <tr>
-                            <th width="">ID</th>
-                            <th width="">Season</th>
-                            <th width="">Month</th>
-                            <th width="20%">Options</th>
+                            <th class="text-center" width="">ID</th>
+                            <th class="text-center" width="">Season</th>
+                            <th class="text-center" width="">Month</th>
+                            <th class="text-center" width="20%">Options</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="text-center">
                         @foreach($preports as $pr)
                         <tr class="tr">
                             <td>{{$pr->id}}</td>
@@ -56,7 +56,9 @@
                             <td>
                                 <a href="/plant_reports/{{$pr->id}}"><button class="btn btn-warning btn-md btn-fill" id="btn_view" name="btn_view"><i class="fas fa-eye"></i></button></a>
                                 @if (auth()->user()->active)
-                                <a href="/plant_reports/{{$pr->id}}/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    @if(auth()->user()->roles->id == 2)
+                                    <a href="/plant_reports/{{$pr->id}}/edit" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                                    @endif
                                 @endif
                                 <a href="/pdf/plant_report/{{$pr->id}}" class="btn btn-primary"><i class="fas fa-download fa-sm text-white"></i></a>
                             </td>

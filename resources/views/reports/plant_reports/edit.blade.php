@@ -48,8 +48,8 @@
                                             @endforeach
                                     </select>
                                 </td>
-                                <td><input type="text" class="form-control" name="plant_area[]" value="" /></td>
-                                <td><input type="text" class="form-control" name="farmers[]" value="" /></td>
+                                <td><input type="text" class="form-control" name="plant_area[]" value="{{$preport->plant_area}}" /></td>
+                                <td><input type="text" class="form-control" name="farmers[]" value="{{$preport->farmers}}" /></td>
                                 <td><input type="button" class="btn btn-danger remove" value="x"></td>
                             </tr>
                         </tbody>
@@ -73,8 +73,8 @@
                                     <input name="users_id[]" type="hidden" value="{{auth()->user()->id}}">
                                     {{auth()->user()->barangays->name}}
                                 </td>
-                                <td><input type="text" class="form-control" name="plant_area[]" value=""/></td>
-                                <td><input type="text" class="form-control" name="farmers[]" value="" /></td>
+                                <td><input type="text" class="form-control" name="plant_area[]" value="{{$pdata->plant_area}}"/></td>
+                                <td><input type="text" class="form-control" name="farmers[]" value="{{$pdata->farmers}}" /></td>
                             </tr>
                         </tbody>
                     </table>

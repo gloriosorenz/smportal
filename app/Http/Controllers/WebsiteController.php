@@ -339,7 +339,7 @@ class WebsiteController extends Controller
         // ------------------------------------------------------------------------------------------------------------------------
 
         // For customers
-        $barangays = Barangay::orderBy('name')->get();
+        // $barangays = Barangay::orderBy('name')->get();
         $provinces = Province::orderBy('name')->get();
         $cities = City::orderBy('name')->get();
         $roles = Role::where('id','>',2)->get();
@@ -352,7 +352,7 @@ class WebsiteController extends Controller
         $laguna = Province::where('id','=',19)->get();
 
         return view('website.contact')
-            ->with('barangays', $barangays)
+            // ->with('barangays', $barangays)
             ->with('provinces', $provinces)
             ->with('cities', $cities)
             ->with('roles', $roles)

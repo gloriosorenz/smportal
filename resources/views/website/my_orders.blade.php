@@ -28,25 +28,27 @@
                         </div>
                         <div class="card-body">
                             @if (count($pending) > 0)
-                            <table id="pending_table" class="table table-hover track_tbl">
+                            <table id="pending_table" class="table table-bordered able-hover track_tbl">
                                 <thead>
                                     <tr>
-                                        <th>Order ID</th>
-                                        <th>Order Date</th>
-                                        <th>Price</th>
-                                        <th>Options</th>
+                                        <th class="text-center">Order ID</th>
+                                        <th class="text-center">Order Date</th>
+                                        <th class="text-center">Price</th>
+                                        <th class="text-center">Options</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="text-center">
                                     @foreach ($pending as $p)
                                         @if ($p->users_id == auth()->user()->id)
                                         <tr class="active">
-                                            <td>{{$p->id}}</td>
+                                            <td>
+                                            <a href="/website/view_order/{{$p->id}}">{{$p->id}}</a>
+                                            </td>
                                             <td>{{$p->created_at->toFormattedDateString()}}</td>
                                             <td>₱ {{ number_format($p->total_price, 2) }}</td>
                                             <td>
                                                 <a href="/website/view_order/{{$p->id}}" class="btn btn-info"><i class="fas fa-eye fa-sm text-white"></i></a>
-                                                <a href="/pdf/invoice/{{$p->id}}" class="btn btn-secondary"><i class="fas fa-download fa-sm text-white"></i></a>
+                                                {{-- <a href="/pdf/invoice/{{$p->id}}" class="btn btn-secondary"><i class="fas fa-download fa-sm text-white"></i></a> --}}
                                             </td>
                                         </tr>
                                         @endif
@@ -68,7 +70,7 @@
                         </div>
                         <div class="card-body">
                             @if (count($done) > 0)
-                            <table id="completed_table" class="table table-hover track_tbl">
+                            <table id="completed_table" class="table table-bordered table-hover track_tbl">
                                 <thead>
                                     <tr>
                                         <th class="text-center">Order ID</th>
@@ -81,7 +83,9 @@
                                     @foreach ($done as $order)
                                         @if ($order->users_id == auth()->user()->id)
                                         <tr class="active">
-                                            <td>{{$order->id}}</td>
+                                            <td>
+                                                <a href="/website/view_order/{{$order->id}}">{{$order->id}}</a>
+                                            </td>
                                             <td>{{$order->created_at->toFormattedDateString()}}</td>
                                             <td>₱ {{ number_format($order->total_price, 2) }}</td>
                                             <td>
@@ -108,20 +112,22 @@
                         </div>
                         <div class="card-body">
                             @if(count($cancelled) > 0)
-                            <table id="cancelled_table" class="table table-hover track_tbl">
+                            <table id="cancelled_table" class="table table-boredered table-hover track_tbl">
                                 <thead>
                                     <tr>
-                                        <th>Order ID</th>
-                                        <th>Order Date</th>
-                                        <th>Price</th>
-                                        <th>Options</th>
+                                        <th class="text-center">Order ID</th>
+                                        <th class="text-center">Order Date</th>
+                                        <th class="text-center">Price</th>
+                                        <th class="text-center">Options</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody class="text-center">
                                     @foreach ($cancelled as $order)
                                         @if ($order->users_id == auth()->user()->id)
                                         <tr class="active">
-                                            <td>{{$order->id}}</td>
+                                            <td>
+                                                <a href="/website/view_order/{{$order->id}}">{{$order->id}}</a>
+                                            </td>
                                             <td>{{$order->created_at->toFormattedDateString()}}</td>
                                             <td>₱ {{ number_format($order->total_price, 2) }}</td>
                                             <td>

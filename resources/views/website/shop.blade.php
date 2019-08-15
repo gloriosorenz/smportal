@@ -6,7 +6,7 @@
 
 <!-- Product -->
 <div class="bg0 m-t-84 p-b-140">
-        <div class="container">
+        <div class="container-fluid w-00 h-100 p-t-100 p-r-250 p-l-250 p-b-300 bg0">
             <!-- Messages -->
             @if (session()->has('success_message'))
                 <div class="alert alert-success">
@@ -22,11 +22,17 @@
             <!-- Show Products Table -->
                 <div class="row">
                     <div class="col-lg-12">
+                        
+                        <div>
+                            <h1 class="display-4"><strong>Products</strong></h1>
+                        </div>
+                        <br>
+
                         <!-- Show Products Datatable -->
                         <div class="card shadow mb-4">
-                            <div class="card-header">
+                            {{-- <div class="card-header">
                                 <h2 class="title">Products</h2>
-                            </div>
+                            </div> --}}
                             <div class="card-body">
                                 <table id="shop_table" class="table table-responsive table-bordered table-hover">
                                     <thead>

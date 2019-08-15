@@ -25,7 +25,6 @@
         @endif
     @endif --}}
 
-
     <div class="row">
         <!-- Season History -->
         <div class="col-md-8">
@@ -167,22 +166,24 @@
                 <div class="ibox-body">
                       <ul class="media-list media-list-divider m-0">
                         @foreach($season_lists as $list)
-                        <li class="media">
-                            <a class="media-img" href="javascript:;">
-                                <img class="img-circle" src="/img/admin-avatar.png" width="40" />
-                            </a>
-                            <div class="media-body">
-                                <div class="media-heading">
-                                    {{ $list->users->first_name }}  {{ $list->users->last_name }}
-                                    @if ($list->season_list_statuses->id == 2)
-                                        <span class="float-right badge badge-success badge-pill">{{$list->season_list_statuses->status }}</span>
-                                    @else
-                                        <span class="float-right badge badge-warning badge-pill">{{$list->season_list_statuses->status }}</span>
-                                    @endif
+                            <li class="media">
+                                <a class="media-img" href="javascript:;">
+                                    <img class="img-circle" src="/img/admin-avatar.png" width="40" />
+                                </a>
+                                <div class="media-body">
+                                    <a href="/season_lists/{{$list->id}}" style="color:dimgray">
+                                        <div class="media-heading">
+                                            {{ $list->users->first_name }}  {{ $list->users->last_name }}
+                                            @if ($list->season_list_statuses->id == 2)
+                                                <span class="float-right badge badge-success badge-pill">{{$list->season_list_statuses->status }}</span>
+                                            @else
+                                                <span class="float-right badge badge-warning badge-pill">{{$list->season_list_statuses->status }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="font-13">{{ $list->users->company }}</div>
+                                    </a>
                                 </div>
-                                <div class="font-13">{{ $list->users->company }}</div>
-                            </div>
-                        </li>
+                            </li>
                         @endforeach
                     </ul>
                 </div>

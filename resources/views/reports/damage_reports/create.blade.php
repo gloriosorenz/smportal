@@ -31,7 +31,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="calamity">Calamity:</label>
-                            <select class="form-control" name="calamity" id="calamity">
+                            <select class="form-control select2_demo_1" name="calamity" id="calamity">
                                 <option value="0" selected="true" disabled="True">Select Calamity</option>
                                 @foreach ($calamities as $calamity)
                                     <option value="{{ $calamity['id']}}">{{ $calamity['type']}}</option>
@@ -112,8 +112,8 @@
                     <div class="col-sm-4 form-group">
                         <div class="form-group">
                             <label class="form-control-label">Crop</label>
-                            <select class="form-control" name="crop">
-                                <option selected>Select Crop</option>
+                            <select class="form-control select2_demo_1" name="crop">
+                                <option selected="True" disabled="True">Select Crop</option>
                                 <option value="Good Rice">Good rice</option>
                                 <option value="Withered Rice">Withered rice</option>
                             </select>
@@ -139,7 +139,7 @@
                     <div class="col-sm-4 form-group">
                         <div class="form-group">
                             <label class="form-control-label">Stage crop development:</label>
-                            <select class="form-control" name="rice_crop_stages_id">
+                            <select class="form-control select2_demo_1" name="rice_crop_stages_id">
                                 <option value="0" selected="true" disabled="True">Select Calamity</option>
                                 @foreach ($rice_crop_stage as $stage)
                                     <option value="{{ $stage['id']}}">{{ $stage['stage']}}</option>
@@ -152,7 +152,7 @@
                     <div class="col-sm-4 form-group">
                         <div class="form-group">
                             <label class="form-control-label">Month to be harvested:</label>
-                            <select class="form-control" name="harvest_month">
+                            <select class="form-control select2_demo_1" name="harvest_month">
                                 <option selected>Select Month</option>
                                 <option value="January">January</option>
                                 <option value="February">Ferbruary</option>
